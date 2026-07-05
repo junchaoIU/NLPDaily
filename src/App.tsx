@@ -78,11 +78,6 @@ function App() {
       setLoading(false)
     }
   }, [loadDateData])
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '初始化失败')
-      setLoading(false)
-    }
-  }, [loadDateData])
 
   useEffect(() => {
     initData()
