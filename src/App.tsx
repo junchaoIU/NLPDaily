@@ -27,7 +27,8 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch(`data/articles-${date}.json`)
+      const base = import.meta.env.BASE_URL
+      const res = await fetch(`${base}data/articles-${date}.json`)
       if (!res.ok) throw new Error(`无法加载 ${date} 的数据`)
       const data: ArticlesData & { date?: string } = await res.json()
       setArticles(data.articles)
@@ -47,7 +48,8 @@ function App() {
     setLoading(true)
     try {
       // 先尝试加载 latest 文件（包含回退数据）
-      const latestRes = await fetch('data/articles-latest.json')
+      const base = import.meta.env.BASE_URL
+      const latestRes = await fetch(`${base}data/articles-latest.json`)
       if (latestRes.ok) {
         const data: ArticlesData & { isFallback?: boolean } = await latestRes.json()
         setArticles(data.articles)
@@ -58,7 +60,7 @@ function App() {
       }
 
       // 加载索引获取日期列表
-      const indexRes = await fetch('data/index.json')
+      const indexRes = await fetch(`${base}data/index.json`)
       if (indexRes.ok) {
         const indexData: DateIndex = await indexRes.json()
         setAvailableDates(indexData.dates)
