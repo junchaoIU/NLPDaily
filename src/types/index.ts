@@ -20,4 +20,6 @@ export interface ArticlesData {
   articles: Article[];
   fetchedAt: string;
   count: number;
+  date?: string;
+  isFallback?: boolean;
 }
