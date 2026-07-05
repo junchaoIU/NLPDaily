@@ -22,13 +22,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '24'
+          python-version: '3.11'
 
-      - name: Fetch arxiv data (with fallback)
-        run: node scripts/fetch-arxiv.cjs
+      - name: Fetch arxiv data (with fallback & translation)
+        run: python scripts/fetch-arxiv.py
+        env:
+          TRANSLATE_API_KEY: ${{ secrets.TRANSLATE_API_KEY }}
 
       - name: Commit and push
         run: |

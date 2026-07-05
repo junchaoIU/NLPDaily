@@ -4,6 +4,8 @@ import ArticleCard from './components/ArticleCard'
 import SearchBar from './components/SearchBar'
 import LoadingSkeleton from './components/LoadingSkeleton'
 
+type Language = 'en' | 'cn'
+
 interface DateIndex {
   dates: string[]
   latest: string
@@ -21,6 +23,7 @@ function App() {
   const [availableDates, setAvailableDates] = useState<string[]>([])
   const [selectedDate, setSelectedDate] = useState<string>('')
   const [currentDate, setCurrentDate] = useState<string>('')
+  const [language, setLanguage] = useState<Language>('en')
 
   // 加载指定日期的数据
   const loadDateData = useCallback(async (date: string) => {
@@ -101,6 +104,8 @@ function App() {
         (a) =>
           a.title.toLowerCase().includes(q) ||
           a.abstract.toLowerCase().includes(q) ||
+          (a.titleCn || '').toLowerCase().includes(q) ||
+          (a.abstractCn || '').toLowerCase().includes(q) ||
           a.authors.some((au) => au.name.toLowerCase().includes(q))
       )
     }
@@ -161,6 +166,28 @@ function App() {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <DateSelector />
+              <div className="flex items-center rounded-full border border-ink-lighter/50 bg-ink-light p-0.5">
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`rounded-full px-3 py-1 text-xs transition-colors ${
+                    language === 'en'
+                      ? 'bg-amber-gold text-ink'
+                      : 'text-parchment-muted hover:text-parchment'
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLanguage('cn')}
+                  className={`rounded-full px-3 py-1 text-xs transition-colors ${
+                    language === 'cn'
+                      ? 'bg-amber-gold text-ink'
+                      : 'text-parchment-muted hover:text-parchment'
+                  }`}
+                >
+                  中文
+                </button>
+              </div>
               <span className="rounded-full border border-ink-lighter/50 bg-ink-light px-3 py-1 text-xs text-parchment-muted">
                 {today}
               </span>
@@ -223,7 +250,7 @@ function App() {
             </div>
           ) : (
             filtered.map((article) => (
-              <ArticleCard key={article.id} article={article} />
+              <ArticleCard key={article.id} article={article} language={language} />
             ))
           )}
         </div>

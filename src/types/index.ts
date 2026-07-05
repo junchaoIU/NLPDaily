@@ -14,6 +14,8 @@ export interface Article {
   absUrl: string;
   pdfUrl: string;
   comment?: string;
+  titleCn?: string;
+  abstractCn?: string;
 }
 
 export interface ArticlesData {

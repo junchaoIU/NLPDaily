@@ -3,6 +3,7 @@ import type { Article } from '../types'
 
 interface ArticleCardProps {
   article: Article
+  language?: 'en' | 'cn'
 }
 
 function ChevronDownIcon({ className }: { className?: string }) {
@@ -79,8 +80,14 @@ function ExternalLinkIcon({ className }: { className?: string }) {
   )
 }
 
-export default function ArticleCard({ article }: ArticleCardProps) {
+export default function ArticleCard({ article, language = 'en' }: ArticleCardProps) {
   const [expanded, setExpanded] = useState(false)
+
+  const isCn = language === 'cn' && (article.titleCn || article.abstractCn)
+  const displayTitle = isCn && article.titleCn
+    ? `${article.titleCn}（${article.title}）`
+    : article.title
+  const displayAbstract = isCn && article.abstractCn ? article.abstractCn : article.abstract
 
   const affiliations = article.authors
     .map((a) => a.affiliation)
@@ -92,7 +99,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
     <div className="group relative flex flex-col rounded-xl border border-ink-lighter/30 bg-ink-light/50 p-5 transition-all duration-300 hover:border-amber-gold/30 hover:bg-ink-light hover:shadow-lg hover:shadow-amber-gold/5">
       {/* Title */}
       <h3 className="font-display text-base font-semibold leading-snug text-parchment transition-colors group-hover:text-amber-gold sm:text-lg">
-        {article.title}
+        {displayTitle}
       </h3>
 
       {/* Authors */}
@@ -142,7 +149,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
             expanded ? '' : 'line-clamp-3'
           }`}
         >
-          {article.abstract}
+          {displayAbstract}
         </p>
       </div>
 

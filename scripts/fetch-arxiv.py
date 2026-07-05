@@ -12,12 +12,20 @@ import re
 import sys
 import time
 import urllib.request
+import urllib.error
 import concurrent.futures
 from datetime import datetime, timedelta, timezone
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 CONCURRENCY = 5
+TRANSLATE_CONCURRENCY = 1
 HEADERS = {'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)'}
+
+# 智谱 GLM 官方翻译 API 配置（单模型低并发，免费额度）
+# key 从环境变量读取，不硬编码（仓库 public，避免泄露）
+TRANSLATE_API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
+TRANSLATE_API_KEY = os.environ.get('TRANSLATE_API_KEY', '')
+TRANSLATE_MODEL = 'glm-4-flash-250414'
 
 
 def get_date_string(dt):
@@ -128,6 +136,84 @@ def fetch_affiliations(article):
         return article
 
 
+def translate_text(text):
+    """使用智谱 GLM 官方 API 翻译文本为中文，低并发带重试"""
+    if not text or not text.strip():
+        return ''
+    if not TRANSLATE_API_KEY:
+        print('  跳过翻译：未配置 TRANSLATE_API_KEY 环境变量', flush=True)
+        return ''
+    body = json.dumps({
+        'model': TRANSLATE_MODEL,
+        'messages': [
+            {'role': 'system', 'content': '你是一个专业的学术翻译。将用户提供的英文翻译成准确流畅的简体中文。只返回翻译结果，不要添加任何解释、注释或额外文字。'},
+            {'role': 'user', 'content': text}
+        ],
+        'temperature': 0.3
+    }).encode('utf-8')
+    last_err = None
+    for attempt in range(4):
+        try:
+            req = urllib.request.Request(
+                TRANSLATE_API_URL,
+                data=body,
+                headers={
+                    'Authorization': f'Bearer {TRANSLATE_API_KEY}',
+                    'Content-Type': 'application/json'
+                },
+                method='POST'
+            )
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                result = json.loads(resp.read().decode('utf-8'))
+            # 节流：每次成功调用后等待，避免触发免费 API 速率限制
+            time.sleep(5)
+            return result['choices'][0]['message']['content'].strip()
+        except urllib.error.HTTPError as e:
+            last_err = e
+            body_text = ''
+            try:
+                body_text = e.read().decode()
+            except Exception:
+                pass
+            # 余额不足 / 鉴权失败：直接终止
+            if 'quota' in body_text or e.code == 401:
+                raise
+            # 429 限流：退避重试
+            if e.code == 429:
+                wait = 5 * (attempt + 1)
+                print(f'    限流，等待 {wait}s 重试 ({attempt+1}/4)', flush=True)
+                time.sleep(wait)
+                continue
+            # 其他错误短暂重试
+            time.sleep(2 * (attempt + 1))
+            continue
+        except Exception as e:
+            last_err = e
+            # 连接被拒绝：API 可能临时封锁，长退避
+            if '10061' in str(e) or 'Connection refused' in str(e):
+                wait = 30 * (attempt + 1)
+                print(f'    连接被拒绝，等待 {wait}s 后重试 ({attempt+1}/4)', flush=True)
+                time.sleep(wait)
+            else:
+                time.sleep(2 * (attempt + 1))
+    raise last_err
+
+
+def translate_article(article):
+    """翻译单篇文章的标题和摘要"""
+    try:
+        article['titleCn'] = translate_text(article['title'])
+    except Exception as e:
+        print(f'  警告: 翻译标题 {article["id"]} 失败: {e}')
+        article['titleCn'] = ''
+    try:
+        article['abstractCn'] = translate_text(article['abstract'])
+    except Exception as e:
+        print(f'  警告: 翻译摘要 {article["id"]} 失败: {e}')
+        article['abstractCn'] = ''
+    return article
+
+
 def fetch_date_articles(date_str):
     """抓取指定日期的文章"""
     url = build_arxiv_url(date_str)
@@ -144,6 +230,11 @@ def fetch_date_articles(date_str):
     print(f'  抓取作者单位信息...')
     with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as executor:
         articles = list(executor.map(fetch_affiliations, articles))
+
+    # 翻译标题和摘要为中文
+    print(f'  翻译标题和摘要为中文...')
+    with concurrent.futures.ThreadPoolExecutor(max_workers=TRANSLATE_CONCURRENCY) as executor:
+        articles = list(executor.map(translate_article, articles))
 
     return {'articles': articles, 'date': date_str}
 
@@ -269,6 +360,78 @@ def backfill(data_dir, days):
             break
 
 
+def translate_existing(data_dir):
+    """为已存在的数据文件补充翻译（两阶段：先全部标题，再全部摘要，分段保存进度）"""
+    dates = get_available_dates(data_dir)
+    if not dates:
+        print('没有可翻译的数据文件')
+        return
+    for date_str in dates:
+        file_path = os.path.join(data_dir, f'articles-{date_str}.json')
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        articles = data.get('articles', [])
+        if not articles:
+            print(f'  {date_str}: 无文章，跳过')
+            continue
+        if all(a.get('titleCn') for a in articles) and all(a.get('abstractCn') for a in articles):
+            print(f'  {date_str}: 已有翻译，跳过')
+            continue
+
+        def _save():
+            data['articles'] = articles
+            with open(file_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+
+        # 阶段1：翻译所有标题（跳过已翻译的，每10篇增量保存）
+        todo_titles = [a for a in articles if not a.get('titleCn')]
+        if todo_titles:
+            print(f'  {date_str}: 阶段1 翻译 {len(todo_titles)} 个标题...', flush=True)
+            for i, a in enumerate(articles):
+                if a.get('titleCn'):
+                    continue
+                try:
+                    a['titleCn'] = translate_text(a['title'])
+                except Exception as e:
+                    print(f'  警告: 翻译标题 {a["id"]} 失败: {e}', flush=True)
+                    a['titleCn'] = ''
+                if (i + 1) % 10 == 0:
+                    print(f'    标题进度 {i + 1}/{len(articles)}', flush=True)
+                    _save()
+            _save()
+            print(f'  {date_str}: 标题翻译完成，已保存', flush=True)
+
+        # 阶段2：翻译所有摘要（跳过已翻译的，每10篇增量保存）
+        todo_abs = [a for a in articles if not a.get('abstractCn')]
+        if todo_abs:
+            print(f'  {date_str}: 阶段2 翻译 {len(todo_abs)} 个摘要...', flush=True)
+            for i, a in enumerate(articles):
+                if a.get('abstractCn'):
+                    continue
+                try:
+                    a['abstractCn'] = translate_text(a['abstract'])
+                except Exception as e:
+                    print(f'  警告: 翻译摘要 {a["id"]} 失败: {e}', flush=True)
+                    a['abstractCn'] = ''
+                if (i + 1) % 10 == 0:
+                    print(f'    摘要进度 {i + 1}/{len(articles)}', flush=True)
+                    _save()
+            _save()
+            print(f'  {date_str}: 摘要翻译完成，已保存', flush=True)
+
+    # 刷新 latest 文件（用最新一天的已翻译数据）
+    dates = get_available_dates(data_dir)
+    for date_str in dates:
+        file_path = os.path.join(data_dir, f'articles-{date_str}.json')
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        if data.get('articles'):
+            today = get_date_string(datetime.now(timezone.utc))
+            save_latest(data_dir, date_str, data['articles'], is_fallback=(date_str != today))
+            print(f'latest 已刷新为 {date_str}')
+            break
+
+
 def main():
     os.makedirs(DATA_DIR, exist_ok=True)
     arg = sys.argv[1] if len(sys.argv) > 1 else None
@@ -276,6 +439,8 @@ def main():
     try:
         if arg == '--backfill':
             backfill(DATA_DIR, 7)
+        elif arg == '--translate':
+            translate_existing(DATA_DIR)
         elif arg:
             print(f'抓取 {arg} 的文章...')
             result = fetch_date_articles(arg)
