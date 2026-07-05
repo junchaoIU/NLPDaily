@@ -30,9 +30,6 @@ jobs:
       - name: Fetch arxiv data (with fallback)
         run: node scripts/fetch-arxiv.cjs
 
-      - name: Backfill past week if needed
-        run: node scripts/fetch-arxiv.cjs --backfill
-
       - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
