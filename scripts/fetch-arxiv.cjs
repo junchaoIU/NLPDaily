@@ -1,45 +1,51 @@
 /**
- * 抓取 arxiv cs.CL 当天文章
+ * 抓取 arxiv cs.CL 文章
  * 每天保存为独立文件 data/articles-YYYY-MM-DD.json
- * 用法: node scripts/fetch-arxiv.js
+ * 
+ * 用法:
+ *   node scripts/fetch-arxiv.cjs              # 抓取当天（回退到最近有论文的一天）
+ *   node scripts/fetch-arxiv.cjs 2025-01-15   # 抓取指定日期
+ *   node scripts/fetch-arxiv.cjs --backfill   # 补抓过去7天数据
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// 获取当天日期字符串 YYYY-MM-DD
-function getTodayDateString() {
-  const now = new Date();
-  const year = now.getUTCFullYear();
-  const month = String(now.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(now.getUTCDate()).padStart(2, '0');
+// 从命令行参数获取日期
+const arg = process.argv[2];
+
+// 获取日期字符串 YYYY-MM-DD
+function getDateString(date) {
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
 
-// 获取当天日期范围 (UTC) 用于 arxiv 查询
-function getTodayDateRange() {
-  const date = getTodayDateString();
+// 获取指定日期的 UTC Date 对象
+function getDateFromString(dateStr) {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+// 获取日期范围用于 arxiv 查询
+function getDateRange(dateStr) {
+  const dateNum = dateStr.replace(/-/g, '');
   return {
-    start: `${date.replace(/-/g, '')}000000`,
-    end: `${date.replace(/-/g, '')}235959`,
+    start: `${dateNum}000000`,
+    end: `${dateNum}235959`,
   };
 }
 
-// 构建 arxiv API 查询 URL（当天文章，最多 2000 篇）
-function buildArxivUrl() {
-  const { start, end } = getTodayDateRange();
+// 构建 arxiv API 查询 URL
+function buildArxivUrl(dateStr) {
+  const { start, end } = getDateRange(dateStr);
   const query = `search_query=cat:cs.CL+AND+submittedDate:[${start}+TO+${end}]&sortBy=submittedDate&sortOrder=descending&max_results=2000`;
   return `http://export.arxiv.org/api/query?${query}`;
 }
 
-const ARXIV_API_URL = buildArxivUrl();
-
 // 并发控制
 const CONCURRENCY = 5;
-
-async function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 /**
  * 解析 arxiv Atom XML 响应
@@ -113,7 +119,6 @@ async function fetchAffiliations(article) {
 
     const html = await response.text();
 
-    // 解析作者单位 - 从 HTML 中提取
     const affiliations = [];
 
     // 模式1: <span class="affiliation">...</span>
@@ -145,10 +150,8 @@ async function fetchAffiliations(article) {
       }
     }
 
-    // 去重并限制数量
     const uniqueAffiliations = [...new Set(affiliations)].slice(0, article.authors.length);
 
-    // 将单位分配给作者
     const updatedAuthors = article.authors.map((author, idx) => ({
       ...author,
       affiliation: uniqueAffiliations[idx] || uniqueAffiliations[0] || '',
@@ -197,7 +200,7 @@ function getAvailableDates(dataDir) {
   const dates = files
     .filter(f => f.startsWith('articles-') && f.endsWith('.json'))
     .map(f => f.replace('articles-', '').replace('.json', ''))
-    .sort((a, b) => b.localeCompare(a)); // 降序，最新的在前
+    .sort((a, b) => b.localeCompare(a));
   
   return dates;
 }
@@ -223,56 +226,215 @@ function cleanupOldFiles(dataDir) {
   });
 }
 
+/**
+ * 抓取指定日期的文章
+ */
+async function fetchDateArticles(dateStr) {
+  const url = buildArxivUrl(dateStr);
+  console.log(`请求 arxiv API (${dateStr})...`);
+  
+  const response = await fetch(url, {
+    headers: {
+      'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`arxiv API 返回 ${response.status}`);
+  }
+
+  const xml = await response.text();
+  let articles = parseAtomXml(xml);
+  console.log(`  ${dateStr}: 获取到 ${articles.length} 篇文章`);
+
+  if (articles.length === 0) {
+    return { articles, date: dateStr };
+  }
+
+  // 抓取作者单位
+  console.log(`  抓取作者单位信息...`);
+  const tasks = articles.map((article) => () => fetchAffiliations(article));
+  articles = await runWithConcurrency(tasks, CONCURRENCY);
+
+  return { articles, date: dateStr };
+}
+
+/**
+ * 保存数据到文件
+ */
+function saveData(dataDir, dateStr, articles) {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
+  const data = {
+    articles,
+    fetchedAt: new Date().toISOString(),
+    count: articles.length,
+    date: dateStr,
+  };
+
+  const outputPath = path.join(dataDir, `articles-${dateStr}.json`);
+  fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
+  console.log(`  数据已保存到 ${outputPath}`);
+
+  // 更新索引
+  const availableDates = getAvailableDates(dataDir);
+  const indexData = {
+    dates: availableDates,
+    latest: availableDates[0] || dateStr,
+    updatedAt: new Date().toISOString(),
+  };
+  fs.writeFileSync(
+    path.join(dataDir, 'index.json'),
+    JSON.stringify(indexData, null, 2)
+  );
+}
+
+/**
+ * 抓取当天数据，如果当天没有论文则回退到最近有论文的一天
+ */
+async function fetchTodayWithFallback(dataDir) {
+  const today = getDateString(new Date());
+  
+  // 尝试当天
+  let result = await fetchDateArticles(today);
+  
+  if (result.articles.length === 0) {
+    console.log(`当天 (${today}) 没有论文，回退查找最近有论文的一天...`);
+    
+    // 向前查找最近7天
+    for (let i = 1; i <= 7; i++) {
+      const date = new Date();
+      date.setUTCDate(date.getUTCDate() - i);
+      const dateStr = getDateString(date);
+      
+      result = await fetchDateArticles(dateStr);
+      
+      if (result.articles.length > 0) {
+        console.log(`  找到 ${dateStr} 有 ${result.articles.length} 篇论文，作为当天数据`);
+        // 保存到该日期的文件
+        saveData(dataDir, dateStr, result.articles);
+        // 同时保存为 "latest" 文件，前端默认加载
+        const latestData = {
+          articles: result.articles,
+          fetchedAt: new Date().toISOString(),
+          count: result.articles.length,
+          date: dateStr,
+          isFallback: true,
+        };
+        fs.writeFileSync(
+          path.join(dataDir, 'articles-latest.json'),
+          JSON.stringify(latestData, null, 2)
+        );
+        console.log(`  已保存为 latest 数据`);
+        return;
+      }
+    }
+    
+    console.log(`最近7天都没有论文数据`);
+    // 即使没论文也保存当天数据
+    saveData(dataDir, today, result.articles);
+    return;
+  }
+  
+  saveData(dataDir, today, result.articles);
+  
+  // 同时保存为 latest
+  const latestData = {
+    articles: result.articles,
+    fetchedAt: new Date().toISOString(),
+    count: result.articles.length,
+    date: today,
+  };
+  fs.writeFileSync(
+    path.join(dataDir, 'articles-latest.json'),
+    JSON.stringify(latestData, null, 2)
+  );
+}
+
+/**
+ * 补抓过去N天数据
+ */
+async function backfill(dataDir, days) {
+  console.log(`开始补抓过去 ${days} 天数据...`);
+  
+  for (let i = 0; i < days; i++) {
+    const date = new Date();
+    date.setUTCDate(date.getUTCDate() - i);
+    const dateStr = getDateString(date);
+    
+    // 检查是否已有数据
+    const filePath = path.join(dataDir, `articles-${dateStr}.json`);
+    if (fs.existsSync(filePath)) {
+      const existing = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      if (existing.articles && existing.articles.length > 0) {
+        console.log(`  ${dateStr}: 已有 ${existing.articles.length} 篇文章，跳过`);
+        continue;
+      }
+    }
+    
+    try {
+      const result = await fetchDateArticles(dateStr);
+      saveData(dataDir, dateStr, result.articles);
+      
+      // 礼貌延迟，避免频繁请求
+      if (i < days - 1) {
+        console.log('  等待 3 秒...');
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+    } catch (err) {
+      console.error(`  ${dateStr} 抓取失败: ${err.message}`);
+    }
+  }
+  
+  // 生成 latest 文件（取最新有论文的一天）
+  const availableDates = getAvailableDates(dataDir);
+  for (const dateStr of availableDates) {
+    const filePath = path.join(dataDir, `articles-${dateStr}.json`);
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    if (data.articles && data.articles.length > 0) {
+      const latestData = {
+        ...data,
+        fetchedAt: new Date().toISOString(),
+        isFallback: dateStr !== getDateString(new Date()),
+      };
+      fs.writeFileSync(
+        path.join(dataDir, 'articles-latest.json'),
+        JSON.stringify(latestData, null, 2)
+      );
+      console.log(`latest 数据设为 ${dateStr} (${data.articles.length} 篇)`);
+      break;
+    }
+  }
+}
+
 async function main() {
-  console.log('开始抓取 arxiv cs.CL 文章...');
-
+  const dataDir = path.join(__dirname, '..', 'data');
+  
   try {
-    // 1. 获取文章列表
-    console.log('请求 arxiv API...');
-    console.log('URL:', ARXIV_API_URL);
-    const response = await fetch(ARXIV_API_URL, {
-      headers: {
-        'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`arxiv API 返回 ${response.status}`);
+    if (arg === '--backfill') {
+      // 补抓过去7天
+      await backfill(dataDir, 7);
+    } else if (arg) {
+      // 抓取指定日期
+      console.log(`抓取 ${arg} 的文章...`);
+      const result = await fetchDateArticles(arg);
+      saveData(dataDir, arg, result.articles);
+    } else {
+      // 默认抓取当天（带回退）
+      console.log('开始抓取 arxiv cs.CL 当天文章...');
+      await fetchTodayWithFallback(dataDir);
     }
-
-    const xml = await response.text();
-    let articles = parseAtomXml(xml);
-    console.log(`获取到 ${articles.length} 篇文章`);
-
-    // 2. 抓取每篇文章的作者单位
-    console.log('抓取作者单位信息...');
-    const tasks = articles.map((article) => () => fetchAffiliations(article));
-    articles = await runWithConcurrency(tasks, CONCURRENCY);
-
-    // 3. 保存数据到按日期命名的文件
-    const dataDir = path.join(__dirname, '..', 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-
-    const today = getTodayDateString();
-    const data = {
-      articles,
-      fetchedAt: new Date().toISOString(),
-      count: articles.length,
-      date: today,
-    };
-
-    // 保存当天数据
-    const outputPath = path.join(dataDir, `articles-${today}.json`);
-    fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
-    console.log(`数据已保存到 ${outputPath}`);
-
-    // 4. 更新索引文件，记录所有可用日期
+    
+    // 清理旧文件
+    cleanupOldFiles(dataDir);
+    
+    // 更新索引
     const availableDates = getAvailableDates(dataDir);
     const indexData = {
       dates: availableDates,
-      latest: today,
+      latest: availableDates[0] || '',
       updatedAt: new Date().toISOString(),
     };
     fs.writeFileSync(
@@ -280,11 +442,6 @@ async function main() {
       JSON.stringify(indexData, null, 2)
     );
     console.log(`索引已更新，共 ${availableDates.length} 天数据`);
-
-    // 5. 清理超过 30 天的旧文件
-    cleanupOldFiles(dataDir);
-
-    console.log(`共 ${articles.length} 篇文章`);
   } catch (err) {
     console.error('抓取失败:', err.message);
     process.exit(1);

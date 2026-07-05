@@ -46,37 +46,38 @@ function App() {
   const initData = useCallback(async () => {
     setLoading(true)
     try {
-      // 先尝试加载索引
-      const indexRes = await fetch('data/index.json')
-      let dates: string[] = []
-      let latestDate = ''
+      // 先尝试加载 latest 文件（包含回退数据）
+      const latestRes = await fetch('data/articles-latest.json')
+      if (latestRes.ok) {
+        const data: ArticlesData & { isFallback?: boolean } = await latestRes.json()
+        setArticles(data.articles)
+        setFiltered(data.articles)
+        setFetchedAt(data.fetchedAt)
+        setCurrentDate(data.date || '')
+        setSelectedDate(data.date || '')
+      }
 
+      // 加载索引获取日期列表
+      const indexRes = await fetch('data/index.json')
       if (indexRes.ok) {
         const indexData: DateIndex = await indexRes.json()
-        dates = indexData.dates
-        latestDate = indexData.latest
-        setAvailableDates(dates)
+        setAvailableDates(indexData.dates)
+        // 如果 latest 没加载成功，用索引的最新日期
+        if (!latestRes.ok && indexData.latest) {
+          setSelectedDate(indexData.latest)
+          await loadDateData(indexData.latest)
+        }
       }
 
-      // 确定要加载的日期
-      let targetDate = latestDate
-      if (!targetDate) {
-        // 回退：尝试加载默认文件
-        const defaultRes = await fetch('data/articles.json')
-        if (defaultRes.ok) {
-          const data: ArticlesData = await defaultRes.json()
-          setArticles(data.articles)
-          setFiltered(data.articles)
-          setFetchedAt(data.fetchedAt)
-          setCurrentDate('')
-          setLoading(false)
-          return
-        }
+      if (!latestRes.ok && !indexRes.ok) {
         throw new Error('没有可用的数据')
       }
-
-      setSelectedDate(targetDate)
-      await loadDateData(targetDate)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '初始化失败')
+    } finally {
+      setLoading(false)
+    }
+  }, [loadDateData])
     } catch (err) {
       setError(err instanceof Error ? err.message : '初始化失败')
       setLoading(false)

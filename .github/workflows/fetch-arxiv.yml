@@ -27,8 +27,11 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Fetch arxiv data
+      - name: Fetch arxiv data (with fallback)
         run: node scripts/fetch-arxiv.cjs
+
+      - name: Backfill past week if needed
+        run: node scripts/fetch-arxiv.cjs --backfill
 
       - name: Commit and push
         run: |
