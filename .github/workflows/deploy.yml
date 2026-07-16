@@ -3,6 +3,9 @@ name: Build & Deploy
 on:
   push:
     branches: [main]
+    paths:
+      - 'frontend/**'
+      - 'data/**'
   workflow_dispatch:
 
 permissions:
@@ -27,20 +30,22 @@ jobs:
           node-version: '24'
 
       - name: Install dependencies
+        working-directory: ./frontend
         run: npm install
 
       - name: Build
+        working-directory: ./frontend
         run: npm run build
 
       - name: Copy data to dist
         run: |
-          mkdir -p dist/data
-          cp -r data/* dist/data/
+          mkdir -p frontend/dist/data
+          cp -r data/* frontend/dist/data/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './frontend/dist'
 
   deploy:
     needs: build

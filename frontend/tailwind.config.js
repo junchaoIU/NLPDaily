@@ -7,29 +7,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        'ink': {
+        ink: {
           DEFAULT: '#0f1419',
           light: '#1a1f2e',
-          lighter: '#252b3d',
+          lighter: '#2a3040',
         },
-        'parchment': {
+        parchment: {
           DEFAULT: '#e8e4d9',
-          dim: '#c5c0b4',
-          muted: '#8a8579',
+          muted: '#a0a0a0',
         },
         'amber-gold': {
-          DEFAULT: '#d4a574',
-          light: '#e8c9a0',
-          dark: '#b88a5a',
+          DEFAULT: '#d4a853',
+          light: '#e8c87a',
         },
-        'wine': {
-          DEFAULT: '#7a3b3b',
-          light: '#9a5a5a',
-        },
+        wine: '#8b3a3a',
       },
       fontFamily: {
-        'display': ['Fraunces', 'serif'],
-        'body': ['Manrope', 'sans-serif'],
+        display: ['Fraunces', 'serif'],
+        body: ['Manrope', 'sans-serif'],
         'serif-body': ['Newsreader', 'serif'],
       },
     },

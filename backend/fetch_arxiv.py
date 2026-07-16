@@ -1,9 +1,9 @@
 """
 抓取 arxiv cs.CL 文章
 用法:
-  python scripts/fetch-arxiv.py              # 抓取当天（回退到最近有论文的一天）
-  python scripts/fetch-arxiv.py 2025-01-15   # 抓取指定日期
-  python scripts/fetch-arxiv.py --backfill   # 补抓过去7天数据
+  python fetch_arxiv.py              # 抓取当天（回退到最近有论文的一天）
+  python fetch_arxiv.py 2025-01-15   # 抓取指定日期
+  python fetch_arxiv.py --backfill   # 补抓过去7天数据
 """
 
 import json
@@ -16,13 +16,22 @@ import urllib.error
 import concurrent.futures
 from datetime import datetime, timedelta, timezone
 
+# 加载 .env 文件（如果存在）
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(env_path):
+    with open(env_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                key, value = line.split('=', 1)
+                os.environ.setdefault(key.strip(), value.strip().strip('"\''))
+
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 CONCURRENCY = 5
 TRANSLATE_CONCURRENCY = 1
 HEADERS = {'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)'}
 
 # 智谱 GLM 官方翻译 API 配置（单模型低并发，免费额度）
-# key 从环境变量读取，不硬编码（仓库 public，避免泄露）
 TRANSLATE_API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
 TRANSLATE_API_KEY = os.environ.get('TRANSLATE_API_KEY', '')
 TRANSLATE_MODEL = 'glm-4-flash-250414'
@@ -43,13 +52,13 @@ def build_arxiv_url(date_str):
     """构建 arxiv API 查询 URL"""
     start, end = get_date_range(date_str)
     query = f'search_query=cat:cs.CL+AND+submittedDate:[{start}+TO+{end}]&sortBy=submittedDate&sortOrder=descending&max_results=2000'
-    return f'http://export.arxiv.org/api/query?{query}'
+    return f'https://export.arxiv.org/api/query?{query}'
 
 
 def http_get(url):
     """HTTP GET 请求"""
     req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=30) as resp:
+    with urllib.request.urlopen(req, timeout=60) as resp:
         return resp.read().decode('utf-8')
 
 
