@@ -4,9 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-ink text-parchment font-body antialiased;
-    background-color: #0f1419;
-    color: #e8e4d9;
+    @apply bg-white text-gray-900 font-body antialiased;
+  }
+
+  .dark body {
+    @apply bg-ink text-parchment;
   }
 
   ::-webkit-scrollbar {
@@ -14,15 +16,26 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #1a1f2e;
+    @apply bg-gray-100;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-ink-light;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #3a4050;
-    border-radius: 3px;
+    @apply bg-gray-300 rounded;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-ink-lighter/50;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #4a5060;
+    @apply bg-gray-400;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-lighter/70;
   }
 }
