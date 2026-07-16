@@ -1,13 +1,12 @@
-name: Fetch arxiv NLP Articles
+name: Build & Deploy
 
 on:
-  schedule:
-    # 每天 UTC 00:00 执行
-    - cron: '0 0 * * *'
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -16,32 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  fetch:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Fetch arxiv data (with fallback & translation)
-        run: python scripts/fetch-arxiv.py
-        env:
-          TRANSLATE_API_KEY: ${{ secrets.TRANSLATE_API_KEY }}
-
-      - name: Commit and push
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add data/
-          git diff --staged --quiet || git commit -m "Update arxiv articles data for $(date +%Y-%m-%d)"
-          git push
-
   build:
-    needs: fetch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -62,9 +36,6 @@ jobs:
         run: |
           mkdir -p dist/data
           cp -r data/* dist/data/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
