@@ -1,156 +1,197 @@
 # 学术助手 - arxiv NLP 每日速递
 
-一个自动抓取 arxiv cs.CL (Computation and Language) 分类每日新论文，并以优雅界面展示的工具。数据每天自动更新，支持查看历史日期的文章。
+自动抓取 arxiv cs.CL (Computation and Language) 分类每日新论文，提供中英双语展示，支持搜索、分类筛选和历史日期回溯。
+
+在线访问：https://junchaoiu.github.io/NLPDaily/
+
+---
 
 ## 功能特性
 
-- **每日自动抓取**: GitHub Actions 每天 UTC 00:00 自动抓取当天所有 cs.CL 论文
-- **数据持久化**: 每天保存为独立文件，支持查看历史日期
-- **优雅界面**: 深色学术风格，卡片式展示
-- **搜索过滤**: 支持按标题、作者、摘要搜索，按分类标签过滤
-- **展开摘要**: 点击展开/收起完整摘要
-- **日期切换**: 下拉选择不同日期查看历史文章
-- **直达原文**: 一键跳转到 arxiv 摘要页或 PDF
+- **每日自动更新**：服务器每天 UTC 00:00 自动抓取并翻译
+- **中英双语切换**：标题和摘要均支持中英文切换查看
+- **搜索过滤**：支持按标题、作者、摘要搜索，按分类标签过滤
+- **历史回溯**：下拉选择不同日期查看历史文章
+- **直达原文**：一键跳转到 arxiv 摘要页或 PDF
+
+---
+
+## 技术架构
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   服务器后端     │     │   GitHub 仓库    │     │   GitHub Pages  │
+│                 │     │                 │     │                 │
+│  backend/       │────►│  data/          │────►│  frontend/      │
+│  cron_fetch.sh  │     │  frontend/      │     │  build + deploy │
+│  fetch_arxiv.py │     │  backend/       │     │                 │
+│  ↓ arxiv API    │     │                 │     │                 │
+│  ↓ GLM API 翻译 │     │ GitHub Actions  │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+---
 
 ## 技术栈
 
-- **前端**: React 18 + TypeScript + Tailwind CSS + Vite
-- **部署**: GitHub Pages
-- **数据抓取**: GitHub Actions + Node.js
-- **数据源**: arxiv API (Atom XML)
+| 层级 | 技术 |
+|------|------|
+| **前端** | React 18 + TypeScript + Tailwind CSS + Vite |
+| **后端** | Python 3 (标准库) |
+| **翻译** | 智谱 GLM-4-Flash API |
+| **部署** | GitHub Pages (前端) + 服务器定时任务 (后端) |
+| **数据源** | arxiv API (Atom XML) |
 
-## 快速开始
-
-### 本地开发
-
-```bash
-# 克隆仓库
-git clone https://github.com/<your-username>/Academic_Assistant.git
-cd Academic_Assistant
-
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-
-# 构建
-npm run build
-```
-
-### 部署到 GitHub Pages
-
-1. **Fork 或创建仓库**
-
-2. **启用 GitHub Pages**
-   - 进入仓库 Settings > Pages
-   - Source 选择 "GitHub Actions"
-
-3. **配置 Actions 权限**
-   - Settings > Actions > General
-   - Workflow permissions 选择 "Read and write permissions"
-
-4. **手动触发第一次抓取**
-   - 进入 Actions 标签页
-   - 选择 "Fetch arxiv NLP Articles"
-   - 点击 "Run workflow" 手动执行
-
-5. **访问页面**
-   - 等待 Actions 执行完成
-   - 访问 `https://<your-username>.github.io/Academic_Assistant/`
+---
 
 ## 项目结构
 
 ```
-academic-assistant/
+Academic_Assistant/
+├── backend/                    # 后端脚本
+│   ├── .env                   # API Key（gitignore，不上传）
+│   ├── .env.example           # 环境变量模板
+│   ├── cron_fetch.sh          # 服务器定时任务脚本
+│   ├── fetch_arxiv.py         # 核心采集+翻译脚本
+│   └── requirements.txt       # Python 依赖（无外部包）
+│
+├── frontend/                   # 前端代码
+│   ├── src/
+│   │   ├── components/        # React 组件
+│   │   ├── types/             # TypeScript 类型定义
+│   │   ├── App.tsx            # 主应用
+│   │   └── main.tsx           # 入口
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── data/                       # 数据文件（JSON）
+│   ├── index.json             # 日期索引
+│   ├── articles-latest.json   # 最新一天数据
+│   └── articles-YYYY-MM-DD.json  # 按日期存储
+│
 ├── .github/
 │   └── workflows/
-│       └── fetch-arxiv.yml      # GitHub Actions 定时任务
-├── scripts/
-│   └── fetch-arxiv.js           # 数据抓取脚本
-├── data/
-│   ├── articles-YYYY-MM-DD.json  # 每日数据文件
-│   └── index.json                # 日期索引
-├── src/
-│   ├── components/              # React 组件
-│   ├── types/                   # TypeScript 类型
-│   └── App.tsx                  # 主应用
-├── index.html
-├── package.json
-├── vite.config.ts
+│       └── deploy.yml         # GitHub Actions：build + deploy
+│
+├── .gitignore                 # 排除 .env、node_modules 等
 └── README.md
 ```
 
-## 数据说明
+---
 
-### 每日数据文件格式
+## 快速开始
+
+### 前端开发
+
+```bash
+cd frontend
+npm install
+npm run dev      # 启动开发服务器
+npm run build    # 构建生产版本
+```
+
+### 后端脚本（本地测试）
+
+```bash
+cd backend
+
+# 创建 .env 文件
+echo "TRANSLATE_API_KEY=your_api_key" > .env
+
+# 抓取当天数据
+python3 fetch_arxiv.py
+
+# 补抓过去7天
+python3 fetch_arxiv.py --backfill
+
+# 补充翻译已有数据
+python3 fetch_arxiv.py --translate
+```
+
+---
+
+## 部署配置
+
+### 1. 服务器定时任务
+
+```bash
+# 编辑 crontab
+crontab -e
+
+# 添加（每天 UTC 00:00 执行）
+0 0 * * * /opt/NLPDaily/backend/cron_fetch.sh
+```
+
+### 2. GitHub Pages
+
+- 仓库 Settings > Pages > Source 选择 "GitHub Actions"
+- push 到 main 分支自动触发 build + deploy
+
+### 3. API Key 配置
+
+在服务器 `backend/.env` 中配置：
+
+```
+TRANSLATE_API_KEY=your_glm_api_key
+```
+
+**注意**：`.env` 已加入 `.gitignore`，不会上传到 GitHub。
+
+---
+
+## 数据格式
+
+### 单篇文章
 
 ```json
 {
-  "articles": [
-    {
-      "id": "2501.12345",
-      "title": "论文标题",
-      "authors": [
-        { "name": "作者名", "affiliation": "单位" }
-      ],
-      "abstract": "论文摘要...",
-      "categories": ["cs.CL", "cs.AI"],
-      "published": "2025-01-15T00:00:00Z",
-      "updated": "2025-01-15T00:00:00Z",
-      "absUrl": "https://arxiv.org/abs/2501.12345",
-      "pdfUrl": "https://arxiv.org/pdf/2501.12345.pdf",
-      "comment": "会议信息（如有）"
-    }
+  "id": "2501.12345",
+  "title": "论文英文标题",
+  "titleCn": "论文中文标题",
+  "authors": [
+    { "name": "作者名", "affiliation": "单位" }
   ],
-  "fetchedAt": "2025-01-15T00:00:00.000Z",
-  "count": 42,
-  "date": "2025-01-15"
+  "abstract": "英文摘要...",
+  "abstractCn": "中文摘要...",
+  "categories": ["cs.CL", "cs.AI"],
+  "published": "2025-01-15T00:00:00Z",
+  "absUrl": "https://arxiv.org/abs/2501.12345",
+  "pdfUrl": "https://arxiv.org/pdf/2501.12345.pdf",
+  "comment": "ACL 2025"
 }
 ```
 
-### 索引文件格式
+### 索引文件
 
 ```json
 {
-  "dates": ["2025-01-15", "2025-01-14", "2025-01-13"],
+  "dates": ["2025-01-15", "2025-01-14"],
   "latest": "2025-01-15",
   "updatedAt": "2025-01-15T00:00:00.000Z"
 }
 ```
 
-## 定时任务
-
-默认每天 UTC 00:00 执行抓取。可以在 `.github/workflows/fetch-arxiv.yml` 中修改 cron 表达式：
-
-```yaml
-on:
-  schedule:
-    - cron: '0 0 * * *'  # 每天 UTC 00:00
-```
-
-## 数据保留
-
-- 自动保留最近 30 天的数据
-- 超过 30 天的旧文件自动清理
+---
 
 ## 自定义配置
 
 ### 修改抓取分类
 
-编辑 `scripts/fetch-arxiv.js` 中的查询参数：
+编辑 `backend/fetch_arxiv.py`：
 
-```javascript
-const query = `search_query=cat:cs.CL+AND+submittedDate:[${start}+TO+${end}]`;
+```python
+# 默认抓取 cs.CL，可改为 cs.AI、cs.LG 等
+query = f'search_query=cat:cs.CL+AND+submittedDate:[{start}+TO+{end}]'
 ```
 
-将 `cs.CL` 替换为其他 arxiv 分类，如 `cs.AI`、`cs.LG` 等。
+### 修改翻译模型
 
-### 修改最大抓取数量
-
-```javascript
-const query = `...&max_results=2000`;  // 默认 2000 篇
+```python
+TRANSLATE_MODEL = 'glm-4-flash-250414'  # 或其他智谱模型
 ```
+
+---
 
 ## 许可证
 
