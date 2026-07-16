@@ -89,12 +89,6 @@ export default function ArticleCard({ article, language = 'en' }: ArticleCardPro
     : article.title
   const displayAbstract = isCn && article.abstractCn ? article.abstractCn : article.abstract
 
-  const affiliations = article.authors
-    .map((a) => a.affiliation)
-    .filter(Boolean)
-
-  const uniqueAffiliations = Array.from(new Set(affiliations))
-
   return (
     <div className="group relative flex flex-col rounded-xl border border-ink-lighter/30 bg-ink-light/50 p-5 transition-all duration-300 hover:border-amber-gold/30 hover:bg-ink-light hover:shadow-lg hover:shadow-amber-gold/5">
       {/* Title */}
@@ -119,28 +113,6 @@ export default function ArticleCard({ article, language = 'en' }: ArticleCardPro
           </span>
         )}
       </div>
-
-      {/* Affiliations */}
-      {uniqueAffiliations.length > 0 && (
-        <div className="mt-2 flex flex-wrap gap-1">
-          {uniqueAffiliations.slice(0, 3).map((aff, idx) => (
-            <span
-              key={idx}
-              className="text-xs text-parchment-muted/70"
-            >
-              {aff}
-              {idx < Math.min(uniqueAffiliations.length, 3) - 1 && (
-                <span className="mx-1">·</span>
-              )}
-            </span>
-          ))}
-          {uniqueAffiliations.length > 3 && (
-            <span className="text-xs text-parchment-muted/50">
-              +{uniqueAffiliations.length - 3}
-            </span>
-          )}
-        </div>
-      )}
 
       {/* Abstract */}
       <div className="mt-3">
