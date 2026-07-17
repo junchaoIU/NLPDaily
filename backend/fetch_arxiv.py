@@ -174,8 +174,8 @@ def translate_text(text):
             )
             with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read().decode('utf-8'))
-            # 节流：每次成功调用后等待，避免触发免费 API 速率限制
-            time.sleep(5)
+            # 节流：每次成功调用后等待 60 秒，避免触发免费 API 速率限制
+            time.sleep(60)
             return result['choices'][0]['message']['content'].strip()
         except urllib.error.HTTPError as e:
             last_err = e
