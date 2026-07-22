@@ -55,11 +55,21 @@ def build_arxiv_url(date_str):
     return f'https://export.arxiv.org/api/query?{query}'
 
 
-def http_get(url):
-    """HTTP GET 请求"""
-    req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return resp.read().decode('utf-8')
+def http_get(url, max_retries=3):
+    """HTTP GET 请求，带重试"""
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                return resp.read().decode('utf-8')
+        except Exception as e:
+            last_err = e
+            if attempt < max_retries - 1:
+                wait = 10 * (attempt + 1)
+                print(f'  HTTP 请求失败，{wait}s 后重试 ({attempt + 1}/{max_retries}): {e}')
+                time.sleep(wait)
+    raise last_err
 
 
 def parse_atom_xml(xml):
