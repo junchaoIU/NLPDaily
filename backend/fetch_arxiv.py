@@ -3,7 +3,7 @@
 用法:
   python fetch_arxiv.py              # 抓取当天（回退到最近有论文的一天）
   python fetch_arxiv.py 2025-01-15   # 抓取指定日期
-  python fetch_arxiv.py --backfill   # 补抓过去7天数据
+  python fetch_arxiv.py --backfill   # 补抓过去14天数据
 """
 
 import json
@@ -469,7 +469,7 @@ def main():
 
     try:
         if arg == '--backfill':
-            backfill(DATA_DIR, 7)
+            backfill(DATA_DIR, 14)
         elif arg == '--translate':
             translate_existing(DATA_DIR)
         elif arg:
