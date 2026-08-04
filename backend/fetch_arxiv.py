@@ -8,6 +8,7 @@
 
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -27,9 +28,13 @@ if os.path.exists(env_path):
                 os.environ.setdefault(key.strip(), value.strip().strip('"\''))
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
-CONCURRENCY = 5
+CONCURRENCY = 1           # 降低并发避免触发 arxiv 限流
 TRANSLATE_CONCURRENCY = 1
 HEADERS = {'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)'}
+
+# 全局速率限制：两次 arxiv 请求之间至少间隔 5 秒
+_last_request_time = 0.0
+_MIN_REQUEST_INTERVAL = 5.0  # 秒
 
 # 智谱 GLM 官方翻译 API 配置（单模型低并发，免费额度）
 TRANSLATE_API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
@@ -55,19 +60,26 @@ def build_arxiv_url(date_str):
     return f'https://export.arxiv.org/api/query?{query}'
 
 
-def http_get(url, max_retries=3):
-    """HTTP GET 请求，带重试"""
+def http_get(url, max_retries=5):
+    """HTTP GET 请求，带重试（指数退避 + 速率限制）"""
+    global _last_request_time
     last_err = None
     for attempt in range(max_retries):
         try:
+            # 速率限制：确保两次请求间隔 >= _MIN_REQUEST_INTERVAL 秒
+            elapsed = time.time() - _last_request_time
+            if elapsed < _MIN_REQUEST_INTERVAL:
+                wait = _MIN_REQUEST_INTERVAL - elapsed + random.uniform(0, 2)
+                time.sleep(wait)
             req = urllib.request.Request(url, headers=HEADERS)
             with urllib.request.urlopen(req, timeout=60) as resp:
+                _last_request_time = time.time()
                 return resp.read().decode('utf-8')
         except Exception as e:
             last_err = e
             if attempt < max_retries - 1:
-                wait = 5 * (attempt + 1)
-                print(f'  HTTP 请求失败，{wait}s 后重试 ({attempt + 1}/{max_retries}): {e}')
+                wait = 10 * (2 ** attempt) + random.uniform(0, 5)  # 10s, 20s, 40s, 80s + 随机抖动
+                print(f'  HTTP 请求失败，{wait:.0f}s 后重试 ({attempt + 1}/{max_retries}): {e}')
                 time.sleep(wait)
     raise last_err
 
@@ -361,8 +373,8 @@ def backfill(data_dir, days):
             result = fetch_date_articles(date_str)
             save_data(data_dir, date_str, result['articles'])
             if i < days - 1:
-                print('  等待 3 秒...')
-                time.sleep(3)
+                print('  等待 15 秒（避免限流）...')
+                time.sleep(15)
         except Exception as e:
             print(f'  {date_str} 抓取失败: {e}')
 
