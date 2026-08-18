@@ -1,6 +1,10 @@
 #!/bin/bash
 cd /opt/NLPDaily
 
+# 文件锁：防止定时任务与手动补抓并发运行（两者共用同一把锁）
+exec 200>/var/lock/nlpdaily-fetch.lock
+flock -n 200 || { echo "$(date): 已有抓取进程在运行，本次跳过" >> /var/log/nlpdaily-fetch.log; exit 0; }
+
 # 加载环境变量（如果存在 .env 文件）
 if [ -f backend/.env ]; then
   set -a
