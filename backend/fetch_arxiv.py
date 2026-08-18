@@ -32,6 +32,10 @@ CONCURRENCY = 1           # 降低并发避免触发 arxiv 限流
 TRANSLATE_CONCURRENCY = 1
 HEADERS = {'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)'}
 
+# 是否抓取作者单位：前端已不展示单位，且每篇需额外请求一次 arxiv 摘要页，
+# 极易触发 429 限流，故默认关闭（设为 1 可重新启用）
+FETCH_AFFILIATIONS = os.environ.get('FETCH_AFFILIATIONS', '0') == '1'
+
 # 全局速率限制：两次 arxiv 请求之间至少间隔 5 秒
 _last_request_time = 0.0
 _MIN_REQUEST_INTERVAL = 5.0  # 秒
@@ -231,14 +235,16 @@ def translate_text(text):
 
 
 def translate_article(article):
-    """翻译单篇文章的标题和摘要"""
+    """翻译单篇文章的标题和摘要（已有翻译则跳过）"""
     try:
-        article['titleCn'] = translate_text(article['title'])
+        if not article.get('titleCn'):
+            article['titleCn'] = translate_text(article['title'])
     except Exception as e:
         print(f'  警告: 翻译标题 {article["id"]} 失败: {e}')
         article['titleCn'] = ''
     try:
-        article['abstractCn'] = translate_text(article['abstract'])
+        if not article.get('abstractCn'):
+            article['abstractCn'] = translate_text(article['abstract'])
     except Exception as e:
         print(f'  警告: 翻译摘要 {article["id"]} 失败: {e}')
         article['abstractCn'] = ''
@@ -257,10 +263,33 @@ def fetch_date_articles(date_str):
     if not articles:
         return {'articles': articles, 'date': date_str}
 
-    # 并发抓取单位
-    print(f'  抓取作者单位信息...')
-    with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as executor:
-        articles = list(executor.map(fetch_affiliations, articles))
+    # 保留已有翻译：按 arxiv id 匹配，避免重新抓取时重复翻译浪费配额
+    existing_path = os.path.join(DATA_DIR, f'articles-{date_str}.json')
+    if os.path.exists(existing_path):
+        try:
+            with open(existing_path, 'r', encoding='utf-8') as f:
+                old_articles = json.load(f).get('articles', [])
+            old_map = {a['id']: a for a in old_articles}
+            reused = 0
+            for a in articles:
+                old = old_map.get(a['id'])
+                if old:
+                    if old.get('titleCn'):
+                        a['titleCn'] = old['titleCn']
+                    if old.get('abstractCn'):
+                        a['abstractCn'] = old['abstractCn']
+                    if a.get('titleCn') or a.get('abstractCn'):
+                        reused += 1
+            if reused:
+                print(f'  复用已有翻译 {reused} 篇')
+        except Exception as e:
+            print(f'  警告: 读取已有翻译失败: {e}')
+
+    # 并发抓取单位（默认关闭：前端不展示，且会触发 arxiv 限流）
+    if FETCH_AFFILIATIONS:
+        print(f'  抓取作者单位信息...')
+        with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as executor:
+            articles = list(executor.map(fetch_affiliations, articles))
 
     # 翻译标题和摘要为中文
     print(f'  翻译标题和摘要为中文...')
