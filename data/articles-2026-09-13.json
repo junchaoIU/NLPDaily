@@ -1,0 +1,2009 @@
+{
+  "articles": [
+    {
+      "id": "2609.14850v1",
+      "title": "Self-Orchestrating Language Models: Leveraging Semantic Dependence for Efficient Inference",
+      "authors": [
+        {
+          "name": "Tian Jin",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models (LLMs) demonstrate impressive capabilities, but their deployment presents significant efficiency challenges. Autoregressive decoding imposes substantial inference latency and under-utilizes hardware accelerators in low batch size regimes. Discrete diffusion models can generate in parallel but struggle to match autoregressive quality without many diffusion denoising steps. Long-context reasoning creates memory bottlenecks that strain even state-of-the-art accelerators. My thesis is that language models can direct their own inference execution strategy by annotating semantic dependence -- which tokens depend on which others -- in their generation. I call such models self-orchestrating language models. For each system, I design a runtime that acts on these annotations to parallelize autoregressive decoding, evict intermediate context, or derive denoising orders, achieving Pareto-optimal quality-efficiency trade-offs. I demonstrate this approach through three self-orchestrating systems. First, PASTA uses semantic dependence to parallelize autoregressive decoding, training the model to annotate which output chunks can generate independently. Second, TIP uses semantic dependence to evict intermediate reasoning steps from the KV cache, reducing memory consumption while preserving accuracy. Third, Planned Diffusion uses semantic dependence to derive a denoising order for discrete diffusion, autoregressively generating a plan that specifies which chunks to denoise in parallel.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T23:48:33Z",
+      "updated": "2026-09-13T23:48:33Z",
+      "absUrl": "https://arxiv.org/abs/2609.14850v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14850v1.pdf",
+      "comment": null,
+      "titleCn": "自编排语言模型：利用语义依赖实现高效推理",
+      "abstractCn": "大型语言模型（LLMs）展现出令人印象深刻的性能，但它们的部署带来了显著的效率挑战。自回归解码在高批处理规模下会引入巨大的推理延迟，且未能充分利用硬件加速器。离散扩散模型可以并行生成，但在没有大量扩散去噪步骤的情况下难以匹配自回归的质量。长上下文推理会形成内存瓶颈，甚至让最先进的加速器也感到吃力。我的论点是，语言模型可以通过在生成过程中标注语义依赖——哪些标记依赖于哪些其他标记——来指导自身的推理执行策略。我将这类模型称为自编排语言模型。对于每个系统，我设计了一个运行时环境，该环境基于这些标注来并行化自回归解码、驱逐中间上下文或推导去噪顺序，从而实现帕累托最优的质量-效率权衡。我通过三个自编排系统来展示这种方法。首先，PASTA利用语义依赖来并行化自回归解码，训练模型标注哪些输出块可以独立生成。其次，TIP利用语义依赖从KV缓存中驱逐中间推理步骤，减少内存消耗的同时保持准确性。第三，Planned Diffusion利用语义依赖为离散扩散推导去噪顺序，自回归地生成一个计划，该计划指定了并行去噪哪些块。"
+    },
+    {
+      "id": "2609.14849v1",
+      "title": "LLMs as Oracles: Reliance on LLMs for Subjective Personal Questions",
+      "authors": [
+        {
+          "name": "Myra Cheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Lujain Ibrahim",
+          "affiliation": ""
+        },
+        {
+          "name": "Grace Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Michelle S. Lam",
+          "affiliation": ""
+        },
+        {
+          "name": "Vishakh Padmakumar",
+          "affiliation": ""
+        },
+        {
+          "name": "Nick Madibekov",
+          "affiliation": ""
+        },
+        {
+          "name": "Diyi Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Dan Jurafsky",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We characterize how people are turning to LLMs as oracles: all-knowing authorities on subjective personal questions. Motivated by risks to users' autonomy and well-being, we develop a typology and LLM-based methods to measure this form of AI reliance at scale and understand how people are offloading judgment and decision-making to AI. Applying our typology to public usage data (68K prompts from WildChat and ThoughtTrace), we find that LLM-as-oracle use has increased over time (2023-2026) and is more prevalent among younger users. We further build a privacy-preserving data donation tool to analyze individuals' longitudinal usage data (140K prompts from 52 participants), identifying similar trends. People are often unaware of their own LLM-as-oracle use, and express dissatisfaction with this behavior after seeing our tool's analysis. Finally, we identify two drivers of LLM-as-oracle use: people's perceptions of AI and the behavior of AI models themselves, which motivate possible interventions to support users' self-deliberation.",
+      "categories": [
+        "cs.CL",
+        "cs.CY",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T23:47:13Z",
+      "updated": "2026-09-13T23:47:13Z",
+      "absUrl": "https://arxiv.org/abs/2609.14849v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14849v1.pdf",
+      "comment": null,
+      "titleCn": "将大型语言模型视为神谕：对主观个人问题依赖大型语言模型",
+      "abstractCn": "我们描述了人们如何将大型语言模型视为神谕：对主观个人问题无所不知的权威。出于对用户自主权和福祉的担忧，我们开发了一种类型学和基于大型语言模型的方法，以大规模测量这种人工智能依赖形式，并了解人们如何将判断和决策外包给人工智能。将我们的类型学应用于公开使用数据（来自WildChat和ThoughtTrace的68K条提示），我们发现将大型语言模型视为神谕的使用随着时间的推移而增加（2023-2026年），并且在年轻用户中更为普遍。我们进一步构建了一个保护隐私的数据捐赠工具，以分析个人的纵向使用数据（来自52名参与者的14万条提示），发现了类似的趋势。人们通常对自己的将大型语言模型视为神谕的使用情况并不知情，并且在看到我们工具的分析后，对此行为表示不满。最后，我们确定了将大型语言模型视为神谕使用的两个驱动因素：人们对人工智能的感知以及人工智能模型自身的行为，这些因素可以推动可能干预措施来支持用户的自我思考。"
+    },
+    {
+      "id": "2609.14829v1",
+      "title": "Enemray: Toward Capable Language Models for Hassaniya",
+      "authors": [
+        {
+          "name": "Cheikh Ahmed",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We introduce Enemray, a Hassaniya-centric language model that enables general-purpose interaction in Hassaniya. Enemray is trained around a stability--plasticity objective: acquire strong Hassaniya linguistic and cultural competence while preserving the general reasoning, multilingual, instruction-following, and safety behaviors of a capable instruction-tuned model. The development pipeline separates language acquisition from behavioral specialization. A separately assembled continual-pretraining corpus provides broad exposure to natural Hassaniya and Mauritanian text; layer-selective continual pretraining learns a compact language-specific parameter update; that update is transferred into the instruction-tuned parameter space; and supervised post-training develops conversational, cultural, literary, task-oriented, and cross-lingual behavior. The supervised corpus integrates selected public Hassaniya and Mauritanian resources with a substantially larger body of newly collected, reconstructed, curated, and constructed instruction data, while policy-generated replay provides a retention signal from the reference model's own behavior distribution. The resulting collection is substantially larger and broader in purpose than existing Hassaniya text resources. In evaluation, Enemray achieves the strongest English to Hassaniya translation among the compared open and proprietary models and the highest overall score on Mauritanian translation error detection, while retaining most of the general capabilities of its instruction-tuned base model on mathematical reasoning, knowledge, code generation, and function calling. This report describes the motivation, data construction, model design, training methodology, and evaluation of Enemray.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T22:52:47Z",
+      "updated": "2026-09-13T22:52:47Z",
+      "absUrl": "https://arxiv.org/abs/2609.14829v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14829v1.pdf",
+      "comment": null,
+      "titleCn": "Enemray：面向哈桑尼亚语能干语言模型",
+      "abstractCn": "我们介绍了Enemray，一个以哈桑尼亚语为中心的语言模型，它能够实现哈桑尼亚语的一般性交互。Enemray围绕稳定性—可塑性目标进行训练：在掌握强大的哈桑尼亚语言和文化能力的同时，保留一个功能强大的指令调优模型的一般推理、多语言、指令跟随和安全行为。开发流程将语言习得与行为专业化分开。一个单独组装的持续预训练语料库提供了广泛的自然哈桑尼亚语和毛里塔尼亚语文本接触；层选择性持续预训练学习紧凑的语言特定参数更新；该更新被转移到指令调优参数空间；监督后训练发展对话、文化、文学、任务导向和跨语言行为。监督语料库集成了选定的公共哈桑尼亚语和毛里塔尼亚语资源与大量新收集、重建、编辑和构建的指令数据，而策略生成的重放提供了参考模型自身行为分布的保留信号。最终形成的语料库比现有的哈桑尼亚语文本资源要大得多，目的也更广泛。在评估中，Enemray在比较的开源和专有模型中实现了最强的英语到哈桑尼亚语翻译，并在毛里塔尼亚语翻译错误检测上获得了最高总分，同时保留了其指令调优基础模型在数学推理、知识、代码生成和函数调用的大部分一般能力。本报告描述了Enemray的动机、数据构建、模型设计、训练方法和评估。"
+    },
+    {
+      "id": "2609.14825v1",
+      "title": "Route, Don't Fix: Regime-Dependent Decoding Correction and a Trajectory-Gated Router for Reliable Clinical LLM Answer Selection",
+      "authors": [
+        {
+          "name": "Zeyu Dong",
+          "affiliation": ""
+        },
+        {
+          "name": "Benjamin Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Joyee W. Jin",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models (LLMs) are often deemed unsafe for clinical question answering because of their tendency to hallucinate. Retrieval augmentation, fine-tuning, and external verifiers require new infrastructure that clinical governance must approve and may add latency or extra model calls. Inference-time correction uses the model's internal logit signals, but a fixed transformation need not suit every question. A corrector that improves accuracy by about ten percentage points on a truthfulness stress test yields negligible gains on clinical multiple-choice benchmarks, where instruction tuning concentrates output probability on one answer and leaves low terminal entropy. We introduce ALTAS, which reads terminal entropy and late-layer linearity ($R^2$) from one forward pass to choose per question between greedy decoding and late-layer trajectory correction. No classifier, probe, or head is trained; the router operates on candidate-answer logits and adds 6.5% latency overhead. Applied to every question, the correction improves TruthfulQA over greedy at 3B and 8B by 11.4 and 10.0 percentage points, respectively ($p&lt;10^{-10}$). Gated per question, ALTAS retains gains of 8.3 to 9.5 percentage points while keeping MedQA, PubMedQA, and MedHallu within a one-percentage-point do-no-harm band, with no statistically significant differences from greedy. The method passes verification sweeps over frozen thresholds, the scoring rule, and the domain label.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T22:36:37Z",
+      "updated": "2026-09-13T22:36:37Z",
+      "absUrl": "https://arxiv.org/abs/2609.14825v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14825v1.pdf",
+      "comment": null,
+      "titleCn": "路径优先，勿修复：依赖政权的解码校正与轨迹门控路由器，用于可靠的临床大语言模型答案选择",
+      "abstractCn": "大型语言模型（LLMs）因其产生幻觉的倾向，常被认为不适用于临床问题解答。检索增强、微调和外部验证需要新的基础设施，而临床治理机构必须批准这些设施，且可能增加延迟或额外的模型调用。推理时校正利用模型的内部logit信号，但固定的转换未必适用于所有问题。一个在真实性压力测试中提升约十个百分点准确率的校正器，在临床多项选择题基准测试中收益微乎其微，因为指令微调将输出概率集中于一个答案，并留下低终端熵。我们引入ALTAS，它通过单次前向传递读取终端熵和深层线性度（$R^2$），为每个问题在贪婪解码和深层轨迹校正之间进行选择。无需训练分类器、探针或头部；路由器基于候选答案logit运行，并增加6.5%的延迟开销。应用于每个问题，校正使TruthfulQA在3B和8B版本上分别比贪婪提升11.4和10.0个百分点（$p<10^{-10}$）。按问题门控，ALTAS保留8.3至9.5个百分点的收益，同时将MedQA、PubMedQA和MedHallu维持在单个百分点的不造成伤害区间内，且与贪婪无统计学显著差异。该方法通过冻结阈值、评分规则和领域标签的验证扫描。"
+    },
+    {
+      "id": "2609.14823v1",
+      "title": "MedTRACE: Tool-Augmented Multimodal Clinical Reasoning Agents for Evidence-Grounded Decision-Making",
+      "authors": [
+        {
+          "name": "Ji Lu",
+          "affiliation": ""
+        },
+        {
+          "name": "Lifei Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Haoran Yu",
+          "affiliation": ""
+        },
+        {
+          "name": "Xianglong Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yiru Fang",
+          "affiliation": ""
+        },
+        {
+          "name": "Kuo Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Huiran Duan",
+          "affiliation": ""
+        },
+        {
+          "name": "Jianping Gou",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Multimodal clinical decision-making requires reliable reasoning over heterogeneous evidence from electronic health records, medical images, and physiological signals. Existing models typically map these inputs directly to diagnoses without explicitly assessing evidence sufficiency, tool-use requirements, or diagnostic uncertainty. This paper presents MedTRACE, a tool-augmented multimodal clinical reasoning agent for evidence-grounded decision-making. MedTRACE uses modality-specific encoders to construct a unified patient-state representation and performs an iterative loop of hypothesis formation, toolaware deliberation, and evidence verification. It dynamically invokes visual grounding, evidence retrieval, and structured parsing tools to locate diagnosis-relevant regions, retrieve clinical knowledge and similar cases, and extract structured findings. The acquired evidence enters an evidence memory, where a consistency verifier confirms or revises the current hypothesis. MedTRACE outputs a diagnosis together with supporting evidence, an auditable reasoning trace, and calibrated confidence. Experiments on multiple multimodal clinical diagnosis benchmarks show that MedTRACE improves diagnostic accuracy by 5.4% and AUROC by 4.7 percentage points over the strongest baseline. It also improves evidenceselection F1 by 8.2 percentage points and visual-grounding IoU by 6.5 percentage points, reduces expected calibration error by 31.6%, and decreases unsupported diagnostic errors by 27.8%. These results demonstrate that active evidence acquisition and verification improve the accuracy, interpretability, and reliability of multimodal clinical decisionmaking.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T22:32:49Z",
+      "updated": "2026-09-13T22:32:49Z",
+      "absUrl": "https://arxiv.org/abs/2609.14823v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14823v1.pdf",
+      "comment": "Accepted to the 22nd International Conference on Advanced Data Mining and Applications (ADMA 2026)",
+      "titleCn": "MedTRACE：基于证据的决策制定的工具增强型多模态临床推理代理",
+      "abstractCn": "多模态临床决策需要基于电子健康记录、医学影像和生理信号等异构证据进行可靠推理。现有模型通常直接将这些输入映射到诊断结果，而未明确评估证据充分性、工具使用需求或诊断不确定性。本文提出了MedTRACE，一种基于证据的多模态临床推理代理工具，用于支持决策制定。MedTRACE采用特定模态的编码器构建统一的病人状态表示，并执行假设形成、工具感知推理和证据验证的迭代循环。它动态调用视觉定位、证据检索和结构化解析工具，以定位与诊断相关的区域、检索临床知识和相似病例，并提取结构化发现。获取的证据进入证据记忆库，其中一致性验证器确认或修正当前假设。MedTRACE输出诊断结果、支持性证据、可审计的推理轨迹和校准的置信度。在多个多模态临床诊断基准测试中，MedTRACE相较于最强基线提高了5.4%的诊断准确率和4.7个百分点的AUROC，同时提升了8.2个百分点的证据选择F1和6.5个百分点的视觉定位IoU，降低了31.6%的预期校准误差，减少了27.8%的不支持诊断错误。这些结果表明，主动的证据获取和验证提高了多模态临床决策的准确性、可解释性和可靠性。"
+    },
+    {
+      "id": "2609.14819v1",
+      "title": "A primer on evaluation methods for large language models in healthcare",
+      "authors": [
+        {
+          "name": "Suzannah E McKinney",
+          "affiliation": ""
+        },
+        {
+          "name": "Phuc Vu",
+          "affiliation": ""
+        },
+        {
+          "name": "Samuel A Justice",
+          "affiliation": ""
+        },
+        {
+          "name": "Christopher Humphries",
+          "affiliation": ""
+        },
+        {
+          "name": "Alyssa Pradhan",
+          "affiliation": ""
+        },
+        {
+          "name": "Timothy J Keyes",
+          "affiliation": ""
+        },
+        {
+          "name": "Bernardo C Bizzo",
+          "affiliation": ""
+        },
+        {
+          "name": "Keith J Dreyer",
+          "affiliation": ""
+        },
+        {
+          "name": "Sarah F Mercaldo",
+          "affiliation": ""
+        },
+        {
+          "name": "James M Hillis",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models (LLMs) have a growing range of applications in medicine, and their evaluation is critical for ensuring they provide benefit and not harm. This evaluation can be more challenging than traditional machine learning for many reasons, including probabilistic and open-ended outputs, and behavior that shifts with prompt design and accumulated context. This review covers four key areas of LLM evaluation: principles of study design, statistical methods, capability evaluation and clinical context evaluation. Capability evaluation considers different benchmarks, including multiple-choice, agentic and multi-turn benchmarks, alongside operational metrics like token usage. Clinical context evaluation addresses establishing accuracy of free text outputs, such as human review and LLM-as-a-judge, and clinical trial approaches. Across sections, we describe underlying concepts and potential pitfalls, while emphasizing the importance of aligning evaluation methods with the research question. Together, this article aims to provide a pragmatic basis for designing and executing rigorous evaluations of healthcare LLMs.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T22:21:21Z",
+      "updated": "2026-09-13T22:21:21Z",
+      "absUrl": "https://arxiv.org/abs/2609.14819v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14819v1.pdf",
+      "comment": null,
+      "titleCn": "医疗保健领域大型语言模型评估方法入门指南",
+      "abstractCn": "大型语言模型（LLMs）在医学领域的应用范围日益广泛，对其评估对于确保其提供益处而非危害至关重要。这种评估在许多方面比传统机器学习更具挑战性，包括概率性和开放式输出，以及随着提示设计和累积上下文的变化而变化的行为。本综述涵盖了LLMs评估的四个关键领域：研究设计原则、统计方法、能力评估和临床环境评估。能力评估考虑了不同的基准，包括选择题、代理型和多轮基准，以及像令牌使用这样的运营指标。临床环境评估则关注于建立自由文本输出的准确性，例如人工审查和LLM作为评判者，以及临床试验方法。在各个部分，我们描述了基本概念和潜在的陷阱，同时强调了评估方法与研究问题保持一致的重要性。本文旨在为设计和执行医疗LLMs的严格评估提供务实的依据。"
+    },
+    {
+      "id": "2609.14817v1",
+      "title": "Tone on a Budget: A Reference-Free Metric for Lexical Tone in Massively Multilingual Text-to-Speech",
+      "authors": [
+        {
+          "name": "Moses Daudu",
+          "affiliation": ""
+        },
+        {
+          "name": "Adeola Enitan Bamidele",
+          "affiliation": ""
+        },
+        {
+          "name": "Honor-Jesus Bezaleel",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "In Yorùbá, pitch alone separates \\d{o}k\\d{o} (husband, Mid), \\d{o}k\\d{ò} (vehicle, Low), and \\d{o}k\\d{ó} (hoe, High) -- the diacritics ARE the tone marks. Yet character error rate (CER), the standard automated metric for text-to-speech (TTS), is in practice computed from ASR output that drops those marks: a synthesizer can ace CER and still say vehicle for husband. We introduce DunDun -- named for the dùndún, the Yorùbá talking drum that speaks through pitch alone -- an automated, reference-free lexical-tone metric that needs no tone-labelled corpus. The gold High/Mid/Low sequence is read from the input text's diacritics (in TTS that text exists by construction, so no reference recording is needed); the prediction comes from the audio's pitch track. We validate three ways. Flattening pitch with PSOLA resynthesis collapses DunDun while CER does not move. Inverting High and Low in the answer key of 300 native recordings drives the two-class readout to 0.14, symmetrically below its 0.35 chance level -- a consistency check on the scoring path, not independent evidence. And three native listeners, over 67 blind A/B trials, pick the tone-correct clip 89.6% of the time (95% CI 80.0-94.8; p &lt; 1e-4); whether DunDun tracks those judgements trial by trial is not resolved at this sample size. Applied to a massively multilingual zero-shot TTS model, DunDun shows what CER cannot: Yorùbá tone sits near the native anchor before any Yorùbá fine-tuning (0.567 +/- 0.02 over five decode seeds vs. 0.596; chance 0.33), despite the 21.4% CER the model's own paper reports; and a few hours of clean audio halve CER (5.6% to 2.7% by 5h, 1.7% by 15h) while tone saturates within the hour. On non-tonal Swahili, CER already captures the gains: the metric a language needs is language-dependent. We release the metric and the complete validation protocol.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T22:18:35Z",
+      "updated": "2026-09-13T22:18:35Z",
+      "absUrl": "https://arxiv.org/abs/2609.14817v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14817v1.pdf",
+      "comment": "9 pages, 2 figures",
+      "titleCn": "预算内的语调：大规模多语言文本到语音中无参考的音调度量",
+      "abstractCn": "在约鲁巴语中，仅音调就能区分 \\d{o}k\\d{o}（丈夫，中音）、\\d{o}k\\d{ò}（车辆，低音）和 \\d{o}k\\d{ó}（锄头，高音）——变音符号就是音调符号。然而，字符错误率（CER）作为语音合成（TTS）的标准自动指标，在实践中是从省略了这些符号的语音识别（ASR）输出中计算的：一个合成器可以完美CER，却仍然把丈夫说成车辆。我们引入了DunDun——以约鲁巴语中通过音调独白说话的鼓（dùndún）命名——这是一种无需参考的自动词汇音调指标，不需要带音调标签的语料库。金标准的中/高/低序列从输入文本的变音符号中读取（在TTS中，文本是按构造存在的，因此不需要参考录音）；预测来自音频的音调轨迹。我们通过三种方式验证。使用PSOLA重合成压平音调会使DunDun降低，而CER不变。在300个母语者的录音答案键中反转高音和低音，使得两类的读数为0.14，对称地低于其0.35的猜测水平——这是对评分路径的一致性检验，而非独立证据。并且，三位母语者在67次盲法A/B试验中，89.6%的时间（95% CI 80.0-94.8；p < 1e-4）选择音调正确的片段；DunDun是否逐次跟踪这些判断在本样本量下尚未确定。应用于大规模多语言零样本TTS模型，DunDun展示了CER无法做到的：在约鲁巴语微调之前，约鲁巴语音调接近母语锚点（五个解码种子中0.567 +/- 0.02 vs 0.596；猜测0.33），尽管模型自己的论文报告了21.4%的CER；几小时干净音频使CER减半（5.6%降至2.7%需5小时，1.7%需15小时），而音调在小时内饱和。在非声调语的斯瓦希里语中，CER已经捕捉到了这些收益：语言需要的指标是语言依赖的。我们发布了该指标和完整的验证协议。"
+    },
+    {
+      "id": "2609.14811v1",
+      "title": "Crypto Accounting Bench: Evaluating Frontier and Open-Weight Models on Crypto-Asset Accounting Tasks",
+      "authors": [
+        {
+          "name": "Kareem Khattab",
+          "affiliation": ""
+        },
+        {
+          "name": "Omar Khattab",
+          "affiliation": ""
+        },
+        {
+          "name": "Mohamed Ibrahem",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We introduce Crypto Accounting Bench (CAB), a benchmark for assessing whether frontier and open-weight language models can reconstruct the complete journal entry that an organization actually posted for a crypto-asset transaction. CAB contains 118 evaluation tasks drawn from 7 pseudonymized organizations. Each task combines transaction mechanics, asset quantities and base-currency values, wallet and legal-entity context, counterparty evidence, related transaction legs, recurrence, tax-lot evidence, and the organization's complete chart of accounts. The target is a balanced structured entry with every required account, side, amount, currency, and full-precision asset quantity. We evaluate 12 models spanning proprietary frontier systems and open-weight releases over 3 independent attempts per task, producing 4,248 trajectories. We report 3 metrics: Mean Score, Best@3, and Pass@3. Pass@3 is the fraction of tasks with at least 1 of 3 attempts that satisfies every rubric criterion and required gate. The leading model reaches 77.43% Mean Score, while the best Pass@3 is 56.78%. Deterministic diagnostics, read from each task's best of 3 attempts and macro-averaged across the 12 models, show higher base-amount agreement (97.8%) than deciding-account accuracy (56.3%). Together with the failure analysis, these results identify account selection and complete-entry composition as the main remaining challenges on CAB.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T21:59:07Z",
+      "updated": "2026-09-13T21:59:07Z",
+      "absUrl": "https://arxiv.org/abs/2609.14811v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14811v1.pdf",
+      "comment": "6 pages, 8 figures, 3 tables. Dataset: https://huggingface.co/datasets/Entendre/Crypto-Accounting-Bench ; code and evaluation: https://github.com/EntendreFinance/crypto-accounting-benchmark",
+      "titleCn": "加密会计基准：评估前沿模型和开放式权重模型在加密资产会计任务上的表现",
+      "abstractCn": "我们介绍了Crypto Accounting Bench (CAB)，这是一个用于评估前沿和开放权重语言模型是否能够重建组织实际为加密资产交易发布的完整日记账条目的基准。CAB包含从7个匿名化组织中提取的118个评估任务。每个任务结合了交易机制、资产数量和基准货币价值、钱包和法律实体背景、交易对手证据、相关交易分支、重复性、税收单位证据以及组织的完整会计科目表。目标是生成一个平衡的结构化条目，包含每个必需的账户、方向、金额、货币和全精度资产数量。我们对12个模型进行了评估，这些模型涵盖了专有前沿系统和开放权重版本，每个任务独立尝试3次，共产生4,248条轨迹。我们报告了3个指标：平均分数、Best@3和Pass@3。Pass@3是指至少有1次尝试满足所有评分标准并通过所有必要门禁的任务的比例。领先模型的平均分数达到77.43%，而最佳Pass@3为56.78%。确定性诊断，从每个任务的3次尝试中的最佳结果读取，并在12个模型中宏观平均，显示出更高的基准金额一致性（97.8%）而非决定账户的准确性（56.3%）。结合失败分析，这些结果确定了账户选择和完整条目组成是CAB上的主要剩余挑战。"
+    },
+    {
+      "id": "2609.14795v1",
+      "title": "Mind Which Bird You Favour: Parameterizing Adequacy-Fluency Balance in Meta-Evaluation of Machine Translation",
+      "authors": [
+        {
+          "name": "Behzad Shayegh",
+          "affiliation": ""
+        },
+        {
+          "name": "Niloofar Kazemi",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "There is a tradeoff in machine translation meta-evaluation between prioritizing alignment with adequacy versus fluency. The balance depends on the combination of translation systems in the meta-evaluation dataset. This system set is a small, filtered sample whose characteristics change heavily across years and language pairs; it does not represent the true system distribution. Consequently, the adequacy-fluency balance is often unrepresentative and subject to change. For sensitive domains, controlling this balance is critical. We expose this balance as a tunable choice. To achieve a target balance, we reweight existing systems while minimizing distortion from uniform weighting, ensuring the evaluated systems remain real and representative. We provide an exact optimization algorithm with theoretical guarantees and pruning mechanisms to compute these weights. To validate meta-evaluation internal consistency, we design a scorer-augmentation framework that establishes a known relative identity for the scorers. Results demonstrate that our reweighting method effectively controls the adequacy-fluency balance and preserves the internal consistency, outperforming prior approaches. Finally, we analyze the performance of popular scorers across a sweep of this parameter.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T21:16:10Z",
+      "updated": "2026-09-13T21:16:10Z",
+      "absUrl": "https://arxiv.org/abs/2609.14795v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14795v1.pdf",
+      "comment": "Accepted by 11th Conference on Machine Translation (WMT26)",
+      "titleCn": "请选择您偏爱的鸟类：在机器翻译元评估中参数化恰当性-流畅性平衡",
+      "abstractCn": "机器翻译元评估中存在权衡取舍，即在优先考虑与充分性对齐与流畅性之间。这种平衡取决于元评估数据集中翻译系统的组合。该系统集合是一个小型的筛选样本，其特征随年份和语言对的变化而剧烈变化；它并不能代表真实的系统分布。因此，充分性-流畅性平衡往往不能代表真实情况且易发生变化。对于敏感领域，控制这种平衡至关重要。我们将这种平衡作为一个可调节的选择进行展示。为了达到目标平衡，我们在最小化均匀加权带来的失真同时重新加权现有系统，确保被评估系统保持真实和代表性。我们提供了一种具有理论保证和剪枝机制的精确优化算法来计算这些权重。为了验证元评估内部一致性，我们设计了一个评分器增强框架，为评分器建立了一个已知的相对身份。结果表明，我们的重新加权方法有效地控制了充分性-流畅性平衡，并保持了内部一致性，优于先前方法。最后，我们分析了流行评分器在这个参数范围内的性能。"
+    },
+    {
+      "id": "2609.14783v1",
+      "title": "Language-Guided Representation Learning for Robust Cross-Sensor Material Recognition",
+      "authors": [
+        {
+          "name": "Mashood M. Mohsan",
+          "affiliation": ""
+        },
+        {
+          "name": "Muhayy Ud Din",
+          "affiliation": ""
+        },
+        {
+          "name": "Binzhao Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Ahmad Abubakar",
+          "affiliation": ""
+        },
+        {
+          "name": "Irfan Hussain",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Robots need touch to manipulate objects safely and reliably, as many properties, such as softness, texture, and contact stability, are hard to infer from vision alone. However, vision-based tactile sensors yield different observations of the same material due to variations in optics, elastomer properties, and illumination, leading to poor generalization when trained on a single or multiple sensors. We propose a language-guided distillation framework for learning sensor-robust tactile representations. Language encodes high-level semantic properties of touch (e.g., rough, soft, slippery) that remain invariant across sensing hardware, providing a natural sensor-agnostic supervisory signal. We construct a 39K-sample touch-language dataset with human-annotated material labels and train a tactile encoder to align sensor-specific tactile images with language embeddings in a shared semantic space. We evaluate our approach for few-shot learning and cross-sensor transfer and benchmark it on six existing tactile datasets. Our method achieves 95% accuracy in the 100-shot setting, improves cross-sensor transfer by an average of 13.3% accuracy, and yields up to 19% accuracy gains across six existing tactile datasets. These results demonstrate that language-guided distillation enables scalable and hardware-agnostic tactile representation learning. Code and dataset are available at https://mashood3624.github.io/Language_Tactile/",
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.RO"
+      ],
+      "published": "2026-09-13T20:53:14Z",
+      "updated": "2026-09-13T20:53:14Z",
+      "absUrl": "https://arxiv.org/abs/2609.14783v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14783v1.pdf",
+      "comment": "Accepted for presentation at the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)",
+      "titleCn": "基于语言的表征学习用于鲁棒的跨传感器材料识别",
+      "abstractCn": "机器人需要触觉来安全可靠地操作物体，因为许多属性，如柔软度、纹理和接触稳定性，仅凭视觉难以推断。然而，基于视觉的触觉传感器由于光学、弹性体特性和照明条件的差异，对同一种材料的观察结果不同，导致在单个或多个传感器上训练时泛化能力差。我们提出了一种语言引导的蒸馏框架，用于学习传感器鲁棒的触觉表示。语言编码触觉的高级语义属性（例如，粗糙、柔软、滑腻），这些属性在不同传感硬件上保持不变，从而提供一种自然的、与传感器无关的监督信号。我们构建了一个包含39K个样本的触觉语言数据集，其中包含人工标注的材料标签，并训练了一个触觉编码器，使其能在共享的语义空间中将特定传感器的触觉图像与语言嵌入进行对齐。我们对该方法在少样本学习和跨传感器迁移方面的性能进行了评估，并在六个现有的触觉数据集上进行了基准测试。我们的方法在100-shot设置中达到了95%的准确率，平均提高了13.3%的跨传感器迁移能力，并在六个现有的触觉数据集上实现了高达19%的准确率提升。这些结果表明，语言引导的蒸馏能够实现可扩展且与硬件无关的触觉表示学习。代码和数据集可在https://mashood3624.github.io/Language_Tactile/获取。"
+    },
+    {
+      "id": "2609.14779v1",
+      "title": "Func-R1: Incentivizing Mathematical Function Reasoning in Multimodal Large Language Models",
+      "authors": [
+        {
+          "name": "Mingze Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiaohan Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Dian Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Haichao Yao",
+          "affiliation": ""
+        },
+        {
+          "name": "Yilin Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Youjun Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Gang Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jintai Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Yiheng Zhu",
+          "affiliation": ""
+        },
+        {
+          "name": "Chang-Yu Hsieh",
+          "affiliation": ""
+        },
+        {
+          "name": "Aimin Pan",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Performing deliberate mathematical reasoning in visual contexts is a hallmark of advanced Multimodal Large Language Models (MLLMs) and requires a sophisticated synthesis of perceptual grounding and symbolic logic. However, in the realm of mathematical functions, our investigation reveals a critical modality interference phenomenon: even advanced models, while performing textual computational reasoning, tend to disregard or misinterpret essential visual cues. To address this challenge, we propose Func-R1, which synergistically harmonizes precise visual perception and rigorous logical reasoning. Concretely, built upon an explicitly decoupled architecture, we employ a hierarchical post-training framework to progressively identify critical visual evidence and conduct in-depth theoretical reasoning. Furthermore, the Perception-Aligned Theoretic Optimization (PATO) strategy is proposed to steer policy updating towards internalizing fundamental theoretical properties while dynamically rectifying heterogeneous visual information throughout the reasoning process. Extensive experiments across diverse benchmarks demonstrate that Func-R1 delivers the optimal performance among open-source MLLMs, even surpassing GPT-5 with an 8.4% improvement on MathVerse's function-oriented tasks.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T20:39:43Z",
+      "updated": "2026-09-13T20:39:43Z",
+      "absUrl": "https://arxiv.org/abs/2609.14779v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14779v1.pdf",
+      "comment": "Accepted to EMNLP 2026 (2026 Conference on Empirical Methods in Natural Language Processing)",
+      "titleCn": "Func-R1：激励多模态大语言模型中的数学函数推理",
+      "abstractCn": "在视觉情境中执行有意的数学推理是高级多模态大型语言模型（MLLMs）的显著特征，并需要感知基础和符号逻辑的复杂融合。然而，在数学函数领域，我们的研究揭示了一种关键的模态干扰现象：即使高级模型在进行文本计算推理时，也倾向于忽略或误解关键的视觉线索。为应对这一挑战，我们提出了Func-R1，它协同地整合了精确的视觉感知和严谨的逻辑推理。具体而言，基于一个明确解耦的架构，我们采用分层后训练框架，逐步识别关键视觉证据并开展深入的理论推理。此外，我们提出了感知对齐理论优化（PATO）策略，以引导策略更新朝着内化基本理论属性的方向发展，同时在推理过程中动态校正异构的视觉信息。广泛的跨不同基准实验表明，Func-R1在开源MLLMs中实现了最佳性能，甚至在MathVerse的面向函数的任务上比GPT-5提高了8.4%。"
+    },
+    {
+      "id": "2609.14773v1",
+      "title": "Pull: Lazy Materialization of Working Memory for Stateful LLM Conversations",
+      "authors": [
+        {
+          "name": "Jiangang Chen",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "As LLM conversations grow to hundreds of turns, full-context injection incurs $O(N^2)$ cumulative token costs, while lossy summarization or hard truncation irreversibly discards historical state. We propose Pull, a session router that maintains an addressable metadata directory via a local, deterministic Purifier (zero LLM calls, millisecond-level latency). At query time, the LLM lazily materializes only the turns it needs; unmaterialized turns remain accessible but collapsed. Unlike irreversible compression, Pull's materialization is reversible; subsequent queries can expand any collapsed turn. On LoCoEval (128 conversations, 12,780 turns), Pull reduces per-query context tokens (Phase 2) by 75.1 percent on single-hop tasks with equivalent quality ($Δ= -0.002$, n.s.) and by 72.0 percent on multi-hop tasks with no quality loss ($Δ= +0.017$). A controlled routing benchmark (7,831 queries x 10 methods) shows that entity lifecycle tracking is empirically a prerequisite for distance-independent routing. On BEAM 1M (14 conversations, 263 questions), Pull improves F1 by +55.2 percent over a truncation baseline.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T20:26:13Z",
+      "updated": "2026-09-13T20:26:13Z",
+      "absUrl": "https://arxiv.org/abs/2609.14773v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14773v1.pdf",
+      "comment": "12 pages, 3 figures. An earlier version was publicly released on Zenodo (DOI: 10.5281/zenodo.21984705). Code and reproduction scripts: https://github.com/wulun811/kongmen-pull",
+      "titleCn": "拉取：有状态的大型语言模型对话的工作记忆的惰性实现",
+      "abstractCn": "随着LLM对话扩展到数百回合，全上下文注入会产生$O(N^2)$的累积token成本，而损失性摘要或硬截断会不可逆地丢弃历史状态。我们提出了Pull，一种会话路由器，它通过本地确定性Purifier维护一个可寻址的元数据目录（零LLM调用，毫秒级延迟）。在查询时，LLM仅惰性地生成它需要的回合；未生成的回合保持可访问但被压缩。与不可逆压缩不同，Pull的生成是可逆的；后续查询可以展开任何被压缩的回合。在LoCoEval（128个对话，12,780个回合）上，Pull在单跳任务中减少每查询上下文token数量（阶段2）达75.1%，且质量相当（$Δ= -0.002$，n.s.），在无质量损失的多跳任务中减少72.0%（$Δ= +0.017$）。一个受控路由基准（7,831个查询x 10种方法）表明，实体生命周期追踪是距离无关路由的经验性前提。在BEAM 1M（14个对话，263个问题）上，Pull比截断基线提高了F1值55.2%。"
+    },
+    {
+      "id": "2609.14770v1",
+      "title": "How broad is that claim? Mapping Generalisation in NLP Research",
+      "authors": [
+        {
+          "name": "Chenxin Diao",
+          "affiliation": ""
+        },
+        {
+          "name": "Nataliya Stepanova",
+          "affiliation": ""
+        },
+        {
+          "name": "Emily Allaway",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Generalisations are common in scientific communication, even though they are semantically ambiguous. An automated method is needed to identify and categorise claims according to their level of generalisation, in order help detect an over-reliance on generalisations and possible misrepresentations of scientific findings. We introduce a comprehensive taxonomy of generalisations in the scientific domain, NLPGenX, which labels claims according to their level of generality and framing within the text. We operationalise this taxonomy with an LLM-powered framework, NLPGenA, that automatically classifies sentences from scientific articles into 5 different generalisation classes. We validate our framework with human annotators and use the framework to construct a large-scale dataset of NLP papers annotated according to generality, with auxiliary labels for hedging and vague descriptors (NLPGens). We use NLPGens to analyse the use of generalisations in NLP papers across multiple venues and subdomains, and to examine associations with citation counts, hedging, and vague descriptors.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T20:06:36Z",
+      "updated": "2026-09-13T20:06:36Z",
+      "absUrl": "https://arxiv.org/abs/2609.14770v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14770v1.pdf",
+      "comment": "EMNLP 2026 Main; the dataset and code are available at https://github.com/cx-diao/nlpgen",
+      "titleCn": "该主张的范围有多广？自然语言处理研究中的泛化映射",
+      "abstractCn": "在科学交流中，泛化现象很常见，尽管它们在语义上具有模糊性。需要一种自动化方法来识别和根据泛化程度对声明进行分类，以帮助检测对泛化的过度依赖以及科学发现可能的误述。我们介绍了一个科学领域的泛化综合分类体系NLPGenX，该体系根据声明在文本中的普遍性和表述方式进行标记。我们通过一个由大型语言模型驱动的框架NLPGenA将此分类体系进行实际应用，该框架自动将科学文章中的句子分类到5个不同的泛化类别中。我们通过人工标注员验证了我们的框架，并使用该框架构建了一个大规模的NLP论文数据集NLPGens，该数据集根据普遍性进行标注，并包含辅助标签以表示保留性措辞和模糊描述。我们使用NLPGens分析了多个会议和子领域中的NLP论文中泛化的使用情况，并考察了其与引用次数、保留性措辞和模糊描述之间的关联。"
+    },
+    {
+      "id": "2609.14767v1",
+      "title": "Loop-Back Authority in LLM Agent Teams: A Paired Experiment on Flat and Hierarchical Coordination",
+      "authors": [
+        {
+          "name": "Burak Agachan",
+          "affiliation": ""
+        },
+        {
+          "name": "Max van Duijn",
+          "affiliation": ""
+        },
+        {
+          "name": "Amirhossein Zohrehvand",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Hierarchical orchestration, in which a Manager agent reviews worker output and can send it back for revision, is the default coordination pattern in production multi-agent LLM frameworks. Classical organizational theory predicts that the authority link speeds convergence on decisive output; work on sycophancy and Degeneration-of-Thought predicts that authoritative critique makes LLM output worse. Prior comparisons vary whole frameworks on tasks with checkable answers, leaving the authority link untested on open-ended work. We present a paired experiment that holds five LLM agents, their roles, prompts, tools, models, and data fixed and varies one link: whether the Manager may reject a worker's output and oblige a revision. Across 43 paired products and 86 runs of a business-intelligence reporting task, a five-model judge panel and a deterministic specification check score every report. The flat organization scores higher on Utility (d = 0.42, p = 0.009) and on Writing Clarity (d = 0.34, p = 0.030); the classical prediction fails. The reports are the same length, but hierarchical reports hedge 53% more, each revision loop is associated with a 0.14-point drop in Writing Clarity, and the hierarchical Writer's first draft is indistinguishable from the flat report: the gap opens inside the revision loop. Specification accuracy is at ceiling in both organizations, and the supervisory tier costs 51.5% more tokens for no quality gain. A supervisor pays for itself when it can verify and becomes a liability when it can only opine.",
+      "categories": [
+        "cs.CL",
+        "cs.MA",
+        "econ.GN",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T19:58:54Z",
+      "updated": "2026-09-13T19:58:54Z",
+      "absUrl": "https://arxiv.org/abs/2609.14767v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14767v1.pdf",
+      "comment": "8 pages, 3 figures, 3 tables, plus 21 pages of supplementary material. Code: https://github.com/cihatburak/Master_Thesis_Multi_Agents",
+      "titleCn": "LLM智能体团队中的循环权限：关于扁平化和层级化协调的配对实验",
+      "abstractCn": "层级协调，其中管理者代理审查工作者的输出并可以将其退回修改，是生产环境中多智能体大型语言模型框架的默认协调模式。经典组织理论预测，权威联系能加速对决定性输出的收敛；而关于谄媚行为和思维退化的研究则预测，权威性批评会使大型语言模型的输出变差。之前的比较是在具有可检验答案的任务上对整个框架进行比较，使得权威联系在开放式工作中的效果未经检验。我们提出了一项配对实验，固定五个大型语言模型代理的角色、提示、工具、模型和数据，并改变一个联系：管理者是否可以拒绝工作者的输出并强制修改。在43个配对产品及86次商业智能报告任务的运行中，由五模型评委小组和确定性规范检查分数对每份报告进行评分。扁平化组织在效用（d = 0.42, p = 0.009）和写作清晰度（d = 0.34, p = 0.030）上得分更高；经典预测失败。报告长度相同，但层级化报告的保留比例高出53%，每次修改循环与写作清晰度0.14分的下降相关，且层级化写手的首稿与扁平化报告无法区分：差距在修改循环内部产生。规范准确性在两种组织中均达到上限，而监督层级的代币成本高出51.5%却无质量提升。当监督者能验证时，其价值得以体现；而当其只能评判时，则成为负担。"
+    },
+    {
+      "id": "2609.14759v1",
+      "title": "Refusal Reads Only a Slice of What the Model Knows: Harm-Keyed Routing and Its Exceptions Across Model Families",
+      "authors": [
+        {
+          "name": "Orion Reblitz-Richardson",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Alignment applied after pretraining is shallow in a measurable way: a single direction in a model's residual stream can be edited out, and the model stops refusing harmful requests. That fact says how easily refusal can be removed, not what the refusal decision was reading in the first place. We ask what it reads, and we separate that from what the model comprehends. Across four open-weight models spanning three families, moral comprehension is native to pretraining: a low-rank moral subspace crystallizes during pretraining, and alignment rotates it once without rebuilding it. The refusal gate, in contrast, is a fresh post-training construction with only a weak pretraining precursor, written into a narrow control-token channel where the refusal decision is orthogonal to the moral-judgment decision. The central result is causal and comes from one model, OLMo-3. A nested interchange rank sweep patches successively larger slices of the moral subspace between matched requests and reads how much of refusal's response transfers: as the basis widens, moral judgment keeps reading more of it, while refusal levels off at the level of a single harm direction, and about three-quarters of refusal's causal input lies outside the moral subspace altogether. Refusal reads the harm percept, not the moral content that judgment reads on the same patches. The picture is not uniform across families. Llama reads broad moral content; Qwen reads beyond the single harm cue but is unresolved at our sample size; GPT-OSS reads harm, and its refusals can be argued in either direction by its own reasoning trace. Where refusal reads only a low-rank slice and routes around the bulk of what the model knows, a rank-one edit removes it. Whether widening what refusal reads would also deepen the behavior is the open question this raises.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T19:49:44Z",
+      "updated": "2026-09-13T19:49:44Z",
+      "absUrl": "https://arxiv.org/abs/2609.14759v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14759v1.pdf",
+      "comment": "34 pages, 6 figures, 15 tables. Companion methods note: \"Calibrating Interpretability Instruments Before Trusting Their Verdicts\" (submitted concurrently). Per-unit arrays: https://doi.org/10.5281/zenodo.22731361. Code: https://github.com/deepsteer/deepsteer",
+      "titleCn": "拒绝阅读仅知道模型的一部分：跨模型家族的基于危害键的路由及其例外",
+      "abstractCn": "在预训练后应用的对齐在可测量的方式上是浅层的：模型残差流中的一个方向可以被编辑移除，模型便停止拒绝有害请求。这一事实表明拒绝可以被轻易移除，而不是拒绝决策原本读取的内容。我们探究其读取的内容，并将其与模型的理解区分开来。在跨越三个系列的四个开放权重模型中，道德理解源于预训练：一个低秩的道德子空间在预训练过程中形成，而对齐仅旋转它一次而不重建它。相比之下，拒绝门是一个全新的训练后构建，只有微弱的预训练前体，被写入一个狭窄的控制标记通道，其中拒绝决策与道德判断决策正交。核心结果是一个因果性的发现，来自一个模型OLMo-3。一个嵌套的交换秩扫描依次修补匹配请求之间道德子空间中更大的切片，并读取拒绝响应中有多少转移：随着基底的扩展，道德判断持续读取更多内容，而拒绝则稳定在单个危害方向的水平，大约四分之三的拒绝因果输入完全位于道德子空间之外。拒绝读取的是危害感知，而不是判断在同一切片上读取的道德内容。这个情况在不同的系列中并不一致。Llama读取广泛的道德内容；Qwen读取了超出单个危害提示的内容，但在我们的样本量下尚未明确；GPT-OSS读取危害，其拒绝可以通过自己的推理追踪以任何方向进行辩论。当拒绝仅读取低秩切片并绕过模型大部分知识时，一个秩为1的编辑就能移除它。扩大拒绝读取的内容是否会加深行为，这是这一发现提出的开放性问题。"
+    },
+    {
+      "id": "2609.14758v1",
+      "title": "Fabrication After Tool Failure: Tool-Augmented Agents Assert Values Their Tools Did Not Return",
+      "authors": [
+        {
+          "name": "Arham Sethi",
+          "affiliation": ""
+        },
+        {
+          "name": "Arsen Kenzhebayev",
+          "affiliation": ""
+        },
+        {
+          "name": "Saanvi Paturi",
+          "affiliation": ""
+        },
+        {
+          "name": "Vatsal Raina",
+          "affiliation": ""
+        },
+        {
+          "name": "Vyas Raina",
+          "affiliation": ""
+        },
+        {
+          "name": "Ivaxi Sheth",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Tool-augmented language models are evaluated on whether they reach the right answer, not on whether they report honestly when a tool fails to supply one. We isolate this post-failure decision with a benchmark of 1,024 items spanning 16 internal-system domains and eight tool-failure types, in which a tool call is enforced and the returned payload is guaranteed to be unusable. Under a deployment-style system prompt, 14.10% of responses are dishonest: the model either asserts a value the payload cannot support or declines while citing a fabricated policy or capability limit. The rate is governed almost entirely by whether the failure is signalled. When the tool returns status:error, dishonesty is absent (0.0%); when it returns status:ok with a redacted, corrupted, stale, malformed, empty or truncated value, dishonesty reaches 45.3%. The behaviour is not an artefact of our prompts: it appears under a neutral prompt (10.17%) and under the shipped prompt of every production agent framework we evaluate, reaching 24.67% under CrewAI's, and none of the nine frameworks we audit specifies what the model should do when a tool fails. Comparing prompt-level defences, we find that the operative variable is not deference to tool output but the absence of a named failure state. Appending a single sentence that requires the model to emit retrieval_status: OK or FAILED before answering reduces dishonesty from 14.10% to 0.87%, with one item of 688 worsening against 92 improving, and transfers unchanged into three foreign agent scaffolds. The emitted flag is faithful in 99.7-99.9% of declarations, giving a runtime detector that needs only a regular expression.",
+      "categories": [
+        "cs.SE",
+        "cs.CL"
+      ],
+      "published": "2026-09-13T19:46:42Z",
+      "updated": "2026-09-13T19:46:42Z",
+      "absUrl": "https://arxiv.org/abs/2609.14758v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14758v1.pdf",
+      "comment": "11 pages, 4 tables",
+      "titleCn": "工具失效后的制造：工具增强型代理断言其工具未返回的值",
+      "abstractCn": "工具增强型语言模型在评估时关注的是它们是否得出正确答案，而不是在工具无法提供答案时是否如实报告。我们通过一个包含1024个项目的基准测试来隔离这种失败后的决策，这些项目涵盖了16个内部系统领域和8种工具失败类型，其中强制执行工具调用并保证返回的负载不可用。在部署式系统提示下，14.10%的响应是不诚实的：模型要么断言一个负载无法支持的值，要么在引用一个虚构的政策或能力限制的情况下拒绝。这一比率几乎完全取决于是否发出了失败信号。当工具返回状态:error时，不存在不诚实行为（0.0%）；当它返回状态:ok，但带有编辑过的、损坏的、过期的、格式错误的、空的或截断的值时，不诚实率达到45.3%。这种行为并非我们提示的产物：在neutral提示下（10.17%）和我们在评估的所有生产代理框架的已发布提示下都出现，在CrewAI的框架下达到24.67%，而我们审计的九个框架中，没有一个是明确指定模型在工具失败时应如何操作的。比较提示级别的防御措施，我们发现关键变量不是对工具输出的顺从，而是缺少命名的失败状态。通过添加一句要求模型在回答前发出retrieval_status: OK或FAILED的要求，可以将不诚实率从14.10%降至0.87%，其中688个项目恶化而92个项目改善，且在三个外国代理框架中保持不变。发出的标志在99.7-99.9%的声明中是忠实的，这为只需要正则表达式的运行时检测器提供了基础。"
+    },
+    {
+      "id": "2609.14754v1",
+      "title": "Calibrating Interpretability Instruments Before Trusting Their Verdicts",
+      "authors": [
+        {
+          "name": "Orion Reblitz-Richardson",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Causal claims about large language model (LLM) internals rest on measurements. Those might include a projection, a cosine, an ablation delta, or an interchange patch among others. These measurements fail in specific, diagnosable ways that return a plausible number instead of an error, so a broken instrument can easily read as a finding. A covariance-matched null can saturate until every direction looks typical, a per-head attribution can overshoot the true residual write threefold on reordered-normalization architectures, an interchange patch can go sign-chaotic because its outcome is pinned at a ceiling, or a read-from verdict can be an artifact of measuring past the layer where the model already decided. This note documents six such failures from a causal interpretability program on refusal and moral representation, spanning several papers and a four-model open-weight panel; each mode is established on one or two of the four. For each we give the tell that catches it and a protocol keyed to a detectable trigger (reordered normalization, massive activations, a low-dimensional decision channel), so we and readers can check whether a given setup is exposed. The discipline reduces to four moves: calibrate against a positive-control ladder, certify with an orthogonal cell, compute power before spending compute, and state every read-from verdict at a depth referenced to the model's commitment. The evidence is four architectures across three families within a single program; external replication across programs is future work.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T19:37:02Z",
+      "updated": "2026-09-13T19:37:02Z",
+      "absUrl": "https://arxiv.org/abs/2609.14754v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14754v1.pdf",
+      "comment": "16 pages, 3 figures, 1 table. Companion to \"Refusal Reads Only a Slice of What the Model Knows\" (submitted concurrently). Per-unit arrays: https://doi.org/10.5281/zenodo.22731361. Code: https://github.com/deepsteer/deepsteer",
+      "titleCn": "在信任其裁决之前校准可解释性工具",
+      "abstractCn": "关于大型语言模型（LLM）内部机制的因果断言依赖于测量。这些测量可能包括投影、余弦相似度、消融增量或交换补丁等。这些测量方式存在特定的、可诊断的失效方式，它们会返回一个看似合理的数值而非错误，因此一个损坏的仪器很容易被误读为发现。协方差匹配的零假设可能饱和到所有方向都看似典型，按头归因可能在重排序归一化架构上超出真实残差三倍，交换补丁可能因为其结果被锁定在某个上限而变得符号混乱，或者从某层读取的断言可能只是测量超出模型已做出决策的层时产生的伪影。本笔记记录了六种此类失效情况，这些情况来自关于拒绝和道德表示的因果可解释性项目，跨越多篇论文和一个包含四个模型的开放权重面板；每个模式基于四个模型中的一个或两个。对于每种情况，我们提供了能捕捉到它的特征标志，并给出了一个与可检测触发器（重排序归一化、大规模激活、低维决策通道）相关的协议，以便我们和读者可以检查特定设置是否暴露于风险。该学科简化为四个步骤：与阳性对照阶梯进行校准，使用正交单元进行认证，在消耗计算资源前计算功效，以及声明与模型决策深度相关的每个从某层读取的断言。证据来自单个项目中三个家族内的四个架构；跨项目的外部验证是未来的工作。"
+    },
+    {
+      "id": "2609.14743v1",
+      "title": "Quantifying the Generation Modality Gap in Speech-Text Language Models",
+      "authors": [
+        {
+          "name": "Ju-Chieh Chou",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiawei Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Karen Livescu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Pure speech language models often lag behind text and speech-text language models in generating coherent content, but this gap is difficult to quantify because speech and text systems are typically evaluated with different metrics and trained on different data. We study the speech-text modality gap in a family of spoken language models, based on flow matching for continuous acoustic feature generation. We construct a unified generation-based evaluation suite that compares speech-only, text-only, and speech-text language models trained on matched data distributions and evaluated in matched generation settings. We evaluate generated continuations along multiple dimensions: semantic coherence, measured by transcribing generated speech and scoring it with a reference language model; local phonetic structure, measured by phone n-gram distributional statistics; speaker consistency and acoustic quality; and emotion-based distributional metrics. Across datasets, we find that joint speech-text modeling substantially improves semantic coherence. However, the improvement is not uniform across metrics: phone-level metrics change only modestly, speaker similarity and predicted quality are lower for speech-text continuations, while emotion-based distributional metrics improve. Compared with larger-scale speech-only models, our speech-text model closes much of the scaling gap in transcript-based semantic coherence, suggesting that text provides an efficient semantic training signal for spoken language modeling.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T19:09:07Z",
+      "updated": "2026-09-13T19:09:07Z",
+      "absUrl": "https://arxiv.org/abs/2609.14743v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14743v1.pdf",
+      "comment": "Accepted to SLT 2026, extended version with appendix",
+      "titleCn": "量化语音-文本语言模型中的生成模态差距",
+      "abstractCn": "纯语音语言模型在生成连贯内容方面通常落后于文本和语音-文本语言模型，但这一差距难以量化，因为语音和文本系统通常使用不同的指标进行评估，并在不同的数据上进行训练。我们基于用于连续声学特征生成的流匹配方法，研究了一族语音语言模型中的语音-文本模态差距。我们构建了一个基于生成的统一评估套件，该套件比较了仅在语音上、仅在文本上和仅在语音-文本上训练且在匹配生成设置中评估的语言模型。我们沿多个维度评估生成的延续：语义连贯性，通过转录生成的语音并使用参考语言模型进行评分来衡量；局部音素结构，通过音素n-gram分布统计来衡量；说话人一致性和声学质量；以及基于情绪的分布指标。在多个数据集上，我们发现联合语音-文本建模显著提高了语义连贯性。然而，这种改进在不同指标上并不均衡：音素级指标变化不大，语音-文本延续的说话人相似性和预测质量较低，而基于情绪的分布指标有所改善。与更大规模的纯语音模型相比，我们的语音-文本模型在基于文本的语义连贯性方面缩小了大部分的规模差距，这表明文本为语音语言建模提供了一种高效的语义训练信号。"
+    },
+    {
+      "id": "2609.14739v1",
+      "title": "Building Legal Reward Models for Grounding and Abstention",
+      "authors": [
+        {
+          "name": "Rilton Franzone",
+          "affiliation": ""
+        },
+        {
+          "name": "Valentin Noël",
+          "affiliation": ""
+        },
+        {
+          "name": "Puyu Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Philip Torr",
+          "affiliation": ""
+        },
+        {
+          "name": "Fabio J. Fehr",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models are increasingly used in high-stakes domains such as law, where systems must ground their reasoning in retrieved evidence and abstain when that evidence is insufficient. However, existing reward models are largely optimised for general preferences rather than contextual grounding, limiting their ability to evaluate these behaviours in retrieval-augmented generation (RAG) settings. We introduce a framework for transforming existing legal QA datasets into contextual preference data and use it to construct LegalRewardBench (LRB), a benchmark for evaluating grounded legal generation under noisy and insufficient retrieval conditions. Across general and legal contextual evaluation, we find that contextual DPO improves grounded evaluation, but performance is sensitive to preference-data construction. Length-balanced augmentation substantially improves grounded legal evaluation, with the strongest configuration combining length-balanced legal and general contextual preference data and improving performance by up to $\\mathbf{+25.6}$pp over baseline. We further find evidence of cross-jurisdiction transfer: models contextually refined primarily on Victorian criminal-law data improve grounded evaluation on external US legal benchmarks, including a $\\mathbf{+16.2}$pp improvement on \\textsc{Housing Statute QA}. Together, these results provide a reproducible foundation for constructing and evaluating grounded legal reward models in retrieval-augmented settings.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T18:59:58Z",
+      "updated": "2026-09-13T18:59:58Z",
+      "absUrl": "https://arxiv.org/abs/2609.14739v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14739v1.pdf",
+      "comment": "Published at ICML 2026 AI4Law Workshop",
+      "titleCn": "构建用于定罪和弃权行为的法律奖励模型",
+      "abstractCn": "大型语言模型在高风险领域（如法律）中的应用日益增多，这些领域要求系统基于检索到的证据进行推理，并在证据不足时保持沉默。然而，现有的奖励模型主要针对通用偏好进行优化，而非情境化基础，这限制了它们在检索增强生成（RAG）环境下评估这些行为的能力。我们提出了一种将现有法律问答数据集转化为情境化偏好数据的框架，并利用该框架构建了LegalRewardBench（LRB），这是一个用于评估在噪声和不足检索条件下情境化法律生成的基准。在通用和法律的情境化评估中，我们发现情境化DPO能够提升情境化评估效果，但性能对偏好数据构建敏感。长度平衡增强显著改善了情境化法律评估，其中最强的配置结合了长度平衡的法律和通用情境化偏好数据，相较于基线提升了高达$\\mathbf{+25.6}$pp。我们进一步发现了跨司法管辖区迁移的证据：主要基于维多利亚州刑法数据情境化优化的模型，在外部美国法律基准上的情境化评估效果得到提升，包括在\\textsc{Housing Statute QA}上提升了$\\mathbf{+16.2}$pp。这些结果共同为在检索增强环境下构建和评估情境化法律奖励模型提供了可复现的基础。"
+    },
+    {
+      "id": "2609.14726v1",
+      "title": "CALICO: A Human-Centered, Codebook-Aligned System for Annotation",
+      "authors": [
+        {
+          "name": "Boqin Yuan",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiaoyi Gu",
+          "affiliation": ""
+        },
+        {
+          "name": "Fiona Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Chang Wan",
+          "affiliation": ""
+        },
+        {
+          "name": "Angel Hsing-Chi Hwang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jieyu Zhao",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models are increasingly used to scale codebook-based annotation in scientific research, but existing workflows provide limited support for translating domain experts' codebooks into reliable, revisable, and auditable prompts. Prompts are often treated as fixed instructions and hidden from annotators, making it difficult for non-technical domain experts to diagnose and correct model behavior when outputs violate codebook guidelines. In this paper, we present CALICO, a human-centered, codebook-aligned annotation workflow that treats prompts as editable, versioned, and optimizable artifacts. CALICO integrates codebook parsing, prompt generation, result inspection, prompt versioning, natural language human feedback, and label-supervised prompt optimization through existing optimizers such as GEPA, MIPROv2, and OPRO, together with our reflection-based optimizer, ReflectAgent. Empirically, we evaluate CALICO on domain-specific AI-companion chatbot conversation codebooks. Across evaluated dimensions, CALICO improves mean held-out performance by +13.0 and +7.4 absolute points for two coders, respectively. A coder-specificity analysis further suggests that optimized prompts capture coder-specific interpretations rather than only generic codebook clarification. CALICO runs as a web application that takes users from raw codebook materials to inspectable, exportable labels; the website, codebase, and live demo are released at https://calico-annotation.github.io/ under the Apache 2.0 License.",
+      "categories": [
+        "cs.CL",
+        "cs.HC"
+      ],
+      "published": "2026-09-13T18:38:43Z",
+      "updated": "2026-09-13T18:38:43Z",
+      "absUrl": "https://arxiv.org/abs/2609.14726v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14726v1.pdf",
+      "comment": "14 pages, 5 figures, 5 tables",
+      "titleCn": "CALICO：一个以人为中心、与代码簿对齐的标注系统",
+      "abstractCn": "大型语言模型越来越多地用于扩展基于码本的标注工作，但在科学研究中，现有的工作流程对将领域专家的码本转化为可靠、可修订和可审计的提示支持有限。提示通常被视为固定的指令，对标注者保密，这使得非技术领域的专家在输出违反码本规范时难以诊断和纠正模型行为。在本文中，我们提出了CALICO，一种以人为中心、与码本对齐的标注工作流程，将提示视为可编辑、版本化和可优化的工件。CALICO通过现有的优化器（如GEPA、MIPROv2和OPRO）以及我们基于反思的优化器ReflectAgent，集成了码本解析、提示生成、结果检查、提示版本管理、自然语言人工反馈和标签监督的提示优化。实证上，我们在特定领域的AI伴侣聊天机器人对话码本上评估了CALICO。在评估的各个维度上，CALICO使两位标注者的平均保留性能分别提高了+13.0和+7.4个百分点。标注者特异性分析进一步表明，优化的提示捕捉了标注者的特定解释，而不仅仅是通用码本澄清。CALICO作为一个网络应用程序运行，将用户从原始码本材料引导至可检查、可导出的标签；网站、代码库和实时演示已发布在https://calico-annotation.github.io/，并遵循Apache 2.0许可证。"
+    },
+    {
+      "id": "2609.14715v1",
+      "title": "Depth and Scale in the Sub-150M Regime: JugnuLM-53M vs JugnuLM-110M",
+      "authors": [
+        {
+          "name": "Dushyant Rajput",
+          "affiliation": ""
+        },
+        {
+          "name": "Nirdesh Chauhan",
+          "affiliation": ""
+        },
+        {
+          "name": "Siddharth Kosaraju",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We scale our conventional sub-150M pretraining recipe from 53.5M to 109.7M parameters, holding the method fixed (Qwen3-style decoder with grouped-query attention, RoPE, SwiGLU, RMSNorm, QK-Norm, and a z-loss; FineWeb-Edu data) and changing only the geometry to a deep-and-thin 23-layer x 576-hidden design. The larger model improves across the board -- BLiMP 78.1 -&gt; 81.3, ARC-Easy 51.4 -&gt; 52.5, WikiText-2 byte-perplexity 2.04 -&gt; 1.95 -- and its 81.3% BLiMP essentially matches GPT-X2-125M (81.28) at about 12% fewer parameters. Notably the 110M model achieves this on fewer training tokens (about 8B vs 12B), so the gain is attributable to capacity and depth, not more data. Both models are deliberately conventional; this report is a clean scaling control and the baseline rung (R0) of an ablation study of what further improves models in this regime. An ablation ladder follows: value residuals (R1) and the Muon optimizer (R2) lift ARC-Easy by a cumulative +3.6 (52.5 -&gt; 56.1) at a near-flat BLiMP and are kept; a diverse data blend (R3) and two logit-distillation settings (R4a/R4b) are not kept -- honest negatives. R3 pins ARC-Easy to FineWeb-Edu's educational filtering rather than raw diversity; distillation from a 1.7B teacher can reach the class-leading ARC-Easy (56.99, matching GPT-X2-125M) but only at a perplexity cost that dialing KD down then erases -- so R2 remains the best kept stack.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T18:17:46Z",
+      "updated": "2026-09-13T18:17:46Z",
+      "absUrl": "https://arxiv.org/abs/2609.14715v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14715v1.pdf",
+      "comment": null,
+      "titleCn": "150M以下规模下的深度与规模：JugnuLM-53M与JugnuLM-110M",
+      "abstractCn": "我们将传统的150M以下预训练配方从53.5M扩展到109.7M参数，保持方法不变（Qwen3风格的解码器，分组查询注意力、RoPE、SwiGLU、RMSNorm、QK-Norm和z损失；FineWeb-Edu数据），仅将结构改为深度且薄的23层x576隐层设计。更大的模型在各方面都得到提升——BLiMP 78.1提升至81.3，ARC-Easy 51.4提升至52.5，WikiText-2字节困惑度2.04提升至1.95——其81.3%的BLiMP表现与GPT-X2-125M（81.28）基本一致，但参数量减少了约12%。值得注意的是，110M模型使用更少的训练token（约80B vs 120B）实现了这一效果，因此提升归因于容量和深度，而非更多数据。两个模型都是刻意设计的常规模型；本报告是一个干净的规模控制实验，是消融研究中进一步改进此类模型的基础步骤。后续的消融实验包括：值残差（R1）和Muon优化器（R2）使ARC-Easy累计提升3.6（52.5提升至56.1），在BLiMP表现近乎持平的情况下被保留；多样化的数据混合（R3）和两种logit蒸馏设置（R4a/R4b）未被保留——这些是诚实负例。R3将ARC-Easy锚定于FineWeb-Edu的教育筛选而非原始多样性；从1.7B的教师模型蒸馏可以达到顶尖的ARC-Easy（56.99，与GPT-X2-125M匹配），但仅以增加困惑度为代价，而降低KD后这一代价会被消除——因此R2仍然是最佳保留方案。"
+    },
+    {
+      "id": "2609.14691v1",
+      "title": "Speak to the City: Multimodal Resolution for Outside-the-Vehicle References",
+      "authors": [
+        {
+          "name": "Alireza Parchami",
+          "affiliation": ""
+        },
+        {
+          "name": "Artin Saberpour",
+          "affiliation": ""
+        },
+        {
+          "name": "Robin Connor Schramm",
+          "affiliation": ""
+        },
+        {
+          "name": "Jürgen Steimle",
+          "affiliation": ""
+        },
+        {
+          "name": "Ulrich Schwanecke",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "As autonomous vehicles and Extended Reality (XR) headsets enable novel in-car interactions, seamlessly querying physical landmarks, known as Outside-the-Vehicle Referencing (OVR), remains challenging due to ego-motion and referential ambiguity. We present a robust, multimodal OVR framework fusing user gaze and natural language to identify Points of Interest (POIs). To address the scarcity of dynamic vehicular data, we developed a VR-based pipeline synchronizing 360-degree transit videos with vehicle GNSS telemetry. Through a user study (N=46) mapping passenger head orientation into a 3D geospatial Digital Twin, we captured authentic gaze-speech behaviors. We subsequently trained a lightweight Transformer network, leveraging LLMs to dynamically align continuous spatial gaze vectors with discrete verbal context. Experimental results demonstrate high accuracy and low computational overhead, achieving an 83.33% Top-1 accuracy (87.72% Top-2) and an average inference time of 24.3 milliseconds. This real-time paradigm effectively resolves referential ambiguity, enabling context-aware spatial retrieval for passengers within the vehicle.",
+      "categories": [
+        "cs.HC",
+        "cs.LG",
+        "cs.IR",
+        "cs.MM",
+        "cs.CL"
+      ],
+      "published": "2026-09-13T17:48:22Z",
+      "updated": "2026-09-13T17:48:22Z",
+      "absUrl": "https://arxiv.org/abs/2609.14691v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14691v1.pdf",
+      "comment": "11 pages, 7 figures, 1 table; Accepted to the 18th International ACM Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutoUI '26)",
+      "titleCn": "面向城市：针对车辆外参照的多模态解析",
+      "abstractCn": "随着自动驾驶汽车和扩展现实（XR）头戴设备的普及，车内交互方式不断创新，但无缝查询物理地标（即车辆外参照，OVR）仍因自身运动和参照模糊性而面临挑战。我们提出了一种融合用户注视和自然语言的稳健多模态OVR框架，用于识别兴趣点（POI）。为解决动态车载数据匮乏问题，我们开发了一个基于VR的流程，将360度交通视频与车辆GNSS遥测数据同步。通过一项用户研究（N=46），将乘客头部朝向映射到3D地理空间数字孪生中，我们捕捉了真实的注视-语音行为。随后，我们训练了一个轻量级Transformer网络，利用大型语言模型（LLM）动态对齐连续空间注视向量与离散语言上下文。实验结果表明，该方案具有高精度和低计算开销，实现了83.33%（Top-1，87.72% Top-2）的准确率和24.3毫秒的平均推理时间。这种实时范式有效解决了参照模糊问题，使乘客能在车内实现情境感知的空间检索。"
+    },
+    {
+      "id": "2609.14687v1",
+      "title": "One Feedback System Does Not Fit All: Localising Data-to-Text Driver Coaching for the United Kingdom and Nigeria",
+      "authors": [
+        {
+          "name": "Iniakpokeikiye Peter Thompson",
+          "affiliation": ""
+        },
+        {
+          "name": "Jawwad Baig",
+          "affiliation": ""
+        },
+        {
+          "name": "Ehud Reiter",
+          "affiliation": ""
+        },
+        {
+          "name": "Dewei Yi",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Data-to-text driver coaching is often presented as a generic pipeline from telematics events to advice. This paper argues that its content requires localisation because usefulness and credibility depend on drivers' knowledge, prevalent risks, regulation, infrastructure, and available data. Two independently developed systems in the United Kingdom and Nigeria are compared by tracing requirements through content selection, generation, and field evaluation. The UK system prioritises post-trip reflection, explanations tied to road and place context, and tone-sensitive wording. The Nigerian system combines legally grounded, once-daily Tips based on detected events with weekly persuasive Reports; it foregrounds safety education and alcohol-related risk in response to reported gaps in formal training and traffic-rule knowledge, as well as local road-safety priorities. Reliable speed-limit metadata supported speeding feedback in the UK, whereas its scarcity led the Nigerian evaluation to exclude speeding from its outcome metric. Both interventions were associated with reduced distance-normalised unsafe-event rates in their own field studies, although their designs and metrics preclude an effect-size comparison. The analysis yields a requirements-to-content design process for localising safety-critical NLG without treating a high-income deployment as the default.",
+      "categories": [
+        "cs.CL",
+        "cs.HC"
+      ],
+      "published": "2026-09-13T17:44:01Z",
+      "updated": "2026-09-13T17:44:01Z",
+      "absUrl": "https://arxiv.org/abs/2609.14687v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14687v1.pdf",
+      "comment": "Accepted to INLG 2026",
+      "titleCn": "一种反馈系统并非适用于所有情况：为英国和尼日利亚本地化数据到文本的驾驶员辅导系统",
+      "abstractCn": "数据到文本的驾驶员辅导通常被呈现为一个从远程信息处理事件到建议的通用流程。本文认为其内容需要本地化，因为其有效性和可信度取决于驾驶员的知识、普遍风险、法规、基础设施和可用数据。通过追踪需求在内容选择、生成和实地评估中的过程，比较了在英国和尼日利亚独立开发的两个系统。英国系统优先考虑事后反思、与道路和地点背景相关的解释以及语调敏感的措辞。尼日利亚系统结合了基于检测事件的、每日一次的法律依据提示，以及每周具有说服力的报告；它突出安全教育和与酒精相关的风险，以回应正式培训和交通规则知识的缺失，以及当地道路安全优先事项。可靠的限速元数据支持了英国的速度反馈，而其稀缺性导致尼日利亚评估排除了超速在其结果指标之外。两项干预措施在其各自实地研究中都与距离标准化不安全事件率降低相关，尽管其设计和指标不允许进行效应大小比较。该分析提供了一个从需求到内容的设计流程，用于本地化安全关键的自然语言生成，而无需将高收入部署视为默认选项。"
+    },
+    {
+      "id": "2609.14677v1",
+      "title": "The Garden of Forking Prompts: How Users Explore Narrative Space in Story Generation",
+      "authors": [
+        {
+          "name": "Advait Deshmukh",
+          "affiliation": ""
+        },
+        {
+          "name": "Nora Benedict",
+          "affiliation": ""
+        },
+        {
+          "name": "Melanie Walsh",
+          "affiliation": ""
+        },
+        {
+          "name": "Maria Antoniak",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models (LLMs) have changed the way people engage with stories. Drawing on public chatbot logs, we can see that when users generate stories, they iteratively edit their prompts to explore narrative possibilities, adjusting characters, redirecting plots, and swapping fictional universes. As aggregated data, these prompts represent rich traces of creative preference at scale. Yet story generation evaluation benchmarks rely on static, one-shot prompts that cannot capture this exploratory behavior. In this work, we study how users revise consecutive story prompts in the wild. Using a dataset of naturally occurring user-chatbot conversations, we construct WildStories, a sample of 275,635 story generation prompts (labeled with story format, prompt components, and explicitness), and WildEdits, a collection of 24,291 edit trees that model how users iteratively edit base story prompts and explore branching story possibilities. From these trees we develop a framework of edit types crossing four directions (adding, removing, changing, and extending) with fourteen targets (e.g., plot, character, genre). We then use our datasets and this framework to analyze user behavior in navigating narrative space via LLMs. Finally, we show how automated permutations based on the framework can be used for story generation benchmarking. Content Warning: This paper works with \"wild\" chatbot logs, which often include toxic and sexually explicit themes.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T17:21:22Z",
+      "updated": "2026-09-13T17:21:22Z",
+      "absUrl": "https://arxiv.org/abs/2609.14677v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14677v1.pdf",
+      "comment": "Accepted at COLM 2026",
+      "titleCn": "分叉提示花园：用户如何在故事生成中探索叙事空间",
+      "abstractCn": "大型语言模型（LLMs）改变了人们与故事互动的方式。通过分析公开的聊天机器人日志，我们可以看到当用户生成故事时，他们会迭代地编辑他们的提示词来探索叙事可能性，调整角色、重定向情节、并切换虚构宇宙。作为聚合数据，这些提示词代表了大规模创意偏好的丰富轨迹。然而，故事生成评估基准依赖于静态的、一次性的提示词，无法捕捉这种探索行为。在这项工作中，我们研究了用户在真实场景下如何修订连续的故事提示词。利用自然发生的用户-聊天机器人对话数据集，我们构建了WildStories，一个包含275,635个故事生成提示词的样本（标记了故事格式、提示词组件和明确性），以及WildEdits，一个包含24,291个编辑树集合，这些树模型了用户如何迭代地编辑基础故事提示词并探索分支故事的可能性。从这些树中，我们发展了一个跨越四个方向（添加、删除、改变和扩展）和十四个目标（例如，情节、角色、类型）的编辑类型框架。然后，我们使用我们的数据集和这个框架来分析用户通过LLMs在叙事空间中的行为。最后，我们展示了基于框架的自动排列如何用于故事生成基准测试。内容警告：本文使用“野生”聊天机器人日志，其中经常包含有毒和性暗示的主题。"
+    },
+    {
+      "id": "2609.14666v1",
+      "title": "Exploring Multimodal Turn-Taking Cues in Face-to-Face Conversation using Voice Activity Projection",
+      "authors": [
+        {
+          "name": "Willem Berner",
+          "affiliation": ""
+        },
+        {
+          "name": "Julio Cesar Cavalcanti",
+          "affiliation": ""
+        },
+        {
+          "name": "Kalle Åström",
+          "affiliation": ""
+        },
+        {
+          "name": "Gabriel Skantze",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Turn-taking is a fundamental component of spoken interaction, and while humans naturally rely on both verbal and non-verbal signals, dialogue systems usually depend on audio cues alone. This paper investigates whether visual features from face-to-face conversations can enhance turn-taking prediction beyond what is achievable from audio-only. We extend the Voice Activity Projection (VAP) model, a self-supervised transformer-based model for predicting future voice activity, by incorporating visual features extracted from the large-scale Meta Seamless Interaction dataset of dyadic face-to-face conversations. The visual features include gaze direction, head movement, body and hand pose, and facial action units (FAU). For incorporating the visual features, we explore concatenation, cross-attention fusion, delta features, and trainable gating mechanisms. Results show that visual information improves performance over the audio-only baseline, with FAU being significantly more informative than other feature groups. Body and gaze features nevertheless contribute complementary information, as the model combining all features performs best. Furthermore, results indicate that performance on specific tasks varies depending on whether training and test data come from improvised (acted) or naturalistic (non-acted) conversations.",
+      "categories": [
+        "cs.CL",
+        "cs.SD",
+        "eess.AS"
+      ],
+      "published": "2026-09-13T17:08:38Z",
+      "updated": "2026-09-13T17:08:38Z",
+      "absUrl": "https://arxiv.org/abs/2609.14666v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14666v1.pdf",
+      "comment": "Accepted to EMNLP 2026 Workshop on Multimodal Interaction in Face-to-Face Dialogue (MINT)",
+      "titleCn": "基于语音活动投影探索面对面交谈中的多模态轮流发言线索",
+      "abstractCn": "轮流发言是口语交互的基本组成部分，尽管人类自然依赖语言和非语言信号，但对话系统通常仅依赖音频提示。本文研究了面对面交谈中的视觉特征是否能在仅使用音频的基础上进一步提升轮流发言的预测能力。我们扩展了语音活动投影（VAP）模型，这是一个基于自监督Transformer的预测未来语音活动的模型，通过整合从大规模Meta无缝交互数据集中提取的面对面双人交谈的视觉特征。这些视觉特征包括注视方向、头部运动、身体和手势姿态以及面部动作单元（FAU）。为了整合视觉特征，我们探索了拼接、交叉注意力融合、增量特征和可训练门控机制。结果表明，视觉信息相较于仅使用音频的基线提升了性能，FAU比其他特征组更具信息量。然而，身体和注视特征仍然提供互补信息，因为整合所有特征的模型表现最佳。此外，结果还表明，在特定任务上的表现取决于训练和测试数据是否来自即兴（表演）或自然（非表演）的交谈。"
+    },
+    {
+      "id": "2609.16076v1",
+      "title": "The Imitation Game: When LLMs Learn to Reason Like Programs via Code-Centric Reasoning Data Synthesis",
+      "authors": [
+        {
+          "name": "Jinyang Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Weibin Liao",
+          "affiliation": ""
+        },
+        {
+          "name": "Keqin Bao",
+          "affiliation": ""
+        },
+        {
+          "name": "Sihang Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Shaobo Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Muyang Ye",
+          "affiliation": ""
+        },
+        {
+          "name": "Hongxin Ding",
+          "affiliation": ""
+        },
+        {
+          "name": "Yue Fang",
+          "affiliation": ""
+        },
+        {
+          "name": "Tianyi Tang",
+          "affiliation": ""
+        },
+        {
+          "name": "Fei Huang",
+          "affiliation": ""
+        },
+        {
+          "name": "Kexin Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xingzhang Ren",
+          "affiliation": ""
+        },
+        {
+          "name": "Dayiheng Liu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large Language Models (LLMs) excel at programming tasks but frequently fail at deterministic, fine-grained reasoning in natural language, relying heavily on semantic approximations rather than robust symbolic execution. To bridge this gap, we propose MIMIC, a framework that leverages executable code as a rigorous medium for reasoning data synthesis. MIMIC fundamentally transforms algorithms into verifiable reasoning trajectories through narrative fusion, code-guided test synthesis, and dynamic code instrumentation. Crucially, these explicit intermediate execution states naturally form a Code-Instrumented Reward (CIR), providing dense, high-fidelity process supervision for reinforcement learning without external reward models. Extensive evaluations reveal that models trained via SFT and GRPO on our synthesized dataset achieve substantial, consistent gains. Our method significantly elevates accuracy across general reasoning, complex mathematical benchmarks, and fine-grained deterministic tasks, demonstrating that the procedural rigor of executable code can effectively unlock and enhance the generalized reasoning capabilities of LLMs. Our code and data are available at https://github.com/zjy1298/MIMIC.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T17:04:16Z",
+      "updated": "2026-09-13T17:04:16Z",
+      "absUrl": "https://arxiv.org/abs/2609.16076v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16076v1.pdf",
+      "comment": "Accepted by EMNLP26 main",
+      "titleCn": "模仿游戏：当大型语言模型通过以代码为中心的推理数据合成学习像程序一样推理",
+      "abstractCn": "大型语言模型（LLMs）在编程任务上表现出色，但在自然语言的确定性、细粒度推理方面经常失败，严重依赖语义近似而非稳健的符号执行。为弥补这一差距，我们提出了MIMIC框架，该框架利用可执行代码作为推理数据合成的严谨媒介。MIMIC通过叙事融合、代码引导的测试合成和动态代码插装，将算法根本性地转化为可验证的推理轨迹。关键在于，这些明确的中间执行状态自然地形成了代码插装奖励（CIR），为强化学习提供了密集、高保真度的过程监督，无需外部奖励模型。广泛的评估表明，在我们的合成数据集上通过SFT和GRPO训练的模型实现了显著、一致的提升。我们的方法显著提高了泛在推理、复杂数学基准和细粒度确定性任务中的准确率，证明可执行代码的程序严谨性能有效解锁并增强LLMs的泛化推理能力。我们的代码和数据可在https://github.com/zjy1298/MIMIC获取。"
+    },
+    {
+      "id": "2609.14648v1",
+      "title": "Optimizing Sparse Outcomes Through Dense Behavioral Signals via Value-Guided Preference Distillation",
+      "authors": [
+        {
+          "name": "Ziyi Zhu",
+          "affiliation": ""
+        },
+        {
+          "name": "Daniel R. Cahn",
+          "affiliation": ""
+        },
+        {
+          "name": "Thomas D. Hull",
+          "affiliation": ""
+        },
+        {
+          "name": "Caitlin A. Stamatis",
+          "affiliation": ""
+        },
+        {
+          "name": "Olivier Tieleman",
+          "affiliation": ""
+        },
+        {
+          "name": "Guilherme B. Freire",
+          "affiliation": ""
+        },
+        {
+          "name": "Jinghong Chen",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Aligning multi-turn dialogue agents is usually framed as matching turn-level human preferences, yet direct optimization of long-term outcomes is often ineffective and prone to reward hacking. We formulate long-horizon dialogue optimization as a multi-objective reinforcement learning problem and train a multi-head value model that predicts a vector of observed user behaviors across multiple look-ahead horizons. Our findings demonstrate that a scalarized composite of dense auxiliary behavioral signals enables effective credit assignment and optimization of sparse outcomes. However, optimizing unconstrained single-objective proxies might induce policy degradations that are harmful when the agent is exposed to real users. To identify these failure modes prior to deployment, we establish a safety framework combining counterfactual user simulation with a validated dialogue-level outcome model to evaluate preference weightings and policy optimization methods. Finally, we demonstrate that distilling multi-objective value preferences into the policy via reference-anchored preference optimization matches on-policy online RL at a small fraction of its compute budget. Live A/B testing confirms that our distilled policy significantly improves long-term user retention, while simultaneously enhancing the positive behaviors and therapeutic-process markers.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T16:32:54Z",
+      "updated": "2026-09-13T16:32:54Z",
+      "absUrl": "https://arxiv.org/abs/2609.14648v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14648v1.pdf",
+      "comment": null,
+      "titleCn": "通过价值引导的偏好蒸馏优化稀疏结果，利用密集行为信号",
+      "abstractCn": "多轮对话代理的对齐通常被定义为匹配回合级的人类偏好，然而直接优化长期结果往往效果不佳且容易导致奖励攻击。我们将长时程对话优化表述为一个多目标强化学习问题，并训练一个多头价值模型，该模型预测多个前瞻时程内观察到的用户行为向量。我们的研究发现，通过将密集的辅助行为信号进行标量化组合，可以实现有效的归因分配和稀疏结果的优化。然而，优化无约束的单目标代理可能会在代理接触真实用户时导致策略退化。为了在部署前识别这些失效模式，我们建立了一个安全框架，该框架结合了反事实用户模拟和经过验证的对话级结果模型，用于评估偏好权重和策略优化方法。最后，我们证明通过参考锚定的偏好优化将多目标价值偏好蒸馏到策略中，可以在极小的计算预算下匹配在线强化学习的策略优化。实时A/B测试证实，我们蒸馏出的策略显著提高了长期用户留存率，同时提升了积极行为和治疗效果指标。"
+    },
+    {
+      "id": "2609.14646v1",
+      "title": "CompCQR: Compositional Query Generation for Training-Free Conversational Search",
+      "authors": [
+        {
+          "name": "Yunah Jang",
+          "affiliation": ""
+        },
+        {
+          "name": "Kang-il Lee",
+          "affiliation": ""
+        },
+        {
+          "name": "Joongbo Shin",
+          "affiliation": ""
+        },
+        {
+          "name": "Kyomin Jung",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Multi-turn interactions with LLMs are becoming increasingly common in information-seeking scenarios. However, user queries are often ambiguous and context-dependent, making them ill-suited for direct use as retriever queries. Conversational query reformulation (CQR) addresses this issue by rewriting the current utterance into a stand-alone query grounded in the dialogue history. Recent LLM-based CQR approaches achieve strong performance; however, their repeated LLM invocations and misalignment with downstream retrievers remain challenges. In this work, we begin from the observation that retrievers are highly sensitive to content ordering: simply reordering the same content can lead to changes in retrieval coverage and performance. Based on this, we propose a novel training-free method that generates a very large number of queries with minimal LLM usage by compositionally combining a small set of atomic components. We further apply LLM reasoning to construct a high-quality document set that balances precision and recall while capturing the user's core intent. Our framework generalizes across both open- and closed-source LLMs as well as dense and sparse retrievers. It achieves strong performance on four widely used conversational benchmarks, with up to 22.5% relative MRR improvement over the previous state-of-the-art baseline with far fewer LLM calls.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T16:31:22Z",
+      "updated": "2026-09-13T16:31:22Z",
+      "absUrl": "https://arxiv.org/abs/2609.14646v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14646v1.pdf",
+      "comment": "Accepted to Findings of EMNLP 2026",
+      "titleCn": "CompCQR：用于无监督对话搜索的合成查询生成",
+      "abstractCn": "在信息检索场景中，与大型语言模型（LLMs）的多轮交互正变得越来越普遍。然而，用户查询通常具有模糊性和上下文依赖性，这使得它们不适合直接用作检索查询。对话式查询重写（CQR）通过将当前话语重写为基于对话历史的独立查询来解决这一问题。基于LLMs的CQR方法近年来取得了优异的性能；然而，其重复调用LLMs以及与下游检索器的不匹配仍然是挑战。在本工作中，我们基于检索器对内容排序高度敏感的观察：简单地重新排序相同内容就可能导致检索覆盖率和性能的变化。据此，我们提出了一种无需训练的新方法，通过组合少量原子组件来生成大量查询，并最小化LLMs的使用。我们进一步应用LLMs的推理能力来构建一个在精确率和召回率之间取得平衡的高质量文档集，同时捕捉用户的核心理解。我们的框架适用于开源和闭源LLMs，以及密集型和稀疏型检索器。它在四个广泛使用的对话基准测试中取得了优异的性能，相较于先前最先进的基线，在远少于LLM调用次数的情况下，相对MRR提升了高达22.5%。"
+    },
+    {
+      "id": "2609.14636v1",
+      "title": "Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation",
+      "authors": [
+        {
+          "name": "Zhiyu Gui",
+          "affiliation": ""
+        },
+        {
+          "name": "Kexin Huang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jia Guo",
+          "affiliation": ""
+        },
+        {
+          "name": "Junkang Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zihao Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhiqiang Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jun Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiancan Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiang Wang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "On-policy distillation (OPD) has become a standard approach for transferring capabilities from large teachers to compact students. Its cost, however, is dominated by autoregressive student rollouts and scales poorly in multi-turn agentic settings. Existing acceleration methods truncate or relocate the supervision signal according to fixed, offline budgets, despite substantial variation in teacher-signal reliability both within and across trajectories. Our empirical analysis on $τ^2$-bench reveals a clear structure in this variation: informative supervision is concentrated in the prefix of each turn, and, most importantly for multi-turn agentic training, the cross-turn loss of teacher endorsement is temporally locked to the student's first erroneous action rather than accumulating gradually over turns. Building on these findings, we propose STRIDE (Stop-and-Restart on-policy Distillation acceleration), which combines two complementary techniques: adaptive early stopping, which terminates a rollout once the cumulative teacher log-probability falls below an out-of-distribution threshold, and a prefix buffer, which caches high-quality prefixes and restarts generation at the weakest correct turn. Together, these mechanisms induce a data-driven curriculum that progressively extends coverage to later turns. On $τ^2$-bench retail, our method matches full-trajectory OPD and exceeds the 30B teacher at a $3.73\\times$ speedup, surpasses the baseline itself at $2.34\\times$, and retains a $4.51\\times$ speedup under cross-domain multi-teacher training. As a supplementary generalization test beyond the agentic setting, STRIDE outperforms full OPD on AIME 2025 at a $5.10\\times$ speedup and on AIME 2024 at a $3.08\\times$ speedup; averaged across the two evaluations, both fixed-budget truncation baselines remain below full OPD.",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-13T16:17:35Z",
+      "updated": "2026-09-13T16:17:35Z",
+      "absUrl": "https://arxiv.org/abs/2609.14636v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14636v1.pdf",
+      "comment": "14 pages, 8 figures",
+      "titleCn": "知道何时停止，何地重启：加速多轮智能体在线策略蒸馏",
+      "abstractCn": "策略内蒸馏（OPD）已成为从大型教师模型迁移能力到紧凑型学生模型的标准方法。然而，其成本主要受自回归学生推理的限制，并且在多轮智能体环境中扩展性较差。现有的加速方法根据固定的离线预算截断或重新定位监督信号，尽管教师信号在不同轨迹内部和跨轨迹之间存在显著变化。我们对$τ^2$基准的实证分析揭示了这种变化的明显结构：信息丰富的监督集中在每个回合的前缀部分，并且对于多轮智能体训练而言，最重要的是教师认可损失的跨回合时间锁定到学生的第一个错误动作，而不是逐渐累积。基于这些发现，我们提出了STRIDE（策略内蒸馏加速中的停止与重启），它结合了两种互补的技术：自适应提前停止，一旦累积的教师对数概率低于分布外阈值就终止推理；以及前缀缓存，它缓存高质量的指令并从最薄弱的正确回合重新开始生成。这些机制共同诱导了一个数据驱动的课程，逐步扩展到后续回合。在$τ^2$基准零售测试中，我们的方法与完整轨迹OPD相当，并在30B教师模型上实现了3.73倍的加速，超过基线本身2.34倍，并在跨领域多教师训练中保持了4.51倍的加速。作为智能体环境之外的补充泛化测试，STRIDE在AIME 2025上以5.10倍的加速优于完整OPD，在AIME 2024上以3.08倍的加速超越完整OPD；在两次评估的平均值中，固定预算截断基线仍然低于完整OPD。"
+    },
+    {
+      "id": "2609.16073v1",
+      "title": "The Immutable Past: Formalizing State Mutability and Conflict Resolution in Mutable RAG",
+      "authors": [
+        {
+          "name": "Hamed HaddadPajouh",
+          "affiliation": ""
+        },
+        {
+          "name": "Amir AmiriTabat",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Retrieval-Augmented Generation (RAG) serves as the primary memory architecture for long-horizon autonomous agents. However, treating shared memory as an append-only stream introduces \\textit{Semantic Shadowing}, a critical failure mode where conflicting historical observations accumulate and statistically dominate valid recent updates. In dynamic environments, this results in severe state divergence as agents retrieve and act upon obsolete facts. This paper formalizes the mechanics of State Mutability to prove that standard dense retrieval suffers from Asymptotic Recall Decay. Furthermore, we formally demonstrate a Majority Vote Trap, revealing that increasing the retrieval context window paradoxically degrades generation accuracy by diluting the attention mechanism under conditions of semantic equivalence. To resolve this, we introduce GC-Mem (Garbage Collection for Memory), a strict inference-time consistency protocol. Unlike heuristic time-decay mechanisms---which indiscriminately destroy valid long-term memory---GC-Mem relies purely on a temporal dominance operator ($Φ_{\\mathcal{T}}$) paired with contradiction detection to surgically excise shadowed context. Evaluated across a rigorous, behaviorally inferred benchmark of 137,760 memory chunks and continuous accumulation sweeps, standard RAG and timestamp re-ranking baselines experience severe degradation. In contrast, GC-Mem empirically recovers $&gt;90\\%$ conflict resolution accuracy. We establish strict precision and recall deployment thresholds, ensuring state convergence where standard mutable RAG fundamentally fails.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T15:28:07Z",
+      "updated": "2026-09-13T15:28:07Z",
+      "absUrl": "https://arxiv.org/abs/2609.16073v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16073v1.pdf",
+      "comment": null,
+      "titleCn": "不可变的过去：在可变RAG中形式化状态可变性和冲突解决",
+      "abstractCn": "检索增强生成（RAG）是长时程自主智能体主要的记忆架构。然而，将共享记忆视为仅追加的流引入了“语义阴影”这一关键失效模式，即冲突的历史观测累积并统计上压倒了有效的近期更新。在动态环境中，这导致智能体在检索和基于过时事实行动时出现严重的状态发散。本文形式化地阐述了状态可变性的机制，证明了标准的密集检索存在渐近召回衰减问题。此外，我们正式证明了“多数投票陷阱”，揭示在语义等价条件下，增加检索上下文窗口反而通过稀释注意力机制而降低生成精度。为解决此问题，我们引入了GC-Mem（内存垃圾回收），这是一种严格的推理时一致性协议。不同于启发式的时间衰减机制——后者会无差别地销毁有效的长期记忆——GC-Mem完全依赖于时间支配算子（$Φ_{\\mathcal{T}}$）与矛盾检测相结合，以精确地切除被阴影覆盖的上下文。在涵盖137,760个记忆块和持续累积扫描的严格行为推断基准测试中，标准RAG和基于时间戳重新排序的基线方法均出现严重退化。相比之下，GC-Mem在冲突解决精度上实证恢复了$>90\\%$。我们设定了严格的精确率和召回率部署阈值，确保了状态收敛，而标准的可变RAG在此方面根本失败。"
+    },
+    {
+      "id": "2609.16070v1",
+      "title": "Efficient Multimodal Generative Recommendation with Latent Narrative Reasoning",
+      "authors": [
+        {
+          "name": "Chenxing Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Nantao Zheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Hao Miao",
+          "affiliation": ""
+        },
+        {
+          "name": "Juyuan Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xinke Jiang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuchen Fang",
+          "affiliation": ""
+        },
+        {
+          "name": "Aolin Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Haijun Wu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Generative recommendation reformulates item prediction as semantic identifier generation, yet episodic content introduces a fundamentally different setting where the target is determined by narrative evolution rather than user preference. This task requires models to understand multimodal storyline progression while addressing the efficiency challenges caused by redundant visual contexts and costly explicit reasoning generation. We propose \\textbf{NarraLite}, an efficient multimodal generative recommendation framework that jointly compresses perception and reasoning. Specifically, Progressive Spectral Compression selectively distills long visual contexts into compact narrative-relevant evidence, preserving transition-critical information while reducing redundant visual computation. Latent Narrative Reasoning introduces context-routed latent reasoning tokens and aligns their contextualized representations with future continuation semantics, enabling implicit narrative inference without autoregressively decoding textual rationales. We further establish a user-agnostic multimodal benchmark for short-form drama continuation across UGC, PGC, and OOD settings. Extensive experiments demonstrate that NarraLite consistently improves continuation accuracy, narrative coherence, and robustness over existing approaches, while achieving a favorable accuracy--efficiency trade-off.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T15:04:05Z",
+      "updated": "2026-09-13T15:04:05Z",
+      "absUrl": "https://arxiv.org/abs/2609.16070v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16070v1.pdf",
+      "comment": null,
+      "titleCn": "基于潜在叙事推理的高效多模态生成式推荐",
+      "abstractCn": "生成式推荐将物品预测重新定义为语义标识符生成，但情景式内容引入了一个根本不同的环境，其中目标由叙事演变而非用户偏好决定。这项任务要求模型理解多模态故事情节的进展，同时解决冗余视觉上下文带来的效率挑战和显式推理生成的成本问题。我们提出了\\textbf{NarraLite}，一个高效的多模态生成式推荐框架，该框架联合压缩感知和推理。具体而言，渐进式频谱压缩选择性地将长视觉上下文提炼为紧凑的与叙事相关的证据，在保留过渡关键信息的同时减少冗余的视觉计算。潜在叙事推理引入了上下文路由的潜在推理标记，并将它们的上下文表示与未来的延续语义对齐，从而实现隐式叙事推理，无需自回归解码文本推理。我们进一步为UGC、PGC和OOD场景下的短剧延续建立了用户无关的多模态基准。大量实验表明，NarraLite在现有方法上始终提高了延续准确率、叙事连贯性和鲁棒性，同时实现了有利的准确率-效率权衡。"
+    },
+    {
+      "id": "2609.14571v1",
+      "title": "Domain-specific Pretraining Profile and Transformer Performance: Evidence from Modeling Digital Pragmatics in Arabic-English Code-switching",
+      "authors": [
+        {
+          "name": "Fahad Al Hussen",
+          "affiliation": ""
+        },
+        {
+          "name": "King Saud University",
+          "affiliation": ""
+        },
+        {
+          "name": " Riyadh",
+          "affiliation": ""
+        },
+        {
+          "name": "Saudi Arabia",
+          "affiliation": ""
+        },
+        {
+          "name": "Mohammed Q. Shormani",
+          "affiliation": ""
+        },
+        {
+          "name": "Ibb University",
+          "affiliation": ""
+        },
+        {
+          "name": " Ibb",
+          "affiliation": ""
+        },
+        {
+          "name": " Yemen",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "This study highlights the role of domain-specific pretraining profile (DSPP) in Transformer performance for modeling digital pragmatics in Arabic-English code-switched discourse. It evaluates MARBERT and XLM-R(oBERTa), with BERT serving as a general-purpose baseline. The models were evaluated on their ability to classify context-sensitive pragmatic functions in code-switched social-media discourse. 11695 unique X posts were collected via Python and utilized for the study. The study employs a quantitative and qualitative NLP approach, following a supervised pipeline. Findings unveil that MARBERT consistently surpasses XLM-R with validation Macro F1 increasing from 0.39 to 0.84 and validation loss decreasing from 0.55 to 0.19. On an independent test set, it achieved 0.96 accuracy, 0.83 macro precision, 0.87 macro recall, and 0.85 Macro F1, while XLM-R achieved 0.92 test accuracy but a substantially lower Macro F1 of 0.52. This was also supported by class-level performance where MARBERT outperforms XLM-R considerably with F1 improvements ranging from +0.33 to +0.60, demonstrating a clear advantage in modeling Arabic digital pragmatics. The study concludes that Transformer performance depends more on DSPP than multilingual coverage alone, as the latter does not guarantee optimal performance on a highly specialized pragmatic classification task.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T14:58:38Z",
+      "updated": "2026-09-13T14:58:38Z",
+      "absUrl": "https://arxiv.org/abs/2609.14571v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14571v1.pdf",
+      "comment": "19 pages, 2 figures, 5 tables",
+      "titleCn": "特定领域预训练配置与Transformer性能：来自阿拉伯-英语代码转换中数字语用学建模的证据",
+      "abstractCn": "本研究强调了特定领域预训练配置文件（DSPP）在Transformer模型性能中的作用，特别是在建模阿拉伯-英语代码转换话语中的数字语用学方面。研究评估了MARBERT和XLM-R(oBERTa)，并将BERT作为通用基准模型。这些模型在分类代码转换社交媒体话语中的情境敏感语用功能方面的能力得到了评估。通过Python收集了11695条独特的X帖子用于研究。研究采用定量和定性的自然语言处理方法，遵循监督式流程。研究发现，MARBERT始终优于XLM-R，验证集宏观F1分数从0.39提升至0.84，验证集损失从0.55降至0.19。在独立测试集上，MARBERT达到了0.96的准确率、0.83的宏观精确率、0.87的宏观召回率和0.85的宏观F1分数，而XLM-R的测试准确率为0.92，但宏观F1分数显著较低，为0.52。这一结果也得到了类别级别性能的支持，其中MARBERT在F1分数上大幅优于XLM-R，提升范围从+0.33至+0.60，显示出在建模阿拉伯数字语用学方面的明显优势。研究结论表明，Transformer模型的性能更多地依赖于DSPP，而非单纯的多语言覆盖范围，因为后者并不能保证在高度专业的语用分类任务上达到最佳性能。"
+    },
+    {
+      "id": "2609.14570v1",
+      "title": "Disentangling Topology and Diversity in Multi-Agent LLMs for Multilingual Low-Resource Emotion Detection",
+      "authors": [
+        {
+          "name": "Ulugbek Shernazarov",
+          "affiliation": ""
+        },
+        {
+          "name": "Charitha Ruwansiri Weerakon Basnayake",
+          "affiliation": ""
+        },
+        {
+          "name": "Abdelkhaleq El Jarjini",
+          "affiliation": ""
+        },
+        {
+          "name": "Noel Crespi",
+          "affiliation": ""
+        },
+        {
+          "name": "Praboda Rajapaksha",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Multi-agent LLM systems combine multiple inference calls, but prior work often confounds how calls are connected with how they are diversified. We study these factors independently: inference topology and source of inter-agent diversity. In a controlled $2 \\times 3$ matrix, we cross parallel aggregation and sequential refinement with stochastic sampling, role prompting, and learned QLoRA specialization, under a fixed three-call budget and output protocol within each backbone. Using Qwen2.5-14B-Instruct and Llama-3.1-8B-Instruct, we evaluate all six configurations on multilingual low-resource emotion detection across nine languages. Parallel learned specialization is strongest on Qwen at 52.83 Macro-F1 and reaches 52.94 on Llama. On Qwen it also exceeds same-backbone zero-shot, few-shot, CoT, and seven-call self-consistency baselines. The preferred topology depends on diversity source: sequential refinement helps stochastic and prompted settings, while the learned Width advantage shrinks from 2.83 points on Qwen to 0.17 on Llama. Depth-wise analysis suggests that later learned specialists can overwrite correct early predictions, although the aggregate effect is backbone-dependent. Overall, how agents are differentiated produces larger performance shifts than topology, which should be evaluated jointly with specialization.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T14:58:26Z",
+      "updated": "2026-09-13T14:58:26Z",
+      "absUrl": "https://arxiv.org/abs/2609.14570v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14570v1.pdf",
+      "comment": "23 pages, 5 figures, 25 tables. Accepted at the REALM Workshop at EMNLP 2026. Code: https://github.com/eracoding/topologyxdiversity",
+      "titleCn": "在多智能体LLM中解耦拓扑结构与多样性以实现多语言低资源情感检测",
+      "abstractCn": "多智能体LLM系统结合了多个推理调用，但以往研究常常混淆调用间如何连接与如何多样化的关系。我们独立研究了这些因素：推理拓扑和智能体间多样性的来源。在一个受控的$2 \\times 3$矩阵中，我们将并行聚合与顺序细化分别与随机采样、角色提示和学习型QLoRA专业化进行交叉实验，每个骨干网络在固定的三调用预算和输出协议下进行。使用Qwen2.5-14B-Instruct和Llama-3.1-8B-Instruct，我们在九种语言的低资源跨语言情感检测任务上评估了所有六种配置。并行学习专业化在Qwen上表现最强，达到52.83宏观F1，并在Llama上达到52.94。在Qwen上，它还超过了同骨干网络的零样本、少样本、CoT和七调用自洽基线。首选拓扑取决于多样性来源：顺序细化有助于随机采样和提示设置，而学习型宽度优势从Qwen上的2.83分缩小到Llama上的0.17分。深度分析表明，后期学习型专业化可以覆盖早期的正确预测，尽管总体效果依赖于骨干网络。总体而言，智能体如何差异化带来的性能变化大于拓扑结构，因此应将差异化与专业化联合评估。"
+    },
+    {
+      "id": "2609.14565v1",
+      "title": "TATK: Triple-Aware Top-K Learning with Knowledge-Grounded Verification for LLM-based Sequential Recommendation",
+      "authors": [
+        {
+          "name": "Yuchen Guan",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiaye Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yifei Han",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhenxi Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yixuan Weng",
+          "affiliation": ""
+        },
+        {
+          "name": "Bin Li",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "LLM-based sequential recommenders usually cast next-item prediction as text generation, but this interface is poorly matched to full-catalog top-K ranking. We propose TATK, a Triple-Aware framework that couples Top-K Learning (TKL) with Knowledge-Grounded Verification (KGV) for LLM-based sequential recommendation. Top-K Learning combines context-aware metadata-KG prompt grounding with position-aware top-K rewards, aligning training with ranking utility; Knowledge-Grounded Verification then applies structure-aware reranking over the top-M candidates after a single LLM forward pass, using the same metadata-derived item graph. We evaluate TATK on Musical Instruments, CDs and Vinyl, and Video Games from Amazon Reviews 2023 under a matched R2ec-style full-catalog protocol. Experiments use Gemma-2-2B-It and Qwen2.5-3B-Instruct backbones, compare against sequential, generative, KG-augmented, and reasoning-enhanced baselines, and include component, reward-shape, sequence-perturbation, reranking, relation-quality, and candidate-pool diagnostics. TATK improves over the matched R2ec reproduction on all 36 reported metrics. On NDCG@10, it improves Qwen by 8.05%, 4.26%, and 3.78% on the three datasets, and improves Gemma by 27.03%, 10.52%, and 10.23%, while keeping inference within 1.17x of Base RecPO latency. The diagnostics show that structural evidence is most useful for recoverable top-M candidates with reliable KG support, and should be gated when metadata relations are sparse or noisy.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T14:50:31Z",
+      "updated": "2026-09-13T14:50:31Z",
+      "absUrl": "https://arxiv.org/abs/2609.14565v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14565v1.pdf",
+      "comment": "Accepted at EMNLP 2026 Main Conference. 23 pages, including references and appendix",
+      "titleCn": "基于LLM的序列推荐中具有知识基础验证的AAA感知Top-K学习",
+      "abstractCn": "基于LLM的序列推荐器通常将下一项预测视为文本生成，但这种接口与全目录Top-K排序匹配不佳。我们提出了TATK，一个三重感知框架，将Top-K学习（TKL）与知识基础验证（KGV）结合用于基于LLM的序列推荐。Top-K学习结合了上下文感知的元数据-KG提示接地与位置感知的Top-K奖励，使训练与排序效用相一致；知识基础验证随后在单次LLM前向传递后，对Top-M候选项应用结构感知的重新排序，使用相同的元数据衍生项图。我们在亚马逊评论2023年的乐器、CD和黑胶唱片以及电子游戏上，在匹配的R2ec风格全目录协议下评估了TATK。实验使用Gemma-2-2B-It和Qwen2.5-3B-Instruct主干网络，与序列、生成式、KG增强和推理增强基线进行比较，并包括组件、奖励形状、序列扰动、重新排序、关系质量以及候选池诊断。TATK在所有36个报告的指标上均优于匹配的R2ec再现。在NDCG@10上，它在三个数据集上分别将Qwen提高了8.05%、4.26%和3.78%，将Gemma提高了27.03%、10.52%和10.23%，同时保持推理速度在Base RecPO延迟的1.17倍以内。诊断表明，结构证据对于具有可靠KG支持的可恢复Top-M候选项最有用，并且当元数据关系稀疏或嘈杂时应进行限制。"
+    },
+    {
+      "id": "2609.14542v1",
+      "title": "Neyshekar: An Open Persian Read-Speech Corpus for Automatic Speech Recognition",
+      "authors": [
+        {
+          "name": "Ahmad Amirivojdan",
+          "affiliation": ""
+        },
+        {
+          "name": "Farzad Nadiri",
+          "affiliation": ""
+        },
+        {
+          "name": "Abolfazl Alizadeh",
+          "affiliation": ""
+        },
+        {
+          "name": "Shaghayegh Yaraghi",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Neyshekar is presented as an open Persian read-speech corpus designed for coverage of both formal and informal language, named entities, and longer utterances. In version 6, 62,279 validated recordings totalling 99.02 hours are provided from 190 contributors, with 34,541 distinct recorded prompts. The prompt pool was assembled from human-written material, contextualised homographs, and reviewed language-model-generated text. Text entries were normalised with the shekar library, which supports both formal and informal Persian, and every submitted recording was reviewed against a common validation rubric. About 24% of released clips are classified as informal by an automatic classifier; these register labels are not human-validated. Item-level rater labels are provided for reproducible agreement estimation, opaque per-clip contributor identifiers make the speaker-disjoint partitioning auditable and support contributor-clustered uncertainty estimates, and a text-disjoint test subset is included for evaluation beyond previously seen prompts. Per-contributor recording load and reference-free signal quality are characterised for every released clip. Corpus characteristics are compared with Persian Common Voice under shared processing. Utility is assessed through two ASR architectures, three optimisation seeds, WER and CER, and independent evaluation on the public PSRB sample. Against duration-matched Common Voice training at approximately 32 hours, in-domain WER is reduced by 9.5 points for Whisper and 11.6 points for XLS-R, and by approximately eight points for both architectures on the independent PSRB sample. Transfer and mixture benefits are not consistently observed across architectures and training budgets. The corpus is released under CC0; code and data are made available through the project repository at https://github.com/amirivojdan/neyshekar.",
+      "categories": [
+        "cs.CL",
+        "cs.SD",
+        "eess.AS"
+      ],
+      "published": "2026-09-13T14:30:43Z",
+      "updated": "2026-09-13T14:30:43Z",
+      "absUrl": "https://arxiv.org/abs/2609.14542v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14542v1.pdf",
+      "comment": "24 pages, 6 figures; dataset and code available at https://github.com/amirivojdan/neyshekar",
+      "titleCn": "内什卡：一个用于自动语音识别的开波斯语语音读语料库",
+      "abstractCn": "内什卡尔是一个开放的波斯语朗读语音语料库，旨在覆盖正式和非正式语言、命名实体以及较长的语句。在版本6中，提供了62,279条经过验证的录音，总时长99.02小时，来自190位贡献者，共有34,541条不同的录音提示。提示库由人工编写材料、上下文相关的同形异义词以及经过评审的语言模型生成文本组成。文本条目使用shekar库进行标准化，该库支持正式和非正式波斯语，并且每条提交的录音都根据一个通用的验证标准进行了审查。大约24%发布的片段被自动分类器归类为非正式；这些标签未经人工验证。提供了项目级评分标签，用于可重复的协议估计；每个片段的不可见贡献者标识符使说话人分离的划分可审计，并支持贡献者集群的不确定性估计，并且包含一个文本分离的测试子集，用于评估超出先前见过的提示。每个发布的片段都对其贡献者的录音负载和无参考信号质量进行了表征。语料库特征与波斯语Common Voice在共享处理下进行了比较。通过两种ASR架构、三种优化种子、WER和CER以及公开PSRB样本的独立评估来评估其效用。与大约32小时时长匹配的Common Voice训练相比，Whisper的领域内WER降低了9.5分，XLS-R降低了11.6分，两种架构在独立的PSRB样本上的WER也降低了大约8分。迁移和混合收益在不同架构和训练预算下并不一致。该语料库在CC0下发布；代码和数据通过项目仓库https://github.com/amirivojdan/neyshekar提供。"
+    },
+    {
+      "id": "2609.14529v1",
+      "title": "Parameter-Efficient Quantum NLP for Paraphrase Detection: Performance, Robustness, and Entanglement",
+      "authors": [
+        {
+          "name": "Farha Nausheen",
+          "affiliation": ""
+        },
+        {
+          "name": "Khandakar Ahmed",
+          "affiliation": ""
+        },
+        {
+          "name": "Farina Riaz",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Rigorous empirical validation of quantum machine learning on natural language tasks remains scarce. We evaluate a 10-qubit hybrid quantum-classical variational circuit (2,148 parameters) for paraphrase detection across three benchmarks: MRPC, Quora Question Pairs (QQP), and adversarial PAWS. On QQP (n = 10 seeds), the circuit achieves 75.53% +/- 0.75%. accuracy, statistically outperforming parameter-matched classical baselines (DeepMLP: p = 0.015, Cohen's d = 1.20; F1: p &lt; 0.001, d = 2.32) and surpassing DistilBERT-4bit with 31,191 fewer parameters. On MRPC the optimal 2-layer variant reaches 92% of BERT-base accuracy at 54,000 lower parameter cost. Circuit depth analysis reveals a dataset-depth scaling effect; entanglement analysis via the Meyer-Wallach measure identifies multi-qubit entanglement as the primary performance driver (r = 0.85 across four variants). Adversarial evaluation on PAWS reveals emergent robustness: 98.2% recall versus 81.6% classical (+16.6 pp, d = 1.24, p &lt; 0.001), without adversarial training. These results constitute the first systematic parameter-matched multi-benchmark empirical validation of hybrid variational circuits for NLP. All results are from classical simulation; hardware validation is future work.",
+      "categories": [
+        "cs.CL",
+        "quant-ph"
+      ],
+      "published": "2026-09-13T14:06:49Z",
+      "updated": "2026-09-13T14:06:49Z",
+      "absUrl": "https://arxiv.org/abs/2609.14529v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14529v1.pdf",
+      "comment": null,
+      "titleCn": "参数高效的量子自然语言处理用于释义检测：性能、鲁棒性和纠缠",
+      "abstractCn": "对量子机器学习在自然语言任务上的严格实证验证仍然稀缺。我们评估了一个10量子比特的混合量子-经典变分电路（2,148个参数）在三个基准测试上的释义检测性能：MRPC、Quora问题对（QQP）和对抗性PAWS。在QQP（n=10个种子）上，该电路达到了75.53% +/- 0.75%的准确率，统计上优于参数匹配的经典基线（DeepMLP：p=0.015，Cohen's d=1.20；F1：p<0.001，d=2.32），并超过了参数减少31,191个的DistilBERT-4bit。在MRPC上，最优的2层变体以54,000个参数成本的降低达到了BERT-base准确率的92%。电路深度分析揭示了数据集-深度缩放效应；通过Meyer-Wallach度量进行的纠缠分析确定了多量子比特纠缠是主要性能驱动因素（四个变体中r=0.85）。在PAWS上的对抗性评估揭示了涌现的鲁棒性：98.2%的召回率对比81.6%的经典方法（+16.6个基点，d=1.24，p<0.001），且无需对抗性训练。这些结果构成了对混合变分电路在NLP领域进行参数匹配多基准实证验证的首个系统性研究。所有结果均来自经典模拟；硬件验证是未来的工作。"
+    },
+    {
+      "id": "2609.14528v1",
+      "title": "Theseus in the Graph: Towards Traceable Multi-Hop Graph Navigation",
+      "authors": [
+        {
+          "name": "Eduin E. Hernandez",
+          "affiliation": ""
+        },
+        {
+          "name": "Luis F. Garcia",
+          "affiliation": ""
+        },
+        {
+          "name": "Nurassyl Askar",
+          "affiliation": ""
+        },
+        {
+          "name": "Sergio A. Diaz",
+          "affiliation": ""
+        },
+        {
+          "name": "Stefano Rini",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Multi-Hop Knowledge Graph Question Answering (KGQA) tasks require models to assemble relational evidence along paths in a KG to answer natural-language questions. However, existing KGQA systems typically focus on predicting the final answer without explicitly modeling or validating the intermediate reasoning steps, obscuring whether the correct answers arise from faithful multi-hop reasoning. To address this limitation, we re-frame multi-hop KGQA as a question-conditioned graph navigation problem. We refer to this formulation as THESEUS - Traceable Hop-wise Evidence SEarch in a Unified Semantics. In this setting, an agent receives a KG, a question, and a topic entity, and traverses a sequence of relations towards the answer, making the reasoning path explicit. To systematically study this formulation, we provide three key contributions. (i) We augment the existing KINSHIP and MQuAKE resources into navigation-ready KGQA datasets with annotated evidence paths and paraphrased questions. (ii) We design evaluation protocols to measure path fidelity, robustness to linguistic variation, and performance across multi-hop and multi-answer questions. (iii) We adapt established path-based KG completion agents - MINERVA, MultiHopKG, and SQUIRE - to operate on full question embeddings rather than symbolic single-relation queries, enabling their trajectories to be guided by natural-language semantics. Together, these contributions advance KGQA research toward systems where traceability is fundamental: answers are accompanied by explicit reasoning paths whose agreement with reference evidence can be systematically evaluated.",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-13T14:06:43Z",
+      "updated": "2026-09-13T14:06:43Z",
+      "absUrl": "https://arxiv.org/abs/2609.14528v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14528v1.pdf",
+      "comment": "30 pages, 1 figure,",
+      "titleCn": "图中的忒修斯：面向可追溯的多跳图导航",
+      "abstractCn": "多跳知识图谱问答（KGQA）任务要求模型沿着知识图谱中的路径组装关系证据来回答自然语言问题。然而，现有的KGQA系统通常专注于预测最终答案，而未明确建模或验证中间推理步骤，导致正确答案是否源于忠实多跳推理难以判断。为解决此局限，我们将多跳KGQA重新定义为问题驱动的图谱导航问题。我们将此形式称为THESEUS——统一语义中可追溯的跳跃式证据搜索。在此设置中，一个智能体接收知识图谱、问题和一个主题实体，沿着一系列关系朝向答案进行导航，使推理路径显式化。为系统研究此形式，我们提出三大关键贡献。(i)我们将现有的KINSHIP和MQuAKE资源扩展为包含标注证据路径和改写问题的导航就绪型KGQA数据集。(ii)我们设计了评估协议来衡量路径保真度、对语言变化的鲁棒性以及跨多跳和多答案问题的性能。(iii)我们改进了现有的基于路径的知识图谱补全智能体MINERVA、MultiHopKG和SQUIRE，使其基于完整问题嵌入而非符号单关系查询运行，从而使其轨迹能受自然语言语义引导。这些贡献共同推动KGQA研究向以可追溯性为基础的系统发展：答案将伴随显式推理路径，其与参考证据的一致性可被系统评估。"
+    },
+    {
+      "id": "2609.14448v1",
+      "title": "NeuroActiSep: Detecting Factual Hallucinations from Feed-Forward Neurons in a Single Pass",
+      "authors": [
+        {
+          "name": "Ali Derogar Odolou",
+          "affiliation": ""
+        },
+        {
+          "name": "Reza Nazari",
+          "affiliation": ""
+        },
+        {
+          "name": "Mostafa Salehi",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Hallucination in large language models reduces their reliability and slows adoption. Various white-box studies have used internal representations to detect patterns of truthfulness and factuality. A less-studied approach is to identify feed-forward neurons correlated with hallucination. We propose a method to rank feed-forward neurons at the final prompt token using a custom neuron selection dataset. We transfer the selected neuron identities to train hallucination classifiers on other factual question answering datasets. Our work provides empirical evidence that probes trained using the features from the selected neurons perform on par with probes trained on internal states. We also analyze the distribution of selected neurons and the effect of layer depth on detection performance.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T11:42:40Z",
+      "updated": "2026-09-13T11:42:40Z",
+      "absUrl": "https://arxiv.org/abs/2609.14448v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14448v1.pdf",
+      "comment": null,
+      "titleCn": "NeuroActiSep：单次遍历中从前馈神经元检测事实性幻觉",
+      "abstractCn": "大型语言模型中的幻觉现象降低了它们的可靠性并减缓了其应用进程。多种白盒研究利用内部表征来检测真实性及事实性的模式。一个较少研究的途径是识别与幻觉相关的前馈神经元。我们提出了一种方法，通过使用自定义神经元选择数据集对最终提示词位置的前馈神经元进行排序。我们将选定的神经元身份迁移到其他事实性问答数据集上训练幻觉分类器。我们的工作提供了经验证据，表明使用选定神经元特征训练的探针在性能上与使用内部状态训练的探针相当。我们还分析了选定神经元的分布以及层深度对检测性能的影响。"
+    },
+    {
+      "id": "2609.14412v1",
+      "title": "Question's Gambit: The First Move Matters in Agentic Deep Search",
+      "authors": [
+        {
+          "name": "Radin Hamidi Rad",
+          "affiliation": ""
+        },
+        {
+          "name": "Amin Bigdeli",
+          "affiliation": ""
+        },
+        {
+          "name": "Negar Arabzadeh",
+          "affiliation": ""
+        },
+        {
+          "name": "Sajad Ebrahimi",
+          "affiliation": ""
+        },
+        {
+          "name": "Charles L. A. Clarke",
+          "affiliation": ""
+        },
+        {
+          "name": "Benjamin C. M. Fung",
+          "affiliation": ""
+        },
+        {
+          "name": "Ebrahim Bagheri",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Deep research agents answer complex questions through iterative loops of searching, reading, and reasoning. Recent work on reasoning-intensive benchmarks such as BrowseComp-Plus shows that well-configured lexical retrieval can surface high-quality evidence, yet agents may still fail to connect documents carrying evidence to the gold documents. We identify a deep research agent's first retrieval move as an important design decision for this setting. We introduce Question's Gambit, a first-move retrieval module that decomposes the question into a set of clues, reformulates them into complementary searches, consolidates the retrieved results, and reranks the candidate pool before the agent begins its iterative search-and-reasoning process. This produces an opening context designed to support both clue aggregation and final-answer verification. We further evaluate on MultiHop-RAG to test whether these benefits transfer beyond BrowseComp-Plus to a more conventional multi-hop question structure. Experiments on BrowseComp-Plus show that Question's Gambit improves retrieval recall and downstream agent accuracy over strong baselines, improving answer accuracy from 83.1% to 90.5% with gpt-5.5 over Pi-Serini, the strongest reported agentic baseline. Our results confirm that effective agentic deep research depends not only on the tools available inside the loop, but also on the quality of the first move. We published our implementation publicly at https://github.com/radinhamidi/Question-s-Gambit.",
+      "categories": [
+        "cs.CL",
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T10:21:07Z",
+      "updated": "2026-09-13T10:21:07Z",
+      "absUrl": "https://arxiv.org/abs/2609.14412v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14412v1.pdf",
+      "comment": null,
+      "titleCn": "问题的博弈：在自主深度搜索中，第一步至关重要",
+      "abstractCn": "深度研究智能体通过搜索、阅读和推理的迭代循环来回答复杂问题。近期在 BrowseComp-Plus 等推理密集型基准测试中的研究表明，经过良好配置的词汇检索能够揭示高质量的证据，但智能体可能仍无法将包含证据的文档与标准答案文档建立联系。我们识别出深度研究智能体的首次检索动作是针对该场景的重要设计决策。我们引入了 Question's Gambit，一个首次检索模块，它将问题分解为一组线索，将这些线索重新表述为互补性搜索，整合检索结果，并在智能体开始迭代搜索和推理过程之前重新排序候选池。这产生了一个初始上下文，旨在支持线索聚合和最终答案验证。我们进一步在 MultiHop-RAG 上进行评估，以测试这些优势是否能够超越 BrowseComp-Plus，迁移到更传统的多跳问题结构中。在 BrowseComp-Plus 上的实验表明，Question's Gambit 在强基线之上提高了检索召回率和下游智能体准确率，使用 gpt-5.5 时，相较于 Pi-Serini（报告的最强智能体基线），答案准确率从 83.1% 提升至 90.5%。我们的结果表明，有效的智能体深度研究不仅取决于循环内部可用的工具，还取决于首次动作的质量。我们已将我们的实现公开发布在 https://github.com/radinhamidi/Question-s-Gambit。"
+    },
+    {
+      "id": "2609.14400v1",
+      "title": "Policy Loopholes in Agent Evaluation: When Policy Ambiguity Masquerades as Agent Error",
+      "authors": [
+        {
+          "name": "Hongliu Cao",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Agent benchmarks evaluate policy compliance but assume each policy determines a unique correct action. Natural-language policies can violate this assumption through silence, ambiguity, or contradiction, admitting multiple defensible readings that a single gold trajectory cannot capture. Auditing two $τ^2$-bench domains, we develop a taxonomy of such policy loopholes and show that affected tasks produce unreliable scores: they lower scores across different models in different ways and make every model less consistent across repeated trials. A cross-domain comparison reveals that exploitability requires both policy ambiguity and tool permissiveness: when policy complexity exceeds what tools can enforce, agents resolve gaps inconsistently and scores become unreliable. Policy specification quality sets the ceiling on evaluation quality. Benchmark developers should audit policies before collecting gold annotations.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T10:00:13Z",
+      "updated": "2026-09-13T10:00:13Z",
+      "absUrl": "https://arxiv.org/abs/2609.14400v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14400v1.pdf",
+      "comment": "Accepted at REALM EMNLP 2026",
+      "titleCn": "代理评估中的政策漏洞：当政策模糊伪装成代理错误时",
+      "abstractCn": "代理基准测试评估策略合规性，但假设每个策略都决定一个唯一的正确动作。自然语言策略可以通过沉默、模糊或矛盾违反这一假设，允许存在多个站得住脚的解读，而单一的金轨迹无法捕捉。审计两个 $τ^2$-基准域后，我们开发了一种此类策略漏洞的分类法，并表明受影响的任务会产生不可靠的分数：它们以不同的方式降低不同模型中的分数，并使每个模型在重复试验中的一致性降低。跨域比较表明，可利用性需要策略模糊性和工具许可性：当策略复杂性超过工具能强制执行的范围时，代理会不一致地填补空白，分数变得不可靠。策略规范质量设定了评估质量的上限。基准测试开发者应在收集金标注之前审计策略。"
+    },
+    {
+      "id": "2609.14399v1",
+      "title": "MOSCOPT: Mixture-of-Skills Collective Optimization for LLM Agents",
+      "authors": [
+        {
+          "name": "Zhenyu Zhang1",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiudong Yang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Natural language prompts and skills serve as the strategic backbone of LLM-based agents. Recent advances in prompt and skill optimization have achieved notable gains, yet all existing methods optimize a \\emph{single} text template---missing the synergy among multiple complementary strategies. We propose MOSCOPT, a text-native, parameter-free algorithm that jointly optimizes a pool of $N$ skills and a gating skill $G$ that dynamically selects $K$ skills per step. To effectively optimize the skills, we build the EditAdam with internally maintained dual states. Through the three-phase interleaved updates with EditAdam, the system monotonically improves without gradient or parameter tuning. Extensive experiments and detailed ablations across 5 benchmarks and 3 target LLMs demonstrate that MOSCOPT consistently outperforms all baselines, and confirm that both the mixture-of-skills architecture with selective activation and the collective evolution with three-phase interleaving are essential to its superior performance. Code is released https://github.com/zhangzhenyu13/SummerClaw/tree/master/summerclaw/agent_trainer/algorithms/moscopt.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T09:57:59Z",
+      "updated": "2026-09-13T09:57:59Z",
+      "absUrl": "https://arxiv.org/abs/2609.14399v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14399v1.pdf",
+      "comment": null,
+      "titleCn": "MOSCOPT：面向大型语言模型代理的技能混合集体优化",
+      "abstractCn": "自然语言提示和技能构成了基于LLM智能体的战略核心。尽管近期在提示和技能优化方面取得了显著进展，但所有现有方法都优化单个文本模板，忽略了多种互补策略之间的协同效应。我们提出了MOSCOPT，这是一种文本原生、无参数的算法，它联合优化一组N个技能和一个门控技能G，该门控技能每步动态选择K个技能。为了有效优化技能，我们构建了具有内部维护的双重状态的EditAdam。通过EditAdam的三阶段交错更新，系统单调改进，无需梯度或参数调整。在5个基准测试和3个目标LLM上的大量实验和详细消融研究证实，MOSCOPT始终优于所有基线，并确认具有选择性激活的技能混合架构和三阶段交错的整体进化是其卓越性能的关键。代码已发布于https://github.com/zhangzhenyu13/SummerClaw/tree/master/summerclaw/agent_trainer/algorithms/moscopt。"
+    },
+    {
+      "id": "2609.16061v1",
+      "title": "POSPAN: Position-Constrained Span Masking for Language Model Pre-training",
+      "authors": [
+        {
+          "name": "Zhenyu Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Lei Shen",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuming Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Meng Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiaodong He",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Span-level masked language modeling (MLM) has shown to be advantageous to pre-trained language models over the original single-token MLM, as entities/phrases and their dependencies are critical to language understanding. Previous works only consider span length with some discrete distributions, while the dependencies among spans are ignored, i.e., assuming that the positions of masked spans are uniformly distributed. In this paper, we present POSPAN, a general framework to allow diverse position-constrained span masking strategies via the combination of span length distribution and position constraint distribution, which unifies all existing span-level masking methods. To verify the effectiveness of POSPAN in pre-training, we evaluate it on the datasets from several NLU benchmarks. Experimental results indicate that the position constraint is capable of enhancing span-level masking broadly, and our best POSPAN setting consistently outperforms its span-length-only counterparts and vanilla MLM. We also conduct theoretical analysis for the position constraint in masked language models to shed light on the reason why POSPAN works well, demonstrating the rationality and necessity of POSPAN.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T09:49:33Z",
+      "updated": "2026-09-13T09:49:33Z",
+      "absUrl": "https://arxiv.org/abs/2609.16061v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16061v1.pdf",
+      "comment": null,
+      "titleCn": "POSPAN：用于语言模型预训练的位置约束跨度掩码",
+      "abstractCn": "基于片段的掩码语言建模（MLM）相较于传统的单词MLM，对预训练语言模型更为有利，因为实体/短语及其依赖关系对语言理解至关重要。以往的研究仅考虑片段长度并假设其服从离散分布，而忽略了片段间的依赖关系，即假设掩码片段的位置均匀分布。在本文中，我们提出了POSPAN，一个通用框架，通过结合片段长度分布和位置约束分布，允许多样化的位置约束片段掩码策略，从而统一了所有现有的片段级掩码方法。为了验证POSPAN在预训练中的有效性，我们在多个自然语言理解基准数据集上进行了评估。实验结果表明，位置约束能够显著提升片段级掩码效果，并且我们的最佳POSPAN设置始终优于仅考虑片段长度的方法及传统的MLM。此外，我们还对掩码语言模型中的位置约束进行了理论分析，以阐明POSPAN为何效果显著，从而证明了POSPAN的合理性和必要性。"
+    },
+    {
+      "id": "2609.16060v1",
+      "title": "HintMiner: Automatic Question Hints Mining From Q&amp;A Web Posts with Language Model via Self-Supervised Learning",
+      "authors": [
+        {
+          "name": "Zhenyu Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "JiuDong Yang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Users often need ask questions and seek answers online. The Question - Answering (QA) forums such as Stack Overflow cannot always respond to the questions timely and properly. In this paper, we propose HintMiner, a novel automatic question hints mining tool for users to help them find answers. HintMiner leverages the machine comprehension and sequence generation techniques to automatically generate hints for users' questions. It firstly retrieve many web Q\\&amp;A posts and then extract some hints from the posts using MiningNet that is built via a language model. Using the huge amount of online Q\\&amp;A posts, we design a self-supervised objective to train the MiningNet that is a neural encoder-decoder model based on the transformer and copying mechanisms. We have evaluated HintMiner on 60,000 Stack Overflow questions. The experiment results show that the proposed approach is effective. For example, HintMiner achieves an average BLEU score of 36.17\\% and an average ROUGE-2 score of 36.29\\%. Our tool and experimental data are publicly available.",
+      "categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T09:24:40Z",
+      "updated": "2026-09-13T09:24:40Z",
+      "absUrl": "https://arxiv.org/abs/2609.16060v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16060v1.pdf",
+      "comment": null,
+      "titleCn": "HintMiner：基于语言模型的自动问题提示挖掘——通过自监督学习从问答网络帖子中挖掘",
+      "abstractCn": "用户经常需要在网络上提问并寻求答案。像Stack Overflow这样的问答（QA）论坛并不能总是及时且正确地回答问题。在本文中，我们提出了HintMiner，一种新颖的自动问题提示挖掘工具，帮助用户找到答案。HintMiner利用机器理解和序列生成技术，自动为用户的问题生成提示。它首先检索大量网络问答帖子，然后使用通过语言模型构建的MiningNet从帖子中提取提示。利用海量的在线问答帖子，我们设计了一个自监督目标来训练MiningNet，该模型是基于transformer和复制机制的神经编码器-解码器模型。我们在60,000个Stack Overflow问题上评估了HintMiner。实验结果表明，所提出的方法是有效的。例如，HintMiner实现了平均BLEU得分为36.17%，平均ROUGE-2得分为36.29%。我们的工具和实验数据是公开可用的。"
+    },
+    {
+      "id": "2609.16059v1",
+      "title": "Towards Scalable RLVR: Multimodal Instruction Following Data Synthesis and Distillation",
+      "authors": [
+        {
+          "name": "Yirong Zeng",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhang Sai",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuxian Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yutai Hou",
+          "affiliation": ""
+        },
+        {
+          "name": "Yufei Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiao Ding",
+          "affiliation": ""
+        },
+        {
+          "name": "Bibo Cai",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Multimodal instruction following (MMIF) is crucial for building generalist agents. However, current training paradigms rely heavily on Supervised Fine-Tuning (SFT), which often leads to surface-level pattern matching and degrades general capabilities. While Reinforcement Learning with Verifiable Rewards (RLVR) offers a promising alternative, its scalability in MMIF is severely bottlenecked by the scarcity of high-quality, RL-ready multimodal data. To bridge this gap, we present MIFS (\\textbf{M}ultimodal \\textbf{I}nstruction \\textbf{F}ollowing \\textbf{S}ynthesis), a systematic pipeline designed to generate RL-ready multimodal data. Specifically, MIFS introduces a generative constraint protocol to synthesize diverse raw samples, followed by a learnability-aware distillation mechanism that filters data based on RL training dynamics to ensure stable policy optimization. Furthermore, a code-based verifier provides high-precision reward signals for policy learning. The resulting dataset comprises 90k samples across 8 constraint categories and 14 task domains. Empirical evaluations demonstrate that MIFS-trained MLLMs achieve an average improvement of 8.13\\% on four MMIF benchmarks and a 3$\\times$ faster training convergence compared to using raw data. Crucially, our approach mitigates the generalization trade-offs typical of SFT, preserving core visual capabilities while significantly boosting instruction-following precision.",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-13T08:50:30Z",
+      "updated": "2026-09-13T08:50:30Z",
+      "absUrl": "https://arxiv.org/abs/2609.16059v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16059v1.pdf",
+      "comment": "14 pages,figures 5",
+      "titleCn": "面向可扩展的RLVR：多模态指令遵循数据合成与蒸馏",
+      "abstractCn": "多模态指令遵循（MMIF）对于构建通用型智能体至关重要。然而，当前的训练范式严重依赖监督微调（SFT），这往往导致表面层次的模式匹配，并降低泛化能力。虽然具有可验证奖励的强化学习（RLVR）提供了有前景的替代方案，但其MMIF的可扩展性因高质量、适合强化学习的多模态数据稀缺而严重受限。为弥补这一差距，我们提出了MIFS（\\textbf{M}ultimodal \\textbf{I}nstruction \\textbf{F}ollowing \\textbf{S}ynthesis），这是一个系统化的管道，旨在生成适合强化学习的多模态数据。具体而言，MIFS引入了一种生成约束协议来合成多样化的原始样本，随后是一个基于可学习性感知的蒸馏机制，该机制根据强化学习训练动态过滤数据，以确保稳定的策略优化。此外，一个基于代码的验证器为策略学习提供高精度的奖励信号。生成的数据集包含8个约束类别和14个任务域中的90k个样本。实证评估表明，使用MIFS训练的多模态语言模型（MLLM）在四个MMIF基准测试中平均提高了8.13%，并且与使用原始数据相比，训练收敛速度提高了3倍。关键的是，我们的方法减轻了SFT典型的泛化权衡问题，在保留核心视觉能力的同时，显著提升了指令遵循的精确度。"
+    },
+    {
+      "id": "2609.14384v1",
+      "title": "Formal Properties of Language as Constraints on Neural Dynamics",
+      "authors": [
+        {
+          "name": "Elliot Murphy",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "What must a neural system be capable of to implement language? Current research annotates stimuli with linguistic variables and tests which electrodes, voxels, or language-model layers predict neural activity. Yet predictive success leaves mechanisms under-constrained. Here, we show that algebraic properties of language specify invariants that mechanisms must preserve: non-associative hierarchical grouping, commutativity, recursive closure, access to substructures, and structured workspace transitions. We term this the Neural Admissibility Program (NAP). Syntactic structure building is analyzed algebraically, with candidate mechanisms offered for each requirement: content-addressable workspace memory, graph-structured transient dynamics scheduling structure-building operations (e.g. stable heteroclinic channels), and a phase-coupled sealing operation recording grouping. Simulations show that a corrected Marcolli-Berwick entropy-optimized binding gate preserves grouping only within a narrow commitment band. As an alternative, we propose a novel neural binding operation we term 'Meld': two constituent populations converge through shared synapses, integrate sublinearly, and saturate. Meld is, to our knowledge, the closest neurally plausible composition law to syntactic Merge. It preserves every NAP invariant, uses known cortical operations, and recovers hierarchical structure at every tested depth and temperature. It predicts that effective population dimensionality separates alternative bracketings and that the composite depends on constituent disagreement. Importantly, the laws decoding bracketing most accurately are a priori inadmissible, showing that decoding accuracy alone cannot adjudicate between mechanisms. By specifying how neural dynamics can remain faithful to linguistic structure, the NAP changes the criterion by which neural implementations of cognition are evaluated.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T08:41:56Z",
+      "updated": "2026-09-13T08:41:56Z",
+      "absUrl": "https://arxiv.org/abs/2609.14384v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14384v1.pdf",
+      "comment": null,
+      "titleCn": "语言的形式属性作为对神经动态的约束",
+      "abstractCn": "要实现语言，神经系统必须具备哪些能力？当前研究通过为刺激标注语言变量并测试哪些电极、体素或语言模型层能够预测神经活动，但预测的成功并未充分约束机制。在此，我们表明语言的代数特性指定了机制必须保持的不变量：非关联分层分组、交换律、递归封闭性、对子结构的访问以及结构化工作空间转换。我们称之为神经可接受性程序（NAP）。句法结构构建通过代数方法进行分析，并为每个要求提供了候选机制：内容寻址工作空间存储、图结构瞬态动力学调度结构构建操作（例如稳定的异质回旋通道）以及记录分组的相耦合密封操作。模拟表明，修正的Marcolli-Berwick熵优化绑定门仅在狭窄的承诺带内保持分组。作为替代方案，我们提出了一种新的神经绑定操作，称之为“融合”（Meld）：两个组成群体通过共享突触汇聚，非线性整合，并达到饱和。据我们所知，融合是我们目前最接近神经上合理的句法Merge组合律。它保持了所有NAP不变量，使用了已知的皮质操作，并在每个测试的深度和温度下恢复层次结构。它预测有效群体维度区分了不同的括号组合，并且复合结构取决于组成成分的不一致。重要的是，解码括号最准确的规律在先验上是不被接受的，这表明仅凭解码准确性无法判断机制。通过指定神经动力学如何忠实于语言结构，NAP改变了评估认知神经实现的准则。"
+    },
+    {
+      "id": "2609.14320v1",
+      "title": "SpectralShift: Effective Context Window Extension of Gated DeltaNet via Spectral Reparameterization",
+      "authors": [
+        {
+          "name": "Zian Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yiwen Hu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zican Dong",
+          "affiliation": ""
+        },
+        {
+          "name": "Tian Xie",
+          "affiliation": ""
+        },
+        {
+          "name": "Wayne Xin Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Yucheng Ding",
+          "affiliation": ""
+        },
+        {
+          "name": "Ran Tao",
+          "affiliation": ""
+        },
+        {
+          "name": "Bryan Dai",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Recently, linear attention layers have been increasingly adopted to replace softmax attention at scale for long-context modeling. However, existing context extension approaches typically apply continued pretraining directly without modifying these layers, overlooking the spectral properties of linear attention state dynamics. In this work, we study long-context extension of Gated DeltaNet (GDN) from a spectral perspective of transition matrix and identify two essential factors governing long-range information retrieval: (1) a sufficiently broad slow spectral band aligned with the target dependency length, and (2) the preservation of fast-decaying modes for state clearing and context switching. Based on this observation, we propose SpectralShift, a spectral reparameterization approach for long-context continual pretraining of GDNs. Specifically, SpectralShift reparameterizes the alpha projections initialization to reshape the decay spectrum by enhancing slow propagation capacity, and further introduces a learning-rate scaling for alpha projections to facilitate long-context training. Experiments show that SpectralShift consistently improves long-context capabilities over training, providing an effective and efficient solution for extending context windows of linear attention models. The code has been open-sourced at https://github.com/RUCAIBox/GDN-SpectralShift.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T06:30:16Z",
+      "updated": "2026-09-13T06:30:16Z",
+      "absUrl": "https://arxiv.org/abs/2609.14320v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14320v1.pdf",
+      "comment": null,
+      "titleCn": "SpectralShift：通过频谱重新参数化扩展Gated DeltaNet的有效上下文窗口",
+      "abstractCn": "最近，线性注意力层越来越多地被用于替代softmax注意力，以大规模地扩展长上下文建模。然而，现有的上下文扩展方法通常直接应用持续预训练，而不会修改这些层，忽略了线性注意力状态动力学的频谱特性。在这项工作中，我们从转换矩阵的频谱视角研究了Gated DeltaNet（GDN）的长上下文扩展，并确定了两个控制长距离信息检索的关键因素：(1) 与目标依赖长度对齐的足够宽的慢频谱带，以及(2) 保持快速衰减模式以进行状态清除和上下文切换。基于这一观察，我们提出了SpectralShift，这是一种用于GDN长上下文持续预训练的频谱重新参数化方法。具体而言，SpectralShift通过增强慢传播能力来重塑衰减频谱，重新参数化alpha投影初始化，并进一步引入alpha投影的学习率缩放，以促进长上下文训练。实验表明，SpectralShift在整个训练过程中始终提升了长上下文能力，为扩展线性注意力模型的上下文窗口提供了一种有效且高效的方法。代码已开源于https://github.com/RUCAIBox/GDN-SpectralShift。"
+    },
+    {
+      "id": "2609.16055v1",
+      "title": "State of Thought Enables Endogenous Reasoning",
+      "authors": [
+        {
+          "name": "Zhiren Gong",
+          "affiliation": ""
+        },
+        {
+          "name": "Yikun Hou",
+          "affiliation": ""
+        },
+        {
+          "name": "Zihao Zeng",
+          "affiliation": ""
+        },
+        {
+          "name": "Ming Xiao",
+          "affiliation": ""
+        },
+        {
+          "name": "Chau Yuen",
+          "affiliation": ""
+        },
+        {
+          "name": "Wei Yang Bryan Lim",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Test-time compute has emerged as a major approach to improving the capabilities of Large Language Models (LLMs). However, existing test-time reasoning paradigms rely heavily on externally imposed control, either through fixed reasoning programs or through costly expansion in constrained search spaces, limiting both generalization and efficiency. We propose State of Thought (SoT), a new reasoning paradigm that enables endogenous reasoning in LLMs, with the model's internal reasoning state governing how reasoning unfolds. Concretely, SoT extracts a compact dynamics-geometric state from the model's internal information transfer and uses a 582-parameter controller on frozen backbones to selectively activate historical reasoning support useful under the current reasoning state, framing reasoning as a state-conditioned process over evidence rather than an externally prescribed token chain. Across quantitative (1.34x), general (1.62x), symbolic-and-code (1.76x), and long-context (2.51x) reasoning on 3 LLMs and 16 datasets, SoT consistently improves mean-baseline accuracy while reducing generated tokens by 62.6% and end-to-end latency by 44.6%. Across 2 VLM scales and 3 reasoning tasks, it improves mean accuracy by 3.8 points over reasoning baselines, with 74.9% fewer completion tokens and 73.5% lower latency than search-based methods. Under constrained access, SoT retains 38.2%/36.5% mean accuracy gains in training-free/embedding-only settings, while trajectory-only judging reaches 84.1% agreement across 3 API models. Together, endogenous state-driven reasoning provides a generalizable and efficient alternative.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T05:55:03Z",
+      "updated": "2026-09-13T05:55:03Z",
+      "absUrl": "https://arxiv.org/abs/2609.16055v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16055v1.pdf",
+      "comment": null,
+      "titleCn": "思维状态实现内源性推理",
+      "abstractCn": "在线推理计算已成为提升大型语言模型（LLM）能力的主要方法。然而，现有的在线推理范式严重依赖外部控制，无论是通过固定的推理程序，还是通过在受限搜索空间中进行昂贵的扩展，这限制了泛化能力和效率。我们提出了思维状态（SoT），这是一种新的推理范式，它使LLM能够进行内源性推理，模型的内部推理状态控制着推理的展开。具体而言，SoT从模型的内部信息传递中提取出紧凑的动力学几何状态，并使用一个582参数控制器在冻结的骨干网络上选择性地激活在当前推理状态下有用的历史推理支持，将推理定义为基于证据的状态条件过程，而不是外部规定的标记链。在3个LLM和16个数据集上的定量（1.34倍）、泛化（1.62倍）、符号和代码（1.76倍）以及长上下文（2.51倍）推理中，SoT始终如一地提高了平均基线准确率，同时将生成的标记减少62.6%，端到端延迟降低44.6%。在2个VLM规模和3个推理任务中，它比推理基线平均准确率提高了3.8分，比基于搜索的方法减少了74.9%的完成标记和降低了73.5%的延迟。在受限访问下，SoT在无训练/仅嵌入设置中保留了38.2%/36.5%的平均准确率提升，而仅轨迹评判在3个API模型上达到了84.1%的协议。总而言之，内源性状态驱动的推理提供了一种通用且高效的替代方案。"
+    },
+    {
+      "id": "2609.14302v1",
+      "title": "E2A-Bench: Benchmarking Evidence-to-Action Reliability in Financial Chart Reasoning",
+      "authors": [
+        {
+          "name": "Xiaoya Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yutong Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Junjie Wang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Can financial vision-language models (VLMs) turn chart evidence into reliable action recommendations? Existing hallucination evaluations are mostly claim-centric; they assess whether generated statements are supported, but not whether evidence remains traceable through rationale, confidence, and final action. We introduce E2A-Bench, a 969-query benchmark for financial chart reasoning, constructed from 323 HS300 constituents under three input modalities with deterministic OHLCV-derived evidence anchors. E2A-Bench evaluates grounding, reasoning-action consistency, evidence-confidence calibration, and directional coverage through UCR, RCI, ECI, and NDR, where NDR measures coverage-aware evidence-to-action reliability rather than realized trading performance. Evaluating 20 VLMs reveals three failures hidden by scalar hallucination scores: the lowest-UCR model ranks near the bottom by NDR due to only 6.4% directional coverage; oracle-aided verification reduces unsupported claims but can collapse coverage; and financial fine-tuning amplifies the BUY:SELL ratio by factors of 4.21 to 4.68 across strict base-fine-tuned pairs. These results show that financial VLM evaluation should trace the full evidence-to-action chain rather than rely on a single hallucination score. Code and data: https://github.com/wanng-ide/E2A-Bench",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T05:50:05Z",
+      "updated": "2026-09-13T05:50:05Z",
+      "absUrl": "https://arxiv.org/abs/2609.14302v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14302v1.pdf",
+      "comment": "EMNLP Findings",
+      "titleCn": "E2A-Bench：金融图表推理中证据到行动可靠性的基准测试",
+      "abstractCn": "金融视觉语言模型（VLMs）能否将图表证据转化为可靠的行动建议？现有的幻觉评估大多是声明为中心的；它们评估生成的声明是否得到支持，但并未评估证据是否通过推理、置信度和最终行动保持可追溯性。我们引入了E2A-Bench，这是一个包含969个查询的金融图表推理基准，由323个沪深300成分股在三种输入模态下构建，具有确定性OHLCV衍生证据锚点。E2A-Bench通过UCR、RCI、ECI和NDR评估基础、推理-行动一致性、证据-置信度校准和方向覆盖度，其中NDR衡量考虑覆盖度的证据到行动可靠性，而非实际交易表现。评估20个VLM揭示了被标量幻觉分数隐藏的三个缺陷：最低UCR模型因仅6.4%的方向覆盖度而在NDR中排名靠后；Oracle辅助验证减少了未支持的声明，但可能导致覆盖度崩溃；金融微调将买：卖比例在严格的基线微调对中放大了4.21到4.68倍。这些结果表明，金融VLM评估应追踪完整的证据到行动链条，而非依赖单一幻觉分数。代码和数据：https://github.com/wanng-ide/E2A-Bench"
+    },
+    {
+      "id": "2609.16053v1",
+      "title": "Retrieval-Driven Memory Reconsolidation for Long-Term LLM Agents",
+      "authors": [
+        {
+          "name": "Yuanyi Song",
+          "affiliation": ""
+        },
+        {
+          "name": "Yukai Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xinbei Ma",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhihui Fu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jianghao Lin",
+          "affiliation": ""
+        },
+        {
+          "name": "Weiwen Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jun Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Huarong Deng",
+          "affiliation": ""
+        },
+        {
+          "name": "Yong Yu",
+          "affiliation": ""
+        },
+        {
+          "name": "Weinan Zhang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Long-term memory is essential for LLM-based agents operating over extended interactions. Existing memory systems primarily update memory when new information arrives, treating retrieval as the endpoint of memory access rather than a driver of memory evolution. Consequently, retrieval feedback is rarely exploited to reorganize memory for future access continuously. Moreover, most existing approaches rely on predefined memory structures together with fixed retrieval pipelines, limiting the agent's ability to organize and evolve its own memory autonomously. Inspired by memory reconsolidation in cognitive neuroscience, we propose \\textbf{REALM}, a \\textbf{r}econsolidation-\\textbf{e}volution \\textbf{a}gentic \\textbf{l}ong-term \\textbf{m}emory framework. It models long-term memory as a continual lifecycle by autonomously organizing memories into a heterogeneous cognitive graph, retrieving evidence via adaptively composed graph-search atoms, and continually reconsolidating memories based on retrieval feedback. REALM achieves an average accuracy of 75.97\\% on LoCoMo and 65.11\\% on LongMemEval, outperforming the strongest baselines by 7.17 and 1.31 points respectively. Ablation studies confirm that memory reconsolidation consistently boosts performance, with further analyses revealing that it progressively reorganizes related memory units into more coherent local structures for collective evidence recall and utilization during reasoning. These results suggest that retrieval-driven memory reconsolidation provides an effective mechanism for continually evolving long-term memory in LLM agents.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T05:17:37Z",
+      "updated": "2026-09-13T05:17:37Z",
+      "absUrl": "https://arxiv.org/abs/2609.16053v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.16053v1.pdf",
+      "comment": null,
+      "titleCn": "基于检索的长期大型语言模型代理记忆再巩固",
+      "abstractCn": "长期记忆对于在长时间交互中运行的基于大型语言模型的智能体至关重要。现有的记忆系统主要在新的信息到达时更新记忆，将检索视为记忆访问的终点，而不是记忆演化的驱动力。因此，检索反馈很少被用来持续重组记忆以供未来访问。此外，大多数现有方法依赖于预定义的记忆结构和固定的检索流程，限制了智能体自主组织和演化自身记忆的能力。受认知神经科学中记忆再巩固的启发，我们提出了 \\textbf{REALM}，一个 \\textbf{r}econsolidation-\\textbf{e}volution \\textbf{a}gentic \\textbf{l}ong-term \\textbf{m}emory 框架。它将长期记忆建模为一个持续的生命周期，通过自主地将记忆组织成一个异构认知图，通过自适应组合图搜索原子来检索证据，并根据检索反馈持续进行记忆再巩固。REALM 在 LoCoMo 上达到了 75.97% 的平均准确率，在 LongMemEval 上达到了 65.11%，分别比最强的基线提高了 7.17 和 1.31 个百分点。消融研究表明，记忆再巩固始终提升了性能，进一步分析揭示，它逐步将相关的记忆单元重组为更连贯的局部结构，以便在推理过程中进行集体证据回忆和利用。这些结果表明，检索驱动的记忆再巩固为 LLM 智能体的长期记忆持续演化提供了一种有效的机制。"
+    },
+    {
+      "id": "2609.14288v1",
+      "title": "Editorial routing shapes how computational results are qualified in AI-assisted scientific writing",
+      "authors": [
+        {
+          "name": "Jihan Kim",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models increasingly analyze computational results and draft manuscripts, making reliable communication as important as correct analysis. Using fixed computational evidence, we tested whether assigning comparisons across modeling choices elsewhere in a research workflow changes manuscript reporting. In constrained sentence-writing tasks, Anthropic's Claude Sonnet 5 often omitted numerical qualifications when detailed comparisons were assigned to a group repository, but retained them more often when the same comparison was assigned to Supporting Information or its own working notes; Claude Opus 5 was less sensitive. These effects did not follow a simple accessibility ordering. A targeted placement rule largely restored sentence-level qualification, whereas a generic accuracy reminder did not. Longer contributions retained numerical qualifications, although some summaries across computational settings were still redirected to the repository. Thus, documenting context within an AI workflow does not ensure its communication where readers encounter the result.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T05:15:56Z",
+      "updated": "2026-09-13T05:15:56Z",
+      "absUrl": "https://arxiv.org/abs/2609.14288v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14288v1.pdf",
+      "comment": null,
+      "titleCn": "编辑路由塑造了在人工智能辅助的科学写作中如何对计算结果进行资格认证。",
+      "abstractCn": "大型语言模型越来越多地分析计算结果并起草文稿，可靠的交流与正确的分析同等重要。我们使用固定的计算证据，测试了在研究工作流程的其他环节分配模型选择之间的比较是否会改变文稿报告。在受限的句子写作任务中，Anthropic的Claude Sonnet 5在将详细比较分配到分组知识库时，经常省略数值限定词，但在将相同比较分配到支持信息或其自身工作笔记时则更常保留；Claude Opus 5则不太敏感。这些效应并不遵循简单的可访问性排序。针对性的放置规则在很大程度上恢复了句子级别的限定，而泛化的准确性提醒则无效。较长的文稿保留了数值限定词，尽管一些跨计算环境的摘要仍被重定向到知识库。因此，在人工智能工作流程中记录上下文并不能确保读者在遇到结果时能够有效交流。"
+    },
+    {
+      "id": "2609.14257v1",
+      "title": "DenMark: Robust Semantic Watermarking for Diffusion Language Models",
+      "authors": [
+        {
+          "name": "Tianhao Ma",
+          "affiliation": ""
+        },
+        {
+          "name": "Weihao Xuan",
+          "affiliation": ""
+        },
+        {
+          "name": "Dong-Dong Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Farshid Nooshi",
+          "affiliation": ""
+        },
+        {
+          "name": "Takashi Ishida",
+          "affiliation": ""
+        },
+        {
+          "name": "Gang Niu",
+          "affiliation": ""
+        },
+        {
+          "name": "Naoto Yokoya",
+          "affiliation": ""
+        },
+        {
+          "name": "Masashi Sugiyama",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Semantic text watermarks encode signals in meaning rather than surface token choices, offering robustness to paraphrasing and other semantic-preserving edits. Existing semantic watermarking methods are primarily designed for autoregressive language models (ARLMs), where completed candidate units can be generated and scored before generation proceeds. This paradigm does not naturally extend to diffusion language models (DLMs), where semantic units remain incomplete during intermediate denoising steps and tokens may be updated in flexible orders. We propose DenMark, a semantic watermarking framework that injects key-dependent signals directly into the DLM denoising process. DenMark partitions the output into fixed token regions and uses temporary rollouts as semantic lookahead: conditional completions estimate the eventual semantics of an incomplete region, enabling DenMark to select local updates with higher estimated semantic watermark scores. Repeating this procedure across denoising steps progressively accumulates watermark evidence in the final output. For detection, DenMark uses calibrated scanning over candidate unit sizes to remain robust to boundary shifts introduced by semantic attacks. Across four DLMs, three datasets, and four semantic attacks, DenMark achieves the best results across all reported detection metrics in all 48 backbone-dataset-attack combinations. These results demonstrate that DenMark provides an effective mechanism for robust semantic watermarking in DLMs.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T03:37:48Z",
+      "updated": "2026-09-13T03:37:48Z",
+      "absUrl": "https://arxiv.org/abs/2609.14257v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14257v1.pdf",
+      "comment": null,
+      "titleCn": "DenMark：面向扩散语言模型的鲁棒语义水印技术",
+      "abstractCn": "语义文本水印通过意义而非表面标记选择来编码信号，从而对释义和其他保持语义的编辑提供鲁棒性。现有的语义水印方法主要针对自回归语言模型（ARLMs）设计，在这些模型中，可以在生成过程开始前生成并评分完成的候选单元。这种范式并不自然地扩展到扩散语言模型（DLMs），在DLMs中，语义单元在中间去噪步骤期间保持不完整，标记可能以灵活的顺序更新。我们提出了DenMark，一个将依赖于密钥的信号直接注入DLM去噪过程的语义水印框架。DenMark将输出划分为固定的标记区域，并使用临时展开作为语义预览：条件完成估计不完整区域最终的意义，使DenMark能够选择具有更高估计语义水印分数的局部更新。在去噪步骤中重复此过程，逐步在最终输出中累积水印证据。对于检测，DenMark使用校准扫描候选单元大小，以保持对语义攻击引入的边界偏移的鲁棒性。在四个DLMs、三个数据集和四种语义攻击中，DenMark在所有48种骨干-数据集-攻击组合中的所有报告检测指标中均取得了最佳结果。这些结果表明，DenMark为DLMs中的鲁棒语义水印提供了一种有效的机制。"
+    },
+    {
+      "id": "2609.14256v1",
+      "title": "Document Topic Alignment Metrics for Evaluating Topic Models of Short-Text Public Health Communications on Social Media",
+      "authors": [
+        {
+          "name": "Wangjiaxuan Xin",
+          "affiliation": ""
+        },
+        {
+          "name": "Shuhua Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Yaorong Ge",
+          "affiliation": ""
+        },
+        {
+          "name": "Shi Chen",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Topic models are widely used to analyze public health-related social media short texts, yet their evaluation remains dominated by metrics that focus entirely on generated topics alone. There is a lack of metrics that quantitatively assess whether assigned topics meaningfully represent the corresponding short-text posts. We propose Document-Topic Alignment metrics (DoTA), an assignment-aware evaluation framework comprising metrics that measure semantic alignment between documents (posts) and their assigned topics. We also introduce margin-based and discriminative variants that capture topic assignment confidence and distinguishability. We evaluate DoTA across five topic models on three public health-related social media datasets from X and compare DoTA metrics with conventional topic-based metrics. Results show that DoTA provides complementary evaluation cues and aligns meaningfully with human evaluations. These findings establish the need for assignment-aware evaluation and demonstrate that the addition of DoTA enables a more comprehensive and practically meaningful evaluation for assessing short-text topic modeling performance.",
+      "categories": [
+        "cs.CL",
+        "cs.SI"
+      ],
+      "published": "2026-09-13T03:22:29Z",
+      "updated": "2026-09-13T03:22:29Z",
+      "absUrl": "https://arxiv.org/abs/2609.14256v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14256v1.pdf",
+      "comment": "Accepted for publication in the Proceedings of the 60th Hawaii International Conference on System Sciences (HICSS 2027)",
+      "titleCn": "用于评估社交媒体短文本公共卫生传播主题模型的文档主题对齐指标",
+      "abstractCn": "主题模型被广泛应用于分析与健康相关的社交媒体短文本，但其评估仍然主要依赖于完全关注生成主题的指标。目前缺乏能够定量评估分配的主题是否有效代表相应短文本的指标。我们提出了文档-主题对齐指标（DoTA），这是一个包含衡量文档（帖子）与其分配主题之间语义对齐指标的分配感知评估框架。我们还引入了基于边距和判别性的变体，以捕捉主题分配的置信度和可区分性。我们在X平台上的三个与健康相关的社交媒体数据集上对五个主题模型评估了DoTA，并将DoTA指标与传统的基于主题的指标进行了比较。结果表明，DoTA提供了互补的评估信息，并与人类评估有显著意义的一致性。这些发现确立了分配感知评估的必要性，并证明了添加DoTA能够使短文本主题建模性能的评估更加全面和具有实际意义。"
+    },
+    {
+      "id": "2609.14245v1",
+      "title": "The Attribution-Compression Frontier in Retrieval-Augmented Generation",
+      "authors": [
+        {
+          "name": "Deepanshu Mody",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Context compression reduces generator input in retrieval-augmented generation, but answer quality alone does not characterize citation attribution. We measure citation attribution across compression methods and budgets, comparing reranking, extractive selection, abstractive summarization, token pruning, and an extract-cluster-rewrite construction on ASQA and QASPER under a fixed generator and primary entailment evaluator. On ASQA at a nominal 0.25 budget (achieved compression 0.08), a RECOMP-style compressor's citations score 0.86 precision against its summaries but 0.12 against source spans under our re-attributability protocol. These estimates depend on a shared NLI model for span recovery and citation scoring and lack independent human calibration. Extractive selection's observed grounded precision ranges from 0.43 to 0.49 across nominal budgets from one-half to one-tenth of the ASQA context, while answer quality declines. For the same RECOMP setting, claim verification after source recovery yields an unsupported rate of 0.88 versus 0.17 when checking summaries. This gap persists beyond structural rejection of missing provenance, but remains evaluator-dependent. A 200-question TRUE T5-XXL audit also finds emitted--grounded gaps under both fixed and recomputed source mappings, without establishing human-calibrated support rates.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-09-13T02:49:06Z",
+      "updated": "2026-09-13T02:49:06Z",
+      "absUrl": "https://arxiv.org/abs/2609.14245v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14245v1.pdf",
+      "comment": "Accepted to GroundLM 2026 Workshop at EMNLP",
+      "titleCn": "检索增强生成中的归因-压缩前沿",
+      "abstractCn": "上下文压缩在检索增强生成中减少了生成器的输入，但答案质量本身并不能表征引用归属。我们在ASQA和QASPER上测量了不同压缩方法和预算下的引用归属，比较了重排序、抽取式选择、抽象式摘要、标记剪枝以及提取-聚类-重写构造，并使用固定的生成器和主要蕴含评估器进行测试。在ASQA的标称0.25预算下（实现压缩0.08），一种RECOMP风格的压缩器在重新归属协议下，其引用得分为0.86，针对其摘要，但针对源跨度仅为0.12。这些估计依赖于用于跨度恢复和引用评分的共享NLI模型，且缺乏独立的人类校准。在ASQA上下文从一半到十分之一的标称预算范围内，抽取式选择的观察到的扎根精度在0.43到0.49之间，而答案质量下降。对于相同的RECOMP设置，在源恢复后的主张验证中，当检查摘要时，不支持率为0.88，而在检查源时为0.17。这种差距在拒绝缺失来源的结构性错误后仍然存在，但仍然取决于评估器。一项包含200个问题的TRUE T5-XXL审计也发现，在固定和重新计算的源映射下都存在发出的扎根差距，但没有建立人类校准的支持率。"
+    },
+    {
+      "id": "2609.14226v1",
+      "title": "Corpus Characterization and Inverse Constitutional Fine-Tuning for Style-Aware Radiology Reports",
+      "authors": [
+        {
+          "name": "Sarah Y. Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Elijah Renner",
+          "affiliation": ""
+        },
+        {
+          "name": "Rayan Ansari",
+          "affiliation": ""
+        },
+        {
+          "name": "Alaa Youssef",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Automated radiology report generation has advanced rapidly in diagnostic accuracy, yet generated reports frequently diverge from the stylistic conventions of authentic radiologist writing in structure, diction, and uncertainty language, a gap which has direct implications for clinician trust and user experience. To address this, we characterize stylistic variation across 2,000 reports from the CheXpert Plus dataset using Bio-ClinicalBERT embeddings, UMAP dimensionality reduction, and HDBSCAN clustering, identifying five distinct reporting patterns differing in pathology focus, narrative structure, and lexical preference. Drawing on these findings, we adapt the inverse constitutional AI framework to derive a style-focused constitution from radiologist-written report pairs without requiring a formal preference dataset. This constitution, encoding conventions of tone, diction, uncertainty calibration, and report structure, is incorporated into the supervised fine-tuning of a MedGemma-4B base model on 25,245 CheXpert Plus training pairs. Constitutional fine-tuning produces a substantial increases in text alignment (BLEU-4: 0.006 to 0.308; ROUGE-L: 0.171 to 0.484) relative to the untuned baseline. These gains show a qualitative shift in structural and lexical alignment rather than marginal improvement, as the baseline model produces near-zero scores due to format mismatch. Overall, we establish corpus-level style characterization and constitutional modeling as an effective and data-efficient strategy for producing radiology reports that conform to authentic radiologist writing conventions.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T01:40:23Z",
+      "updated": "2026-09-13T01:40:23Z",
+      "absUrl": "https://arxiv.org/abs/2609.14226v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14226v1.pdf",
+      "comment": null,
+      "titleCn": "语料库表征与反向宪法微调用于风格感知的放射科报告",
+      "abstractCn": "自动放射学报告生成在诊断准确性方面取得了快速进展，但生成的报告在结构、用词和不确定性表述上经常偏离真实放射科医生的写作风格惯例，这一差距对临床医生信任和用户体验具有直接影响。为解决这一问题，我们利用Bio-ClinicalBERT嵌入、UMAP降维和HDBSCAN聚类，对CheXpert Plus数据集中的2000份报告进行风格变异特征分析，识别出五种不同的报告模式，这些模式在病理重点、叙事结构和词汇偏好上存在差异。基于这些发现，我们调整了逆向宪法AI框架，从放射科医生撰写的报告对中提取风格导向的宪法，而无需正式偏好数据集。该宪法编码了语气、用词、不确定性校准和报告结构的惯例，被整合到基于25,245份CheXpert Plus训练对的MedGemma-4B基础模型的监督微调中。宪法微调相较于未调优的基线模型，文本一致性显著提升（BLEU-4：0.006至0.308；ROUGE-L：0.171至0.484）。这些增益体现了结构和词汇一致性的质变，而非边际改进，因为基线模型由于格式不匹配而得分接近零。总体而言，我们建立了语料库级风格特征分析和宪法建模，将其作为生成符合真实放射科医生写作惯例的放射学报告的有效且数据高效的策略。"
+    },
+    {
+      "id": "2609.14207v1",
+      "title": "Learning to Refer from Estimated Listener Gaze",
+      "authors": [
+        {
+          "name": "Téa Wright",
+          "affiliation": ""
+        },
+        {
+          "name": "Alane Suhr",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We propose to finetune vision-language models to generate more pragmatically optimal referring expressions by transforming observations of incremental listener comprehension, in the form of gaze scanpaths, into learning signals. During training, referring expressions are sampled from the speaker policy being optimized, conditioned on images and target referents; then, a neural listener estimating human gaze behavior maps from images and sampled referring expressions to scanpaths, each represented by a sequence of fixations, with each fixation corresponding to a word in the referring expression. We experiment with several approaches to convert fixation sequences and target referents into token- and sequence-level rewards, which are used to optimize policy parameters. Through evaluation with human listeners, we find that speaker policies trained with gaze-estimating listeners result in significantly more pragmatically-optimal references than base models, reducing sequence length from 15.4 down to 4.0 words while increasing referential success from 75.2 up to 80.0%. Our work demonstrates a promising opportunity for learning to generate utterances through language-based interaction, not only from the explicit signal of communicative success, but also from implicitly-available observations of a listener's process of comprehension.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T00:36:18Z",
+      "updated": "2026-09-13T00:36:18Z",
+      "absUrl": "https://arxiv.org/abs/2609.14207v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.14207v1.pdf",
+      "comment": "Accepted at COLM 2026",
+      "titleCn": "从估计的听众注视中学习指称",
+      "abstractCn": "我们提出通过将增量听众理解观察（以注视扫描路径的形式）转化为学习信号，来微调视觉语言模型以生成更策略上最优的指称表达。在训练过程中，指称表达根据图像和目标指称从正在优化的说话人策略中采样；然后，一个估计人类注视行为的神经听众将图像和采样的指称表达映射到扫描路径，每个扫描路径由一系列注视组成，每个注视对应指称表达中的一个词。我们实验了多种将注视序列和目标指称转换为标记和序列级奖励的方法，这些奖励用于优化策略参数。通过人类听众的评估，我们发现使用注视估计听众训练的说话人策略产生的指称表达在策略上显著更优，将序列长度从15.4个词减少到4.0个词，同时将指称成功率从75.2%提高到80.0%。我们的工作展示了通过基于语言的交互学习生成语句的潜力，不仅来自沟通成功的明确信号，也来自听众理解过程的隐含观察。"
+    }
+  ],
+  "fetchedAt": "2026-09-16T09:47:26.680179+00:00",
+  "count": 55,
+  "date": "2026-09-13"
+}
