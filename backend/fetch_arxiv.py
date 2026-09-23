@@ -4,8 +4,23 @@
   python fetch_arxiv.py              # 抓取当天（回退到最近有论文的一天）
   python fetch_arxiv.py 2025-01-15   # 抓取指定日期
   python fetch_arxiv.py --backfill   # 补抓过去14天数据
+  python fetch_arxiv.py --translate  # 为已有数据补充翻译
+
+arxiv API 变更说明（2026-09）:
+  arxiv 网关开始间歇性返回 HTTP 406（Not Acceptable）。实测同一 URL、
+  同一 UA 下 406 与 200 交替出现，与客户端 IP 无关，判断为网关侧动态
+  WAF（可能与负载均衡节点或流量负载有关），长退避重试通常可恢复。
+  持续无法恢复的查询: submittedDate:[...] 日期范围、+AND+ 布尔组合、
+  start 翻页、max_results>300。应对策略（双数据源 + 自动降级）:
+  1. 主数据源: cat:cs.CL + sortBy=submittedDate 倒序拉取最近 250 篇
+     （本地按提交日期分组，覆盖约 5 天），406 时长退避重试
+  2. 兜底数据源: OAI-PMH ListRecords 按公告批次收割，主源重试耗尽
+     后自动降级。datestamp 是公告日期（比提交日期晚 1~4 天，周六日
+     无公告；旧论文出新版本也会重新出现在公告批次），需查 D+1~D+4
+     的批次并用 <created> 字段过滤出提交日恰为 D 的论文
 """
 
+import html
 import json
 import os
 import random
@@ -32,6 +47,9 @@ CONCURRENCY = 1           # 降低并发避免触发 arxiv 限流
 TRANSLATE_CONCURRENCY = 1
 HEADERS = {'User-Agent': 'AcademicAssistant/1.0 (research tool; contact via GitHub)'}
 
+# 一次拉取的文章条数：arxiv 网关对 max_results>300 返回 406，250 为安全上限
+RECENT_MAX_RESULTS = 250
+
 # 是否抓取作者单位：前端已不展示单位，且每篇需额外请求一次 arxiv 摘要页，
 # 极易触发 429 限流，故默认关闭（设为 1 可重新启用）
 FETCH_AFFILIATIONS = os.environ.get('FETCH_AFFILIATIONS', '0') == '1'
@@ -51,17 +69,17 @@ def get_date_string(dt):
     return dt.strftime('%Y-%m-%d')
 
 
-def get_date_range(date_str):
-    """获取日期范围用于 arxiv 查询"""
-    date_num = date_str.replace('-', '')
-    return f'{date_num}000000', f'{date_num}235959'
+def build_arxiv_url():
+    """构建 arxiv API 查询 URL：按提交日期倒序拉取最近 N 篇 cs.CL
 
-
-def build_arxiv_url(date_str):
-    """构建 arxiv API 查询 URL"""
-    start, end = get_date_range(date_str)
-    query = f'search_query=cat:cs.CL+AND+submittedDate:[{start}+TO+{end}]&sortBy=submittedDate&sortOrder=descending&max_results=500'
-    return f'https://export.arxiv.org/api/query?{query}'
+    原来的 submittedDate:[...] 日期范围查询已被网关 WAF 拒绝（HTTP 406）,
+    改为一次拉取最近列表后在本地按提交日期分组。
+    """
+    return (
+        'https://export.arxiv.org/api/query?search_query=cat:cs.CL'
+        '&sortBy=submittedDate&sortOrder=descending'
+        f'&max_results={RECENT_MAX_RESULTS}'
+    )
 
 
 def http_get(url, max_retries=5):
@@ -79,6 +97,23 @@ def http_get(url, max_retries=5):
             with urllib.request.urlopen(req, timeout=60) as resp:
                 _last_request_time = time.time()
                 return resp.read().decode('utf-8')
+        except urllib.error.HTTPError as e:
+            if e.code == 406:
+                # 实测 406 为间歇性拒绝（同 URL 同 UA 下 406/200 交替出现，
+                # 与客户端 IP 无关），长退避重试通常可恢复；耗尽后抛出，
+                # 由上层降级 OAI-PMH 兜底
+                if attempt >= max_retries - 1:
+                    print(f'  HTTP 406 重试耗尽: {url}', flush=True)
+                    raise
+                wait = 60 * (attempt + 1) + random.uniform(0, 10)
+                print(f'  HTTP 406（间歇性 WAF 拒绝），{wait:.0f}s 后重试 ({attempt + 1}/{max_retries}): {url}', flush=True)
+                time.sleep(wait)
+                continue
+            last_err = e
+            if attempt < max_retries - 1:
+                wait = 10 * (2 ** attempt) + random.uniform(0, 5)  # 10s, 20s, 40s, 80s + 随机抖动
+                print(f'  HTTP 请求失败，{wait:.0f}s 后重试 ({attempt + 1}/{max_retries}): {e}')
+                time.sleep(wait)
         except Exception as e:
             last_err = e
             if attempt < max_retries - 1:
@@ -130,6 +165,119 @@ def parse_atom_xml(xml):
         })
 
     return entries
+
+
+# 最近文章缓存（按提交日期分组），单次运行内复用，避免 backfill 重复请求
+_recent_articles_by_date = None
+
+
+def published_utc_date(article):
+    """文章提交时间的 UTC 日期（与原 submittedDate 查询口径一致）"""
+    published = article.get('published', '')
+    try:
+        dt = datetime.fromisoformat(published.replace('Z', '+00:00'))
+        return dt.astimezone(timezone.utc).strftime('%Y-%m-%d')
+    except ValueError:
+        return published[:10]
+
+
+def fetch_recent_articles():
+    """拉取最近 N 篇 cs.CL 文章并按提交日期(UTC)分组（带缓存）"""
+    global _recent_articles_by_date
+    if _recent_articles_by_date is not None:
+        return _recent_articles_by_date
+    print(f'请求 arxiv API（最近 {RECENT_MAX_RESULTS} 篇 cs.CL）...')
+    xml = http_get(build_arxiv_url())
+    entries = parse_atom_xml(xml)
+    groups = {}
+    for e in entries:
+        groups.setdefault(published_utc_date(e), []).append(e)
+    print(f'  获取到 {len(entries)} 篇，覆盖 {len(groups)} 天:')
+    for d in sorted(groups.keys(), reverse=True):
+        print(f'    {d}: {len(groups[d])} 篇')
+    _recent_articles_by_date = groups
+    return groups
+
+
+def parse_oai_records(xml, date_str):
+    """解析 OAI-PMH ListRecords 响应，提取提交日期恰为 date_str 的 cs.CL 文章
+
+    响应按公告批次返回（新论文首次公告 + 旧论文更新版本公告混合），
+    需用 <created>（首次提交日期）字段过滤出提交日恰为 date_str 的论文。
+    """
+    entries = []
+    for rec_match in re.finditer(r'<record>[\s\S]*?</record>', xml):
+        rec = rec_match.group(0)
+        if 'status="deleted"' in rec:
+            continue
+
+        created = re.search(r'<created>([^<]+)</created>', rec)
+        if not created or created.group(1).strip() != date_str:
+            continue
+
+        cats = re.search(r'<categories>([^<]+)</categories>', rec)
+        if not cats or 'cs.CL' not in cats.group(1).split():
+            continue
+
+        def find(tag):
+            m = re.search(rf'<{tag}>([\s\S]*?)</{tag}>', rec)
+            return html.unescape(m.group(1)).strip() if m else ''
+
+        id_val = find('id')
+        if not id_val:
+            continue
+
+        authors = []
+        for a_match in re.finditer(r'<author>[\s\S]*?</author>', rec):
+            a = a_match.group(0)
+            key_m = re.search(r'<keyname>([^<]+)</keyname>', a)
+            fore_m = re.search(r'<forenames>([^<]+)</forenames>', a)
+            if key_m:
+                name = f'{fore_m.group(1)} {key_m.group(1)}'.strip() if fore_m else key_m.group(1)
+                authors.append({'name': name, 'affiliation': ''})
+
+        comment_m = re.search(r'<comments>([\s\S]*?)</comments>', rec)
+        comment = html.unescape(comment_m.group(1)).strip() if comment_m else None
+
+        entries.append({
+            'id': id_val,
+            'title': re.sub(r'\n\s*', ' ', find('title')),
+            'authors': authors,
+            'abstract': re.sub(r'\n\s*', ' ', find('abstract')),
+            'categories': list(dict.fromkeys(cats.group(1).split())),
+            'published': f'{date_str}T00:00:00Z',
+            'updated': f'{find("updated") or date_str}T00:00:00Z',
+            'absUrl': f'https://arxiv.org/abs/{id_val}',
+            'pdfUrl': f'https://arxiv.org/pdf/{id_val}.pdf',
+            'comment': comment,
+        })
+    return entries
+
+
+def fetch_date_articles_oai(date_str):
+    """通过 OAI-PMH 抓取指定日期首次提交的 cs.CL 文章（兜底数据源）
+
+    OAI-PMH 的 datestamp 是公告日期，比提交日期晚 1~4 天（周六日无公告批次），
+    因此需逐日查询 D+1 ~ D+4 的公告批次，再用 <created> 字段过滤出提交日
+    恰为 D 的论文，按 id 去重合并。
+    """
+    articles = []
+    seen_ids = set()
+    today = get_date_string(datetime.now(timezone.utc))
+    for offset in range(1, 5):
+        stamp = (datetime.fromisoformat(date_str) + timedelta(days=offset)).strftime('%Y-%m-%d')
+        if stamp > today:
+            break  # 未来日期尚无公告批次
+        url = (
+            'https://export.arxiv.org/oai2?verb=ListRecords'
+            f'&from={stamp}&until={stamp}&metadataPrefix=arXiv&set=cs'
+        )
+        xml = http_get(url)
+        for a in parse_oai_records(xml, date_str):
+            if a['id'] not in seen_ids:
+                seen_ids.add(a['id'])
+                articles.append(a)
+    return articles
 
 
 def fetch_affiliations(article):
@@ -200,8 +348,9 @@ def translate_text(text):
             )
             with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read().decode('utf-8'))
-            # 节流：每次成功调用后等待 60 秒，避免触发免费 API 速率限制
-            time.sleep(60)
+            # 节流：避免触发免费 API 速率限制。注：60s 过于保守（补抓 7 天
+            # 需 16 小时），降为 5s；触发 429 时上方有退避重试兜底
+            time.sleep(5)
             return result['choices'][0]['message']['content'].strip()
         except urllib.error.HTTPError as e:
             last_err = e
@@ -252,13 +401,19 @@ def translate_article(article):
 
 
 def fetch_date_articles(date_str):
-    """抓取指定日期的文章"""
-    url = build_arxiv_url(date_str)
-    print(f'请求 arxiv API ({date_str})...')
-
-    xml = http_get(url)
-    articles = parse_atom_xml(xml)
-    print(f'  {date_str}: 获取到 {len(articles)} 篇文章')
+    """抓取指定日期的文章（主数据源为最近列表分组，失败或未覆盖时走 OAI-PMH 兜底）"""
+    try:
+        groups = fetch_recent_articles()
+    except Exception as e:
+        # 主源 406 重试耗尽等异常时降级 OAI-PMH，避免单点故障
+        print(f'  最近列表获取失败: {e}，降级 OAI-PMH 兜底', flush=True)
+        groups = {}
+    if date_str in groups:
+        articles = groups[date_str]
+        print(f'  {date_str}: 从最近列表获取到 {len(articles)} 篇文章')
+    else:
+        articles = fetch_date_articles_oai(date_str)
+        print(f'  {date_str}: OAI-PMH 获取到 {len(articles)} 篇文章')
 
     if not articles:
         return {'articles': articles, 'date': date_str}
@@ -367,18 +522,21 @@ def fetch_today_with_fallback(data_dir):
         save_latest(data_dir, today, result['articles'])
         return
 
+    # 当天无论文（arxiv 新论文要在处理后的次日才对 API 可见），回退到最近列表中
+    # 最新有论文的一天（最近列表覆盖约最近 5 天，无需再逐天探测）
     print(f'当天 ({today}) 没有论文，回退查找最近有论文的一天...')
-    for i in range(1, 8):
-        date = datetime.now(timezone.utc) - timedelta(days=i)
-        date_str = get_date_string(date)
+    groups = fetch_recent_articles()
+    for date_str in sorted(groups.keys(), reverse=True):
+        if not groups[date_str]:
+            continue
+        print(f'  找到 {date_str} 有 {len(groups[date_str])} 篇论文，作为 latest 数据')
         result = fetch_date_articles(date_str)
         if result['articles']:
-            print(f'  找到 {date_str} 有 {len(result["articles"])} 篇论文，作为 latest 数据')
             save_data(data_dir, date_str, result['articles'])
             save_latest(data_dir, date_str, result['articles'], is_fallback=True)
             return
 
-    print('最近7天都没有论文数据')
+    print('最近列表中没有论文数据')
     save_data(data_dir, today, [])
 
 

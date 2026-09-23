@@ -8,7 +8,7 @@
 
 ## 功能特性
 
-- **每日自动更新**：服务器每天 UTC 00:00 自动抓取并翻译
+- **每日自动更新**：服务器每天 UTC 00:00 自动抓取并翻译，断更自动告警
 - **中英双语切换**：标题和摘要均支持中英文切换查看
 - **搜索过滤**：支持按标题、作者、摘要搜索，按分类标签过滤
 - **历史回溯**：下拉选择不同日期查看历史文章
@@ -72,7 +72,8 @@ Academic_Assistant/
 │
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml         # GitHub Actions：build + deploy
+│       ├── deploy.yml         # GitHub Actions：build + deploy
+│       └── alert.yml          # GitHub Actions：数据新鲜度巡检告警
 │
 ├── .gitignore                 # 排除 .env、node_modules 等
 └── README.md
@@ -182,7 +183,12 @@ TRANSLATE_API_KEY=your_glm_api_key
 
 ```python
 # 默认抓取 cs.CL，可改为 cs.AI、cs.LG 等
-query = f'search_query=cat:cs.CL+AND+submittedDate:[{start}+TO+{end}]'
+# 注意：不能用 submittedDate:[...] 日期范围查询（见下方变更记录）
+return (
+    'https://export.arxiv.org/api/query?search_query=cat:cs.CL'
+    '&sortBy=submittedDate&sortOrder=descending'
+    f'&max_results={RECENT_MAX_RESULTS}'
+)
 ```
 
 ### 修改翻译模型
@@ -190,6 +196,46 @@ query = f'search_query=cat:cs.CL+AND+submittedDate:[{start}+TO+{end}]'
 ```python
 TRANSLATE_MODEL = 'glm-4-flash-250414'  # 或其他智谱模型
 ```
+
+---
+
+## 运维与故障排查
+
+### 数据断更告警（双重防护）
+
+- **GitHub Actions（`alert.yml`）**：每天 UTC 06:30 检查线上 `index.json` 的 `latest`
+  日期，滞后超过 3 天自动开 Issue（有未关闭的同标签 Issue 则追加评论）。
+  独立于服务器，抓取链路任何环节故障都能触发。
+- **服务器自检（`cron_fetch.sh`）**：每次抓取后检查数据新鲜度，异常时在
+  `/var/log/nlpdaily-fetch.log` 打印 `WARNING`。
+
+### 变更记录：arxiv API 网关限制（2026-09）
+
+2026-09-16/17 起 arxiv 网关开始返回 HTTP 406 拒绝部分查询。实测同一 URL、
+同一 User-Agent 下 406 与 200 交替出现，与客户端 IP 无关，判断为间歇性
+动态限制（可能与负载均衡节点或流量负载有关，长退避重试通常可恢复），
+而非确定性规则。以下查询被持续拒绝（重试也无法恢复）：
+
+- `submittedDate:[...]` 日期范围查询
+- `+AND+` / `+OR+` 布尔组合查询
+- `start` 翻页参数（含 `start=0`）
+- `max_results > 300`（250 为安全上限）
+- `id_list` 参数
+
+导致当时的服务器脚本（依赖日期范围查询）从 09-17 起静默断更（cron 照常
+运行、照常提交时间戳，但抓不到任何新论文）。修复方案（双数据源 + 自动降级）：
+
+1. **主数据源**：`cat:cs.CL + sortBy=submittedDate` 倒序拉最近 250 篇，
+   本地按提交日期（UTC）分组，覆盖最近约 5 天；遇 406 长退避重试
+   （60s 递增，最多 5 次）
+2. **兜底数据源**：OAI-PMH `ListRecords`（`/oai2` 端点），主源重试耗尽
+   后自动降级。按公告批次收割后用 `<created>` 字段过滤出当天首次提交
+   的论文（注意：OAI-PMH 的 datestamp 是公告日期，比提交日晚 1~4 天，
+   周六日无批次；旧论文出新版本也会出现）
+
+若未来 arxiv 再次调整规则，可参考上述排查思路：先用最小查询验证
+（`search_query=cat:cs.CL&max_results=1`），再逐步加参数定位被拒的组合；
+注意同一查询多次测试排除间歇性干扰。
 
 ---
 

@@ -1,0 +1,62 @@
+name: Data Freshness Alert
+
+# 数据新鲜度巡检：检查线上最新数据日期，超过 3 天未更新自动开 Issue 告警。
+# 背景：2026-09-17 起 arxiv 网关 WAF 拒绝旧查询语法导致静默断更，
+# 服务器 cron 每天照常运行（仅更新时间戳），直到一个月后才被发现。
+# 此工作流独立于服务器，直接检查线上产物，抓取链路任何环节故障都能触发告警。
+
+on:
+  schedule:
+    - cron: '30 6 * * *'  # 每天 UTC 06:30（服务器抓取在 UTC 00:00 后完成）
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check data freshness
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE: https://junchaoiu.github.io/NLPDaily
+          STALE_DAYS: 3
+        run: |
+          LATEST=$(curl -sf "$SITE/data/index.json" | python3 -c "import json,sys; print(json.load(sys.stdin).get('latest',''))" || echo "")
+          TODAY=$(date -u +%F)
+          echo "线上最新数据日期: ${LATEST:-<读取失败>}，今天: $TODAY"
+
+          if [ -z "$LATEST" ]; then
+            echo "::error::无法读取线上 index.json（网站可能部署失败）"
+            exit 1
+          fi
+
+          DIFF=$(( ( $(date -ud "$TODAY" +%s) - $(date -ud "$LATEST" +%s) ) / 86400 ))
+          echo "数据滞后: ${DIFF} 天"
+
+          if [ "$DIFF" -lt "$STALE_DAYS" ]; then
+            echo "数据新鲜度正常"
+            exit 0
+          fi
+
+          # 数据过期：开 Issue 告警（已有未关闭的同标签 Issue 则追加评论，避免重复）
+          echo "数据已 ${DIFF} 天未更新，触发告警..."
+          gh label create "data-stale" --color d73a4a --description "数据断更告警" 2>/dev/null || true
+          BODY="线上最新数据日期为 **${LATEST}**，距今 **${DIFF} 天**（检查时间 ${TODAY} UTC）。
+
+          可能原因：
+          - 服务器 cron 任务失败（检查 \`/var/log/nlpdaily-fetch.log\`）
+          - arxiv API 再次变更（检查 \`backend/fetch_arxiv.py\` 的查询语法是否仍有效）
+          - 翻译 API 配额耗尽或网络故障
+
+          排查命令：\`bash check_status.sh\`"
+
+          EXISTING=$(gh issue list --label "data-stale" --state open --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "【自动巡检 $TODAY】线上数据已 $DIFF 天未更新（latest=$LATEST），请检查服务器抓取任务。"
+            echo "已追加评论到 Issue #$EXISTING"
+          else
+            gh issue create --title "数据断更告警：线上数据已 ${DIFF} 天未更新" --body "$BODY" --label "data-stale"
+            echo "已创建新告警 Issue"
+          fi

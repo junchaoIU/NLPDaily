@@ -25,6 +25,24 @@ git pull --rebase origin main 2>&1 | tee -a /var/log/nlpdaily-fetch.log
 python3 -u backend/fetch_arxiv.py --backfill 2>&1 | tee -a /var/log/nlpdaily-fetch.log
 EXIT_CODE=$?
 
+# 数据新鲜度自检：latest 距今超过 3 天则打 WARNING 到日志，方便巡检时发现静默断更
+# （2026-09 曾因 arxiv 网关拒绝旧查询语法而静默断更一个月，脚本退出码仍为 0）
+python3 - <<'EOF' 2>&1 | tee -a /var/log/nlpdaily-fetch.log
+import json
+from datetime import datetime, timezone
+try:
+    d = json.load(open('data/index.json'))
+    latest = d.get('latest', '')
+    if latest:
+        diff = (datetime.now(timezone.utc) - datetime.fromisoformat(latest)).days
+        if diff >= 3:
+            print(f'WARNING: 数据已 {diff} 天未更新 (latest={latest})，抓取链路可能异常，请检查上方日志！')
+        else:
+            print(f'新鲜度正常: latest={latest} (滞后 {diff} 天)')
+except Exception as e:
+    print(f'WARNING: 数据新鲜度自检失败: {e}')
+EOF
+
 git add data/
 git diff --staged --quiet || git commit -m "Update arxiv articles data for $(date +%Y-%m-%d)"
 git push origin main 2>&1 | tee -a /var/log/nlpdaily-fetch.log
