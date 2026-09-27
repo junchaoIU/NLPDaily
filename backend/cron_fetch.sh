@@ -31,14 +31,18 @@ python3 - <<'EOF' 2>&1 | tee -a /var/log/nlpdaily-fetch.log
 import json
 from datetime import datetime, timezone
 try:
+    # index.json 的 latest 是“最新有文章的日期”（纯日期无时区），
+    # fromisoformat 解析后是 naive datetime，必须补 UTC 时区才能与 aware 的 now() 相减
     d = json.load(open('data/index.json'))
     latest = d.get('latest', '')
     if latest:
-        diff = (datetime.now(timezone.utc) - datetime.fromisoformat(latest)).days
+        diff = (datetime.now(timezone.utc) - datetime.fromisoformat(latest).replace(tzinfo=timezone.utc)).days
         if diff >= 3:
             print(f'WARNING: 数据已 {diff} 天未更新 (latest={latest})，抓取链路可能异常，请检查上方日志！')
         else:
             print(f'新鲜度正常: latest={latest} (滞后 {diff} 天)')
+    else:
+        print('WARNING: index.json 无有效 latest，所有数据文件均为空！')
 except Exception as e:
     print(f'WARNING: 数据新鲜度自检失败: {e}')
 EOF

@@ -499,17 +499,32 @@ def save_latest(data_dir, date_str, articles, is_fallback=False):
 
 
 def update_index(data_dir):
-    """更新索引文件"""
+    """更新索引文件
+
+    latest 取“最新有文章的日期”而非 dates[0]：空数据日（如周末抓取失败、
+    当天论文次日可见）也会生成文件占据 dates，若 latest 直接取 dates[0]，
+    会被空日期欺骗——线上显示已更新但实际无数据，新鲜度告警也会误判正常。
+    """
     dates = get_available_dates(data_dir)
+    latest = ''
+    for date_str in dates:
+        file_path = os.path.join(data_dir, f'articles-{date_str}.json')
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                if json.load(f).get('articles'):
+                    latest = date_str
+                    break
+        except Exception:
+            continue
     index_data = {
         'dates': dates,
-        'latest': dates[0] if dates else '',
+        'latest': latest,
         'updatedAt': datetime.now(timezone.utc).isoformat(),
     }
     path = os.path.join(data_dir, 'index.json')
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(index_data, f, ensure_ascii=False, indent=2)
-    print(f'索引已更新，共 {len(dates)} 天数据')
+    print(f'索引已更新，共 {len(dates)} 天数据，最新有效数据: {latest or "无"}')
 
 
 def fetch_today_with_fallback(data_dir):

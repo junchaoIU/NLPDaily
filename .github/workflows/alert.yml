@@ -1,8 +1,11 @@
 name: Data Freshness Alert
 
-# 数据新鲜度巡检：检查线上最新数据日期，超过 3 天未更新自动开 Issue 告警。
-# 背景：2026-09-17 起 arxiv 网关 WAF 拒绝旧查询语法导致静默断更，
-# 服务器 cron 每天照常运行（仅更新时间戳），直到一个月后才被发现。
+# 数据新鲜度巡检：检查线上最新有效数据日期，超过 3 天未更新自动开 Issue 告警。
+# 背景 1：2026-09-17 起 arxiv 网关拒绝旧查询语法导致静默断更，
+#   服务器 cron 每天照常运行（仅更新时间戳），直到一个月后才被发现。
+# 背景 2（2026-09-27）：index.json 的 latest 曾被空数据日欺骗（空文件也占据
+#   dates[0]，latest 显示今天但实际无数据），故改读 articles-latest.json 的
+#   date 字段——它是“最新有文章的那天”，不会被空数据日欺骗。
 # 此工作流独立于服务器，直接检查线上产物，抓取链路任何环节故障都能触发告警。
 
 on:
@@ -23,12 +26,20 @@ jobs:
           SITE: https://junchaoiu.github.io/NLPDaily
           STALE_DAYS: 3
         run: |
-          LATEST=$(curl -sf "$SITE/data/index.json" | python3 -c "import json,sys; print(json.load(sys.stdin).get('latest',''))" || echo "")
+          # 先验证网站可达（index.json 读不到 = 部署失败）
+          if ! curl -sf "$SITE/data/index.json" > /dev/null; then
+            echo "::error::无法读取线上 index.json（网站可能部署失败）"
+            exit 1
+          fi
+
+          # 新鲜度看 articles-latest.json 的 date（最新有文章的那天），
+          # 不用 index.json 的 latest（会被空数据日欺骗）
+          LATEST=$(curl -sf "$SITE/data/articles-latest.json" | python3 -c "import json,sys; print(json.load(sys.stdin).get('date',''))" || echo "")
           TODAY=$(date -u +%F)
-          echo "线上最新数据日期: ${LATEST:-<读取失败>}，今天: $TODAY"
+          echo "线上最新有效数据日期: ${LATEST:-<读取失败>}，今天: $TODAY"
 
           if [ -z "$LATEST" ]; then
-            echo "::error::无法读取线上 index.json（网站可能部署失败）"
+            echo "::error::无法读取线上 articles-latest.json 的 date 字段"
             exit 1
           fi
 

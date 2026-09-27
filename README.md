@@ -203,10 +203,13 @@ TRANSLATE_MODEL = 'glm-4-flash-250414'  # 或其他智谱模型
 
 ### 数据断更告警（双重防护）
 
-- **GitHub Actions（`alert.yml`）**：每天 UTC 06:30 检查线上 `index.json` 的 `latest`
-  日期，滞后超过 3 天自动开 Issue（有未关闭的同标签 Issue 则追加评论）。
-  独立于服务器，抓取链路任何环节故障都能触发。
-- **服务器自检（`cron_fetch.sh`）**：每次抓取后检查数据新鲜度，异常时在
+- **GitHub Actions（`alert.yml`）**：每天 UTC 06:30 检查线上 `articles-latest.json`
+  的 `date`（最新有文章的那天），滞后超过 3 天自动开 Issue（有未关闭的同标签
+  Issue 则追加评论）。独立于服务器，抓取链路任何环节故障都能触发。
+  注：不读 `index.json` 的 `latest`——它曾被空数据日欺骗（空文件也占据
+  dates 首位，显示今天但实际无数据）。
+- **服务器自检（`cron_fetch.sh`）**：每次抓取后检查 `index.json` 的 `latest`
+  （取“最新有文章的日期”）距今是否超过 3 天，异常时在
   `/var/log/nlpdaily-fetch.log` 打印 `WARNING`。
 
 ### 变更记录：arxiv API 网关限制（2026-09）
