@@ -25,7 +25,10 @@ git pull --rebase origin main 2>&1 | tee -a /var/log/nlpdaily-fetch.log
 python3 -u backend/fetch_arxiv.py --backfill 2>&1 | tee -a /var/log/nlpdaily-fetch.log
 EXIT_CODE=$?
 
-# 数据新鲜度自检：latest 距今超过 3 天则打 WARNING 到日志，方便巡检时发现静默断更
+# 数据新鲜度自检：latest（最新有文章的日期）距今超过 5 天则打 WARNING 到日志，
+# 方便巡检时发现静默断更。阈值 5 而非 3：arxiv 周五晚不公告（周日晚~周四晚
+# 20:00 EDT），周五提交的论文最早周二可见，正常周的周日/周一 latest 也会
+# 滞后 3~4 天，阈值 3 会每周误报。
 # （2026-09 曾因 arxiv 网关拒绝旧查询语法而静默断更一个月，脚本退出码仍为 0）
 python3 - <<'EOF' 2>&1 | tee -a /var/log/nlpdaily-fetch.log
 import json
@@ -37,7 +40,7 @@ try:
     latest = d.get('latest', '')
     if latest:
         diff = (datetime.now(timezone.utc) - datetime.fromisoformat(latest).replace(tzinfo=timezone.utc)).days
-        if diff >= 3:
+        if diff >= 5:
             print(f'WARNING: 数据已 {diff} 天未更新 (latest={latest})，抓取链路可能异常，请检查上方日志！')
         else:
             print(f'新鲜度正常: latest={latest} (滞后 {diff} 天)')

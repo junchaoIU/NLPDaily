@@ -24,7 +24,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE: https://junchaoiu.github.io/NLPDaily
-          STALE_DAYS: 3
+          # 阈值 5 而非 3：arxiv 周五晚不公告（周日晚~周四晚 20:00 EDT），
+          # 周五提交的论文最早周二可见，正常周的周日/周一 latest 也会滞后 3~4 天。
+          # 阈值 3 会在每周一误报；5 = 正常最坏滞后 4 天 + 缓冲，真断更 5 天必报。
+          STALE_DAYS: 5
         run: |
           # 先验证网站可达（index.json 读不到 = 部署失败）
           if ! curl -sf "$SITE/data/index.json" > /dev/null; then
@@ -54,7 +57,10 @@ jobs:
           # 数据过期：开 Issue 告警（已有未关闭的同标签 Issue 则追加评论，避免重复）
           echo "数据已 ${DIFF} 天未更新，触发告警..."
           gh label create "data-stale" --color d73a4a --description "数据断更告警" 2>/dev/null || true
-          BODY="线上最新数据日期为 **${LATEST}**，距今 **${DIFF} 天**（检查时间 ${TODAY} UTC）。
+          BODY="线上最新有效数据日期为 **${LATEST}**，距今 **${DIFF} 天**（检查时间 ${TODAY} UTC）。
+
+          注：周五提交的论文最早周二才对 API 可见，周末滞后 3~4 天属正常公告节奏；
+          滞后 ≥5 天才判定为链路故障。
 
           可能原因：
           - 服务器 cron 任务失败（检查 \`/var/log/nlpdaily-fetch.log\`）
