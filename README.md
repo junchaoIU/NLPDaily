@@ -13,6 +13,8 @@
 - **搜索过滤**：支持按标题、作者、摘要搜索，按分类标签过滤
 - **历史回溯**：下拉选择不同日期查看历史文章
 - **直达原文**：一键跳转到 arxiv 摘要页或 PDF
+- **趋势雷达**：热点主题逐周走势图、各周论文量、主题环比变化（纯本地统计，零 API）
+- **每周简报**：每周热点术语、突现主题（对比前 4 周）、主题聚类地图与代表论文
 
 ---
 
@@ -38,6 +40,7 @@
 |------|------|
 | **前端** | React 18 + TypeScript + Tailwind CSS + Vite |
 | **后端** | Python 3 (标准库) |
+| **分析** | Python 3 + numpy + scikit-learn（趋势/周报，无需 API） |
 | **翻译** | 智谱 GLM-4-Flash API |
 | **部署** | GitHub Pages (前端) + 服务器定时任务 (后端) |
 | **数据源** | arxiv API (Atom XML) |
@@ -65,10 +68,14 @@ Academic_Assistant/
 │   ├── package.json
 │   └── vite.config.ts
 │
+├── analysis/                   # 趋势雷达+每周简报分析（全本地、零 API）
+│   └── analyze.py             # 术语提取/突现检测/KMeans 聚类，产物写入 data/analysis/
+│
 ├── data/                       # 数据文件（JSON）
 │   ├── index.json             # 日期索引
 │   ├── articles-latest.json   # 最新一天数据
-│   └── articles-YYYY-MM-DD.json  # 按日期存储
+│   ├── articles-YYYY-MM-DD.json  # 按日期存储
+│   └── analysis/              # 分析产物：trends.json、reports.json、report-YYYY-Www.json
 │
 ├── .github/
 │   └── workflows/
