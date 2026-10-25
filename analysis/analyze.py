@@ -87,7 +87,7 @@ directly indirectly simply easily clearly obviously naturally actually indeed
 truly almost nearly approximately around ask asks asked asking
 point points percentage percent yet rather remain remains remaining where
 four five six seven eight nine ten gain gains gap gaps single multiple
-support supports supported supporting
+support supports supported supporting every against output outputs input inputs
 http https www com github org arxiv pdf html
 '''.split())
 
