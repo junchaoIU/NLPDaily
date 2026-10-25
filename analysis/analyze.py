@@ -100,7 +100,7 @@ PHRASE_ALLOW = {'language', 'model', 'models', 'learning'}
 TOKEN_RE = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*")
 URL_RE = re.compile(r'https?://\S+|www\.\S+')
 MIN_DF_BURST = 5          # 突现词本周至少出现的论文数
-TREND_TOPIC_COUNT = 15    # 趋势图跟踪的主题数
+TREND_CLUSTER_COUNT = 12  # 趋势图跟踪的全局主题聚类数
 REPORT_TOP_TERMS = 15     # 周报热点词数量
 REPORT_TOP_BURSTS = 10    # 周报突现主题数量
 CLUSTER_REPRESENTATIVES = 5
@@ -196,14 +196,40 @@ def weekly_df(papers):
     return df
 
 
-def pick_trend_topics(all_df, total_papers):
-    """挑选全程趋势主题：优先多词术语（信息量高），过滤只在极短期爆发的噪声。"""
-    candidates = [(term, df) for term, df in all_df.items()
-                  if df >= max(10, total_papers * 0.005)]
-    candidates.sort(key=lambda x: x[1], reverse=True)
-    topics = dedup_terms([{'term': t} for t, _ in candidates],
-                         get_term=lambda x: x['term'], overlap=0.5)
-    return [t['term'] for t in topics[:TREND_TOPIC_COUNT]]
+def build_topic_trends(weeks, n_clusters=TREND_CLUSTER_COUNT):
+    """全局主题聚类 + 逐周演化：对全期论文做 TF-IDF + KMeans，
+    每个 topic 是一组语义相近的论文（与周报主题地图同一语义），
+    趋势为该主题逐周的论文篇数，而不是泛化高频词的出现次数。"""
+    from sklearn.cluster import KMeans
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+
+    week_names = list(weeks)
+    week_idx = {w: i for i, w in enumerate(week_names)}
+    papers = [(w, p) for w in week_names for p in weeks[w]]
+    vectorizer = TfidfVectorizer(max_features=20000, ngram_range=(1, 2),
+                                 min_df=3, sublinear_tf=True,
+                                 stop_words=list(STOPWORDS | set(ENGLISH_STOP_WORDS)))
+    matrix = vectorizer.fit_transform([p['text'] for _, p in papers])
+    k = min(n_clusters, max(2, len(papers) // 100))
+    km = KMeans(n_clusters=k, n_init=5, random_state=42)
+    labels = km.fit_predict(matrix)
+    terms = vectorizer.get_feature_names_out()
+
+    topics = []
+    for c in range(k):
+        idx = [i for i, lab in enumerate(labels) if lab == c]
+        if not idx:
+            continue
+        center = km.cluster_centers_[c]
+        top_terms = [terms[i] for i in center.argsort()[::-1][:4]]
+        weekly = [0] * len(week_names)
+        for i in idx:
+            weekly[week_idx[papers[i][0]]] += 1
+        topics.append({'term': ' / '.join(top_terms[:3]), 'terms': top_terms,
+                       'total': len(idx), 'weekly': weekly})
+    topics.sort(key=lambda t: t['total'], reverse=True)
+    return topics
 
 
 def find_bursts(this_df, this_n, base_df, base_n):
@@ -335,25 +361,22 @@ def main():
     week_names = list(weeks)
     print(f'共 {len(week_names)} 周、{sum(len(v) for v in weeks.values())} 篇论文')
 
-    # 每周 DF 缓存
+    # 每周 DF 缓存（供周报热点词与突现检测）
     dfs = {w: weekly_df(ps) for w, ps in weeks.items()}
-    all_df = Counter()
-    for df in dfs.values():
-        all_df.update(df)
-    total = sum(len(v) for v in weeks.values())
 
-    # 全程趋势主题 + 逐周计数
-    topics = pick_trend_topics(all_df, total)
+    # 全程主题聚类 + 逐周演化（与周报主题地图同一语义）
+    topic_clusters = build_topic_trends(weeks)
     trend_weeks = week_names[-args.trend_weeks:]
     trends = {
         'generatedAt': datetime.now(timezone.utc).isoformat(),
         'weeks': trend_weeks,
         'weeklyPaperCounts': [len(weeks[w]) for w in trend_weeks],
         'topics': [{
-            'term': t,
-            'total': all_df[t],
-            'weekly': [dfs[w].get(t, 0) for w in trend_weeks],
-        } for t in topics],
+            'term': t['term'],
+            'terms': t['terms'],
+            'total': t['total'],
+            'weekly': t['weekly'][-args.trend_weeks:],
+        } for t in topic_clusters],
     }
     os.makedirs(args.out_dir, exist_ok=True)
     trends_path = os.path.join(args.out_dir, 'trends.json')

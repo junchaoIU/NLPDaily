@@ -43,7 +43,7 @@ function TrendsView() {
           热点主题逐周走势
         </h2>
         <p className="mt-1 text-xs text-gray-400 dark:text-parchment-muted">
-          每周有多少篇论文提及该主题（点击下方式术语可显示/隐藏曲线）
+          全量论文按语义聚为若干研究主题，跟踪各主题逐周论文量（点击主题可显示/隐藏曲线）
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {data.topics.map((t, i) => {

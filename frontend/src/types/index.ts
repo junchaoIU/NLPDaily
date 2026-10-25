@@ -28,6 +28,7 @@ export interface ArticlesData {
 
 export interface TrendTopic {
   term: string;
+  terms?: string[];
   total: number;
   weekly: number[];
 }
