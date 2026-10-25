@@ -50,6 +50,10 @@ except Exception as e:
     print(f'WARNING: 数据新鲜度自检失败: {e}')
 EOF
 
+# 趋势雷达 + 每周简报：基于全量本地数据重新计算（秒级），产物在 data/analysis/。
+# 分析失败不影响主抓取链路，只打 WARNING。
+python3 -u analysis/analyze.py --data-dir data --out-dir data/analysis 2>&1 | tee -a /var/log/nlpdaily-fetch.log || echo "WARNING: 趋势/周报分析失败" | tee -a /var/log/nlpdaily-fetch.log
+
 git add data/
 git diff --staged --quiet || git commit -m "Update arxiv articles data for $(date +%Y-%m-%d)"
 git push origin main 2>&1 | tee -a /var/log/nlpdaily-fetch.log

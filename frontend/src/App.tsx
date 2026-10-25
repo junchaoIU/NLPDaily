@@ -3,9 +3,12 @@ import type { Article, ArticlesData } from './types'
 import ArticleCard from './components/ArticleCard'
 import SearchBar from './components/SearchBar'
 import LoadingSkeleton from './components/LoadingSkeleton'
+import TrendsView from './components/TrendsView'
+import ReportView from './components/ReportView'
 
 type Language = 'en' | 'cn'
 type Theme = 'light' | 'dark'
+type View = 'daily' | 'trends' | 'report'
 
 interface DateIndex {
   dates: string[]
@@ -52,6 +55,7 @@ function App() {
   const [currentDate, setCurrentDate] = useState<string>('')
   const [language, setLanguage] = useState<Language>('en')
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
+  const [view, setView] = useState<View>('daily')
 
   useEffect(() => {
     const root = document.documentElement
@@ -199,7 +203,23 @@ function App() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <DateSelector />
+              {/* 视图导航 */}
+              <div className="flex items-center rounded-full border border-gray-200 bg-white p-0.5 dark:border-ink-lighter/50 dark:bg-ink-light">
+                {([['daily', '每日速递'], ['trends', '趋势雷达'], ['report', '每周简报']] as [View, string][]).map(([v, label]) => (
+                  <button
+                    key={v}
+                    onClick={() => setView(v)}
+                    className={`rounded-full px-3 py-1 text-xs transition-colors ${
+                      view === v
+                        ? 'bg-amber-gold text-ink'
+                        : 'text-gray-500 hover:text-gray-900 dark:text-parchment-muted dark:hover:text-parchment'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              {view === 'daily' && <DateSelector />}
               {/* 主题切换 */}
               <button
                 onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -248,19 +268,24 @@ function App() {
         </div>
       </header>
 
-      {/* Search & Filter */}
-      <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-        <SearchBar
-          value={searchQuery}
-          onChange={setSearchQuery}
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
-      </div>
+      {/* Search & Filter（仅每日速递视图） */}
+      {view === 'daily' && (
+        <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+          />
+        </div>
+      )}
 
       {/* Content */}
       <main className="mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 lg:px-8">
+        {view === 'trends' && <TrendsView />}
+        {view === 'report' && <ReportView language={language} />}
+        {view === 'daily' && (<>
         {error && (
           <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-center dark:border-wine/30 dark:bg-wine/10">
             <p className="text-sm text-gray-700 dark:text-parchment">{error}</p>
@@ -301,6 +326,7 @@ function App() {
             ))
           )}
         </div>
+        </>)}
       </main>
     </div>
   )

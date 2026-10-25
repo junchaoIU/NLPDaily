@@ -25,3 +25,57 @@ export interface ArticlesData {
   date?: string;
   isFallback?: boolean;
 }
+
+export interface TrendTopic {
+  term: string;
+  total: number;
+  weekly: number[];
+}
+
+export interface TrendsData {
+  generatedAt: string;
+  weeks: string[];
+  weeklyPaperCounts: number[];
+  topics: TrendTopic[];
+}
+
+export interface ReportPaper {
+  id: string;
+  title: string;
+  titleCn?: string;
+  absUrl: string;
+}
+
+export interface TermCount {
+  term: string;
+  count: number;
+}
+
+export interface BurstTerm {
+  term: string;
+  count: number;
+  baselineCount: number;
+  lift: number;
+  score: number;
+}
+
+export interface ReportCluster {
+  terms: string[];
+  size: number;
+  representatives: ReportPaper[];
+}
+
+export interface WeeklyReport {
+  week: string;
+  generatedAt: string;
+  paperCount: number;
+  topTerms: TermCount[];
+  topPhrases: TermCount[];
+  bursts: BurstTerm[];
+  clusters: ReportCluster[];
+}
+
+export interface ReportIndex {
+  generatedAt: string;
+  weeks: string[];
+}
