@@ -1,6 +1,293 @@
 {
-  "articles": [],
-  "fetchedAt": "2026-10-26T02:01:08.146348+00:00",
-  "count": 0,
+  "articles": [
+    {
+      "id": "2610.34027v1",
+      "title": "When Does GEPA Merge Help? A Mechanism-Level Diagnostic",
+      "authors": [
+        {
+          "name": "Chong Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Ruyi Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Changming Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Alice Zhao",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "GEPA is among the strongest reflective prompt optimizers for language-model programs, but its system-aware merge operator is unstable across models: merge improves gpt-4.1-mini on average while degrading Qwen3-8B, an asymmetry noted but left unexplained by the GEPA paper. We investigate this instability across five datasets and two models. Our nine-configuration sweep over merge timing and merge operator shows that merge can improve both models when configured appropriately. This suggests that merge instability is better explained by configuration sensitivity than by an inherent flaw in the merge operator. We then test whether prompt-level features predict GEPA's merge-accept decisions and find that they do not, ruling out static-feature gating. As a proof of concept, a behavior-based probe built from these diagnostics avoids large merge failures in our multi-seed runs by abstaining on high-risk tasks, although it does not consistently outperform NoMerge. Code is available as GEPA-MergeProbe at https://github.com/ChongZZZZ/GEPA_MERGE .",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-25T03:32:01Z",
+      "updated": "2026-10-25T03:32:01Z",
+      "absUrl": "https://arxiv.org/abs/2610.34027v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.34027v1.pdf",
+      "comment": "12 pages, 5 figures. Code: https://github.com/ChongZZZZ/GEPA_MERGE",
+      "titleCn": "GEPA合并何时有帮助？一个基于机制的诊断",
+      "abstractCn": "GEPA是语言模型程序中最强的反射性提示优化器之一，但其系统感知合并算子在模型间表现不稳定：合并操作平均提升了gpt-4.1-mini的性能，却降低了Qwen3-8B的性能，这一不对称性虽被GEPA论文提及但未作解释。我们针对五个数据集和两个模型研究了这种不稳定性。我们对合并时机和合并算子的九种配置进行扫描发现，当配置适当 时，合并操作可以提升两个模型性能。这表明合并的不稳定性更可能由配置敏感性解释，而非合并算子本身存在固有缺陷。随后我们测试提示级特征能否预测GEPA的合并接受决策，结果发现不能，从而排除了静态特征门控。作为概念验证，我们基于这些诊断构建了一个基于行为的探针，通过在高风险任务上保持沉默，避免在多种子运行中出现大规模合并失败，尽管它并未始终优于NoMerge。代码可在https://github.com/ChongZZZZ/GEPA_MERGE获取。"
+    },
+    {
+      "id": "2610.34013v1",
+      "title": "The Patient Is Always Right? Evaluating Sycophancy in Medical Diagnosis with Graded Patient Beliefs",
+      "authors": [
+        {
+          "name": "Viswonathan Manoranjan",
+          "affiliation": ""
+        },
+        {
+          "name": "Andrea Mock",
+          "affiliation": ""
+        },
+        {
+          "name": "Myra Cheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Lujain Ibrahim",
+          "affiliation": ""
+        },
+        {
+          "name": "Andrew Coyne",
+          "affiliation": ""
+        },
+        {
+          "name": "Junyi Jessy Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Desmond C. Ong",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "More people are seeking out general-purpose AI models for medical advice, including diagnosis. Yet, AI models are susceptible to sycophancy, like validating users' beliefs even when they are untrue, which could lead to false positive diagnoses. Here, we evaluate how nine AI models change their diagnostic decision when a patient presents a belief that they have a specific (but incorrect) medical condition. We vary how close the user belief is to the clinical evidence presented. Models sycophantically adopt the patient's belief on average 23.2\\% of the time---sometimes even when the patient proposes a fictional, made-up condition. We also varied different personas, including a Rare Disease Claimer that got models to accept their belief 43.0\\% of the time. Additional analyses find that medical fine-tuning and model scale makes models less susceptible to changing their diagnoses. Sycophantic bias in medical diagnosis raises implications for safety, especially as more people are using AI for health support.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-25T02:54:42Z",
+      "updated": "2026-10-25T02:54:42Z",
+      "absUrl": "https://arxiv.org/abs/2610.34013v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.34013v1.pdf",
+      "comment": null,
+      "titleCn": "患者总是对的吗？基于分级患者信念评估医疗诊断中的谄媚行为",
+      "abstractCn": "越来越多的人正在寻求通用型AI模型进行医疗咨询，包括诊断。然而，AI模型容易受到奉承的影响，例如在用户信念不实时仍予以验证，这可能导致假阳性诊断。在此，我们评估了当患者提出一个他们认为自己患有特定（但错误）医疗状况的信念时，九个AI模型如何改变其诊断决策。我们变化了用户信念与所呈现的临床证据的接近程度。模型平均23.2%的时间奉承地采纳患者的信念——有时甚至在患者提出一个虚构的、编造的病症时也是如此。我们还变化了不同角色，包括一个罕见病声称者，他们让模型43.0%的时间接受其信念。额外的分析发现，医学微调和模型规模使模型不易改变其诊断。医疗诊断中的奉承偏见对安全性提出了启示，特别是随着越来越多的人使用AI进行健康支持。"
+    },
+    {
+      "id": "2610.34012v1",
+      "title": "Reversible Pseudonymisation of Documents Sent to External LLMs: an Open Bilingual Benchmark and an Engine",
+      "authors": [
+        {
+          "name": "Vladimir Beskorovainyi",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Professionals send working documents to external large language models. A common safeguard is reversible pseudonymisation: personal data are replaced with placeholders before the request and restored locally in the answer. We present an open benchmark of five existing open tools and a regular-expression baseline on Russian and UK English, and an open engine built on the two strongest tools. The benchmark excludes each tool's own authors' dataset from its verdict, compares the engine with each tool on identical datasets for detection, reports masking precision, and tests on a held-out set of synthetic documents whose files, hashes, decision rules, run plan and stopping rule were published before any run. Two local LLMs test whether placeholders survive. All evaluation data are synthetic, and the benchmark was run by the author of the engine; code, data, predictions and raw answers are released. On external datasets no existing tool meets all predefined thresholds: in UK English the identifier and leak thresholds are not met, in Russian the identifier threshold is borderline. On the last held-out set of 1,000 documents per language, the best existing tools leave a whole value visible in 61% (Russian) and 58% (UK) of documents. On these documents, from the generator it was developed on, the engine does so in 0.3% [0.1; 0.9] and 0.2% [0.1; 0.7], leaves any part of a value visible in 0.8% and 0.2%, and meets all detection thresholds in both languages. In UK English it also restores at least 99% of its placeholders after 760 answers. In Russian it restores only 94.6% [93.6; 95.6] of name placeholders, against a 99% threshold, mainly because the inflection it borrows from pii-guard produces wrong surname forms. The engine was developed over six earlier held-out sets from the same generator; real documents were not tested.",
+      "categories": [
+        "cs.CR",
+        "cs.CL"
+      ],
+      "published": "2026-10-25T02:50:43Z",
+      "updated": "2026-10-25T02:50:43Z",
+      "absUrl": "https://arxiv.org/abs/2610.34012v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.34012v1.pdf",
+      "comment": "22 pages, 9 tables. Code, data generator, held-out sets, pre-registrations, predictions and raw LLM answers: https://github.com/beskvladimir-create/pii-roundtrip (release v0.5.0, DOI 10.5281/zenodo.23624098)",
+      "titleCn": "面向外部大型语言模型的文档可逆假名化：一个开放双语基准及引擎",
+      "abstractCn": "专业人士将工作文档发送给外部大型语言模型。一种常见的保护措施是可逆的假名化：在请求之前将个人信息替换为占位符，并在回答中本地恢复。我们提出了一个包含五个现有开源工具和正则表达式基线的俄语和英国英语开放基准，以及基于这两个最强工具构建的开放引擎。基准排除了每个工具自身作者的测试数据集，在相同数据集上比较引擎与每个工具的检测能力，报告掩码精度，并在一组预先公布的合成文档上测试，这些文档的文件、哈希值、决策规则、运行计划和停止规则在运行前就已公开。两个本地大型语言模型测试占位符是否存活。所有评估数据均为合成数据，基准由引擎作者运行；代码、数据、预测结果和原始回答均已公开。在外部数据集上，没有现有工具能满足所有预设阈值：在英国英语中，标识符和泄露阈值未达标，在俄语中，标识符阈值接近临界。在每种语言的最后1000份保留文档中，现有最佳工具在61%（俄语）和58%（英国）的文档中暴露了完整值。在这些文档上，由其生成的引擎仅暴露0.3% [0.1; 0.9]（俄语）和0.2% [0.1; 0.7]（英国）的完整值，暴露任何部分值的概率为0.8%和0.2%，并在两种语言中满足所有检测阈值。在英国英语中，引擎在760个回答后至少恢复99%的占位符。在俄语中，引擎仅恢复94.6% [93.6; 95.6]的姓名占位符，与99%的阈值相比，主要是因为从pii-guard借用的屈折变化产生了错误的姓氏形式。引擎是在六个来自同一生成器的早期保留数据集上开发的；未测试真实文档。"
+    },
+    {
+      "id": "2610.33969v1",
+      "title": "\"High-Quality\" Data for Early-Stage Instruction Tuning: An Empirical Study of Data Quality Metrics",
+      "authors": [
+        {
+          "name": "Vladimir Necula",
+          "affiliation": ""
+        },
+        {
+          "name": "David Gvadzabia",
+          "affiliation": ""
+        },
+        {
+          "name": "Sofia Serrano",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "\"Data quality\" is widely invoked in instruction tuning, but the term is often underspecified. We study it as an operational property by asking which simple example-level metrics, drawn from prior work on data selection, text quality, and instruction tuning, best predict training utility under a fixed finetuning budget. For each metric, we sort instruction-response examples by score, partition them into low, middle, and high bins with roughly equal token mass, finetune separately on each bin, and compare validation perplexity and LLM-as-judge scores for the models' generated answers as a function of cumulative training tokens. Our results suggest that answer-dense supervision, as captured by response ratio, is a stronger and more portable predictor of instruction-tuning utility than commonly used alternative proxies.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-25T00:49:49Z",
+      "updated": "2026-10-25T00:49:49Z",
+      "absUrl": "https://arxiv.org/abs/2610.33969v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.33969v1.pdf",
+      "comment": null,
+      "titleCn": "用于早期阶段指令微调的高质量数据：数据质量指标的经验研究",
+      "abstractCn": "“数据质量”在指令微调中被广泛提及，但该术语通常定义不明确。我们将其作为一项可操作的属性进行研究，通过询问哪些源自数据选择、文本质量和指令微调先前工作的简单示例级指标，在固定的微调预算下最能预测训练效用。对于每个指标，我们按分数对指令-响应示例进行排序，将它们划分为大致等量的token质量的低、中、高三个区间，分别在每个区间上独立进行微调，并比较模型生成答案的验证困惑度和作为评判者的LLM得分，作为累积训练token数的函数。我们的结果表明，答案密集的监督（通过响应率来体现）比常用的替代代理更能预测指令微调效用，且更具可移植性。"
+    },
+    {
+      "id": "2610.33962v1",
+      "title": "Beyond Belief: Evaluating and Mitigating LLM Susceptibility to Misinformation",
+      "authors": [
+        {
+          "name": "Emran Kanaan",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiho Lee",
+          "affiliation": ""
+        },
+        {
+          "name": "Ibrahim Odat",
+          "affiliation": ""
+        },
+        {
+          "name": "Soroush Vosoughi",
+          "affiliation": ""
+        },
+        {
+          "name": "Weicheng Ma",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Tool-using large language models (LLMs) must decide whether external information warrants action. We investigate whether their expressed credibility judgments reliably indicate behavioral resistance to misinformation. We evaluate five LLMs on 196 constructed false notices paired with legitimate counterparts and 204 archived attacks adapted to simulated tool use. When asked to act on the constructed notices, models issue harmful tool calls in 27%--99% of cases they have rated untrustworthy. Removing the preliminary rating step increases harmful execution by 15 percentage points on average, showing that credibility elicitation itself changes the behavior being evaluated. Interventions that improve credibility discrimination do not consistently yield safer actions. A simple forewarning significantly reduces harmful execution in four of five models, but neither tested generated-example prebunk outperforms it in the main evaluation. These reductions can also compromise legitimate task completion. Supervised fine-tuning on generated false notices reduces harmful execution on held-out archived attacks under the rating-first protocol, with model-dependent utility costs and weaker protection without rating elicitation. Our findings motivate evaluating misinformation defenses through both harmful actions and legitimate task completion, while accounting for the behavioral effects of the evaluation protocol.",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-10-25T00:26:14Z",
+      "updated": "2026-10-25T00:26:14Z",
+      "absUrl": "https://arxiv.org/abs/2610.33962v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.33962v1.pdf",
+      "comment": null,
+      "titleCn": "超越信念：评估和减轻大型语言模型对错误信息的易感性",
+      "abstractCn": "使用工具的大型语言模型（LLMs）必须判断外部信息是否值得采取行动。我们研究了这些模型表达的信誉判断是否可靠地表明了对错误信息的防御行为。我们对五个LLMs在196个构建的虚假通知及其合法对应物，以及204个针对模拟工具使用的存档攻击上进行了评估。当被要求对构建的通知采取行动时，模型在27%至99%的案例中对其评分为不可信时发出了有害的工具调用。移除初步评分步骤平均增加了15个百分点的有害执行，表明信誉提取本身改变了被评估的行为。提高信誉区分的干预措施并不始终产生更安全的行动。简单的预先警告在五个模型中的四个中显著减少了有害执行，但在主要评估中，测试生成的示例预先驳斥并未优于它。这些减少也可能影响合法任务的完成。在生成的虚假通知上进行监督微调，在评分优先协议下减少了在存档攻击上的有害执行，但在没有评分提取的情况下，模型相关的效用成本较低且保护较弱。我们的研究结果表明，应通过有害行为和合法任务完成两个方面来评估错误信息防御，同时考虑评估协议的行为影响。"
+    },
+    {
+      "id": "2610.33958v1",
+      "title": "How Do Small Coding Agents Use Code Graphs and Embeddings?",
+      "authors": [
+        {
+          "name": "Saurav Bellam",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Coding agents are given embedding search and code-graph tools on the premise that a repository's structure is something the model lacks and the tool supplies. We test that premise on SWE-bench Verified with small open-weight models, stratifying tasks by a deterministic hop depth (the shortest code-graph path from code the issue mentions to code the gold patch changes) that a companion paper defines and validates. First, we ablate a localization agent's tool set (grep only; +embedding search; +graph tools; all) on a depth-balanced 160-task split and on all 500 tasks for ten models (six Qwen3 sizes from 0.6B to 32B with five decodings each, an FP8 control, three Gemma 4 sizes; 79k episodes). Structured tools double grep-only accuracy for Qwen3-8B and Gemma 4 E4B; their gain peaks at 17-21 points at 1.7-4B and falls to 4-5 points at 32B (odds ratio 0.77-0.82 per doubling of parameters). From 8B up, about half of that gain is the form of the submission rather than finding the target; the fall from 14B to 32B is a fall in tool uptake at equal grep-only accuracy; and the same 4B size gains or does not gain from a tool depending on the checkpoint. Each extra hop multiplies the odds of correct localization by 0.50-0.67 at every size, and no tool set flattens that gradient: traces show the graph tools' gain is name lookup at hop 0 and one expansion at hop 1, and agents chain expansions in only 12-14% of episodes. A fixed repair model resolves 6-13 of 160 tasks from these localizations (oracle 26). Second, linear probes find direct call edges decodable under a within-anchor, degree-stratified protocol (AUC 0.74; 0.61-0.66 inside agent conversations), but below a lexical baseline (0.99), with two-hop edges at 0.57. Small agents carry a one-hop, largely lexical picture of their repository, in weights and in use. We release the agent, probes, logs and traces.",
+      "categories": [
+        "cs.CL",
+        "cs.SE",
+        "cs.LG"
+      ],
+      "published": "2026-10-25T00:16:32Z",
+      "updated": "2026-10-25T00:16:32Z",
+      "absUrl": "https://arxiv.org/abs/2610.33958v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.33958v1.pdf",
+      "comment": "29 pages, 5 figures. Depth labels and dataset card and full code, raw results and analysis will be released in the near future",
+      "titleCn": "小型编码代理如何使用代码图和嵌入？",
+      "abstractCn": "在代码库结构是模型所缺乏而工具所能提供的前提下，我们为编码代理配备了嵌入搜索和代码图工具。我们在SWE-bench验证集上使用小型开放权重模型测试这一前提，并根据同伴论文中定义和验证的确定性跳跃深度（从代码问题提及的代码到黄金补丁更改的代码的最短代码图路径）对任务进行分层。首先，我们在深度平衡的160任务拆分和所有500任务上对定位代理的工具集进行消融实验（仅grep；+嵌入搜索；+图工具；全部），针对十种模型（六个Qwen3尺寸从0.6B到32B，每个尺寸五种解码，一个FP8控制，三种Gemma 4尺寸；79k个片段）。结构化工具将Qwen3-8B和Gemma 4 E4B的仅grep准确率翻倍；它们的收益在1.7-4B时达到17-21点的高峰，在32B时降至4-5点（参数每翻倍，优势比下降至0.77-0.82）。从8B开始，大约一半的收益来自于提交的形式而非找到目标；从14B到32B的下降是由于在相同grep-only准确率下工具使用率的下降；而相同4B尺寸的收益或无收益则取决于检查点。每增加一个跳跃，在所有尺寸上正确定位的几率都会乘以0.50-0.67，且没有工具集能够使这一梯度趋于平缓：跟踪显示，图工具在跳跃0时的收益是名称查找，在跳跃1时是扩展，而代理仅在12-14%的片段中链式扩展。一个固定的修复模型从这些定位中解决了6-13个任务（预言机为26）。其次，线性探针发现直接调用边可以在锚内、按度分层协议下解码（AUC为0.74；代理对话内部为0.61-0.66），但低于词汇基线（0.99），双跳边为0.57。小型代理在权重和使用中携带了一个单跳、主要是词汇化的仓库图像。我们发布了代理、探针、日志和跟踪。"
+    },
+    {
+      "id": "2610.33956v1",
+      "title": "Continual Learning Exam: Benchmarking Long-Horizon RSI and Experiential Learning in LLM Agents",
+      "authors": [
+        {
+          "name": "Haoyu Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Sitian Tu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuxuan Huang",
+          "affiliation": ""
+        },
+        {
+          "name": "Huichi Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhangyue Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiahao Huang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jingyuan Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Tianmiao Shi",
+          "affiliation": ""
+        },
+        {
+          "name": "Jin Shi",
+          "affiliation": ""
+        },
+        {
+          "name": "Nianxi Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yangmiao Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhuolang Chan",
+          "affiliation": ""
+        },
+        {
+          "name": "Huiyan Hu",
+          "affiliation": ""
+        },
+        {
+          "name": "Chenchao Sheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Yaqing Luo",
+          "affiliation": ""
+        },
+        {
+          "name": "Yue Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Huaxiu Yao",
+          "affiliation": ""
+        },
+        {
+          "name": "Meng Fang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jun Wang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Continual learning is the ability of LLM agents to improve over time by acquiring, refining, and applying knowledge from experience while retaining useful prior knowledge. It is essential for agents learning over long time horizons, yet current evaluations largely assess individual task performance rather than improvement through accumulated experience. We introduce Continual Learning Exam (CLE), a large-scale benchmark developed by 50+ domain experts to measure experience-driven improvement in realistic professional workflows. CLE comprises 120 human-authored tasks, each organised as a five-level ladder, yielding 600 levels spanning 89 professional roles across 12 occupational domains. Agents must pass each level to unlock the next, with later levels building on experience accumulated during earlier assignments. An evaluation agent assesses each submission against human-authored rubrics. We compare a single-submission setting with one that provides diagnostic feedback after failure and allows one revision. Across 17 harness-model configurations using frontier LLMs, feedback and revision yield a median completion gain of 5.3 percentage points. Yet the best-performing system clears only 47.7% of levels and completes all five levels in just 23.3% of tasks, highlighting the difficulty of sustained learning from experience for existing frontier LLMs. As such, the dataset can also be used to post-train LLMs to strengthen their continual learning capabilities.",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-10-25T00:00:25Z",
+      "updated": "2026-10-25T00:00:25Z",
+      "absUrl": "https://arxiv.org/abs/2610.33956v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.33956v1.pdf",
+      "comment": "Project page: https://haoyu-zhao.github.io/CLE/index.html",
+      "titleCn": "持续学习考试：对长时程风险规避和经验学习在大型语言模型代理中的基准测试",
+      "abstractCn": "持续学习是指LLM智能体通过获取、精炼和应用经验中的知识来不断提升自身能力，同时保留有用的先验知识。这对于需要长期学习的智能体至关重要，然而当前的评估方法主要关注单个任务的性能，而非通过积累经验带来的改进。我们引入了持续学习考试（CLE），这是一个由50多位领域专家开发的大规模基准，用于衡量在真实专业工作流程中的经验驱动改进。CLE包含120个由人类编写的任务，每个任务组织成一个五级阶梯，共产生600个级别，涵盖12个职业领域的89个专业角色。智能体必须通过每个级别才能解锁下一个级别，后期级别建立在早期任务中积累的经验之上。一个评估智能体会根据人类编写的评分标准对每个提交进行评估。我们比较了单次提交设置和失败后提供诊断反馈并允许一次修改的设置。在17种使用前沿LLM的框架模型配置中，反馈和修改带来了中位数5.3个百分点的完成增益。然而，表现最好的系统仅通过47.7%的级别，且仅在23.3%的任务中完成所有五个级别，这突显了现有前沿LLM从经验中持续学习面临的困难。因此，该数据集也可用于对LLM进行后训练，以增强其持续学习能力。"
+    }
+  ],
+  "fetchedAt": "2026-10-27T02:03:27.712909+00:00",
+  "count": 7,
   "date": "2026-10-25"
 }
