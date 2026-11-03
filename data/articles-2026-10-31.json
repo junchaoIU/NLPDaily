@@ -1,6 +1,668 @@
 {
-  "articles": [],
-  "fetchedAt": "2026-11-02T02:01:26.464073+00:00",
-  "count": 0,
+  "articles": [
+    {
+      "id": "2611.00616v1",
+      "title": "Enhancing Language Model Reasoning with Structured Multi-Level Modeling",
+      "authors": [
+        {
+          "name": "Siheng Xiong",
+          "affiliation": ""
+        },
+        {
+          "name": "Ali Payani",
+          "affiliation": ""
+        },
+        {
+          "name": "Faramarz Fekri",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Inference-time scaling enhances a model's reasoning by extending its chain-of-thought (CoT). However, existing approaches typically rely on a single policy trained with outcome-reward reinforcement learning (RL), which often suffers from long-horizon plan failures where the implicit plan drifts from valid strategies, especially for small LMs with limited capacity. To address this, we propose Multi-Level Reasoning (MLR), which reformulates long-CoT generation as a two-level stochastic process. A high-level planner generates structured step descriptors specifying both the reasoning mode and the semantic subgoal. The low-level executor then produces detailed reasoning conditioned on these descriptors, forming an alternating plan--execute loop. To maintain scalability, we adopt a minimal design where the base model serves as the low-level policy and a lightweight LoRA module implements the high-level policy. For training, we observe that outcome-reward RL provides sparse and delayed feedback for long trajectories (e.g., several thousand tokens), hindering credit assignment. We therefore introduce iterative Step-DPO, a process-level preference optimization scheme that leverages Twisted Sequential Monte Carlo (TSMC) to provide scalable stepwise supervision. This yields more effective training, improved stability, and higher accuracy. Extensive experiments on challenging math, science, and logical reasoning benchmarks show that, under the same reduced data budget (10% SFT and 5% preference relative to the DeepSeek-R1 distillation setup), MLR outperforms both SFT-based distillation and strong RL/preference-optimization baselines across multiple base models and tasks. Moreover, MLR exhibits slower performance degradation on long-horizon reasoning, demonstrating stronger robustness under extended CoT generation.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-31T04:33:35Z",
+      "updated": "2026-10-31T04:33:35Z",
+      "absUrl": "https://arxiv.org/abs/2611.00616v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00616v1.pdf",
+      "comment": "ICLR 2026",
+      "titleCn": "通过结构化多级建模增强语言模型推理能力",
+      "abstractCn": "推理时扩展通过延长其思维链（CoT）来增强模型的推理能力。然而，现有方法通常依赖于单一策略，该策略通过结果-奖励强化学习（RL）进行训练，这往往会导致长时程计划失败，其中隐式计划偏离有效策略，特别是对于容量有限的小型语言模型。为解决这一问题，我们提出了多级推理（MLR），将长思维链生成重新表述为两级随机过程。高层规划器生成结构化步骤描述符，指定推理模式和语义子目标。低层执行器随后根据这些描述符生成详细推理，形成交替的计划-执行循环。为保持可扩展性，我们采用极简设计，其中基础模型作为低层策略，轻量级LoRA模块实现高层策略。在训练方面，我们观察到结果-奖励RL为长轨迹（例如数千个标记）提供稀疏和延迟的反馈，阻碍了信用分配。因此，我们引入了迭代式Step-DPO，这是一种基于过程的偏好优化方案，利用扭曲序列蒙特卡洛（TSMC）提供可扩展的逐步监督。这带来了更有效的训练、更高的稳定性以及更高的准确性。在具有挑战性的数学、科学和逻辑推理基准测试上的大量实验表明，在相同的数据预算减少条件下（相对于DeepSeek-R1蒸馏设置的10% SFT和5%偏好），MLR在多个基础模型和任务上均优于基于SFT的蒸馏以及强大的RL/偏好优化基线。此外，MLR在长时程推理上表现出更慢的性能退化，在扩展CoT生成下展现出更强的鲁棒性。"
+    },
+    {
+      "id": "2611.00606v1",
+      "title": "Sparse Autoencoder Attribution Graphs Are Decided at the Margin",
+      "authors": [
+        {
+          "name": "Karl Li",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Attribution graphs over the features of sparse autoencoders (SAEs) are used to predict what an ablation does and are compared across training seeds. A TopK SAE keeps the largest preactivations at each token, and a feature's margin is its preactivation's distance to the cutoff. On five public TopK SAE pairs from three Pythia models, zeroing one feature moves a next layer feature across the cutoff in 0.74 of cases or more, and the crossings carry most of the response's energy. Over writes that scale a feature's code by three factors, the graph built on the features active beforehand has a median relative error of 0.247 or more. The margin graph adds the first order change to every preactivation and reranks, at the same cost, and errs by at most 0.033. At the median, the crossing features' decoded change is 1.24 times the model's own change in norm or more. Between seeds of one testbed, sparse maps between features explain 0.85 of a graph's energy on its active features, and 0.47 once the other seed's graph keeps only its own. The largest model studied is pythia-160m.",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-10-31T04:03:14Z",
+      "updated": "2026-10-31T04:03:14Z",
+      "absUrl": "https://arxiv.org/abs/2611.00606v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00606v1.pdf",
+      "comment": "34 pages, 8 figures",
+      "titleCn": "稀疏自动编码器归因图是在边缘处决定的",
+      "abstractCn": "在稀疏自动编码器（SAEs）的特征上构建的归因图用于预测消融操作的效果，并在不同的训练种子之间进行比较。TopK SAE会保留每个标记处最大的预激活值，而一个特征的范围是其预激活值到截止点的距离。在三个Pythia模型中的五个公共TopK SAE对中，将一个特征置零在74%或更多的情况下会使下一层特征跨越截止点，而这些跨越承载了大部分响应的能量。在将特征编码缩放三倍的写操作中，基于先前激活特征构建的图的中值相对误差为0.247或更高。范围图将每个预激活值的一阶变化添加并重新排序，以相同的成本，误差最多为0.033。中值上，跨越特征的解码变化是模型自身变化范数的1.24倍或更多。在一个测试平台的不同种子之间，特征之间的稀疏映射解释了其激活特征上0.85的图能量，而一旦另一个种子的图仅保留其自己的特征，这一比例就降至0.47。所研究的最大模型是pythia-160m。"
+    },
+    {
+      "id": "2611.00597v1",
+      "title": "Multi-Estimate Elicitation Does Not Uniformly Debias Language Model Judgments",
+      "authors": [
+        {
+          "name": "An-Sheng Jhang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Does eliciting five weighted estimates within a single response change how a language model responds to information? Across anchoring, hindsight, base-rate, conjunction, and status-quo/default tasks, we compare direct numerical answers with a multi-estimate response format, contrasting source framings, explicitly random cues, and probability-consistency constraints. We evaluate three completed configurations--gpt-6.1-sol, claude-sonnet-5.5, and Qwen3-8B (reasoning disabled, analyzed descriptively). In the first two configurations, direct elicitation yielded near-zero irrelevant-anchor indices and status-quo effects, while remaining responsive to informative sources and informed advice. Of 23 preregistered confirmatory tests, six rejected after Holm adjustment; however, all six absolute point estimates fell below their prespecified smallest effect sizes of interest without establishing equivalence. Moreover, while separate versus joint elicitation shifted conjunction judgments, interpretation is constrained by between-call noise. Ultimately, multi-estimate elicitation failed to produce uniform debiasing or response attenuation across tasks and models, though post hoc correlations between candidate spread and anchoring error motivate independent predictive validation. Materials: https://github.com/asj252/llm-judgment-studies",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-10-31T03:46:00Z",
+      "updated": "2026-10-31T03:46:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.00597v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00597v1.pdf",
+      "comment": "47 pages, 3 figures",
+      "titleCn": "多估计提取并不能均匀地消除语言模型判断的偏差",
+      "abstractCn": "在单个响应中获取五个加权估计是否会改变语言模型对信息的反应？在锚定效应、后见之明、基准率、结合效应和现状/默认任务中，我们比较了直接数值回答与多估计响应格式，对比了来源框架、明确随机提示和概率一致性约束。我们评估了三种完成的配置——gpt-6.1-sol、claude-sonnet-5.5和Qwen3-8B（推理禁用，描述性分析）。在前两种配置中，直接获取估计产生了接近零的无关锚定指数和现状效应，同时仍然对信息来源和知情建议保持响应。在23项预先注册的确认测试中，经过Holm调整后，有六项被拒绝；然而，所有六项绝对点估计值均低于其预设的最小效应量，未能确立等效性。此外，虽然单独与联合获取估计改变了结合判断，但解释受限于调用间的噪声。最终，多估计获取未能跨任务和模型产生一致的去偏或响应减弱，尽管候选范围与锚定误差之间的后验相关性为独立预测验证提供了动机。材料：https://github.com/asj252/llm-judgment-studies"
+    },
+    {
+      "id": "2611.00592v1",
+      "title": "Saidzoda-Tajik-E5-Large: Fine-Tuning a 560M Embedder for Tajik Retrieval",
+      "authors": [
+        {
+          "name": "Tohir Saidzoda",
+          "affiliation": ""
+        },
+        {
+          "name": "Nekruz Maxudov",
+          "affiliation": ""
+        },
+        {
+          "name": "Bedil Karimov",
+          "affiliation": ""
+        },
+        {
+          "name": "Abubakr Abdullozoda",
+          "affiliation": ""
+        },
+        {
+          "name": "Amin Jalilov",
+          "affiliation": ""
+        },
+        {
+          "name": "Jonibek Kishvarov",
+          "affiliation": ""
+        },
+        {
+          "name": "Rahmonali Sharipov",
+          "affiliation": ""
+        },
+        {
+          "name": "Mariyamkhon Shodyeva",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Finding the passage that answers a question is the first step of most practical systems built on documents, and for Tajik we found no openly described model for it. We present Saidzoda-Tajik-E5-Large, a Tajik text embedder built from multilingual-e5-large-instruct (560M parameters). We asked our own Tajik language model to write questions for passages from Tajik laws, tax documents, Wikipedia and web text, and trained on 235,140 question and passage pairs for one epoch, with hard negatives chosen by another embedder and English and Russian pairs mixed in so the model would not forget those languages. On laws the model had never seen, the right passage is among the top ten results for 93.6% of questions, up from 80.2%; on tax documents, 94.5% against 82.6%. On Belebele, the one test we have that was written by people, the gain is smaller and not confirmed (92.2% to 95.2%, with touching intervals), and Russian and English do not change. On law and tax questions written in the same style as its training questions, it is tied with Giga-Embeddings-3B, a model five times its size; on Belebele the 3B and 8B models score slightly higher, and only after we fine-tuned them on our data are they clearly ahead. We also report what failed: training in bfloat16 broke the model, and replacing Tajik letters with similar Russian ones did not help. Our law, tax and Wikipedia test questions come from the same model that wrote the training questions, so we treat those scores as an upper limit until questions written by Tajik speakers are available.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-31T03:41:43Z",
+      "updated": "2026-10-31T03:41:43Z",
+      "absUrl": "https://arxiv.org/abs/2611.00592v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00592v1.pdf",
+      "comment": "10 pages, 5 tables, 1 figure. Technical report. Model: https://huggingface.co/Tohirju/Saidzoda-Tajik-E5-Large",
+      "titleCn": "萨迪佐达-塔吉克语-E5-大型：为塔吉克语检索微调一个560M嵌入器",
+      "abstractCn": "在基于文档的实用系统中，找到回答问题的段落是首要步骤，而对于塔吉克语，我们并未发现公开描述的模型。我们提出了 Saidzoda-Tajik-E5-Large，这是一个基于 multilingual-e5-large-instruct（560M 参数）构建的塔吉克文本嵌入器。我们使用自己的塔吉克语言模型为塔吉克法律、税务文件、维基百科和网页文本中的段落编写问题，并使用 235,140 个问题和段落对进行了一轮训练，其中困难负样本由另一个嵌入器选择，并且混合了英语和俄语对，以防止模型忘记这些语言。在模型从未见过的法律文本上，93.6% 的问题的正确段落出现在前十个结果中，从 80.2% 提升至 94.5%；在税务文件上，从 82.6% 提升至 94.5%。在 Belebele 测试中（这是唯一由人类编写的测试），提升幅度较小且未得到确认（从 92.2% 提升至 95.2%，存在重叠区间），并且俄语和英语的表现没有变化。在风格与训练问题相同的法律和税务问题上，它与 Giga-Embeddings-3B（一个规模是其五倍的模型）不相上下；在 Belebele 测试中，3B 和 8B 模型的得分略高，但只有在用我们的数据微调后它们才明显领先。我们还报告了失败之处：使用 bfloat16 进行训练破坏了模型，而用相似的俄语字母替换塔吉克字母并未奏效。我们的法律、税务和维基百科测试问题均来自编写训练问题的同一模型，因此我们将这些得分视为上限，直到有塔吉克语使用者编写的问题可用。"
+    },
+    {
+      "id": "2611.00588v1",
+      "title": "TVP: TV is Almost All You Need for Speculative Decoding",
+      "authors": [
+        {
+          "name": "Aaryam Sharma",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Speculative decoding accelerates LLM inference with a drafter whose proposed tokens are verified by the target model in parallel. Under lossless speculative sampling, a draft token is accepted with probability one minus the total variation (TV) distance between the target and draft distributions, yet drafters are often trained with cross-entropy (CE) or KL. We first show that under matched and well-tuned training, TV matches or surpasses several published draft-training objectives when fine-tuning, and a fixed TV and KL mixture does the same when training from scratch. We identify two remaining problems, TV's vanishing gradients on undercovered tokens and the prefix products that starve later positions in acceptance-length objectives. To address both, we derive TVP, a loss family based on expected acceptance length, whose power parameter interpolates between coverage and acceptance oriented objectives. Annealing the power from zero to one gives the highest or tied-highest acceptance length across three drafter architectures and three target models, including longer drafts and block verification. TVP improves acceptance length over CE by 9.8% when fine-tuning, and over the public DFlash2 training recipes by 6.2 to 12.9%.",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-10-31T03:31:48Z",
+      "updated": "2026-10-31T03:31:48Z",
+      "absUrl": "https://arxiv.org/abs/2611.00588v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00588v1.pdf",
+      "comment": "25 pages, 2 figures, 14 tables",
+      "titleCn": "TVP：电视几乎对所有推测解码都至关重要",
+      "abstractCn": "推测解码通过一个其提出的标记由目标模型并行验证的草稿者加速了LLM推理。在无损推测采样下，草稿标记以目标分布和草稿分布之间总变差（TV）距离的1减去概率被接受，但草稿者通常用交叉熵（CE）或KL进行训练。我们首先表明，在匹配且良好调优的训练下，TV在微调时与几种已发表的草稿训练目标相匹配或超越，而一个固定的TV和KL混合物在从头开始训练时也做到同样。我们识别出两个剩余问题：TV在未覆盖标记上的梯度消失以及前缀乘积在接收长度目标中使后续位置饥饿。为解决这两个问题，我们推导出TVP，一个基于预期接受长度的损失家族，其幂参数在覆盖和接受导向目标之间进行插值。从零退火到一，在三种草稿架构和三种目标模型（包括更长的草稿和块验证）中给出最高或并列最高的接受长度。TVP在微调时比CE提高接受长度9.8%，并在公共DFlash2训练配方中比CE提高6.2%到12.9%。"
+    },
+    {
+      "id": "2611.00585v1",
+      "title": "Conic Certification of Transformer Attention",
+      "authors": [
+        {
+          "name": "Masoud Ataei",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Attention is the computational core of large language models, yet the verifiers that bound how far an attention head's output can move under input perturbations give no guarantee on how loose their bounds are. A weak certificate therefore cannot be told apart from a fragile model. We develop a conic programming theory of attention certification that supplies this guarantee. We prove that the difficulty lies not in the softmax but in the bilinear interaction of a varying query with the keys. This interaction makes certification NP-hard over boxes and inapproximable once the attention logits can move by a constant amount. A fixed query or listed token substitutions, by contrast, make the exact worst case efficiently computable. An exponential cone moment relaxation then certifies a head with an error bounded quadratically in the perturbation radius by computable quantities, an order that cannot be improved. We also show that relaxations that treat a network one operation at a time, linear bound propagation among them, pay on second-order terms a sum of per-operation maxima instead of one coupled maximum. Computational results on GPT-2 indicate that the theory carries over to a trained model. Against exact worst cases with the query fixed, the certificate attains the predicted second-order accuracy. It is tighter than linear bound propagation on every head, and the looseness of bound propagation tracks the predicted per-operation excess.",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "math.OC",
+        "cs.LG"
+      ],
+      "published": "2026-10-31T03:28:37Z",
+      "updated": "2026-10-31T03:28:37Z",
+      "absUrl": "https://arxiv.org/abs/2611.00585v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00585v1.pdf",
+      "comment": "56 pages, 5 figures, 6 tables. Code and data: https://github.com/chimera1001/conic-attention-cert",
+      "titleCn": "变压器注意力机制的圆锥认证",
+      "abstractCn": "注意力机制是大型语言模型的核心计算单元，然而用于约束注意力头输出在输入扰动下移动范围的验证器并未提供对其边界松紧程度的保证。因此，弱证书与脆弱模型无法区分。我们开发了一种注意力认证的锥规划理论，以提供这种保证。我们证明困难并不在于softmax函数，而在于变化的查询与键之间的双线性交互。这种交互使得认证在区间上为NP困难，并且一旦注意力logits可以移动一个常量值，就不可近似。相比之下，固定查询或列出的标记替换使得精确最坏情况可以被高效计算。然后，指数锥矩松弛通过可计算的量对扰动半径的平方误差范围内认证一个注意力头，这种顺序无法改进。我们还表明，将网络逐个操作处理、其中线性边界传播的松弛，在二阶项上支付的是每个操作最大值的和，而不是一个耦合的最大值。在GPT-2上的计算结果表明，该理论可以推广到训练好的模型。对于固定查询的精确最坏情况，证书达到了预期的二阶精度。它在每个注意力头上都比线性边界传播更紧密，并且边界传播的松紧程度与预期的每个操作超额相匹配。"
+    },
+    {
+      "id": "2611.00579v1",
+      "title": "From Apparent Search Gains to Selection Failures: Auditing Test-Time Inference in Structured Workflow Planning",
+      "authors": [
+        {
+          "name": "Zhitong Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Weifeng Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Kai Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhiyuan Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Ali Mostafavi",
+          "affiliation": ""
+        },
+        {
+          "name": "James Caverlee",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Test-time search can improve structured planning, but when methods differ in prompts, post-processing, and selection, it is unclear what an observed gain should be attributed to. We study this question on DisasterBench, where models compose typed multi-tool workflows, by decomposing inference into three observable stages: whether a correct workflow is discovered, whether it survives structural validation, and whether it is finally selected. Comparing independent sampling, a nominal tree-search configuration, and multi-operator search under controlled inference budgets on two model families, we find that (i) the nominal tree-search configuration realizes non-adaptive complete-workflow sampling, and independent sampling with its expansion prompt reproduces its candidate discovery without constructing a tree; (ii) structural validation never removes the last correct workflow in our evaluated candidate pools, whereas majority voting leaves a discovered correct workflow unselected on 10-19% of tasks per pool, with an audit confirming substantive tool-choice or information-flow errors in 57 of 60 examined cases; and (iii) a tool-specification-aware verifier recovers some of these losses but overturns more correct decisions than it fixes. Our results motivate auditing realized rather than nominal inference pipelines, and reporting discovery, validity, and selection separately.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-31T03:10:12Z",
+      "updated": "2026-10-31T03:10:12Z",
+      "absUrl": "https://arxiv.org/abs/2611.00579v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00579v1.pdf",
+      "comment": "37 pages. Code and reproducibility artifacts: https://github.com/TamuChen18/Found-but-Not-Chosen",
+      "titleCn": "从表面搜索收益到选择失败：审计结构化工作流规划中的测试时推理",
+      "abstractCn": "测试时搜索可以提高结构化规划，但当方法在提示、后处理和选择上存在差异时，观察到的收益应归因于何处尚不明确。我们在DisasterBench上研究了这个问题，该基准中模型组合类型化的多工具工作流，通过将推理分解为三个可观察的阶段：是否发现正确的工作流、是否通过结构验证以及是否最终被选中。在受控推理预算下，比较了两个模型家族的独立采样、名义树搜索配置和多操作符搜索，我们发现：(i) 名义树搜索配置实现了非自适应完整工作流采样，而独立采样结合其扩展提示在不构建树的情况下复现了其候选发现；(ii) 结构验证从未移除我们评估候选池中的最后一个正确工作流，而多数投票在每池10-19%的任务上遗漏了发现的正确工作流，审计在60个被检查案例中的57个案例中确认了实质性的工具选择或信息流错误；(iii) 工具规范感知验证器挽回了一些这些损失，但推翻了比其修正更多的正确决策。我们的结果支持审计实际而非名义推理管道，并分别报告发现、有效性和选择。"
+    },
+    {
+      "id": "2611.00555v1",
+      "title": "Distinguishing among reasoning levels of GPT 5.5 Pro via a grammar lens benchmark",
+      "authors": [
+        {
+          "name": "Emma Graham",
+          "affiliation": ""
+        },
+        {
+          "name": "Richard Granger",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Does the level of test-time processing effort affect a language model's computational capability? A formal grammar-lens benchmark method, derived from the theory of computation, generates novel data at specified levels, each successively more computationally powerful than the levels below. Using this data, we tested GPT-5.5, and GPT-5.5-Pro-Medium, -High, and -XHigh, showing incrementally increased acceptance of test data: 16, 40, 43, and 52\\%, respectively, illustrating the benchmark's ability to discern fine-grained differences among models' added test-time reasoning levels. Additionally, as test-time compute effort increases, model responses diverge from human responses to the same data. This increasing disagreement may turn out to be broadly characteristic of more capable language models, introducing the potential of a general capability-versus-alignment conflict.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-31T02:28:02Z",
+      "updated": "2026-10-31T02:28:02Z",
+      "absUrl": "https://arxiv.org/abs/2611.00555v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00555v1.pdf",
+      "comment": null,
+      "titleCn": "通过语法视角基准测试区分GPT 5.5 Pro的推理层级",
+      "abstractCn": "测试时处理工作的程度是否会影响语言模型的计算能力？一种基于计算理论的形式语法基准方法，在指定水平上生成新数据，每个水平都比前一个水平在计算能力上更强。使用这些数据，我们测试了GPT-5.5、GPT-5.5-Pro-Medium、-High和-XHigh，显示出测试数据接受率的逐步增加：分别为16%、40%、43%和52%，这表明基准方法能够区分模型在测试时推理水平上的细微差异。此外，随着测试时计算工作的增加，模型对相同数据的响应与人类响应逐渐偏离。这种不断增加的分歧可能成为更强大语言模型的普遍特征，引入了通用能力与对齐冲突的潜在可能性。"
+    },
+    {
+      "id": "2611.00544v1",
+      "title": "Skill++: Towards Lifelong Agents via Routing-Aware Skill Refinement",
+      "authors": [
+        {
+          "name": "Hanrong Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Minghao Liang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiawei Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yankai Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Shicheng Fan",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhiwei Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Enze Ma",
+          "affiliation": ""
+        },
+        {
+          "name": "Junwei Yuan",
+          "affiliation": ""
+        },
+        {
+          "name": "Tianyi Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Dehai Min",
+          "affiliation": ""
+        },
+        {
+          "name": "Kening Zheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Xue Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Philip S. Yu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language model (LLM) agents extend their capabilities with skills, each with a name, a description, and a body. Under progressive disclosure, an LLM router selects skills by name and description alone and loads only the selected bodies. Skill libraries grow continually as users and agents add new skills. Because the router relies on this metadata, a similar new skill can displace an earlier one, breaking previously correct routing even though the earlier skill and the router are unchanged. This routing interference is aggravated for public skills, whose descriptions may not match their bodies. We formulate the problem as lifelong skill routing, a class-incremental continual learning problem. A solution must keep earlier skills selectable without suppressing new ones. Existing approaches fall short, since continually retraining the router risks catastrophic forgetting and rewriting methods either ignore similar skills or require per-skill feedback. We therefore propose Skill++, which rewrites only the name and description of each incoming skill, without router training or labeled data. The new description states what the body supports, how the skill differs from its closest predecessor, and what related work it excludes. As a library grows to 731 skills over ten sessions, Skill++ selects all required skills for 76.3% of queries, versus 36.4% under the original metadata. Across three benchmarks and five LLM routers, it outperforms all compared approaches, and its gains carry over to the Codex CLI agent harness.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-10-31T01:58:58Z",
+      "updated": "2026-10-31T01:58:58Z",
+      "absUrl": "https://arxiv.org/abs/2611.00544v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00544v1.pdf",
+      "comment": null,
+      "titleCn": "Skill++：通过路由感知技能精炼实现终身智能体",
+      "abstractCn": "大型语言模型（LLM）代理通过技能扩展其功能，每个技能都包含名称、描述和主体。在渐进式披露中，LLM路由器仅通过名称和描述选择技能，并仅加载所选的主体。随着用户和代理不断添加新技能，技能库持续增长。由于路由器依赖于这些元数据，相似的技能可能会取代较早的技能，即使较早的技能和路由器本身未发生变化，也会破坏先前正确的路由。对于公共技能，其描述可能与主体不匹配，这种路由干扰更为严重。我们将此问题表述为终身技能路由问题，即类别增量持续学习问题。解决方案必须保持早期技能的可选性，同时不压制新技能。现有方法存在不足，因为持续重新训练路由器存在灾难性遗忘的风险，而重写方法要么忽略相似技能，要么需要每项技能的反馈。因此，我们提出了Skill++，它仅重写每个传入技能的名称和描述，无需路由器训练或标记数据。新的描述说明主体支持的内容、该技能与其最近前驱的区别，以及排除的相关工作。当技能库在十次会话中增长到731项技能时，Skill++为76.3%的查询选择了所有所需技能，而原始元数据下的选择率仅为36.4%。在三个基准测试和五个LLM路由器上，它优于所有比较方法，并且其优势也体现在Codex CLI代理适配器上。"
+    },
+    {
+      "id": "2611.00536v1",
+      "title": "Dual-Axis Policy Entailment: A Benchmark for Policy-Change Reasoning",
+      "authors": [
+        {
+          "name": "Charles Chang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuen Yuen Ang",
+          "affiliation": ""
+        },
+        {
+          "name": "Bolun Sun",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Whether a policy shifts domains and, by extension, continues, broadens, narrows, or reverses previous policy is of paramount importance to the study of public policy. We propose Dual-Axis Policy Entailment (DAPE), which evaluates an ordered pair of policy directives on both dimensions at once: a binary judgment determines whether the two directives govern the same policy domain, and a five-way judgment determines whether the later directive continues, broadens, narrows, or reverses the earlier policy, or governs a different domain altogether. Read together, the two judgments form one five-category label, our primary metric. The two-axis design captures two central dimensions of policy change without conflating errors on either dimension into a generic \"irrelevant\" label, and it makes annotation more rigorous: a coder cannot dismiss a difficult pair as domain-irrelevant without an explicit, checkable decision. We introduce an expert-annotated benchmark of 1,000 ordered directive pairs drawn from a large corpus of Chinese government policy, together with an annotation-calibration protocol (an adjudication packet with pre/post agreement measurement) that we contribute as a methodological artifact. Fourteen open-weight models and four frontier API flagships fail the task zero-shot: even the best frontier flagship's chance-corrected agreement with expert labels is far below the human ceiling (Cohen's $κ\\approx 0.29$ vs. $0.53$). A fine-tuned open-weight model (LoRA SFT of Qwen3-14B, five-fold cross-validation) closes this gap, reaching the coder-mutual human ceiling ($κ= 0.524$ vs. $0.527$). Finally, we apply our method to China's AI policy (1980-2024) and map the direction of policy change across eras.",
+      "categories": [
+        "cs.CL",
+        "cs.CY"
+      ],
+      "published": "2026-10-31T01:48:26Z",
+      "updated": "2026-10-31T01:48:26Z",
+      "absUrl": "https://arxiv.org/abs/2611.00536v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00536v1.pdf",
+      "comment": "36 pages, 7 figures",
+      "titleCn": "双轴政策蕴涵：政策变更推理的基准",
+      "abstractCn": "一项政策是否转换领域，并由此延伸出继续、扩展、缩小或逆转先前政策，对于公共政策研究至关重要。我们提出了双轴政策蕴涵（DAPE）方法，该方法同时评估一对政策指令的两个维度：二元判断用于判定两个指令是否管辖同一政策领域，五元判断用于判定后续指令是继续、扩展、缩小、逆转先前政策，还是管辖完全不同的领域。这两项判断共同构成一个五分类标签，作为我们的主要衡量指标。双轴设计能够捕捉政策变化的两个核心维度，同时避免将两个维度上的错误混淆为笼统的“无关”标签，并使标注更加严谨：标注者不能在未经明确、可核查的决策情况下将一个困难的指令对判定为领域无关。我们引入了一个包含1000对有序指令的专家标注基准，这些指令来自大量中国政府政策文本，并附带了一个标注校准协议（包含事前事后协议测量的裁决包），作为方法论成果贡献。14个开放权重模型和4个前沿API旗舰模型在零样本情况下均未完成任务：即使最佳前沿旗舰模型的校正随机一致性远低于人类天花板（Cohen's $κ\\approx 0.29$ 对比 $0.53$）。一个微调的开放权重模型（LoRA SFT of Qwen3-14B，五折交叉验证）缩小了这一差距，达到了标注者与人类相互认可的极限（$κ= 0.524$ 对比 $0.527$）。最后，我们将该方法应用于中国的AI政策（1980-2024），并绘制了各时代政策变化的方向图。"
+    },
+    {
+      "id": "2611.00530v1",
+      "title": "WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search",
+      "authors": [
+        {
+          "name": "Kepu Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuzhe Cai",
+          "affiliation": ""
+        },
+        {
+          "name": "Yue Shu",
+          "affiliation": ""
+        },
+        {
+          "name": "Dawei Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Jinhai Zhu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuan Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zehua Dai",
+          "affiliation": ""
+        },
+        {
+          "name": "Tongke Ni",
+          "affiliation": ""
+        },
+        {
+          "name": "Ziyao Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Chen Fu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jie Shao",
+          "affiliation": ""
+        },
+        {
+          "name": "Chao Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiangmin Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Ruifeng Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Rongchun Yao",
+          "affiliation": ""
+        },
+        {
+          "name": "Jie Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Weixin Qiu",
+          "affiliation": ""
+        },
+        {
+          "name": "Nan Song",
+          "affiliation": ""
+        },
+        {
+          "name": "Junyang Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Fan Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Quanchao Hui",
+          "affiliation": ""
+        },
+        {
+          "name": "Yulong Ou",
+          "affiliation": ""
+        },
+        {
+          "name": "Qiang Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Hao Cao",
+          "affiliation": ""
+        },
+        {
+          "name": "Sen Yang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We present WeSearch, a unified, model-centric retrieval framework for large-scale, continuously evolving content search. Prevailing methods assign documents fixed hierarchical Semantic IDs, implicitly assuming each document follows a single coherent semantic path-an assumption that often breaks down for multi-topic documents. WeSearch instead retrieves query-relevant clusters and then ranks atomic documents within the resulting query-specific candidate space, decoupling candidate pruning from fine-grained relevance modeling. Combined with relevance-aware training, compact document representations, and incremental index updates, this design enables weekly-or daily when needed-model refreshes. Deployed as the primary semantic retrieval path in WeChat Search alongside a lexical syntax tree, WeSearch shows consistent one-week A/B gains on corpora from hundreds of millions to billions of documents, and a one-month full-traffic A/B test confirms stable improvements of +0.68% CTR and +2.27% per-user article clicks, together with a 41% reduction in retrieval resource cost and a 19 ms reduction in graphic-text retrieval latency. WeSearch is now fully deployed in WeChat Search, serving 100% of production traffic.",
+      "categories": [
+        "cs.IR",
+        "cs.CL"
+      ],
+      "published": "2026-10-31T01:35:20Z",
+      "updated": "2026-10-31T01:35:20Z",
+      "absUrl": "https://arxiv.org/abs/2611.00530v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00530v1.pdf",
+      "comment": null,
+      "titleCn": "WeSearch：一个面向微信搜索的统一模型中心检索框架",
+      "abstractCn": "我们提出了WeSearch，一个统一的、以模型为中心的大规模、持续演化内容检索框架。现有方法为文档分配固定的层级语义ID，隐含假设每个文档遵循单一的连贯语义路径——这一假设对于多主题文档往往不成立。WeSearch则检索与查询相关的簇，然后在生成的特定查询候选空间中对原子文档进行排序，将候选筛选与细粒度相关性建模解耦。结合相关性感知训练、紧凑文档表示和增量索引更新，该设计支持每周（或按需每日）模型刷新。在微信搜索中与词汇语法树并列作为主要的语义检索路径，WeSearch在数亿至数十亿文档的语料库上持续获得一周的A/B测试增益，一个月的全流量A/B测试证实了稳定的改进：点击率（CTR）提升0.68%，人均文章点击率提升2.27%，检索资源成本降低41%，图文检索延迟减少19毫秒。WeSearch现已全面部署于微信搜索，服务100%的生产流量。"
+    },
+    {
+      "id": "2611.00518v1",
+      "title": "Agentic Context Management for Multi-Turn Human-AI Conversations",
+      "authors": [
+        {
+          "name": "Matthew Ho",
+          "affiliation": ""
+        },
+        {
+          "name": "Chenglong Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Baolin Peng",
+          "affiliation": ""
+        },
+        {
+          "name": "Nebojsa Jojic",
+          "affiliation": ""
+        },
+        {
+          "name": "Philippe Laban",
+          "affiliation": ""
+        },
+        {
+          "name": "Michel Galley",
+          "affiliation": ""
+        },
+        {
+          "name": "Jianfeng Gao",
+          "affiliation": ""
+        },
+        {
+          "name": "Lianhui Qin",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "LLMs degrade in multi-turn conversation partly because of context pollution: the model's own earlier outputs stay in context and anchor later turns, so an early misreading of the user's intent can persist after the user corrects it. Assistant omission (AO), dropping every assistant message, removes this pollution but fails when interaction is referential: later turns refer back to drafts, decisions, and tool-call results that exist only in assistant turns. We propose Agentic Conversation Context Curation (AC3), a training-free method in which a separate analyzer (1) consolidates the task specification from the user's messages alone, (2) audits the assistant's prior outputs against it, and (3) edits the context, either appending the analysis or discarding the assistant side and rebuilding the context from the specification. A second finding: pollution is contagious. An analyzer that sees the assistant's reasoning while extracting the specification can do worse than no intervention, and instructing it to ignore them did not close the gap, so we exclude assistant turns structurally. On Lost in Conversation (replaying difficulty-selected instances), where AO is an oracle by construction, AC3 closes 55-84% of the gap between full context and AO on three of four tasks and exceeds AO on the fourth, and an LLM that faithfully summarizes the history does not reproduce the gain even with more compute. On real WildChat conversations, a GPT-5-mini judge prefers AC3's next turn over both full context and AO in every configuration of our main table, though this preference depends on the judge; on CollabLLM results are mixed. In stateful tool use (tau2-bench), AO collapses to 0% on every model; AC3 does not collapse, though it falls slightly behind full context. Detector studies show that Reset removes injected pollution but is not span-selective: the gain comes from rebuilding the specification.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-10-31T01:13:55Z",
+      "updated": "2026-10-31T01:13:55Z",
+      "absUrl": "https://arxiv.org/abs/2611.00518v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00518v1.pdf",
+      "comment": null,
+      "titleCn": "多轮人机对话的代理式上下文管理",
+      "abstractCn": "大型语言模型在多轮对话中表现下降的部分原因在于上下文污染：模型自身的早期输出会持续存在于上下文中，从而影响后续对话，导致用户早期对意图的错误理解在用户纠正后依然存在。助手消息省略（AO）通过删除所有助手消息来消除这种污染，但在交互具有指代性时失效——后续对话会引用仅存在于助手消息中的草稿、决策和工具调用结果。我们提出了代理式对话上下文管理（AC3），这是一种无需训练的方法，其中独立的分析器（1）仅从用户消息中整合任务规范，（2）对照该规范审核助手的先前输出，并（3）编辑上下文，或追加分析结果，或舍弃助手一侧并从规范中重建上下文。第二个发现：污染具有传染性。在提取规范时若分析器看到助手推理，其效果可能劣于不干预，而指示其忽略这些内容并未缩小差距，因此我们从结构上排除助手消息。在“对话迷失”（重放难度选定的实例）实验中，AO按设计是神谕，AC3在四分之三的任务上缩小了完整上下文与AO之间的55-84%差距，并在第四个任务上超越AO，而一个忠实于历史总结的大型语言模型即使增加计算量也无法再现此收益。在真实的WildChat对话中，GPT-5-mini评判者在我们主要表格的每种配置下都更倾向于AC3的下一轮对话，尽管这种偏好因评判者而异；CollabLLM的结果则较为复杂。在状态化工具使用（tau2-bench）中，AO在所有模型上的表现均降至0%；AC3虽略有落后于完整上下文，但并未崩溃。检测研究表明，重置操作能消除注入的污染，但并非区间选择性：收益来自重建规范。"
+    },
+    {
+      "id": "2611.00515v1",
+      "title": "AStockArena: Beyond Returns, Can We Entrust Real Capital to the Decisions of Financial Agents?",
+      "authors": [
+        {
+          "name": "Zeyu Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Sing Kwong Lai",
+          "affiliation": ""
+        },
+        {
+          "name": "Xuanzhi Feng",
+          "affiliation": ""
+        },
+        {
+          "name": "HaoYang Shang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yang Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Zihao Fang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xuan Liu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models (LLMs) are increasingly used in dynamic financial trading, yet real-time trading benchmarks mainly evaluate agents by cumulative returns and risk-adjusted performance. Such outcome metrics cannot show whether trades are faithfully reported, supported by available evidence, and consistent with account states. We introduce AStockArena, a real-time decision-auditing benchmark for continuous trading in China's A-share market. Under shared market conditions and execution constraints, we evaluate 13 open- and closed-source models over 3,198 sequential decisions. AStockArena reconstructsthe actions actually posted to accounts by aligning reports, trade requests, execution responses, and account states, and audits them with eight checks spanning execution traceability (O), evidence sufficiency (RK), and financial meta-awareness (B), combining record verification with consensus expert annotation. Of 1,070 trading points, 72.99% exhibit at least one audit gap; model-level rates range from52.2% to 91.2%, with evidence gaps most prevalent. Historical trade-filtering replay further shows thatportfolio outcomes are sensitive to these flagged trades. Decision-process auditing thus offers a verifiable complement to return-based evaluation of financial agents.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-10-31T01:08:02Z",
+      "updated": "2026-10-31T01:08:02Z",
+      "absUrl": "https://arxiv.org/abs/2611.00515v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00515v1.pdf",
+      "comment": null,
+      "titleCn": "AStockArena：超越收益，我们能否将真实资本托付给金融代理人的决策？",
+      "abstractCn": "大型语言模型（LLMs）在动态金融交易中应用日益广泛，然而实时交易基准主要依据累积收益和风险调整表现来评估智能体。此类结果指标无法证明交易是否真实报告、有据可依且与账户状态一致。我们引入AStockArena，这是一个针对中国A股市场连续交易的实时决策审计基准。在共享市场条件和执行约束下，我们对13个开源和闭源模型在3,198个连续决策中进行了评估。AStockArena通过整合报告、交易请求、执行响应和账户状态，重建实际提交到账户的行动，并通过涵盖执行可追溯性（O）、证据充分性（RK）和金融元认知（B）的八项检查进行审计，结合记录验证与专家共识标注。在1,070个交易点中，72.99%至少存在一项审计缺陷；模型级别的缺陷率介于52.2%至91.2%，其中证据缺陷最为普遍。历史交易过滤重放进一步表明，投资组合结果对这些被标记的交易敏感。因此，决策过程审计为金融智能体的收益评估提供了可验证的补充。"
+    },
+    {
+      "id": "2611.00504v1",
+      "title": "Robustness Starts with the Objective: Designing and Certifying Robust LLM-Generated Heuristics",
+      "authors": [
+        {
+          "name": "Pantea Karimi",
+          "affiliation": ""
+        },
+        {
+          "name": "Roozbeh Bostandoost",
+          "affiliation": ""
+        },
+        {
+          "name": "Dany Rouhana",
+          "affiliation": ""
+        },
+        {
+          "name": "Siva Kesava Reddy Kakarla",
+          "affiliation": ""
+        },
+        {
+          "name": "Pooria Namyar",
+          "affiliation": ""
+        },
+        {
+          "name": "Mohammad Alizadeh",
+          "affiliation": ""
+        },
+        {
+          "name": "Venkat Arun",
+          "affiliation": ""
+        },
+        {
+          "name": "Behnaz Arzani",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "LLMs are increasingly used to design heuristics for computer systems. However, most synthesis frameworks evaluate candidates by their average performance, which can mask severe regressions on specific workloads. Even adding adversarial training inputs doesn't eliminate these regressions, and percentile objectives (e.g., optimizing for the 95th percentile) overlook how severe regressions can be beyond the selected threshold. We present TAILOR, a framework that guides LLM synthesis using the Conditional Value at Risk (CVaR) of the cost difference between each candidate and an existing baseline on the same workload. This paired CVaR measures the average difference over the worst fraction of workloads. We show that a negative paired CVaR guarantees improvements in both average performance and tail optimality gap relative to the unknown optimum, without ever computing that optimum. We find that TAILOR achieves the best mean--tail trade-off among the synthesis objectives we evaluate across three case studies: Azure GPU batch admission, Azure VM packing, and server placement. Tested across seven diverse optimization benchmarks, TAILOR produces heuristics that are certified with 99% confidence to improve both average performance and tail optimality gaps over the baseline in six of them. On these six benchmarks, TAILOR also outperforms known robust, human-designed alternatives in the tail while achieving better or comparable average-performance improvement over the baseline.",
+      "categories": [
+        "cs.CL",
+        "cs.DC",
+        "cs.AI",
+        "cs.PF"
+      ],
+      "published": "2026-10-31T00:49:26Z",
+      "updated": "2026-10-31T00:49:26Z",
+      "absUrl": "https://arxiv.org/abs/2611.00504v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00504v1.pdf",
+      "comment": null,
+      "titleCn": "鲁棒性始于目标：设计并认证鲁棒的LLM生成启发式算法",
+      "abstractCn": "大型语言模型（LLMs）越来越多地被用于设计计算机系统的启发式算法。然而，大多数合成框架通过平均性能来评估候选方案，这可能会掩盖在特定工作负载上的严重退化。即使添加对抗性训练输入也无法消除这些退化，而分位数目标（例如，针对95分位数进行优化）则忽略了所选阈值之外的退化程度。我们提出了TAILOR框架，该框架利用候选方案与现有基线在相同工作负载上成本差异的条件价值风险（CVaR）来指导LLM合成。这种配对CVaR衡量了最差一部分工作负载上的平均差异。我们证明，负配对CVaR保证了相对于未知最优解，平均性能和尾部最优性差距的改进，而无需计算该最优解。我们发现，在三个案例研究（Azure GPU批量准入、Azure虚拟机打包和服务器放置）中评估的合成目标中，TAILOR实现了最佳平均-尾部权衡。在七个不同的优化基准测试中，TAILOR产生的启发式算法在六个基准测试中获得了99%的置信度保证，能够提高平均性能和尾部最优性差距。在这六个基准测试中，TAILOR在尾部性能方面也优于已知的鲁棒性、人工设计的替代方案，同时在平均性能提升方面实现了更好或相当的效果。"
+    },
+    {
+      "id": "2611.00496v1",
+      "title": "Swap, Replicate, Read the Mass: A Protocol for Auditing Demographic Bias in System One Decision Models",
+      "authors": [
+        {
+          "name": "Alejandro Mozo Quesada",
+          "affiliation": ""
+        },
+        {
+          "name": "Sergio Gálvez Rojas",
+          "affiliation": ""
+        },
+        {
+          "name": "Francisco López Valverde",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "System One decision models replace text generation with typed, probability-scored answers and are entering production. Answers execute without a person in the loop, and no multi-model audit exists on established bias benchmarks. We provide that audit: three benchmarks: BBQ (all eleven categories), CrowS-Pairs, and SilverSpoon, adapted to the typed interface, twelve models plus a no-thinking ablation, and 1,638,000 decisions. Every order-sensitive item runs twice with options swapped; native typed models also swap labels; ten configurations repeat under extra seeds and batch 16. We find widespread stereotype alignment, order-dependent answers, and confidence that tracks instability rather than bias. In BBQ, 97 of 143 model-by-category scores are significant and 94 aligned, while the commercial reference abstains on 99.5% of ambiguous items, hiding aligned probability mass. Option swaps flip 0.0% to 72.6% of choices; typed scoring stays below 10% except Laya (22-33%), and untuned letter prompting reaches 73%. CrowS-Pairs preference spans 0.496 to 0.816, and boolean answers can be decided by position (1.00 versus 0.005). SilverSpoon judgments shift toward lower-SES labels in five of eight decision models, inherited from the 9B backbone or induced by tuning. Audits must permute options and reverse questions by default; order-invariant scoring should become a procurement requirement.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-10-31T00:36:15Z",
+      "updated": "2026-10-31T00:36:15Z",
+      "absUrl": "https://arxiv.org/abs/2611.00496v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00496v1.pdf",
+      "comment": null,
+      "titleCn": "交换、复制、读取大众：系统一决策模型人口偏差审计协议",
+      "abstractCn": "系统一号决策模型用带类型标注、概率评分的答案替代了文本生成，并已进入生产阶段。这些答案无需人工介入即可执行，且在已建立的偏见基准上不存在多模型审计。我们提供了这项审计：包括三个基准——BBQ（所有十一类）、CrowS-Pairs和SilverSpoon，已适配到带类型标注的界面；十二个模型加上无思考的消融实验；共计1,638,000个决策。每个对顺序敏感的项目都交换选项后重复运行；原生带类型标注的模型也交换标签；十种配置在额外种子和批次16下重复。我们发现存在普遍的刻板印象一致性、顺序依赖的答案，以及置信度追踪不稳定而非偏见。在BBQ中，143个模型按类别评分中有97个具有统计学意义且94个与偏见一致，而商业参考在99.5%的模糊项上保持沉默，隐藏了一致的概率分布。选项交换导致0.0%至72.6%的选择反转；带类型标注的评分除Laya（22-33%）外均低于10%，未调优的字母提示可达73%。CrowS-Pairs的偏好范围在0.496至0.816，布尔答案可由位置决定（1.00与0.005）。SilverSpoon的判断在八种决策模型中的五种向低社会阶层标签倾斜，源于9B主干或调优诱导。审计必须默认交换选项和逆转问题；顺序不变的评分应成为采购要求。"
+    },
+    {
+      "id": "2611.00492v1",
+      "title": "Spotting the Artificial: Dialogic Humor Improvisation in Humans and LLMs",
+      "authors": [
+        {
+          "name": "Lizeth Palacios Patiño",
+          "affiliation": ""
+        },
+        {
+          "name": "Ximena Gutierrez-Vasques",
+          "affiliation": ""
+        },
+        {
+          "name": "Daniel Rodriguez",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We propose a methodology for investigating the differences between natural and synthetic language in a challenging setting: humorous improvisational dialogue. Our experimental setting compares human-produced comedy improvisations with the dialogues generated by LLMs in a multi-agent environment that we designed. The analysis combines automated linguistic measures with manual annotation grounded in Systemic Functional Linguistics (SFL). The results show that, although LLMs can create coherent and creative scenes, they often fail to reproduce key characteristics of spontaneous spoken interaction. In addition, LLM-generated interactions display a strong tendency toward politeness and positive evaluations, contrasting with the broader range of attitudes found in human humorous improvisation. Our evidence highlights both the strengths and limitations of current LLMs in modeling dialogic humor and demonstrate the value of integrating linguistic theory with NLP methods for the analysis of machine-generated language",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-10-31T00:33:27Z",
+      "updated": "2026-10-31T00:33:27Z",
+      "absUrl": "https://arxiv.org/abs/2611.00492v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.00492v1.pdf",
+      "comment": null,
+      "titleCn": "识别虚假：人类与大型语言模型中的对话幽默即兴创作",
+      "abstractCn": "我们提出了一种在具有挑战性的环境中研究自然语言与合成语言差异的方法：幽默即兴对话。我们的实验设置将人类创作的喜剧即兴对话与我们在设计的多智能体环境中生成的对话进行了比较。该分析结合了自动语言度量与基于系统功能语言学（SFL）的手动标注。结果表明，尽管LLMs能够创建连贯且富有创意的场景，但它们往往无法再现自发口语互动的关键特征。此外，LLM生成的互动表现出强烈的礼貌和正面评价倾向，这与人类幽默即兴中更广泛的态度范围形成对比。我们的证据突出了当前LLMs在模拟对话式幽默方面的优势与局限性，并证明了将语言学理论与自然语言处理方法相结合对于分析机器生成语言的价值。"
+    }
+  ],
+  "fetchedAt": "2026-11-03T02:15:42.557233+00:00",
+  "count": 16,
   "date": "2026-10-31"
 }
