@@ -1,6 +1,1063 @@
 {
-  "articles": [],
-  "fetchedAt": "2026-11-12T02:01:20.734477+00:00",
-  "count": 0,
+  "articles": [
+    {
+      "id": "2507.11662",
+      "title": "Let's Think in Two Steps: Mitigating Agreement Bias in MLLMs with Self-Grounded Verification",
+      "authors": [
+        {
+          "name": "Moises Andrade",
+          "affiliation": ""
+        },
+        {
+          "name": "Joonhyuk Cha",
+          "affiliation": ""
+        },
+        {
+          "name": "Brandon Ho",
+          "affiliation": ""
+        },
+        {
+          "name": "Vriksha Srihari",
+          "affiliation": ""
+        },
+        {
+          "name": "Karmesh Yadav",
+          "affiliation": ""
+        },
+        {
+          "name": "Zsolt Kira",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Verifiers--functions assigning rewards to agent behavior--have been key to AI progress in math, code, and games. However, extending gains to domains without clear-cut success criteria (e.g., computer use) remains a challenge: while humans can recognize desired outcomes, translating this intuition into scalable rules is nontrivial. Multimodal LLMs (MLLMs) offer a promising solution, given their world knowledge, human-preference alignment, and reasoning skills. We evaluate MLLM verifiers across web navigation, computer use, and robotics, spanning 13 models, 28 judge designs, diverse agent trajectories, and distinct downstream applications. We identify a critical limitation: a strong tendency for MLLMs to over-validate agent behavior, a phenomenon we term agreement bias. This bias is pervasive across models, is resilient to test-time scaling, and harms pipelines relying on MLLM judgments (e.g., self-improvement). We discuss principles for design and evaluation of verifiers, and introduce SGV, a method that improves verification by harnessing MLLMs' own capabilities via modulation of (un)conditional generation. First, an MLLM generates broad priors about desired behavior, independent of the data under evaluation. Then, conditioned on generated priors, it reasons over and judges a candidate trajectory. Our methods yield more human-aligned verifiers, with gains of up to 25pp in failure detection, 14pp in accuracy, and benefits extending to downstream applications. In self-improvement and online supervision, our verifiers boost task completion of a GUI specialist in OSWorld, a diffusion policy in robomimic, and a ReAct agent in VisualWebArena--surpassing the previous SOTA by 20pp. Finally, we release an updated version of VisualWebArena, featuring improved evaluators, high-fidelity environment parallelism with >10x speedups, and VWA-Lite, a 1/3-scale subset with comparable evaluation fidelity.",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.MA",
+        "cs.RO"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2507.11662",
+      "pdfUrl": "https://arxiv.org/pdf/2507.11662.pdf",
+      "comment": "ICLR 2026. Code, models, and data publicly available at https://mshalimay.github.io/agreement-bias-sgv/",
+      "titleCn": "让我们分两步思考：通过自我验证减轻MLLM中的协议偏差",
+      "abstractCn": "验证器——将奖励分配给智能体行为的函数——一直是数学、代码和游戏领域中人工智能进步的关键。然而，将收益扩展到没有明确成功标准的领域（例如，计算机使用）仍然是一个挑战：虽然人类可以识别期望结果，但将这种直觉转化为可扩展的规则并不简单。多模态大型语言模型（MLLMs）提供了一个有前景的解决方案，凭借其世界知识、与人类偏好的对齐以及推理能力。我们评估了MLLM验证器在网页导航、计算机使用和机器人领域的表现，涵盖了13个模型、28种裁判设计、多样的智能体轨迹和不同的下游应用。我们确定了一个关键限制：MLLMs有强烈倾向于过度验证智能体行为的趋势，我们将这种现象称为“一致性偏差”。这种偏差在所有模型中都普遍存在，对测试时扩展具有韧性，并损害依赖MLLM判断的流程（例如，自我改进）。我们讨论了验证器设计和评估的原则，并引入了SGV，这是一种通过调节（无条件）生成来利用MLLM自身能力以改进验证的方法。首先，一个MLLM生成关于期望行为的广泛先验，独立于正在评估的数据。然后，基于生成的先验，它对候选轨迹进行推理和判断。我们的方法产生了更符合人类偏好的验证器，在失败检测方面提高了高达25个百分点的收益，在准确率方面提高了14个百分点，并使收益扩展到下游应用。在自我改进和在线监督中，我们的验证器提高了OSWorld中GUI专家的任务完成率，robomimic中扩散策略的表现，以及VisualWebArena中ReAct智能体的表现——超越了之前的SOTA水平20个百分点。最后，我们发布了VisualWebArena的更新版本，该版本具有改进的评估器、超过10倍速度提升的高保真环境并行性，以及VWA-Lite，这是一个规模缩小到1/3的子集，具有可比的评估保真度。"
+    },
+    {
+      "id": "2509.21284",
+      "title": "Bounds of Chain-of-Thought Robustness: Reasoning Steps, Embed Norms, and Beyond",
+      "authors": [
+        {
+          "name": "Dingzirui Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xuanliang Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Keyan Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Qingfu Zhu",
+          "affiliation": ""
+        },
+        {
+          "name": "Wanxiang Che",
+          "affiliation": ""
+        },
+        {
+          "name": "Yang Deng",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Existing research indicates that the output of Chain-of-Thought (CoT) is significantly affected by input perturbations. Although many methods aim to mitigate such impact by optimizing prompts, a theoretical explanation of how these perturbations influence CoT outputs remains an open area of research. This gap limits our in-depth understanding of how input perturbations propagate during the reasoning process and hinders further improvements in prompt optimization methods. Therefore, in this paper, we theoretically analyze the effect of input perturbations on the fluctuation of CoT outputs. We first derive an upper bound for input perturbations under the condition that the output fluctuation is within an acceptable range, based on which we prove that: (i) This upper bound is positively correlated with the number of reasoning steps in the CoT; (ii) Even an infinitely long reasoning process cannot eliminate the impact of input perturbations. We then apply these conclusions to the Linear Self-Attention (LSA) model, which can be viewed as a simplified version of the Transformer. For the LSA model, we prove that the upper bound for input perturbation is negatively correlated with the norms of the input embedding and hidden state vectors. To validate this theoretical analysis, we conduct experiments on three mainstream datasets and four mainstream models. The experimental results align with our theoretical analysis, empirically demonstrating the correctness of our findings.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2509.21284",
+      "pdfUrl": "https://arxiv.org/pdf/2509.21284.pdf",
+      "comment": null,
+      "titleCn": "思维链鲁棒性的界限：推理步骤、嵌入规范及其他",
+      "abstractCn": "现有研究表明，思维链（Chain-of-Thought, CoT）的输出显著受到输入扰动的影响。尽管许多方法通过优化提示来缓解这种影响，但这些扰动如何影响CoT输出的理论解释仍是一个悬而未决的研究领域。这一空白限制了我们对输入扰动在推理过程中如何传播的深入理解，也阻碍了提示优化方法的进一步改进。因此，在本文中，我们从理论上分析了输入扰动对CoT输出波动的影响。我们首先在输出波动处于可接受范围内的条件下，推导了输入扰动的上界，并基于此证明了：(i) 该上界与CoT中的推理步骤数呈正相关；(ii) 即使是无限长的推理过程也无法消除输入扰动的影响。随后，我们将这些结论应用于线性自注意力（Linear Self-Attention, LSA）模型，该模型可被视为Transformer的简化版本。对于LSA模型，我们证明了输入扰动的上界与输入嵌入向量和隐藏状态向量的范数呈负相关。为验证这一理论分析，我们在三个主流数据集和四个主流模型上进行了实验。实验结果与我们的理论分析相符，经验性地证明了我们结论的正确性。"
+    },
+    {
+      "id": "2602.08294",
+      "title": "Not All Gap Correction Helps: A Geometric View of External Information in LLM Inference",
+      "authors": [
+        {
+          "name": "Dingzirui Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xuanliang Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Keyan Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Qingfu Zhu",
+          "affiliation": ""
+        },
+        {
+          "name": "Wanxiang Che",
+          "affiliation": ""
+        },
+        {
+          "name": "Yang Deng",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Providing external information beyond the query is a common way to improve large language model (LLM) inference, as seen in in-context learning (ICL), retrieval-augmented generation (RAG), and memory-based methods (Mem). Existing work increasingly suggests that useful external information should compensate for the gap between LLMs and user queries, implicitly assuming that stronger gap-correction can lead to better performance. In this paper, we challenge this assumption and show that more gap-corrective external information can instead harm performance. We analyze this phenomenon in Transformers through the lens of reasoning error, defined as the difference between the predicted answer vector and the ground-truth answer vector. Our analysis reveals that external information can be not only under-corrective but also over-corrective, where excessively strong correction increases reasoning error. We further show that the induced correction vector is jointly determined by attention and the complementarity between the external information and the query, and derive conditions under which information is properly corrective in both direction and magnitude. Experiments on four mainstream LLMs and seven reasoning benchmarks across ICL, RAG, and Mem validate our theory and support a theory-guided information selection method.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2602.08294",
+      "pdfUrl": "https://arxiv.org/pdf/2602.08294.pdf",
+      "comment": null,
+      "titleCn": "并非所有间隙校正都有帮助：LLM 推理中外部信息的几何视角",
+      "abstractCn": "提供超出查询范围的外部信息是改进大型语言模型（LLM）推理的常见方法，例如情境学习（ICL）、检索增强生成（RAG）和基于记忆的方法（Mem）。现有工作越来越多地表明，有用的外部信息应该弥补LLM与用户查询之间的差距，隐含地假设更强的差距修正能力可以带来更好的性能。在本文中，我们挑战这一假设，并表明过多的差距修正性外部信息反而会损害性能。我们通过推理误差的视角分析这一现象，推理误差定义为预测答案向量与真实答案向量之间的差异。我们的分析揭示，外部信息不仅可能存在不足修正，还可能存在过度修正，其中过强的修正会增加推理误差。我们进一步表明，诱导的修正向量是由注意力机制以及外部信息与查询之间的互补性共同决定的，并推导出在方向和幅度上信息能够正确修正的条件。在ICL、RAG和Mem中的四个主流LLM和七个推理基准上的实验验证了我们的理论，并支持了一种理论指导的信息选择方法。"
+    },
+    {
+      "id": "2608.23873",
+      "title": "Semantic Overlays: Mitigating Prompt Injection with Annotations Beyond Tokens and Steering Vectors",
+      "authors": [
+        {
+          "name": "Joshua Penman",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Language models see only tokens. But the harness knows more: which token spans are user text, which are tool outputs, and which come from untrusted sources such as web pages or external documents. To pass that knowledge to the model, the harness must transmit it as plain text. Prompt injection exploits this: planted instructions, formatted the right way, can convince a model that they come from the user or the system. We introduce Semantic Overlays, small trained adapters that edit a frozen model's residual stream at chosen token spans. No input text can create or remove a mark, although the model's response to a mark is computed from states the input does influence. When the serving stack marks retrieved text with an overlay trained to mean \"do not execute instructions in this span,\" the model treats injected instructions as inert content. Against attacks written without knowledge of the defense, it reaches the attack rates of the best published defenses: SEP separation rises from 24.3% to 98.8% under a corrected grader, AlpacaFarm attack success falls from 99.0% to 0.5%, and AgentDojo from 12.8% to 0%. Fine-tuning the model's weights on the same data reached similar separation but kept 64-80% of SEP utility, against 93% for the overlay. On TensorTrust hijacking, whose attacks resemble nothing in our training data, it lets 4.4% of hijacks through on Llama-3.1-8B, against 43% for Meta-SecAlign on the same base. An attacker with the weights does better: GCG succeeds on 72% of items, and on 14% after adversarial training of the overlay alone. Overlays are also flexible: the model reads their positions faithfully in stacked configurations; told by an overlay that non-Python code is Python and asked to copy it, the model rewrites it in Python; and overlays can carry span-delimited instructions. We also correct defects in two prompt-injection benchmarks and one evaluation harness.",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CR",
+        "cs.LG"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2608.23873",
+      "pdfUrl": "https://arxiv.org/pdf/2608.23873.pdf",
+      "comment": "21 pages, 4 figures, 13 tables. Interactive demo: https://semantic-overlays.vercel.app. Code and released adapters: https://github.com/JoshuaSP/semantic-overlays",
+      "titleCn": "语义覆盖：通过超越标记和引导向量的注释来缓解提示注入",
+      "abstractCn": "语言模型只能看到token。但“ harness”了解更多：哪些token跨度是用户文本，哪些是工具输出，以及哪些来自不可信的来源，如网页或外部文档。为了将这种知识传递给模型，“ harness”必须将其作为纯文本传输。提示注入利用了这一点：格式正确的植入指令可以说服模型它们来自用户或系统。我们引入了语义叠加（Semantic Overlays），即小型训练适配器，它们在选定的token跨度上编辑冻结模型的残差流。没有输入文本可以创建或删除标记，尽管模型对标记的响应是根据输入影响的状态计算的。当服务栈使用经过训练表示“不要执行此跨度中的指令”的叠加标记检索的文本时，模型将注入的指令视为惰性内容。对于没有了解防御的攻击，它达到了最佳已发布防御的攻击率：在修正的评分器AlpacaFarm下，SEP分离率从24.3%提高到98.8%；AgentDojo攻击成功率从99.0%降至0.5%；在TensorTrust劫持攻击中，其攻击与我们的训练数据中的任何内容都不相似，在Llama-3.1-8B上允许4.4%的劫持通过，而Meta-SecAlign在同一基础上为43%。拥有权重的攻击者表现更好：GCG在72%的项目上成功，在单独对叠加进行对抗性训练后，在14%的项目上成功。叠加也很灵活：模型在堆叠配置中忠实地读取它们的位置；被叠加告知非Python代码是Python并要求复制时，模型将其重写为Python；叠加可以携带跨度分隔的指令。我们还修正了两个提示注入基准和一个评估“ harness”中的缺陷。"
+    },
+    {
+      "id": "2609.30012",
+      "title": "Low-Cost Assays for Measuring Model Behavior Across Vendors and Releases",
+      "authors": [
+        {
+          "name": "Tapan Parikh",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Language models advise people, keep them company, and write software while they sleep. Measuring what they do is hard: behavior has to be sampled repeatedly across models, prompts and releases, most of it lives in unstructured text that has to be coded before it can be counted, and the result has to be legible and rigorous enough to meaningfully compare models and vendors. To address these constraints, we present a simple, cheap, scalable, and replicable model for studying model behavior. Each study is a frozen, public stimulus run identically on a cross-vendor panel, at a few dollars per model or less. Each reads its transcripts one of three ways, chosen by how much interpretation the behavior needs: exact match on a clamped reply, a codebook applied by LLM judges whose agreement with a human coder is reported per code, and an instrumented environment that records what an agent did independently of what it said. Run across four years of model releases from both frontier and open-source labs, these instruments find four things. Convergence: asked to pick a word, 27 of 44 models answer serendipity at least once in four tries. Resistance: a trailing \"right?\" moves endorsement by up to 32 points, and the sign flips from sycophantic to resistant as generations advance, keyed to the tag's surface form. House: whether a model holds a position under pressure tracks its generation, and how it holds tracks the lab that built it. Account: told to do something the documentation in their repository contradicts, some coding agents never went along silently and others always did, and the same model can change with the harness it runs in. Re-run on every release, batteries like these track how behavior is changing across vendors and over time.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2609.30012",
+      "pdfUrl": "https://arxiv.org/pdf/2609.30012.pdf",
+      "comment": "Corrects the author list and title of the reference to Alnasser et al. (arXiv:2609.07662). No other changes",
+      "titleCn": "跨供应商和版本测量模型行为的低成本检测方法",
+      "abstractCn": "语言模型为人类提供建议、陪伴人类，并在人类睡觉时编写软件。衡量它们的行为很困难：行为需要在不同的模型、提示和版本中进行反复采样，其中大部分行为存在于非结构化文本中，必须先进行编码才能进行计数，而最终结果必须足够清晰和严谨，才能有用地比较模型和供应商。为了应对这些限制，我们提出了一种简单、廉价、可扩展且可复制的模型行为研究方法。每个研究都是在一个跨供应商面板上以相同方式运行的冻结的公共刺激运行，每个模型的成本低于几美元。每个模型以三种方式之一读取其文本记录，选择方式取决于行为所需的解释程度：对固定回复进行精确匹配、由大型语言模型裁判应用的代码簿（裁判与人类编码器的协议按代码报告）以及记录代理行为而不依赖于其言论的仪器化环境。在四年来的前沿和开源实验室模型发布中运行这些仪器，发现了四件事。收敛性：被要求选择一个词时，44个模型中有27个至少在四次尝试中回答了“机缘巧合”。抵抗性：一个附加的“对吗？”可以将认可度提高高达32个百分点，并且随着世代的进步，其符号从谄媚变为抵抗，这与标签的表面形式有关。房屋：在压力下模型是否持有立场反映了其世代，而其持有方式则反映了构建它的实验室。账户：当被告知做某事时，其存储库中的文档与其行为相矛盾，一些编码代理从不默默遵从，而另一些则始终遵从，并且相同的模型可以随着其运行的框架而改变。在每个发布上重新运行，像这样的电池可以跟踪供应商和随时间推移的行为变化。"
+    },
+    {
+      "id": "2611.08714",
+      "title": "Patching the Blind Spots: Reversible LLM Rule Overlay for Frozen Fraud Detectors",
+      "authors": [
+        {
+          "name": "Bo Qu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhurong Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Frank Zahradnik",
+          "affiliation": ""
+        },
+        {
+          "name": "Ming Ouyang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Gradient-boosted trees dominate industrial tabular fraud classification, but even a well-trained model has blind spots, and retraining a deployed model is not always safe. We bring LLM reasoning to patching such a model without modifying it: LLMs read its tree digest and SHAP attributions, reason about the fraud it misses, and propose rules anchored on features it underweights, screened and calibrated into a reversible log-lift overlay at the production cut-off. Single-LLM benefit is high-variance and inverts between datasets, so we pool three diverse backbones by logit averaging, trading peak gain for a bounded worst case. On an experimental detector trained on sampled, selection-biased real-world e-commerce data, tuned continued training regresses, whereas the overlay gains on average +2.26% recall at equal precision ($Δ$R@P) and +1.60% precision at equal recall ($Δ$P@R). Replayed offline on a legacy production detector, the overlay, calibrated on one month and frozen, stays more precise at equal recall for seven months (+5.64% $Δ$P@R). On seven bias-shift variants of a public benchmark it raises $Δ$P@R on all and keeps $Δ$R@P near neutral. LLM reasoning over a model's diagnostics can improve a deployed tabular classifier through readable predicates naming the fraud they cover.",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.08714",
+      "pdfUrl": "https://arxiv.org/pdf/2611.08714.pdf",
+      "comment": "12 pages, 1 figure, 8 tables",
+      "titleCn": "修补盲点：针对冻结欺诈检测器的可逆LLM规则叠加",
+      "abstractCn": "梯度提升树在工业表格式欺诈分类中占据主导地位，但即使是训练良好的模型也存在盲点，而重新训练已部署的模型并不总是安全的。我们引入大型语言模型推理来修补此类模型，而无需修改模型本身：LLM读取其树摘要和SHAP归因，推理其错过的欺诈，并提出基于其低权重特征的规则，经过筛选和校准，形成在生产截止点可逆的对数提升覆盖层。单个LLM的收益具有高方差，并在不同数据集间反转，因此我们通过逻辑平均池化三种不同的主干网络，以牺牲峰值收益换取有界的最坏情况。在一个基于采样、选择偏差的真实世界电子商务数据训练的实验检测器上，调优的持续训练会降低性能，而覆盖层平均在相同精度下召回率提升+2.26% ($Δ$R@P)，在相同召回率下精度提升+1.60% ($Δ$P@R)。在遗留生产检测器上离线重放，校准一个月后冻结的覆盖层，在七个月内保持相同召回率下的更高精度（+5.64% $Δ$P@R）。在七个偏差变化变体公共基准上，它在所有情况下都提高了$Δ$P@R，并将$Δ$R@P保持在接近中性。LLM对模型诊断的推理可以通过可读的谓词命名其覆盖的欺诈，从而改进已部署的表格式分类器。"
+    },
+    {
+      "id": "2611.10508",
+      "title": "Imperfectly Imperfect: Evaluating Graded Cognitive Diversity in LLM Persona Simulations",
+      "authors": [
+        {
+          "name": "Sion Weatherhead",
+          "affiliation": ""
+        },
+        {
+          "name": "Ben Newell",
+          "affiliation": ""
+        },
+        {
+          "name": "Aaron Belbasis",
+          "affiliation": ""
+        },
+        {
+          "name": "Flora Salim",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language model (LLM) agents are increasingly used as synthetic participants in social, behavioural, and decision-making research, yet it remains unclear whether they can express graded cognitive diversity as assigned when engaging in simulated behaviour. We introduce a cognition-suite evaluation that tests whether simulated populations reproduce human variation in reasoning, self-reported traits, their associations, and downstream behaviour. Agents conditioned on synthetic or human-derived profiles of cognitive reflection, Need for Cognition, and Big Five personality answer the same suite as a cohort of 473 adults: two newly assembled tests, a Cognitive Reflection Test (CRT) and a Behavioural Reflection Test (BRT) whose decision scenarios measure reflection in behaviour, alongside an established CRT and the two trait questionnaires. Across seven full-battery simulation runs of four models, agents recover Need for Cognition and Big Five trait distributions on self-report questionnaires, but fall short on simulating diversity of cognitive task performance and downstream behaviours. In the four Claude Sonnet 4.6 runs, every agent scores full marks on both CRTs, whatever reflection level its persona was assigned. In the other three runs agents make intuitive-lure errors (the tempting wrong answers CRT items invite), but 49 to 85% score full marks, against under 10% in the human sample. Claude Sonnet 5 comes closest to people's item-by-item pattern of lures; the other two runs give fewer lures and vary less between items. In the BRT scenarios, every run over-produces 8 to 11 of 15 coded behaviours by at least 20 percentage points, and people's links between reflection and behaviour carry over only in part. Useful synthetic populations must preserve not only trait descriptors but the structured variation in reasoning, error type, and behaviour those descriptors are meant to organise.",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CY"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.10508",
+      "pdfUrl": "https://arxiv.org/pdf/2611.10508.pdf",
+      "comment": "Accepted at NeurIPS 2026 (Evaluations & Datasets Track). 42 pages, 14 figures. Code: https://github.com/sion-w/CogSuite",
+      "titleCn": "不完美的不完美：评估LLM角色模拟中的分级认知多样性",
+      "abstractCn": "大型语言模型（LLM）代理越来越多地被用作社会、行为和决策研究中的合成参与者，但尚不清楚它们在参与模拟行为时是否能表达所分配的分级认知多样性。我们引入了一套认知评估，用于测试模拟人群是否能在推理、自我报告的特质、其关联以及下游行为中再现人类的变异。基于认知反思、认知需求和大五人格的合成或人类衍生特质的代理，与473名成年人的队列回答了同一套测试：两项新汇编的测试——认知反思测试（CRT）和行为反思测试（BRT），其决策场景测量行为中的反思，以及一项已建立的CRT和两项特质问卷。在四个模型的七次完整电池模拟运行中，代理在自我报告问卷中恢复了认知需求和五大特质的分布，但在模拟认知任务表现和下游行为多样性方面有所欠缺。在四次Claude Sonnet 4.6运行中，每个代理在两项CRT中都获得满分，无论其角色被分配何种反思水平。在其他三次运行中，代理犯了直觉诱惑错误（CRT项目邀请的诱人错误答案），但49%至85%的代理获得满分，而人类样本中不到10%获得满分。Claude Sonnet 5最接近人类的逐项诱惑模式；其他两次运行提供的诱惑较少，项目间差异较小。在BRT场景中，每次运行都至少以20个百分点的幅度过度产生15个编码行为中的8至11个，而人类在反思与行为之间的联系仅部分延续。有用的合成人群不仅需要保留特质描述符，还需要保留那些描述符旨在组织的推理、错误类型和行为中的结构化变异。"
+    },
+    {
+      "id": "2611.11342",
+      "title": "Agent Self-Improvement with Frozen Weights: The Added Value and Limits of Failure Traces",
+      "authors": [
+        {
+          "name": "Arkid Mitra",
+          "affiliation": ""
+        },
+        {
+          "name": "Snehil Saluja",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We evaluate whether an AI agent's harness, the notes around its model, can learn from the agent's failure traces beyond a matched search that never sees them. It can, but less than it looks. We tested an open 9-billion-parameter model with fixed weights; a larger teacher model wrote its notes. On generated customer-service decisions, where both note writers were told the target rules, notes based on the agent's mistakes improved accuracy by 4.0 percentage points over notes from the same process with the mistakes withheld. That process alone, trying and keeping better-scoring notes, reached about 60% of the total improvement. In full customer-service conversations the same notes showed no demonstrated improvement. Separately, a strict screen of single lessons admitted two customer-service lessons, still awaiting tests on new data, and one tool-use lesson, written without seeing the agent's mistakes, which showed no demonstrated gain on new tool-use tasks. A neutral note with no procedure scored higher than the learned lessons (exploratory). A blind audit judged 146 of 240 tool-use test items defective.",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.11342",
+      "pdfUrl": "https://arxiv.org/pdf/2611.11342.pdf",
+      "comment": "6 pages, 1 figure, 1 table. Code and data: https://github.com/hopit-ai/harness-mistakes-artifacts",
+      "titleCn": "带有冻结权重的智能体自我改进：失败追踪的附加值与局限性",
+      "abstractCn": "我们评估了人工智能代理的约束机制，即围绕其模型的注释，是否能在从未接触过这些代理失败轨迹的匹配搜索之外进行学习。它确实能学习，但效果不如预期。我们测试了一个参数量为90亿的固定权重开放模型，由一个更大的教师模型撰写其注释。在生成的客户服务决策中，告知两位注释撰写者目标规则的注释，基于代理错误记录的准确率比隐藏错误的相同过程提高了4个百分点。仅此过程，通过尝试并保留评分更高的注释，就达到了约60%的总改进。在完整的客户服务对话中，相同的注释并未显示出任何改进。此外，严格的单一课程筛选中包含了两个客户服务课程，仍需在新数据上测试，以及一个工具使用课程，该课程在未看到代理错误的情况下撰写，在新工具使用任务上并未显示出任何收益。一个没有程序的中立注释（探索性）得分高于学习到的课程。盲审判定240个工具使用测试项中的146项存在缺陷。"
+    },
+    {
+      "id": "2611.14850",
+      "title": "Effective Teacher Support for Reasoning Distillation",
+      "authors": [
+        {
+          "name": "Lavinia Ghita",
+          "affiliation": ""
+        },
+        {
+          "name": "Dhruv Desai",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Forward-KL language-model distillation normally computes dense teacher and student scores over the full vocabulary at every supervised position, making training and stored teacher targets expensive. We instead distill from the teacher's highest-probability vocabulary fraction, renormalizing the retained mass as we sweep support from 100% to 0.01%. Our main study distills Qwen3 4B -> 1.7B. We confirm the broader support-reduction finding on larger Qwen3 8B -> 4B and Nemotron Nano 12B -> 9B pairs and under answer-only supervision. We evaluate generation primarily on MMLU-Pro and secondarily on GPQA-Diamond. Across the Qwen3 settings, retaining 0.01% of the vocabulary causes no observed MMLU-Pro degradation relative to full-vocabulary distillation, although disagreement with the complete teacher distribution increases. Nemotron Nano matches full-vocabulary MMLU-Pro at 0.1%, but smaller fractions fail to emit the closing reasoning tag, showing that the reliable cutoff depends on the model family. At 0.01% support, caching the retained next-token scores from the teacher forward pass cuts training step time by 38%, while restricting student output computation to those tokens cuts peak memory by 24%; neither causes observed MMLU-Pro degradation.",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14850",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14850.pdf",
+      "comment": null,
+      "titleCn": "有效的教师支持推理蒸馏",
+      "abstractCn": "正向KL语言模型蒸馏通常在每次监督位置上计算覆盖整个词汇表的密集教师和学生学习分数，导致训练和存储教师目标成本高昂。我们则从教师最高概率词汇部分进行蒸馏，并在支持从100%扫到0.01%的过程中重新归一化保留的权重。我们的主要研究蒸馏Qwen3 4B到1.7B。我们在更大的Qwen3 8B到4B和Nemotron Nano 12B到9B对以及仅答案监督的情况下验证了更广泛的支持减少发现。我们主要在MMLU-Pro上评估生成，次要在GPQA-Diamond上评估。在Qwen3设置中，保留0.01%的词汇相对于全词汇蒸馏不会导致观察到的MMLU-Pro退化，尽管与完整教师分布的分歧增加。Nemotron Nano在0.1%的支持下匹配全词汇MMLU-Pro，但更小的分数无法发出结束推理标签，表明可靠的截止点取决于模型家族。在0.01%的支持下，缓存教师前向传递中保留的下一个标记分数将训练步时间缩短38%，而将学生输出计算限制在这些标记上将峰值内存减少24%；两者都不会导致观察到的MMLU-Pro退化。"
+    },
+    {
+      "id": "2611.14861",
+      "title": "Is Jev a Good Multilingual Judge?",
+      "authors": [
+        {
+          "name": "Wei Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yi Fan",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiyan Fu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Generative large language models are widely used for multilingual text evaluation, yet whether decision models that directly output judgment probabilities can serve as multilingual judges has received limited attention. We evaluate Jev against generative LLM judges on four multilingual benchmarks with human annotations, covering up to 47 language varieties and three evaluation formats: binary decisions, pairwise comparisons, and graded ratings. At approximately $1/31$ to $1/61$ of GPT-6.1's evaluation cost, Jev is competitive on most multilingual judging tasks, but falls behind GPT-6.1 on knowledge-intensive answer verification. Further analysis shows that Jev is more likely to accept incorrect answers in low-resource languages than in English and that its probability outputs help identify errors across tasks. Based on these findings, we offer recommendations on evaluation instructions, confidence-based selection, and model routing, providing empirical guidance for using Jev as a multilingual judge.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14861",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14861.pdf",
+      "comment": null,
+      "titleCn": "杰夫是一位优秀的多语言法官吗？",
+      "abstractCn": "生成式大型语言模型被广泛应用于多语言文本评估，但直接输出判断概率的决策模型能否作为多语言评判者尚未得到充分关注。我们在包含高达47种语言变体和三种评估格式（二元决策、两两比较和分级评分）的四项带人工标注的多语言基准测试中，评估了Jev与生成式LLM评判者的表现。Jev的评估成本约为GPT-6.1的1/31至1/61，在大多数多语言评判任务中表现具有竞争力，但在知识密集型答案验证方面落后于GPT-6.1。进一步分析表明，Jev在低资源语言中比英语更容易接受错误答案，且其概率输出有助于识别任务中的错误。基于这些发现，我们提出了关于评估指令、基于置信度的选择和模型路由的建议，为将Jev作为多语言评判者提供实证指导。"
+    },
+    {
+      "id": "2611.14908",
+      "title": "Hy ASR 3.0 Technical Report",
+      "authors": [
+        {
+          "name": "Aoxiong Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Auden Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Chao Huang",
+          "affiliation": ""
+        },
+        {
+          "name": "Chuanyang Hu",
+          "affiliation": ""
+        },
+        {
+          "name": "Eitan Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Ethan Zou",
+          "affiliation": ""
+        },
+        {
+          "name": "Fangming Feng",
+          "affiliation": ""
+        },
+        {
+          "name": "Guangyu Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Guinan Li",
+          "affiliation": ""
+        },
+        {
+          "name": "He Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiahong Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Meng Yu",
+          "affiliation": ""
+        },
+        {
+          "name": "Mingyu Cui",
+          "affiliation": ""
+        },
+        {
+          "name": "Peng Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Rongjie Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Steve Yves",
+          "affiliation": ""
+        },
+        {
+          "name": "Teddy Sun",
+          "affiliation": ""
+        },
+        {
+          "name": "Tian Zheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Wei Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yang Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Yixuan Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhennan Lin",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhihang Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhuohao Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Ziqiang Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Anji Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Bang Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Caisheng Ouyang",
+          "affiliation": ""
+        },
+        {
+          "name": "Chengqi Zhu",
+          "affiliation": ""
+        },
+        {
+          "name": "Chong Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Conglian Xie",
+          "affiliation": ""
+        },
+        {
+          "name": "Dongdong Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Edward Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Evelynn Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Ferman Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Feng Lu",
+          "affiliation": ""
+        },
+        {
+          "name": "Gang Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jathon Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jaxl Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiachen Luo",
+          "affiliation": ""
+        },
+        {
+          "name": "Jian Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Jingxi Gui",
+          "affiliation": ""
+        },
+        {
+          "name": "Kysun Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Liang Dong",
+          "affiliation": ""
+        },
+        {
+          "name": "Longsha Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Na Hu",
+          "affiliation": ""
+        },
+        {
+          "name": "Qi Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Rilin Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Rui Yuan",
+          "affiliation": ""
+        },
+        {
+          "name": "Shanshan Sang",
+          "affiliation": ""
+        },
+        {
+          "name": "Siyu Yan",
+          "affiliation": ""
+        },
+        {
+          "name": "Steven Hong",
+          "affiliation": ""
+        },
+        {
+          "name": "Taihui Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Weiwei Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiangyu Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiaotong Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xue Hu",
+          "affiliation": ""
+        },
+        {
+          "name": "Xue Jiang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yameng Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Yifu Sun",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuhuan Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhiang Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhibin Wang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We present Hy ASR 3.0, a large language model (LLM)-based automatic speech recognition (ASR) system that delivers strong recognition accuracy, supports flexible contextual conditioning, and maintains robust recognition performance across diverse speech conditions. Hy ASR 3.0 supports Mandarin Chinese, English and 13 Chinese dialect groups, including Cantonese. Among the evaluated systems, it achieves the lowest aggregate error rates on public Mandarin Chinese, English, and Cantonese benchmarks and the lowest error rates on the corresponding internal test sets, alongside first-tier dialect recognition performance. Beyond audio-only transcription, Hy ASR 3.0 supports multiple forms of external context, including hotword lists, question--answer dialogues, and summaries, enabling the use of task-relevant information during recognition. The model also leverages intra-utterance context to disambiguate homophonic and phonetically similar keywords using information from other parts of the same utterance, without requiring a separate contextual input. Evaluations demonstrate strong contextual recognition in both external-context and intra-utterance settings, as well as robust recognition of long-form speech, children's and older adults' speech, low-volume speech, and speech in noisy environments. This report describes the model architecture and training methodology and presents evaluations across recognition accuracy, context utilization, and robustness.",
+      "categories": [
+        "cs.CL",
+        "eess.AS"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14908",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14908.pdf",
+      "comment": "12 pages, Technical Report. Project Leads: Auden Li, Eitan Wang, and Steve Yves (listed in alphabetical order by first name)",
+      "titleCn": "Hy ASR 3.0 技术报告",
+      "abstractCn": "我们介绍了Hy ASR 3.0，这是一个基于大型语言模型（LLM）的自动语音识别（ASR）系统，具有强大的识别准确率、支持灵活的上下文调节，并在各种语音条件下保持稳健的识别性能。Hy ASR 3.0支持普通话、英语以及包括粤语在内的13个中文方言组。在评估的系统中，它在公开的普通话、英语和粤语基准测试中实现了最低的综合错误率，并在相应的内部测试集中取得了最低的错误率，同时具备一流的方言识别性能。除了音频转录外，Hy ASR 3.0还支持多种外部上下文形式，包括唤醒词列表、问答对话和摘要，能够在识别过程中利用任务相关的信息。该模型还利用语句内上下文，通过同一语句其他部分的信息来消除同音异义词和语音相似的词语歧义，无需额外的上下文输入。评估结果表明，该模型在外部上下文和语句内上下文设置中均表现出强大的上下文识别能力，以及稳健的长语音、儿童语音、老年人语音、低音量语音和噪声环境语音识别能力。本报告描述了模型架构和训练方法，并展示了在识别准确率、上下文利用和稳健性方面的评估结果。"
+    },
+    {
+      "id": "2611.14910",
+      "title": "MuEdit: An efficient multi-task editing method towards inter-domain knowledge conflicts",
+      "authors": [
+        {
+          "name": "Songshi Liang",
+          "affiliation": ""
+        },
+        {
+          "name": "Ting-En Lin",
+          "affiliation": ""
+        },
+        {
+          "name": "Zixuan Huang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuchuan Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yongbin Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Zihe Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Rui Yan",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language models (LLMs) require frequent knowledge updates across heterogeneous domains, but existing editing methods fail when applied sequentially to multi-task settings. We trace this collapse to inter-domain null-space misalignment: heterogeneous tasks induce distinct Jacobian geometries, causing their common null space to shrink dramatically and leaving insufficient admissible directions for conflict-free updates. We propose the Conflict Index to quantify this geometric interference, and introduce Mu-Edit, which mitigates multi-task conflicts via (1) conflict-aware ordering to minimize cumulative interference, and (2) dynamic low-rank approximation to expand the null space when ordering alone is insufficient. Experiments across five functional domains and three backbones show that Mu-Edit significantly outperforms existing baselines in multi-task editing performance while preserving general capabilities, and remains effective under incremental task arrival.",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14910",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14910.pdf",
+      "comment": "30 pages,accepted by NeurIPS 2026",
+      "titleCn": "MuEdit：一种面向跨领域知识冲突的高效多任务编辑方法",
+      "abstractCn": "大型语言模型（LLMs）需要在异构领域内频繁更新知识，但现有的编辑方法在应用于多任务设置时顺序执行会失效。我们将此问题归因于跨领域的零空间错配：异构任务会诱导不同的雅可比几何结构，导致它们的公共零空间急剧缩小，从而留下不足的可行方向进行无冲突更新。我们提出了冲突指数来量化这种几何干扰，并引入了Mu-Edit方法，通过（1）冲突感知排序以最小化累积干扰，以及（2）动态低秩近似在排序不足时扩展零空间，来缓解多任务冲突。在五个功能领域和三种主干网络的实验表明，Mu-Edit在多任务编辑性能上显著优于现有基线，同时保留了泛化能力，并在增量任务到达时仍保持有效。"
+    },
+    {
+      "id": "2611.14925",
+      "title": "ToolTurns: Benchmarking LLM Agents in Multi-Turn Dialogue",
+      "authors": [
+        {
+          "name": "Milad Gholami",
+          "affiliation": ""
+        },
+        {
+          "name": "Brendan King",
+          "affiliation": ""
+        },
+        {
+          "name": "Jeffrey Flanigan",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Tool-using language models are increasingly deployed in conversational settings, yet most large-scale tool-use benchmarks focus on isolated requests. We introduce ToolTurns, a benchmark of 2,620 problems spanning 1,827 tools and 11,004 API endpoints across 47 categories. Each dialogue begins with an intentionally underspecified request and continues through two context-dependent follow-ups, testing clarification, tool use, and retention of conversational context. We also introduce an open-source user simulator that reveals withheld context through dialogue and generates follow-up requests, with a checker--fixer pipeline for improving its turns. Across nine language models, the best agent resolves 69.6% of individual requests but completes only 39.8% of full dialogues. Under this evaluation protocol, every evaluated model receives lower success scores on follow-up requests than on the initial request, and dialogue-quality rubric scores and task success can rank models very differently. Paired turn-level evaluation shows that the checker--fixer reduces detected dialogue defects, and blind human evaluation favors the revised turns. ToolTurns provides a testbed for evaluating whether agents sustain task success across multi-turn dialogue with tools.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14925",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14925.pdf",
+      "comment": null,
+      "titleCn": "ToolTurns：多轮对话中大型语言模型代理的基准测试",
+      "abstractCn": "使用工具的语言模型正越来越多地应用于对话场景，然而大多数大规模工具使用基准测试主要关注孤立的请求。我们介绍了ToolTurns，一个包含2,620个问题的基准测试，涵盖1,827种工具和11,004个API端点，分布在47个类别中。每个对话从一个故意模糊的请求开始，并通过两个依赖于上下文的后续请求继续，测试澄清、工具使用以及对话上下文的保持。我们还引入了一个开源的用户模拟器，通过对话揭示隐藏的上下文，并生成后续请求，以及一个检查-修正流程来改进其对话回合。在九个语言模型中，表现最好的代理解决了69.6%的单独请求，但仅完成了39.8%的完整对话。在此评估协议下，每个被评估模型在后续请求上的成功率都低于初始请求，对话质量评分和任务成功率可以显著地区分模型。配对回合级评估显示，检查-修正流程减少了检测到的对话缺陷，而盲法人工评估更倾向于修正后的回合。ToolTurns提供了一个测试平台，用于评估代理在使用工具的多回合对话中是否能够持续保持任务成功率。"
+    },
+    {
+      "id": "2611.14935",
+      "title": "Do Large Language Models Show Racial and Sex Bias in Pain Management? A Counterfactual Audit of GPT, Claude, Gemini, Llama, DeepSeek and Qwen",
+      "authors": [
+        {
+          "name": "Richard J. Young",
+          "affiliation": ""
+        },
+        {
+          "name": "Alice M. Matthews",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Racial and ethnic minority patients receive less pain treatment than non-Hispanic White patients, and large language models (LLMs) used as medical AI could reproduce that bias. Prior audits tested a few proprietary models, stated race explicitly and rarely measured the models' own response instability. In exploratory, non-preregistered analyses, Study 1 had four open-weight LLMs assess six acute-pain vignettes in every combination of four races and two sexes, with identity stated or cued only by a name (two names per group), comparing each identity with a White male reference on the same case and sampling seed. In Study 2, 24 configurations of 17 models, including OpenAI's GPT-4.1 mini and gpt-oss, Anthropic's Claude Haiku 4.5, Google's Gemini 2.5 Flash, Meta's Llama, DeepSeek and Qwen, with reasoning on and off and at two precisions, answered the same vignettes and the 50 clinician-written Q-Pain cases. In this single-prompt, JSON-constrained task, no difference survived correction in Study 1, none of 1,386 comparisons survived the false discovery rate in Study 2, and every pain-severity difference was equivalent to zero within one point on a 0-10 scale (within a quarter point for 237 of 238 Q-Pain comparisons). Opioid decisions were bounded less precisely (Study 1 could not exclude differences of about 20 percentage points), so they show no detected difference, not proof of none. The few differences surviving correction within a model favoured Black patients. Models differed far more from one another and across their own settings than between patients (the reference patient received the high opioid dose in 6% to 93% of responses), although serving software, provider and prompt format also differed. Fairness audits of clinical AI should use several names per group, pair comparisons on the seed, report the noise floor and test each deployed configuration.",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CY"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14935",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14935.pdf",
+      "comment": "31 pages, 5 figures, 14 tables. Code, vignettes, panel definition, spend ledger and all 58,080 raw model responses: https://github.com/ricyoung/qpain-llm-counterfactual-audit",
+      "titleCn": "大型语言模型在疼痛管理中是否存在种族和性别偏见？GPT、Claude、Gemini、Llama、DeepSeek和Qwen的对照审查",
+      "abstractCn": "少数族裔患者比非西班牙裔白人患者接受更少的疼痛治疗，而作为医疗AI使用的大型语言模型（LLMs）可能会复制这种偏见。之前的审计测试了少数几个专有模型，明确声明种族，并且很少测量模型自身的响应不稳定性。在探索性、未预先注册的分析中，研究1让四个开放权重LLMs以四种种族和两种性别的所有组合评估六个急性疼痛案例，身份仅通过名称声明或提示（每组两个名称），并将每个身份与同一案例中的白人男性参考进行比较，同时使用相同的案例和采样种子。研究2中，17个模型的24种配置，包括OpenAI的GPT-4.1 mini和gpt-oss、Anthropic的Claude Haiku 4.5、Google的Gemini 2.5 Flash、Meta的Llama、DeepSeek和Qwen，在推理开启和关闭以及两种精度下，回答了相同的案例和50个临床医生编写的Q-Pain案例。在这个单提示、JSON约束的任务中，研究1中没有任何差异在校正后仍然显著，研究2中1,386个比较中没有任何一个在假发现率校正后显著，并且所有疼痛严重程度差异在0-10量表上都在一个点内相当于零（237个Q-Pain比较中有237个在四分之一点内）。阿片类药物决策的界限不够精确（研究1无法排除约20个百分点的差异），因此它们没有显示出检测到的差异，而不是证明没有差异。在模型内校正后幸存的少数差异有利于黑人患者。模型之间的差异远大于患者之间的差异（参考患者在高阿片剂量下收到6%到93%的响应），尽管服务软件、提供者和提示格式也有所不同。临床AI的公平性审计应每组使用多个名称，在种子上进行配对比较，报告噪声水平，并测试每个部署配置。"
+    },
+    {
+      "id": "2611.14960",
+      "title": "Termination Lag: Coding Agents Solve Early but Stop Late",
+      "authors": [
+        {
+          "name": "Musa Cim",
+          "affiliation": ""
+        },
+        {
+          "name": "Burak Topcu",
+          "affiliation": ""
+        },
+        {
+          "name": "Mahmut Taylan Kandemir",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Coding agents can solve a task well before they stop working on it. We characterize \\emph{termination lag}--the number of steps between an agent's first correct patch and the end of its run--across five models, two agent frameworks, and three SWE-bench datasets by recording and testing every distinct repository patch generated during execution. Our analysis reveals that 38--82% of successful runs achieve a correct solution on their initial source-code edit. However, agents continue to expend substantial effort after correct patches, with post-solution steps accounting for a median of 35--37% for Qwen3-Coder and 54--60% for Laguna-XS.2 in successful runs on SWE-bench Verified and Multilingual. Agents spend most of these additional steps verifying their work and exploring the repository. In a small fraction of cases (1--8%), this continued activity leads agents to undo their earlier correct patch, leaving the final solution incorrect.",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14960",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14960.pdf",
+      "comment": null,
+      "titleCn": "终止滞后：编码代理早于预期完成编码但停止工作较晚",
+      "abstractCn": "编码代理可以在停止工作之前很好地完成任务。我们通过记录和测试执行过程中生成的每个独特存储库补丁，在五个模型、两个代理框架和三个SWE-bench数据集上，对代理的**终止延迟**——即代理首次正确补丁与运行结束之间的步骤数——进行了表征。我们的分析表明，38--82%的成功运行在初始源代码编辑时就达到了正确解决方案。然而，代理在正确补丁后仍会投入大量精力，在SWE-bench验证和多语言的成功运行中，Qwen3-Coder和Laguna-XS.2的后解决方案步骤分别占中位数的35--37%和54--60%。在这些额外步骤中，代理主要花费时间验证其工作并探索存储库。在少数情况下（1--8%），这种持续活动会导致代理撤销其早期的正确补丁，使最终解决方案不正确。"
+    },
+    {
+      "id": "2611.14975",
+      "title": "Aggregate Accuracy Hides Diagnosis-Specific Failure in Medical Vision-Language Models",
+      "authors": [
+        {
+          "name": "Shreya Ajay Kale",
+          "affiliation": ""
+        },
+        {
+          "name": "Angad Ripudaman Singh Bajwa",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Medical vision-language models (VLMs) are compared mainly by accuracy averaged across findings, a summary that can hide complete failure on a single diagnosis. We audit five open medical VLMs (MedGemma-4B, Lingshu-7B, HuatuoGPT-Vision-7B, Qwen2.5-VL-7B, and MedVLM-R1) on 6,048 ChestX-ray14 questions balanced by sex, age, finding, and label. On the 432 pneumothorax-positive X-rays, HuatuoGPT-Vision and Qwen2.5-VL detect zero cases while MedGemma and Lingshu detect 38% and 67% of the same images. The two failing models answer \"no\" to all 864 pneumothorax cases (balanced accuracy 0.500, chance), yet produce fluent, anatomically specific explanations that name the signs of a collapsed lung and then deny them, with no hedge or abstention. This failure is not an artifact of prompting, image resolution, label ambiguity, or model scale. It persists across four prompt formats, at native resolution, and on single-label cases. A within-model control shows the same forced prompt gives HuatuoGPT 79% recall on nodule but only 6% on pneumothorax. It survives a tenfold scale increase (Qwen2.5-VL-72B detects 4%) and replicates on SIIM-ACR, an independent dataset with radiologist-drawn masks, where the failing models detect 0 of 432 confirmed pneumothoraces, including 0 of the 144 largest lesions. Reading the models' logits and internal states shows this is not blindness. The two failing models are highly confident yet no better than chance and a linear probe recovers pneumothorax from their hidden representations even where recall is zero, so the finding is represented internally but suppressed at the output. Aggregate accuracy therefore cannot establish that a medical VLM can see a given finding, because a model that misses one can still describe it convincingly. Reporting per-finding recall and specificity on balanced cases is needed to tell the difference.",
+      "categories": [
+        "eess.IV",
+        "cs.CL",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14975",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14975.pdf",
+      "comment": "Accepted at the NeurIPS 2026 Workshop on Medical Reasoning with Vision Language Foundation Models (Med-Reasoner). 16 pages including NeurIPS checklist, 1 figure, 5 tables",
+      "titleCn": "聚合精度掩盖了医疗视觉语言模型中的诊断特定失败",
+      "abstractCn": "医学视觉语言模型（VLMs）主要通过跨发现平均的准确率进行比较，这种总结可能会掩盖在单一诊断上的完全失败。我们对五个公开的医学VLMs（MedGemma-4B、Lingshu-7B、HuatuoGPT-Vision-7B、Qwen2.5-VL-7B和MedVLM-R1）在6,048个经过性别、年龄、发现和标签平衡的ChestX-ray14问题数据集上进行了审计。在432张阳性气胸X光片上，HuatuoGPT-Vision和Qwen2.5-VL未检测到任何病例，而MedGemma和Lingshu分别检测了相同图像的38%和67%。这两个失败的模型对所有864个气胸病例回答“否”（平衡准确率为0.500，即随机概率），但它们生成了流畅且解剖学上具体的解释，先描述了肺塌陷的征象，然后予以否认，没有任何保留或回避。这种失败并非由提示、图像分辨率、标签模糊或模型规模引起。它在四种提示格式、原始分辨率和单标签案例中均持续存在。模型内部控制显示，相同的强制提示使HuatuoGPT在结节上的召回率为79%，但在气胸上仅为6%。即使模型规模扩大十倍（Qwen2.5-VL-72B检测率为4%），这一现象依然存在，并在SIIM-ACR独立数据集上得到验证，该数据集包含放射科医生绘制的掩码，其中失败的模型在432个确认的气胸病例中未检测到任何病例，包括144个最大病灶中的0个。通过读取模型的logits和内部状态可以发现，这并非由于失明。这两个失败的模型表现出高度自信，但表现不如随机概率，线性探针甚至能从其隐藏表示中恢复气胸信息，即使召回率为零，因此该发现内部存在但被输出抑制。因此，汇总准确率无法证明医学VLM能否识别特定发现，因为一个遗漏某个发现的模型仍能对其做出令人信服的描述。需要在平衡案例上报告每个发现的召回率和特异性，以区分差异。"
+    },
+    {
+      "id": "2611.14980",
+      "title": "CoLFA: Collaboration-Guided Lightweight Failure Attribution for LLM-Based Multi-Agent Systems",
+      "authors": [
+        {
+          "name": "Yufei Luo",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuchen Ling",
+          "affiliation": ""
+        },
+        {
+          "name": "Chunrong Fang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Failure attribution in multi-agent systems requires tracing error formation to identify the decisive error step and the responsible agent. However, agents' division of work and information exchange lead to Interleaved Steps and Cluttered Content, requiring models to link executions and check details in lengthy records. This makes it difficult to balance localization accuracy and token cost. We find that multi-agent collaboration also leaves records of how executions connect and content passes between them as results are formed, providing evidence for tracing error formation. Based on this observation, we propose CoLFA (Collaboration-Guided Lightweight Failure Attribution), which uses collaboration cues to organize the attribution input according to how results are formed, determining which steps are examined and how their content is presented. Through Handoff-Guided Step Expansion and Cross-Referenced Content Organization, CoLFA helps the model focus on examining error formation and the role of each decision while reducing the processing of irrelevant and repeated records. Across five settings spanning Who&When and LongRCA and three backbone models, CoLFA achieves the highest exact step-localization accuracy with the lowest token consumption. Compared with individual baselines in each setting, CoLFA improves accuracy by up to 37.50% and reduces token consumption by up to 97.6%.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14980",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14980.pdf",
+      "comment": "23 pages, 4 figures, 15 tables",
+      "titleCn": "CoLFA：面向基于LLM的多智能体系统的协作引导轻量级失效归因",
+      "abstractCn": "在多智能体系统中，故障归因需要追踪错误形成过程以识别决定性错误步骤和负责的智能体。然而，智能体的任务分工和信息交换导致了交错步骤和混杂内容，要求模型将执行过程与详细记录进行关联。这使得在定位精度和token成本之间难以平衡。我们发现，多智能体协作在结果形成过程中也留下了执行过程如何连接以及内容如何在它们之间传递的记录，为追踪错误形成提供了证据。基于这一观察，我们提出了CoLFA（协作引导的轻量级故障归因），该模型利用协作线索根据结果形成方式组织归因输入，确定哪些步骤需要检查以及如何呈现其内容。通过交接引导的步骤扩展和交叉引用的内容组织，CoLFA帮助模型专注于检查错误形成过程和每个决策的作用，同时减少对无关和重复记录的处理。在涵盖Who&When、LongRCA五个场景和三种骨干模型的测试中，CoLFA实现了最高的精确步骤定位精度和最低的token消耗。与每个场景中的独立基线相比，CoLFA将精度提高了最多37.50%，并将token消耗降低了最多97.6%。"
+    },
+    {
+      "id": "2611.14996",
+      "title": "Breaking Bad: \"Going Badly\" Activations Drive Reward Hacking",
+      "authors": [
+        {
+          "name": "Natalia Fischl-Lanzoni",
+          "affiliation": ""
+        },
+        {
+          "name": "Punya Syon Pandey",
+          "affiliation": ""
+        },
+        {
+          "name": "Merlin Stein",
+          "affiliation": ""
+        },
+        {
+          "name": "David Demitri Africa",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Humans often cheat when a task is going badly and a goal feels out of reach. We explore and validate an analogous idea in language models: they exhibit a similar internal pressure state that precedes reward hacking. Using everyday stories (crucially, without any hacking examples), we extract a task badness direction that rises as failures accumulate across three models we study (Qwen3.6-27B, GPT-OSS-20B, and Gemma-4-31B). On impossible or difficult coding tasks, task badness rises over the turns leading up to a hack. Further, subtracting the direction a moderate amount reduces cheating in Qwen, more than steering against desperation or task impossibility. Subtracting task badness by an even larger amount blinds the agent to its own failures, causing it to interpret failing tests as passing. However, the relationship to hacking differs across models: in GPT-OSS, the state separates hacking runs from honest solves but not honest failures. Our results suggest monitoring and mitigation strategies based on tracking this state of task badness. Further, as agents are set on more difficult and long-horizon tasks, states like this may push them toward illegible and obscured chain-of-thought, so oversight will be needed on internal representations such as this.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.14996",
+      "pdfUrl": "https://arxiv.org/pdf/2611.14996.pdf",
+      "comment": null,
+      "titleCn": "《绝命毒师》：\"情况恶化\"激活驱动奖励系统被操控",
+      "abstractCn": "当任务进展不顺利且目标看似遥不可及时，人类常常会作弊。我们在语言模型中探索并验证了一个类似的概念：它们表现出一种与奖励破解（reward hacking）相类似的内部压力状态。我们使用日常故事（关键在于不包含任何作弊示例），从我们研究的三个模型（Qwen3.6-27B、GPT-OSS-20B和Gemma-4-31B）中提取出任务不良方向的指标，该指标随着失败累积而上升。在不可能或困难的编程任务中，任务不良程度在导致作弊的回合中持续上升。此外，通过适度减去该方向，Qwen中的作弊行为会减少，其效果比阻止绝望感或任务不可能性更显著。通过更大幅度地减去任务不良程度，会使智能体对其自身失败产生盲点，导致其将失败的测试结果误判为通过。然而，不同模型与作弊的关系存在差异：在GPT-OSS中，该状态将作弊运行与诚实求解区分开来，但无法区分诚实失败。我们的结果表明，可以通过追踪这种任务不良状态来制定监控和缓解策略。此外，随着智能体被分配更困难、更长远的任务，这类状态可能会将它们推向难以理解和隐藏的思维链（chain-of-thought），因此需要对这类内部表征进行监督。"
+    },
+    {
+      "id": "2611.15010",
+      "title": "Calibrate, Don't Retrain: Decomposing the Value of Annotator Disagreement in Cyberbullying Severity",
+      "authors": [
+        {
+          "name": "Arslan Bisharat",
+          "affiliation": ""
+        },
+        {
+          "name": "Katelyn Skees",
+          "affiliation": ""
+        },
+        {
+          "name": "Manuel Sandoval Madrigal",
+          "affiliation": ""
+        },
+        {
+          "name": "Mujtaba Nazari",
+          "affiliation": ""
+        },
+        {
+          "name": "Ayaan Khan",
+          "affiliation": ""
+        },
+        {
+          "name": "Deborah L. Hall",
+          "affiliation": ""
+        },
+        {
+          "name": "Mohammed Abuhamad",
+          "affiliation": ""
+        },
+        {
+          "name": "Yasin N. Silva",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Machine learning models are often trained on labeled data produced by multiple human annotators. When those annotators disagree, their labels are commonly collapsed into a single majority vote, which discards information about the underlying disagreement. We examine the cost of this practice for cyberbullying severity, a subjective judgment on which annotators disagree heavily. In the corpus we study, all 5 annotators assigned the same severity label to only 4.1% of comments. Turning 5 judgments into one label hides this disagreement and obscures how much the annotators differed in their assessments. In this paper, we ask whether a model can preserve this information by predicting the distribution of annotator judgments instead of a single majority label. We find 3 main results. First, accuracy against the majority label cannot tell competent models apart: 2 models with similar accuracy can differ greatly in how well they match the distribution of annotator judgments. Second, predicting the full distribution requires little extra effort. Calibrating an existing model, which adjusts its output probabilities after training, captures most of the improvement without retraining, across 3 datasets covering severity, abuse, and irony, while training on label distributions adds a small further gain. Third, we examine a dataset that includes annotator demographics, where a single shared model has one advantage and one limit. The advantage is that a model predicting the distribution of judgments matches each demographic group's judgments significantly better than a model trained on majority labels, so both groups gain. The limit is that it does not narrow the gap in performance between the groups, because one shared model cannot encode which group is right on a given comment. Preserving annotator disagreement is therefore a low-cost step toward fairer moderation, though not a complete one.",
+      "categories": [
+        "cs.SI",
+        "cs.CL",
+        "cs.CY",
+        "cs.HC"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.15010",
+      "pdfUrl": "https://arxiv.org/pdf/2611.15010.pdf",
+      "comment": "26 pages. Submitted to PACMHCI (CSCW). Code and data: https://github.com/arslanbisharat/severity",
+      "titleCn": "校准而非重新训练：分解标注者分歧在网络欺凌严重程度中的价值",
+      "abstractCn": "机器学习模型通常在由多个人工标注者生成的标记数据上进行训练。当这些标注者意见不一致时，他们的标签通常会被合并为单一多数票，从而丢弃了关于潜在分歧的信息。我们考察了这种做法在网暴严重程度上的代价，这是一个标注者意见分歧严重的主观判断。在我们研究的语料库中，所有5个标注者只对4.1%的评论分配了相同的严重程度标签。将5个判断转化为一个标签隐藏了这种分歧，并掩盖了标注者在评估上的差异程度。在本文中，我们提出一个问题：模型是否可以通过预测标注者判断的分布而不是单一多数票标签来保留这些信息。我们发现了3个主要结果。首先，针对多数票标签的准确率无法区分优秀的模型：两个准确率相似的模型在匹配标注者判断分布方面可能存在巨大差异。其次，预测完整分布所需的额外工作量很小。校准现有模型（在训练后调整其输出概率）可以在不重新训练的情况下捕捉到大部分改进，涵盖严重程度、虐待和反讽三个数据集，而训练标签分布只会带来微小的额外增益。第三，我们考察了一个包含标注者人口统计信息的数据集，其中单一共享模型有一个优势和一个局限。优势在于，预测判断分布的模型比在多数票标签上训练的模型显著更好地匹配每个群体群体的判断，从而使两个群体都受益。局限在于它不会缩小群体间性能差距，因为单一共享模型无法编码在特定评论中哪个群体是正确的。因此，保留标注者分歧是迈向更公平审核的低成本步骤，尽管它并不完整。"
+    },
+    {
+      "id": "2611.15041",
+      "title": "AROMA: Adaptive Representation-Oriented Multimodal Actuation for Vision-Language Model Control",
+      "authors": [
+        {
+          "name": "Zhaoning Zhang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Mechanistic localization does not by itself yield usable control: causal sensitivity may occupy little activation energy, an accurate local direction may fail at finite scale, and a reachable numeral target may be wrong. We introduce AROMA (Adaptive Representation-Oriented Multimodal Actuation), a frozen-VLM control framework separating where to intervene, which geometry and gain to use, how to reach a target, which target to pursue, and when to act. In Llama-3.2-11B-Vision-Instruct, four dimensions of a causally validated cross-attention head explain 89.82% of cardinality sensitivity but only 9.52% of median activation energy; magnitude-normalized causal subspace actuation converts this mismatch into finite control, improving exact-count accuracy on untouched procedural data by +8.00 pp. Iterative Minimal-Effort Actuation (MEA) reaches 81.25% of oracle targets versus 15.18% for a frozen direction under matched step budgets. With target and gate frozen before evaluation, targeted MEA improves the previous frozen policy from 34.444% to 38.730% on a new natural Stage-2 cohort (N=630; paired p=4.63e-7) and yields 65.741% versus 65.153% over all 7,992 examples while editing only 63 inputs. Prospective routing, replication across heads and models, and comparisons with attribution-steering baselines further characterize each stage, separating localization, actuation, reachability, target quality, and selective deployment as distinct control problems.",
+      "categories": [
+        "cs.LG",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.15041",
+      "pdfUrl": "https://arxiv.org/pdf/2611.15041.pdf",
+      "comment": "39 pages, 16 figures",
+      "titleCn": "AROMA：自适应表示导向的多模态驱动，用于视觉语言模型控制",
+      "abstractCn": "机制定位本身并不能直接产生可用的控制效果：因果关系敏感性可能只需要很小的激活能，精确的局部方向在有限尺度下可能失效，而可达的数值目标可能错误。我们引入AROMA（自适应表征导向的多模态驱动），这是一个冻结变长局部模型（VLM）控制框架，它将干预位置、使用何种几何形状和增益、如何达到目标、追求哪个目标以及何时行动等问题分离。在Llama-3.2-11B-Vision-Instruct中，经过因果验证的跨注意力头的四个维度解释了89.82%的基数敏感性，但仅解释了9.52%的中位数激活能；幅度归一化的因果子空间驱动将这种不匹配转化为有限控制，通过在未处理的程序数据上提高精确计数精度，提升了8.00个百分点。迭代最小努力驱动（MEA）在匹配的步数预算下达到了81.25%的启示目标，而冻结方向仅达到了15.18%。在评估前冻结目标和门控，目标驱动MEA将先前冻结策略在新自然Stage-2队列（N=630；配对p=4.63e-7）上的表现从34.444%提升到38.730%，并在所有7,992个示例中产生了65.741%的准确率，同时仅修改了63个输入。前瞻性路由、跨头和模型的复制，以及与归因引导基线的比较进一步刻画了每个阶段，将定位、驱动、可达性、目标质量和选择性部署作为不同的控制问题进行分离。"
+    },
+    {
+      "id": "2611.15049",
+      "title": "Science Prediction Universe",
+      "authors": [
+        {
+          "name": "Zengji Tu",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiang Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiarui Sun",
+          "affiliation": ""
+        },
+        {
+          "name": "Ruoyu Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhihui Qi",
+          "affiliation": ""
+        },
+        {
+          "name": "Chengda Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yutao Zhou",
+          "affiliation": ""
+        },
+        {
+          "name": "Bo Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Ziyan Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jialong Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Liang Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Kuan Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Steven Dillmann",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuanqi Du",
+          "affiliation": ""
+        },
+        {
+          "name": "Soojung Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Shizhe Diao",
+          "affiliation": ""
+        },
+        {
+          "name": "Jianjun Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Junlang Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Xuming Hu",
+          "affiliation": ""
+        },
+        {
+          "name": "Lin Chang",
+          "affiliation": ""
+        },
+        {
+          "name": "Baobao Chang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xiaowen Chu",
+          "affiliation": ""
+        },
+        {
+          "name": "Philip S. Yu",
+          "affiliation": ""
+        },
+        {
+          "name": "Tong-Yi Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Hao Cheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Qin Han",
+          "affiliation": ""
+        },
+        {
+          "name": "Yanye Feng",
+          "affiliation": ""
+        },
+        {
+          "name": "Chenru Duan",
+          "affiliation": ""
+        },
+        {
+          "name": "Chuncheng Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yan Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuchen Gao",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhao Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Ronghua Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Tory Xu",
+          "affiliation": ""
+        },
+        {
+          "name": "Renjian Song",
+          "affiliation": ""
+        },
+        {
+          "name": "Yaokai Fu",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Humanity has long sought to explain natural phenomena. Reliable prediction of experimental outcomes is a central test of our understanding of the processes that produce them. If artificial general intelligence (AGI) is to surpass human scientific capabilities, it must also predict experimental outcomes more reliably than humans. Such capabilities could accelerate scientific discovery across disciplines, help address humanity's most pressing challenges, and improve human well-being. We introduce Science Prediction Universe (SPU), a benchmark of hidden experimental outcomes with 100 public verified tasks from chemistry, materials science, biology and medicine, and 16 private tasks from unpublished wet-lab experiments. Given an experimental setup and candidate conditions, an agent works with any resources it needs to rank the candidates by a measured outcome. We evaluate thirteen agent configurations spanning twelve frontier models across two harnesses (Codex and Claude Code). Current agents remain far from saturating wet-lab outcome prediction, with substantial performance disparities across models: on the public benchmark, configurations separate into two distinct tiers, with task-adjusted Spearman correlations ranging from 0.227 for the lowest-performing configuration to 0.478 for the best. Analysis of 1,155 scored public trajectories (227,103 tool calls) suggests that the bottleneck lies in scientific judgment rather than tool execution: agents rely on shared monotone priors, agreeing far more with one another than with experimental reality (0.52 vs. 0.33), and frequently compute trivial physical or chemical proxies that do not influence the final outcome.",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-11-11T00:00:00Z",
+      "updated": "2026-11-13T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.15049",
+      "pdfUrl": "https://arxiv.org/pdf/2611.15049.pdf",
+      "comment": "52 pages, 28 figures, 7 tables. Project page: https://spu.unipat.ai/",
+      "titleCn": "科学预测宇宙",
+      "abstractCn": "人类长期以来一直试图解释自然现象。对实验结果的可靠预测是我们对产生这些现象的过程的理解的核心检验。如果通用人工智能（AGI）要超越人类的科学能力，它也必须比人类更可靠地预测实验结果。这样的能力可以加速跨学科的科学发现，帮助解决人类面临的最紧迫的挑战，并改善人类福祉。我们介绍了科学预测宇宙（SPU），这是一个包含隐藏实验结果的基准，涵盖化学、材料科学、生物学和医学的100个公开验证任务，以及来自未发表湿实验的16个私有任务。给定一个实验设置和候选条件，一个智能体将与它需要的任何资源合作，根据测量结果对候选条件进行排序。我们评估了跨越两个套件（Codex和Claude Code）的十二个前沿模型的十三种智能体配置。目前的智能体仍然远未达到湿实验结果预测的饱和状态，模型之间存在显著的性能差异：在公开基准上，配置分为两个截然不同的等级，任务调整的斯皮尔曼相关系数范围从表现最差的配置的0.227到表现最好的配置的0.478。对1,155个得分公开轨迹（227,103个工具调用）的分析表明，瓶颈在于科学判断而不是工具执行：智能体依赖于共享的单调先验知识，彼此之间的一致性远高于与实验现实的一致性（0.52 vs. 0.33），并且频繁地计算对最终结果没有影响的琐碎物理或化学代理。"
+    }
+  ],
+  "fetchedAt": "2026-11-13T02:08:07.873468+00:00",
+  "count": 21,
   "date": "2026-11-11"
 }
