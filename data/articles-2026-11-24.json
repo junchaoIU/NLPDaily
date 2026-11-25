@@ -1,6 +1,605 @@
 {
-  "articles": [],
-  "fetchedAt": "2026-11-24T02:00:12.736330+00:00",
-  "count": 0,
+  "articles": [
+    {
+      "id": "2603.14045",
+      "title": "The Reasoning Bottleneck in Graph-RAG: Structured Prompting and Context Compression for Multi-Hop QA",
+      "authors": [
+        {
+          "name": "Yasaman Zarrinkia",
+          "affiliation": ""
+        },
+        {
+          "name": "Venkatesh Srinivasan",
+          "affiliation": ""
+        },
+        {
+          "name": "Alex Thomo",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Graph-RAG systems achieve strong multi-hop question answering by indexing documents into knowledge graphs, but strong retrieval does not guarantee strong answers. Evaluating KET-RAG, a leading Graph-RAG system, on three multi-hop QA benchmarks (HotpotQA, MuSiQue, 2WikiMultiHopQA), we find that 77% to 91% of questions have the gold answer in the retrieved context, yet accuracy is only 35% to 78%, and 73% to 84% of errors are reasoning failures. We propose two augmentations: (i) SPARQL chain-of-thought prompting, which decomposes questions into triple-pattern queries aligned with the entity-relationship context, and (ii) graph-walk compression, which compresses the context by ~60% via knowledge-graph traversal with no LLM calls. SPARQL CoT improves accuracy by +2 to +14 pp; graph-walk compression adds +6 pp on average when paired with structured prompting on smaller models. Surprisingly, we show that, with question-type routing, a fully augmented budget open-weight Llama-8B model matches or exceeds the unaugmented Llama-70B baseline on all three benchmarks at ~12x lower cost. A replication on LightRAG confirms that our augmentations transfer across Graph-RAG systems.",
+      "categories": [
+        "cs.IR",
+        "cs.CL"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2603.14045",
+      "pdfUrl": "https://arxiv.org/pdf/2603.14045.pdf",
+      "comment": "Findings of EACL 2027. 14 pages, 2 figures, 16 tables. Code: https://github.com/thomouvic/graph-rag-qa-pub",
+      "titleCn": "图-拉格（Graph-RAG）中的推理瓶颈：结构化提示与上下文压缩用于多跳问答",
+      "abstractCn": "图-检索增强生成（Graph-RAG）系统通过将文档索引到知识图谱中，实现了强大的多跳问答能力，但强大的检索并不一定能保证强答案。我们对领先的图-检索增强生成系统KET-RAG在三个多跳问答基准（HotpotQA、MuSiQue、2WikiMultiHopQA）上的评估发现，77%至91%的问题在检索到的上下文中包含黄金答案，但准确率仅为35%至78%，其中73%至84%的错误是由于推理失败。我们提出了两种增强方法：（i）SPARQL思维链提示，将问题分解为与实体关系上下文对齐的三元模式查询；（ii）图遍历压缩，通过知识图谱遍历压缩上下文约60%，且无需调用大型语言模型。SPARQL思维链提示将准确率提升了2至14个百分点；图遍历压缩在较小模型上配合结构化提示时，平均提升了6个百分点。令人惊讶的是，我们证明，通过问题类型路由，完全增强的预算开放权重Llama-8B模型在所有三个基准上的表现均达到或超过未增强的Llama-70B基线，且成本降低了约12倍。在LightRAG上的复现实验证实，我们的增强方法可以迁移到图-检索增强生成系统中。"
+    },
+    {
+      "id": "2609.23490",
+      "title": "BabelArena: A Large-Scale Multilingual Benchmark for LLM Agents",
+      "authors": [
+        {
+          "name": "Peng Kuang",
+          "affiliation": ""
+        },
+        {
+          "name": "Yuchun Fan",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiangnan Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Minghao Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jialong Tang",
+          "affiliation": ""
+        },
+        {
+          "name": "Hao-Ran Wei",
+          "affiliation": ""
+        },
+        {
+          "name": "Weixuan Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jianhong Tu",
+          "affiliation": ""
+        },
+        {
+          "name": "Baosong Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Tong Xiao",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Large language model (LLM) agents increasingly execute multi-step workflows through tool use and interaction with users and environments. However, current agent evaluations are largely English-centric, limiting our understanding of agent capabilities in multilingual settings. We introduce BabelFlow, a benchmark-general agentic workflow that adapts existing agent benchmarks to new languages by analyzing runtime dependencies, coordinating structure-preserving translation, and combining multi-layer verification with human review to preserve task and evaluation semantics. Using BabelFlow, we construct BabelArena, a task-aligned benchmark comprising 16,146 instances derived from 702 canonical tasks across four benchmark families, 13 domains, and 23 languages. Experiments with five frontier models show that no single model dominates across benchmark families and that cross-language disparities extend well beyond task success. Lower-resource languages exhibit distinct failure patterns, with larger shares of tool-use and control-flow errors rather than answer-quality errors alone, pointing to gaps in reliable task execution across the resource levels of these languages. On the same tasks, agents in low-resource languages also consume substantially more tokens than in English (up to roughly twice the input) without proportional increases in interaction length, and language consistency degrades further on tasks requiring structured output, where switches are directed overwhelmingly toward English. We believe BabelArena provides a foundation for advancing research on reliable and efficient multilingual agents.",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2609.23490",
+      "pdfUrl": "https://arxiv.org/pdf/2609.23490.pdf",
+      "comment": "20 pages, 11 tables, and 7 figures",
+      "titleCn": "BabelArena：面向大型语言模型代理的多语言大规模基准测试",
+      "abstractCn": "大型语言模型（LLM）代理越来越多地通过工具使用和与用户及环境的交互来执行多步骤工作流程。然而，当前代理评估主要集中于英语，限制了我们对代理在多语言环境中的能力理解。我们介绍了BabelFlow，一个通用的基准化代理工作流程，它通过分析运行时依赖关系、协调结构保持翻译，并结合多层验证与人工审核来保留任务和评估语义，从而将现有代理基准适应到新语言。使用BabelFlow，我们构建了BabelArena，这是一个任务对齐的基准，包含16,146个实例，这些实例源自四个基准系列、13个领域和23种语言的702个规范任务。五个前沿模型的实验表明，没有单一模型能在所有基准系列中占据主导地位，且跨语言差异远超任务成功。低资源语言表现出独特的失败模式，工具使用和控制流错误的比例远高于答案质量问题，这表明在这些语言的资源水平上，可靠的任务执行存在差距。在相同任务上，低资源语言的代理消耗的token数量也远高于英语（高达输入的两倍），且交互长度没有相应增加，而在需要结构化输出的任务上，语言一致性进一步下降，转换几乎完全指向英语。我们相信BabelArena为推进可靠高效的多语言代理研究提供了基础。"
+    },
+    {
+      "id": "2611.27376",
+      "title": "Composable Soft-Prompt Distillation of RL Experts: Toward Continual Post-Training",
+      "authors": [
+        {
+          "name": "Zhen Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Changyi Yang",
+          "affiliation": ""
+        },
+        {
+          "name": "Xuehai He",
+          "affiliation": ""
+        },
+        {
+          "name": "Chengzhi Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Yutong Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Ziyue Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhuoran Yin",
+          "affiliation": ""
+        },
+        {
+          "name": "Yangmin Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhihan Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jisen Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Mingyu Jin",
+          "affiliation": ""
+        },
+        {
+          "name": "Chuhan Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhaotian Weng",
+          "affiliation": ""
+        },
+        {
+          "name": "Ruoyu He",
+          "affiliation": ""
+        },
+        {
+          "name": "Wenyao Gao",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiaxin Deng",
+          "affiliation": ""
+        },
+        {
+          "name": "Chenwei Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Hui Shen",
+          "affiliation": ""
+        },
+        {
+          "name": "Wenhao Chai",
+          "affiliation": ""
+        },
+        {
+          "name": "Chenyang Zhao",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhuofan Ying",
+          "affiliation": ""
+        },
+        {
+          "name": "Kieran Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Andrew Chen",
+          "affiliation": ""
+        },
+        {
+          "name": "Pony Ma",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhaoran Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Alkesh Patel",
+          "affiliation": ""
+        },
+        {
+          "name": "Zhe Gan",
+          "affiliation": ""
+        },
+        {
+          "name": "Xin Eric Wang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "RL post-training typically produces domain experts that must then be consolidated into one model, and as new experts keep arriving, this consolidation becomes a continual process. Weight merging and multi-teacher on-policy distillation (MOPD) must re-consolidate the whole model whenever an expert is added, and can erode capabilities outside the target domains. We propose Composable Soft-Prompt Distillation (CSPD), which keeps the pre-RL model frozen, distills each RL expert independently into a soft prompt, and composes experts by concatenating their prompts without joint training. A single soft prompt suffices to distill an RL expert, recovering at least 90% of the teacher's gain in 22 of 23 math, code, and agent settings. Independently trained prompts compose well. In a multi-expert setting, the average rises with every expert added, and the full composition matches MOPD (67.83 vs. 67.79). The composition generalizes best across six held-out benchmarks. Input-space adaptation adds little serving overhead, keeping throughput within 1.5% of the unadapted backbone and reaching 2.40x that of rank-4 LoRA. These results point toward continual post-training on a fixed backbone.",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.27376",
+      "pdfUrl": "https://arxiv.org/pdf/2611.27376.pdf",
+      "comment": null,
+      "titleCn": "可组合软提示蒸馏强化学习专家：迈向持续训练后微调",
+      "abstractCn": "RL预训练通常会产生领域专家，这些专家随后需要被整合到一个模型中，而随着新专家的不断加入，这种整合过程成为一个持续的过程。权重合并和多教师策略蒸馏（MOPD）在每次添加专家时都必须重新整合整个模型，并且可能会削弱目标领域之外的能力。我们提出了可组合软提示蒸馏（CSPD），该技术保持预RL模型冻结，独立地将每个RL专家蒸馏成一个软提示，并通过连接它们的提示来组合专家，而无需联合训练。单个软提示足以蒸馏一个RL专家，在23个数学、代码和智能体设置中的22个中，至少恢复了教师收益的90%。独立训练的提示组合良好。在多专家设置中，随着添加的专家数量增加，平均收益也随之提高，完整的组合与MOPD相当（67.83 vs. 67.79）。该组合在六个保留基准测试中泛化效果最佳。输入空间自适应几乎不增加服务开销，保持吞吐量在未自适应主干网络的1.5%以内，并达到rank-4 LoRA的2.40倍。这些结果指向在固定主干网络上进行持续后训练。"
+    },
+    {
+      "id": "2611.28349",
+      "title": "Grammar-as-a-Drafter: More Tokens per Speculative Decoding Step on Grammar-Constrained Structured Outputs",
+      "authors": [
+        {
+          "name": "John Zhang",
+          "affiliation": ""
+        },
+        {
+          "name": "Silky Arora",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Speculative decoding speeds up generation by letting a lightweight drafter propose tokens that the target model verifies in one forward pass. Under structured outputs (JSON schemas, regular expressions, tool-call formats), the drafter works against a constraint it does not know, so its proposals for keys, delimiters, and indentation are often rejected or invalid, even though the grammar engine already knows the next tokens. We present Grammar-as-a-Drafter (GaaD), which makes the grammar a second drafter. Before each verify step, the scheduler merges the drafter's proposal with grammar-forced tokens (out-degree 1 in the grammar automaton) into one draft row of width $K$ (which can exceed the drafter's proposal length $K_M$): matching tokens are promoted to GRAMMAR, the proposal is truncated where it disagrees, and grammar tokens fill the remaining slots. The verify step accepts GRAMMAR drafts without computing their logits, composing with any drafter without adding kernels or compilation on the critical path. Because grammars fix text rather than tokens, accepting canonical GRAMMAR drafts with probability 1 preserves grammar validity but can shift the output distribution relative to grammar-masked decoding. We implement GaaD in vllm-torchtpu and an independent Rust serving runtime, and evaluate it on TPU v7x with MTP, DFlash, and n-gram drafters on a JSON character-profile benchmark. GaaD raises average acceptance length from 2.06 to 5.43 for MTP (Qwen3.5-0.8B; 1.99 to 5.31 on Qwen3.5-35B-A3B), 1.57 to 4.13 for DFlash, and 1.30 to 3.64 for n-gram (Qwen3-4B), decoding 2.66-2.81x faster at batch size 1 and 1.14-1.70x faster at batch size 64. In the Rust runtime, MTP with GaaD is 2.23x faster on Qwen3.5-0.8B and 2.02x on Qwen3.5-397B-A17B-FP8 (1.22-1.69x at high concurrency). Under mixed traffic, GaaD finishes workloads 1.03-1.23x sooner while modestly raising plain-text TPOT.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.28349",
+      "pdfUrl": "https://arxiv.org/pdf/2611.28349.pdf",
+      "comment": "12 pages, 4 figures, 6 tables. Implementation: https://github.com/vllm-project/vllm-torchtpu/pull/3321",
+      "titleCn": "语法作为起草工具：在语法约束结构化输出上进行推测解码时，每一步产生更多标记",
+      "abstractCn": "推测解码通过让轻量级起草者提出目标模型在单次前向传递中验证的标记来加速生成。在结构化输出（JSON模式、正则表达式、工具调用格式）下，起草者针对其不知道的约束工作，因此其提出的键、分隔符和缩进建议经常被拒绝或无效，即使语法引擎已经知道下一个标记。我们提出了语法作为起草者（GaaD），将语法作为第二个起草者。在每个验证步骤之前，调度器将起草者的建议与语法强制的标记（语法自动机中的出度1）合并成一个宽度为K（可以超过起草者建议长度KM）的草稿行：匹配的标记被提升为GRAMMAR，建议在存在分歧处被截断，语法标记填充剩余位置。验证步骤接受GRAMMAR草稿而不计算其logits，与任何起草者组合而不在关键路径上增加内核或编译。由于语法修正文本而非标记，以概率1接受规范GRAMMAR草稿可以保持语法有效性，但可能会相对于语法掩码解码偏移输出分布。我们在vllm-torchtpu和独立的Rust服务运行时中实现了GaaD，并在TPU v7x上使用MTP、DFlash和n-gram起草者对JSON字符配置文件基准进行了评估。GaaD将MTP的平均接受长度从2.06提高到5.43（Qwen3.5-0.8B；1.99提高到5.31在Qwen3.5-35B-A3B），DFlash从1.57提高到4.13，n-gram从1.30提高到3.64（Qwen3-4B），在批大小为1时解码速度提高了2.66-2.81倍，在批大小为64时提高了1.14-1.70倍。在Rust运行时中，MTP与GaaD在Qwen3.5-0.8B上速度提高了2.23倍，在Qwen3.5-397B-A17B-FP8上提高了2.02倍（在高并发时为1.22-1.69倍）。在混合流量下，GaaD使工作负载提前完成1.03-1.23倍，同时适度提高了纯文本TPOT。"
+    },
+    {
+      "id": "2611.31727",
+      "title": "fork() for Agents: Agent Kernel for Non-blocking LLM Orchestration",
+      "authors": [
+        {
+          "name": "Ankit Chadha",
+          "affiliation": ""
+        },
+        {
+          "name": "Pratyay Banerjee",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "LLM-based agents typically execute tool calls synchronously and discard completed work upon failure. Subgraph-selective recovery, re-executing only a failed node's transitive descendants, is a well-established pattern in distributed systems (Spark, Erlang/OTP, Dryad), and recent agent runtimes (Sherlock, AgentGit, Atomix) preserve completed work through verifiers, version control, or transactional tool boundaries. We present \\textbf{Agent-Kernel}, a non-blocking runtime that ports this pattern to the LLM \\emph{content plane}: its primitive, \\textbf{Sub-Graph Recovery (SGR)}, fires on a raw exception with no trained verifier or planner, resets a failed node's descendants while preserving completed siblings, and composes each parent's text into its children's prompts (context inheritance), all on a durable substrate with a formal state-preservation guarantee. Across 14{,}434 runs on synthetic and standard benchmarks (tau-bench, Gaia2, AutomationBench, InterruptBench), SGR reaches full recovery within budget=3 where whole-trajectory replay exhausts (100\\% vs.\\ 55\\%), and is roughly 10$\\times$ faster than an adapted Sherlock rollback that also recovers. It matches ReAct-serial accuracy within noise on linear workloads while adding recovery and parallelism (up to 12.7$\\times$ speedup) where structure permits. Ablation isolates SGR: removing it collapses success to 39.4\\%.",
+      "categories": [
+        "cs.CL",
+        "cs.DC"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31727",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31727.pdf",
+      "comment": "Accepted in EACL 2027, Findings",
+      "titleCn": "为代理的 fork()：非阻塞 LLM 协调的代理内核",
+      "abstractCn": "基于LLM的智能体通常同步执行工具调用，并在失败时丢弃已完成的工作。子图选择性恢复，即仅重新执行失败节点的传递闭包，是分布式系统（Spark、Erlang/OTP、Dryad）中一种成熟的模式，而最新的智能体运行时（Sherlock、AgentGit、Atomix）则通过验证器、版本控制或事务性工具边界来保留已完成的工作。我们提出了 \\textbf{Agent-Kernel}，这是一个非阻塞运行时，将此模式移植到LLM的 \\emph{内容平面}：其原语 \\textbf{子图恢复（SGR）} 在原始异常触发时启动，无需训练的验证器或规划器，重置失败节点的子节点，同时保留完成的兄弟节点，并将每个父节点的文本组合到其子节点的提示中（上下文继承），所有操作都在具有形式化状态保存保证的持久化基座上进行。在14{,}434次在合成和标准基准测试（tau-bench、Gaia2、AutomationBench、InterruptBench）上的运行中，SGR在预算=3时（整个轨迹回放耗尽时）实现完全恢复（100% vs.\\ 55%），并且比也能恢复的Sherlock回滚快约10倍。在允许结构的情况下，它在线性工作负载上与ReAct-serial精度相当，同时增加了恢复和并行性（最高12.7倍加速）。消融实验隔离了SGR：移除它会导致成功率降至39.4%。"
+    },
+    {
+      "id": "2611.31735",
+      "title": "BEARING: Who Is Talking to Whom? Grounding Acoustic Direction in Vision for Online Multi-Party Conversation",
+      "authors": [
+        {
+          "name": "Nader Lobandi",
+          "affiliation": ""
+        },
+        {
+          "name": "Lombe Chileshe",
+          "affiliation": ""
+        },
+        {
+          "name": "Mohammad Mehdi Hosseini",
+          "affiliation": ""
+        },
+        {
+          "name": "Mohammad H. Mahoor",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Understanding a group conversation means deciding, from video and audio, who is speaking and to whom. Leading systems treat these tasks offline on single-channel clips and align models with a self-evaluation reward. We propose BEARING, a geometry-first alternative built on one measured signal: the direction from which a microphone array beside the camera hears a sound. A label-free calibration learned from the stream registers this direction into the camera image, and an online registry of faces, voices and directions needs no enrollment. The registered direction serves as (i) a visual prompt for a vision-language model, a marker on the speaker or an arrow toward an off-screen source; (ii) one input of a reliability-weighted fusion with visual active-speaker detection, for speakers in the same direction from the array; and (iii) a verifiable reward for alignment: the named speaker must sit where the sound comes from, the confidence must match that check, and always answering \"group\" earns nothing. Every decision is online, with the lookahead as an explicit parameter. On 9,498 addressee-labelled utterances from three AMI sites and egocentric EasyCom, the direction prompt raises speaker accuracy from 54% to 74%; addressee accuracy moves by about two points, because telling one addressee from the group depends on the words more than on where people are. For co-located speakers on AVDIAR, visual active-speaker detection holds 95% where direction alone falls to 59%. The verifiable reward beats self-evaluation under GRPO, reward-ranked fine-tuning and DPO; shrinking the lookahead from 5 s to 0.5 s costs 4.5 DER points on AMI, and learning the registration online costs a dip in the first two minutes before the system overtakes vision alone. Code and evaluation protocols will be released.",
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31735",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31735.pdf",
+      "comment": "26 pages, 15 figures, 16 tables. Includes supplementary material. Demo video as an ancillary file",
+      "titleCn": "轴承：谁在跟谁说话？为在线多边谈话将听觉方向锚定在视觉上",
+      "abstractCn": "理解群组对话意味着从视频和音频中判断谁在说话以及向谁说话。现有系统将这些任务离线处理在单通道片段上，并通过自我评估奖励来校准模型。我们提出了BEARING，一种基于几何学的替代方案，它基于一个测量信号：摄像机旁边麦克风阵列听到声音的方向。从数据流中学习的无标签校准将此方向注册到相机图像中，而人脸、声音和方向的在线注册表无需注册。注册的方向作为(i)视觉语言模型的视觉提示，是说话者的标记或指向屏幕外声源的箭头；(ii)与视觉主动说话者检测进行可靠性加权融合的一个输入，对于来自阵列同一方向的说话者；(iii)校准的可验证奖励：命名说话者必须坐在声音来源处，置信度必须与该检查匹配，始终回答“群组”则无奖励。所有决策都是在线的，前瞻性作为一个显式参数。在来自三个AMI站点和第一人称EasyCom的9,498个接收者标记的语句中，方向提示将说话者准确率从54%提高到74%；接收者准确率提高了约两个点，因为从群组中识别一个接收者更多地取决于词语而不是人们的位置。对于AVDIAR上的同场说话者，视觉主动说话者检测在方向单独失效时仍保持95%的准确率，而方向仅为59%。可验证奖励在GRPO、奖励排名微调和DPO下优于自我评估；将前瞻时间从5秒缩短到0.5秒，在AMI上会导致4.5个DER点的损失，而在线学习注册则会导致系统在最初的两个分钟内落后于纯视觉系统。代码和评估协议将公开发布。"
+    },
+    {
+      "id": "2611.31756",
+      "title": "TACT-Bench: Testing Adaptive Conversational Threats against Tool-Use Agents",
+      "authors": [
+        {
+          "name": "Ilia Hashemi Rad",
+          "affiliation": ""
+        },
+        {
+          "name": "Feijie Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Haoyu Wang",
+          "affiliation": ""
+        },
+        {
+          "name": "Jing Gao",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "The growing autonomy of AI agents in using external tools and making decisions has created an urgent need for comprehensive safety benchmarks. Existing benchmarks test compromised tool channels or adaptive multi-turn attacks, though they may not capture the unique capabilities of policy-governed tool-use agents, which must resist unauthorized requests without abandoning the legitimate work embedded in the same interaction. To fill this gap, we introduce TACT-Bench, a stateful benchmark built around scenario-specific stories, personas, manipulation tactics, and response-adaptive escalation. Each adversarial task targets an action explicitly prohibited by the policy provided to the assistant, while the policy remains hidden from the attacking user. TACT pairs each adversarial task with at least one benign counterpart, and its adversarial tasks retain authorized ground-truth actions when a compliant resolution remains available. We define these base tasks as TACT-Base. We additionally introduce TACT-TrustPrime, which places an independent benign task before an unrelated attack in the same conversation. We also propose Paired Selective Trustworthiness (PST), which combines explicit safe refusal with demonstrated capability on matched benign tasks, to analyze an agent's overcautiousness and practicality. Averaged across 6 different models as assistants, TACT-Base raises Attack-Induced Failure Rate (AFR) by 17.53% over four compatible attack baselines, and TACT-TrustPrime raises it by a further 17.01%. The two evaluated defense methods reduce AFR by only 8.35%--9.41% on average and do not consistently improve PST, underscoring the need for stronger policy-enforcement methods.",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CR"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31756",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31756.pdf",
+      "comment": "Code and data are available at https://github.com/IliaHashemiRad/TACTBench",
+      "titleCn": "TACT-Bench：针对工具使用代理的适应性对话威胁测试",
+      "abstractCn": "人工智能代理在使用外部工具和决策方面的自主性日益增强，催生了对全面安全基准的迫切需求。现有基准测试受感染的工具渠道或自适应多轮攻击，尽管它们可能无法捕捉受策略管控的工具使用代理的独特能力——这些代理必须在不受授权请求影响的情况下，不放弃嵌入在相同交互中的合法工作。为填补这一空白，我们引入了TACT-Bench，这是一个基于特定场景故事、角色、操纵策略和响应自适应升级的状态性基准。每个对抗性任务都针对代理政策明确禁止的行动，而政策对攻击用户保持隐藏。TACT将每个对抗性任务与至少一个良性对应任务配对，并且当合规解决方案仍然可用时，其对抗性任务保留授权的ground-truth行动。我们将这些基础任务定义为TACT-Base。我们还引入了TACT-TrustPrime，它在一个对话中无关攻击之前放置一个独立的良性任务。我们还提出了配对选择性可信度（PST），它结合了明确的拒绝安全与在匹配良性任务上的能力展示，以分析代理的过度谨慎和实用性。在6种不同模型作为代理的情况下，TACT-Base使攻击诱导失败率（AFR）比四个兼容攻击基线提高了17.53%，而TACT-TrustPrime进一步提高了17.01%。这两种评估的防御方法平均仅降低了8.35%--9.41%的AFR，并且不能始终提高PST，这突显了需要更强的策略执行方法。"
+    },
+    {
+      "id": "2611.31771",
+      "title": "SPARQL-Planned Single-Hop Traversal over a Live Knowledge Graph for Multi-Hop Question Answering",
+      "authors": [
+        {
+          "name": "Priyesh Vakharia",
+          "affiliation": ""
+        },
+        {
+          "name": "Masud Moshtaghi",
+          "affiliation": ""
+        },
+        {
+          "name": "Pratyay Banerjee",
+          "affiliation": ""
+        },
+        {
+          "name": "Nicholas Jedema",
+          "affiliation": ""
+        },
+        {
+          "name": "Amita Misra",
+          "affiliation": ""
+        },
+        {
+          "name": "Ankit Chadha",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Semantic retrieval struggles with multi-hop question answering on both recall and precision: gold passages are buried among distractors that degrade the reader's answer, and retrieving them requires reasoning over the query rather than matching it. GraphRAG techniques expand semantic retrieval by connecting passages to graph nodes and performing one or more hops of expansion after initial retrieval. This improves recall, but multi-hop expansion becomes expensive and brings additional noise into the retrieved set. We break this tradeoff by \\emph{interleaving} dense retrieval with knowledge-graph traversal for complex multi-hop questions. Dense retrieval locates the first relevant regions of the search space at good recall, while traversal of a pre-existing external KG (Wikidata) restores precision and improves recall by confirming retrieved passages against a reasoning path through the KG. To keep traversal both question-adaptive and reliable, we have an LLM plan it as code generation task for graph traversal in SPARQL format but \\emph{parse rather than execute} the query. On full 1{,}000-question splits under a shared corpus and reader, and with a single configuration applied identically to every dataset, we reach \\textbf{62.5 / 75.1} EM/F1 on HotpotQA, \\textbf{73.5 / 81.0} on 2WikiMultiHopQA, and \\textbf{37.1 / 50.0} on MuSiQue, ahead of reproduced HippoRAG2, T\\textsuperscript{2}RAG, and IRCoT on all three benchmarks. A second, token-matched setting stays ahead of T\\textsuperscript{2}RAG on HotpotQA and 2Wiki while spending roughly its per-query budget. Executing the generated SPARQL instead of parsing it costs up to 11.4 EM, mostly because raw queries return empty results, not because of syntax errors.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31771",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31771.pdf",
+      "comment": "Accepted in EACL 2027, Findings",
+      "titleCn": "针对多跳问答，在实时知识图谱上进行SPARQL计划单跳遍历",
+      "abstractCn": "语义检索在多跳问答中面临召回率和精确率的双重挑战：正确答案被干扰信息淹没，影响读者判断，而检索它们需要基于查询进行推理而非直接匹配。图RAG技术通过将文本段落连接到图节点，并在初步检索后进行一次或多次扩展，扩展了语义检索的边界。这提升了召回率，但多跳扩展成本高昂，并给检索结果引入额外噪声。我们通过将密集检索与知识图谱遍历\\emph{交替}执行，解决了这一权衡问题，适用于复杂的多跳问题。密集检索在搜索空间中快速定位相关区域，而遍历预先存在的知识图谱（维基数据）则通过推理路径确认检索到的段落，从而提升精确率并改善召回率。为使遍历既适应问题又可靠，我们让大型语言模型将其作为SPARQL格式的图遍历代码生成任务，但\\emph{解析而非执行}查询。在共享语料库和读者条件下，对全部1,000个问题的数据集应用单一配置，我们在HotpotQA上达到\\textbf{62.5 / 75.1}的EM/F1，在2WikiMultiHopQA上达到\\textbf{73.5 / 81.0}，在MuSiQue上达到\\textbf{37.1 / 50.0}，均优于复现的HippoRAG2、T\\textsuperscript{2}RAG和IRCoT在三个基准测试中的表现。在第二个、基于token匹配的设置中，我们在HotpotQA和2Wiki上持续领先T\\textsuperscript{2}RAG，同时仅消耗其单次查询的预算。解析生成的SPARQL而非执行它，会导致高达11.4 EM的损失，这主要是由于原始查询返回空结果，而非语法错误。"
+    },
+    {
+      "id": "2611.31790",
+      "title": "Byte Patches versus BPE at Matched Data: A Matched-Twin Comparison at 350M Parameters",
+      "authors": [
+        {
+          "name": "Asadullah Maliyawala",
+          "affiliation": ""
+        },
+        {
+          "name": "Andrej Lisal",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "We compare a MEGABYTE-style byte-patch Transformer with a 64-byte sliding local decoder (local64) to a matched byte-level 8k BPE decoder (BPE-8k) under identical raw bytes, document order, and approximately matched bytes per optimizer step: 350M parameters and 10 billion training bytes. Under matched-span document sliding (identical scored byte ranges), BPE-8k leads with relative gaps of -5.2%, -4.9%, -9.3% and -6.1% in bits per byte (overall, text, code, math; paired bootstrap). Downstream, CharBench equal fine-tuning favors local64 (53.7% vs 40.0%), fact200 favors BPE-8k (16.5% vs 7.0%), and PIQA (raw and length-normalized) and ARC-Easy length-normalized favor BPE-8k after Holm correction at alpha = 0.05; remaining tasks are ties. Evaluation pitfalls that changed conclusions include context-length extrapolation past the BPE training context, bits per token reported as bits per byte, and inconsistent byte denominators. Unlike controlled tokenizer studies that vary the subword tokenizer under a fixed token budget, or FLOP-controlled byte-model scaling studies, we hold the raw bytes, their order and the optimizer recipe fixed and ask whether a fixed-patch byte model can replace the tokenizer at all. Limits: one size, one seed, one 8k vocabulary fixed before the runs, and a known difference in embedding initialization between the twins.",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31790",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31790.pdf",
+      "comment": "18 pages, 3 figures. Code, checkpoints and evaluation suites: https://github.com/AsadullahMaliyawala/bytelm-local64",
+      "titleCn": "字节补丁与BPE在匹配数据上的比较：350M参数下的匹配双胞胎比较",
+      "abstractCn": "我们比较了一种MEGABYTE风格的字节补丁Transformer与一个64字节滑动局部解码器（local64），以及一个匹配字节级的8k BPE解码器（BPE-8k），在相同的原始字节、文档顺序以及大约匹配的每优化器步骤的字节数（350M参数和100亿训练字节）下：在匹配跨度文档滑动（相同的评分字节范围）中，BPE-8k在每字节比特数（整体、文本、代码、数学；配对自举）上领先，相对差距分别为-5.2%、-4.9%、-9.3%和-6.1%。在下游任务中，CharBench等精细微调倾向于local64（53.7% vs 40.0%），fact200倾向于BPE-8k（16.5% vs 7.0%），而PIQA（原始和长度归一化）以及ARC-Easy长度归一化在Holm校正α=0.05后倾向于BPE-8k；其余任务为平局。改变结论的评价陷阱包括超出BPE训练上下文的上下文长度外推、报告的每token比特数实际上是每字节比特数，以及不一致的字节分母。与在固定token预算下改变子词分词器的研究，或受FLOP控制的字节模型缩放研究不同，我们固定了原始字节、它们的顺序和优化器配方，并询问一个固定补丁字节模型是否能够完全替代分词器。限制：一个大小、一个种子、一个在运行前固定的8k词汇表，以及双胞胎之间嵌入初始化的已知差异。"
+    },
+    {
+      "id": "2611.31791",
+      "title": "SwarmLeak: Does Coordination Improve Privacy Attacks on LLM Agents?",
+      "authors": [
+        {
+          "name": "Asma Farajidizaji",
+          "affiliation": ""
+        },
+        {
+          "name": "Vyas Raina",
+          "affiliation": ""
+        },
+        {
+          "name": "Vatsal Raina",
+          "affiliation": ""
+        },
+        {
+          "name": "Ivaxi Sheth",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "LLM agents increasingly collaborate in group chats while holding tool access to confidential records, which makes the shared chat an attack surface. It remains unclear whether several colluding attackers extract such information more effectively than one. We introduce SwarmLeak, a red-teaming dataset of 24 synthetic group-chat scenarios across healthcare, law, finance, and software engineering, where attackers pose as colleagues to make a victim agent post protected fields despite an explicit confidentiality policy. With GLM 5.2 attacking five victim models through seven conversational strategies, we compare one attacker with a swarm of four sharing a private channel, matching scenarios, strategies, and a 200,000-token budget that also covers swarm coordination. Swarms show no advantage: a single attacker matches or exceeds them on every victim, and the share of runs leaking any field differs between conditions by at most 14.3 percentage points, whereas changing the victim shifts it from 0% to 99.4%. On the two most vulnerable models, nearly every run leaks under both conditions, but single attackers expose more of the record at first disclosure (85.4% vs. 68.1% of protected fields on Nemotron 3.5 Lightning). Four of the five victims leaked despite the policy. GLM 5.2 retrieved protected data in 64.3% of individual-attack runs and leaked in 0.6%: retrieval does not imply disclosure, but in high-stakes settings even one leaked field can identify a patient or client. At equal budgets, a larger red team is not automatically a stronger one; the victim model matters far more.",
+      "categories": [
+        "cs.CR",
+        "cs.CL"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31791",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31791.pdf",
+      "comment": "12 pages, 4 figures, 3 tables",
+      "titleCn": "SwarmLeak：协调是否增强了针对LLM代理的隐私攻击？",
+      "abstractCn": "LLM代理在处理机密记录时越来越多地通过群聊协作，这使得共享聊天成为攻击面。目前尚不清楚多个协同攻击者是否比单个攻击者更有效地提取此类信息。我们引入了SwarmLeak，这是一个包含医疗保健、法律、金融和软件工程领域24个合成群聊场景的红色团队数据集，攻击者伪装成同事，使受害者代理在明确保密政策的情况下发布受保护字段。使用GLM 5.2通过七种对话策略攻击五个受害者模型，我们比较了一个攻击者与一个共享私密通道的四个攻击者组成的群组，匹配场景、策略，并使用一个200,000个token的预算，该预算也涵盖了群组协调。群组并未显示出优势：单个攻击者在每个受害者上都达到或超过群组的表现，并且在不同条件下泄露任何字段的运行比例最多相差14.3个百分点，而改变受害者则使其从0%变为99.4%。在两个最脆弱的模型中，几乎所有运行在两种条件下都会泄露信息，但单个攻击者在首次披露时暴露了更多的记录（85.4%与Nemotron 3.5 Lightning上68.1%的受保护字段）。五个受害者中有四个尽管有保密政策仍泄露了信息。GLM 5.2在单个攻击运行的64.3%中检索到受保护数据，在0.6%中泄露：检索并不等同于披露，但在高风险场景中，即使一个泄露的字段也可能识别出患者或客户。在同等预算下，更大的红色团队并不自动意味着更强的团队；受害者模型的重要性远超于此。"
+    },
+    {
+      "id": "2611.31800",
+      "title": "Learning Compact State Abstractions for LLM Agents",
+      "authors": [
+        {
+          "name": "Yaswanth Chittepu",
+          "affiliation": ""
+        },
+        {
+          "name": "Raghavendra Addanki",
+          "affiliation": ""
+        },
+        {
+          "name": "Anup Rao",
+          "affiliation": ""
+        },
+        {
+          "name": "Branislav Kveton",
+          "affiliation": ""
+        },
+        {
+          "name": "Scott Niekum",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "LLM agents commonly use the full interaction history as a proxy for state, retaining all past observations and actions regardless of whether they remain relevant. We instead ask what information an agent actually needs to carry forward. We define agent state as a compact abstraction of interaction history that preserves the competence of a fixed reference agent, with the minimal such abstraction as the ideal. Because matching the reference agent's behavior is unnecessarily restrictive and difficult for black-box policies, we define sufficiency through task performance rather than behavior matching. We represent state abstractions as deterministic recursive programs and search over them using an LLM-guided genetic algorithm. Across ALFWorld and ScienceWorld, the learned abstractions preserve near-reference task success while reducing mean policy input by up to 71% and 57%, respectively. The resulting programs are directly inspectable, providing an explicit account of what information is retained, updated, and discarded during interaction.",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.NE"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31800",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31800.pdf",
+      "comment": null,
+      "titleCn": "为LLM智能体学习紧凑状态抽象",
+      "abstractCn": "LLM代理通常将完整交互历史作为状态的代理，无论过去观察到的信息和采取的行动是否仍然相关，都会保留所有内容。我们则探讨代理实际需要保留哪些信息。我们将代理状态定义为交互历史的紧凑抽象，该抽象保留了固定参考代理的能力，以最小的此类抽象为理想。由于匹配参考代理的行为对黑盒策略来说既不必要又困难，我们通过任务表现而非行为匹配来定义充分性。我们将状态抽象表示为确定性递归程序，并使用LLM引导的遗传算法进行搜索。在ALFWorld和ScienceWorld中，学习到的抽象在保持接近参考任务成功率的同时，分别将平均策略输入减少了71%和57%。生成的程序可直接检查，明确说明了在交互过程中保留、更新和丢弃了哪些信息。"
+    },
+    {
+      "id": "2611.31821",
+      "title": "Exploring Multi-Player Social Games as Verifiable Training Grounds for Large Language Models",
+      "authors": [
+        {
+          "name": "Keyu He",
+          "affiliation": ""
+        },
+        {
+          "name": "Michael Li",
+          "affiliation": ""
+        },
+        {
+          "name": "Jiarui Liu",
+          "affiliation": ""
+        },
+        {
+          "name": "Mingqian Zheng",
+          "affiliation": ""
+        },
+        {
+          "name": "Koichi Onoue",
+          "affiliation": ""
+        },
+        {
+          "name": "Tongshuang Wu",
+          "affiliation": ""
+        },
+        {
+          "name": "Maarten Sap",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "The training of socially intelligent language models often relies on large language model (LLM) judges, which are expensive, noisy, and vulnerable to reward hacking. Multi-player social games offer a natural alternative: they require open-ended communication to coordinate with teammates and infer hidden roles, while their rules provide an objective outcome which can serve as a verifiable reward for training. Using three social games, we explore how much social intelligence Qwen3 models can acquire through supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR). Results show that against a much stronger Gemma-3-27B model, SFT and RLVR raise the win rate of Qwen3-4B from 33% to 81% on the three trained games, and from 39% to 54% on three additional held-out games. In contrast, in-context strategies such as prompting improve the win rate of Qwen3-4B by only about 6 pp across the same games we train and evaluate on. Furthermore, we show that the gains from SFT and RLVR hold across the model sizes 1.7B, 4B, and 32B. Qualitative analyses of agent behavior show signs of stronger social intelligence; for example, trained agents tend to share information more openly, check each other's claims against public evidence, and coordinate their votes. More broadly, our results demonstrate that training LLMs on verifiable outcomes in social games can cultivate generalizable social behaviors, which offers a scalable path for building socially intelligent agents.",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31821",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31821.pdf",
+      "comment": null,
+      "titleCn": "探索多人社交游戏作为大型语言模型的验证性训练场",
+      "abstractCn": "社会智能语言模型的训练通常依赖于大型语言模型（LLM）裁判，这些裁判成本高昂、存在噪声且容易受到奖励攻击。多人社交游戏提供了一个自然的替代方案：它们需要开放式沟通来协调队友并推断隐藏角色，同时其规则提供了客观结果，可作为训练的可验证奖励。我们使用三种社交游戏，探索Qwen3模型通过监督微调（SFT）和带可验证奖励的强化学习（RLVR）能获得多少社会智能。结果表明，在与一个更强大的Gemma-3-27B模型对比中，Qwen3-4B在三种训练游戏中的胜率从33%提升至81%，在另外三种未参与训练的游戏中从39%提升至54%。相比之下，诸如提示等情境策略仅在我们训练和评估的游戏中使Qwen3-4B的胜率提高了约6个百分点。此外，我们证明SFT和RLVR带来的提升适用于1.7B、4B和32B等不同模型规模。智能体行为的定性分析显示出更强的社会智能迹象；例如，训练后的智能体倾向于更开放地共享信息，相互检查公共证据中的主张，并协调投票。更广泛地说，我们的结果表明，在社交游戏中基于可验证结果训练LLM可以培养可推广的社会行为，为构建社会智能代理提供了一种可扩展的路径。"
+    },
+    {
+      "id": "2611.31848",
+      "title": "Faithful Persona Steering under Incongruity via Dual-Stream Refinement",
+      "authors": [
+        {
+          "name": "Yu-An Chu",
+          "affiliation": ""
+        },
+        {
+          "name": "Jen-Ren Pong",
+          "affiliation": ""
+        },
+        {
+          "name": "Chia-Yao Yeh",
+          "affiliation": ""
+        },
+        {
+          "name": "Meng-Fen Chiang",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Standard LLM personalization typically frames identity as a static retrieval task, overlooking the inherent incongruity of human personas, where stable traits coexist with atypical, context-specific stances. Existing methods struggle to reconcile these dimensions: prompting succumbs to context drift over long sequences, while fine-tuning often suppresses idiosyncratic \"quirks\" in favor of generic distributional patterns. To bridge this gap, we present QuirkyMind, a framework that disentangles identity definition from its expression. First, Traits Anchoring constructs a dual-stream latent state, fusing a sentence-level summary for semantic stability with a token-level sequence for generative control. This state is stabilized via In-Context Narrative Refinement using an alternating objective: a discriminative InfoNCE loss anchors the persona in representation space to prevent drift, while a generative cross-entropy loss ensures faithful verbalization. Finally, Persona Steered Generalization transfers the refined state to downstream tasks via parameter-efficient adapters. Empirical evaluations on Persona-Steered QA and Narrative Inference demonstrate that QuirkyMind mitigates drift, consolidating persona knowledge without erasing authentic incongruities.",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31848",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31848.pdf",
+      "comment": "Accepted to Findings of ACL 2026. 18 pages, 14 figures, 8 tables",
+      "titleCn": "基于双流精炼的不一致下的忠实角色引导",
+      "abstractCn": "标准的大型语言模型个性化通常将身份视为一个静态检索任务，忽视了人类角色固有的不协调性——即稳定特质与典型、特定情境立场共存的现象。现有方法难以协调这些维度：提示方法在长序列中容易受到上下文漂移的影响，而微调方法则倾向于压制个性化的“怪癖”，以换取通用的分布模式。为了弥补这一差距，我们提出了QuirkyMind框架，该框架将身份定义与其表达分离。首先，特质锚定构建了一个双流潜在状态，融合了用于语义稳定性的句子级摘要和用于生成控制的标记级序列。该状态通过情境叙事细化进行稳定化，采用交替目标：判别性InfoNCE损失将角色锚定在表示空间中，以防止漂移，而生成交叉熵损失确保忠实表达。最后，角色引导泛化通过参数高效的适配器将细化状态迁移到下游任务。在角色引导问答和叙事推理上的实证评估表明，QuirkyMind减轻了漂移，在整合角色知识的同时保留了真实的矛盾性。"
+    },
+    {
+      "id": "2611.31870",
+      "title": "Subliminal Learning Crosses Modalities",
+      "authors": [
+        {
+          "name": "Saraswathy Amjith",
+          "affiliation": ""
+        },
+        {
+          "name": "Kimia Hamidieh",
+          "affiliation": ""
+        },
+        {
+          "name": "Antonio Torralba",
+          "affiliation": ""
+        },
+        {
+          "name": "Yoon Kim",
+          "affiliation": ""
+        }
+      ],
+      "abstract": "Subliminal learning refers to a surprising phenomenon in language models wherein a prompt given to one model (e.g., preference for cats) can be subliminally distilled to another model via training on data that is ostensibly meaningless (e.g., number sequences). This paper shows that text-based subliminal learning transfers cross-modally, in particular, a topic/preference (e.g., animals) transferred through number sequences across vision-language models also changes how images are generated and represented. First, we show that a diffusion model using the student as its text encoder generates the student's animal more often than with the original model as its text encoder, but not its color or style. We then investigate the mechanism behind this phenomenon and which concepts transfer across modalities. A constant component of the student's change accounts for much of the shift of image representations toward the trait. Adding this component uniformly can change the generated animal, which depends on the whole prompt, but not concepts such as color or style, which are encoded in a single token. Finally, we introduce weight lens as an approach to identify a subliminal trait from the weights of a single trained model, and show that it identifies the trait of nearly every student, including traits that do not surface in generated images.",
+      "categories": [
+        "cs.LG",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-11-24T00:00:00Z",
+      "updated": "2026-11-25T00:00:00Z",
+      "absUrl": "https://arxiv.org/abs/2611.31870",
+      "pdfUrl": "https://arxiv.org/pdf/2611.31870.pdf",
+      "comment": null,
+      "titleCn": "潜意识学习跨越模态",
+      "abstractCn": "潜意识学习是指语言模型中一个令人惊讶的现象，即给一个模型提供的提示（例如，对猫的偏好）可以通过在表面上无意义的数据（例如，数字序列）上进行训练，被潜意识地传递给另一个模型。本文表明，基于文本的潜意识学习具有跨模态迁移性，特别是通过数字序列在视觉-语言模型之间传递的主题/偏好（例如，动物）也会改变图像的生成和表示方式。首先，我们证明使用学生作为文本编码器的扩散模型比使用原始模型作为文本编码器时更频繁地生成学生的动物，但其颜色或风格则不然。然后，我们研究了这种现象背后的机制以及哪些概念会跨模态迁移。学生变化的一个恒定成分解释了图像表示向该特征转变的大部分变化。添加这个成分可以统一地改变生成的动物，这取决于整个提示，但不会改变像颜色或风格这样的概念，这些概念被编码在一个单独的标记中。最后，我们引入权重透镜作为识别单个训练模型权重中潜意识特征的方法，并证明它识别了几乎所有学生的特征，包括那些在生成图像中未显现的特征。"
+    }
+  ],
+  "fetchedAt": "2026-11-25T02:05:15.277079+00:00",
+  "count": 14,
   "date": "2026-11-24"
 }
